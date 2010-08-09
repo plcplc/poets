@@ -1,0 +1,89 @@
+\documentclass[a4paper,oneside, final, twocolumn]{memoir}
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\setcounter{tocdepth}{3}
+\usepackage{abstract}
+\usepackage{caption}
+\usepackage{url}
+\usepackage{listings}
+\usepackage{alltt}
+\usepackage{color}
+\definecolor{blue}{rgb}{0,0,0.8}
+\definecolor{green}{rgb}{0,0.5,0}
+\definecolor{red}{rgb}{0.5,0,0}
+\definecolor{grey}{rgb}{0.5,0.5,0.5}
+
+\newcommand{\twofig}[6]{
+\begin{figure}[htp!]
+\begin{center}
+\fbox{    \subfigure[#1]{    \includegraphics[width=0.4\textwidth]{#2}    }
+    \subfigure[#3]{    \includegraphics[width=0.4\textwidth]{#4}    } }
+\caption{#5}
+\label{#6}
+\end{center}
+\end{figure}
+}
+
+\newcommand{\onefig}[4]{
+\begin{figure}[htp!]
+\begin{center}
+\fbox{    \includegraphics[width= #4 \textwidth]{#1}}
+\caption{#2}
+\label{#3}
+\end{center}
+\end{figure}
+}
+
+\lstset{ 
+	language=Python,                % choose the language of the code
+	numbers=left,                   % where to put the line-numbers
+	numberstyle=\tiny,      % the size of the fonts that are used for the line-numbers
+	stepnumber=1,                   % the step between two line-numbers.
+	numbersep=10pt,                  % how far the line-numbers are from the code
+	basicstyle= \ttfamily \scriptsize,       % the size of the fonts that are used for the code
+	breaklines=true,
+	identifierstyle=\color{black},
+	keywordstyle=\color{blue}\textbf,
+       stringstyle=\color{black},
+	commentstyle=\color{red},
+	showstringspaces=false,         % underline spaces within strings
+	inputencoding=utf8,
+	extendedchars= true,
+	frame=single,
+}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{pslatex}
+\usepackage[urw-garamond]{mathdesign}
+%BEGIN
+\title{Extensions To The Contract Specification Language CLS\\
+        \small{A POETS Coding Extravaganza}}
+
+\author{Brian Søborg Mathiasen (soborg@diku.dk) \\ Kim Lundsteen Juncher (juncher@diku.dk) \\ Philip (plcplc@gmail.com) \\ Martin Dybdal (dybber@dybber.dk)}
+\date{\today} %\today
+
+\pagestyle{plain}
+\chapterstyle{hangnum}
+\setcounter{secnumdepth}{1}
+\date{\today}
+\begin{document}
+\begin{abstract}
+The Contract Specification Language\cite{hvitved10} is a means of formalizing a
+series of actions in a legally binding agreement, describing commitments of a
+number of active individuals or companies. In this paper, we present a number of
+extensions to the existing language on basis of a number of practically used
+contract schemes that were impossible to formulate in the existing language. The
+extensions ensure the integrity of the language core features described in
+\cite{hvitved10}.
+\end{abstract}
+
+\maketitle
+\newpage
+
+\renewcommand\bibname{References}
+\bibliography{/home/bsm/Dropbox/bib/bibliography}
+\bibliographystyle{apalike}
+
+\end{document}
