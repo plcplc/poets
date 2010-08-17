@@ -69,18 +69,149 @@
 \setcounter{secnumdepth}{1}
 \date{\today}
 \begin{document}
+\maketitle
+\newpage
 \begin{abstract}
-The Contract Specification Language\cite{hvitved10} is a means of formalizing a
-series of actions in a legally binding agreement, describing commitments of a
-number of active individuals or companies. In this paper, we present a number of
-extensions to the existing language on basis of a number of practically used
+The Contract Specification Language is a means of formalizing a
+series of actions in a legally binding agreement, describing commitments between
+a number of active individuals or companies. In this paper, we present a number
+of extensions to the existing language on basis of a number of practically used
 contract schemes that were impossible to formulate in the existing language. The
 extensions ensure the integrity of the language core features described in
 \cite{hvitved10}.
 \end{abstract}
 
-\maketitle
-\newpage
+\chapter{Introduction}
+Recently, Tom Hvitved [citation], presented a language for specifying
+multi-party contracts between individuals or companies, for use in third
+generation ERP systems. The motivation of such a language is based on research
+[citation] stating that contract lifecycle management (CLM) has become a
+critical key to success for enterprises. Current state-of-the-art enterprise
+systems such as Microsoft Dynamics NAV do not represent contracts explicitly as
+first-class objects, but rather via low-level code and database schemes. Such
+contracts are hard to maintain, costly and time consuming, and analyses are are
+difficult to perform. The proposed language overcomes these difficulties and
+introduce several features, such as absolute temporal constraints (deadlines),
+relative temporal constraints (sequential ordering), contrary-to-duty clauses,
+run-time monitoring, blame assignment and much more [citation].
+
+However, despite these many features of the language, it is far from complete.
+In fact, several key features used in real life contract management are
+impossible to define in the existing language. In this paper, we will introduce
+a number of extensions to the existing contract language, as well as define a
+small predicate language usable within contract templates, in order to provide a
+richer array of possibilities within the system. We will also ensure, that any
+and all pre-existing features of the system will co-exist with the extension,
+and that the semantics of all semantics remain sound and in line with the
+initial intentions of the language (??).
+
+To further highlight the need of these extensions, we will provide a number of
+examples usable in the real world, that are impossible to formalize in the
+existing system.
+
+\paragraph{Example 1 - Syntactic sugar for recursive contracts.}
+Story: Defining recursive contracts can be complicated to define, take up much
+space and are hard to read. We now propose syntactic sugar for defining
+recursive functions as iterative contracts using repeat-until/collect-until
+syntax:
+
+\begin{verbatim}
+repeat <a> A(...)
+	within e_{1} after e_{2}
+as d until P(d)
+\end{verbatim}
+alternatively
+\begin{verbatim}
+collect <a> A(...)
+	within e_{1} after e_{2}
+in d until P(d)
+
+for d being a list of some accumulated elements
+     P() being a predicate or list operation.
+\end{verbatim}     
+Since the semantics dictate collecting of actions, where a condition is met, in
+‘d’, until predicate P(d) == T, the collect-until gives a better intuitive
+understanding of it’s functionality.
+The repeat-until/collect-until is equivalent to the following construction:
+\begin{verbatim}
+repeat(accumulator: \tau, x: \tau’, y: \tau’)
+	<a> A(...) @ t
+		within x after y
+	then 	if P(A({...} : accumulator)
+		then empty
+		else rep(A({...}: accumulator, x+y-t, 0)
+\end{verbatim}
+
+\paragraph{Example 2 - syntactic sugar for parameter-transferring “where”-clauses in contracts.}
+Story: Existing “where”-clauses are bloated and verbose. We propose syntactic sugar to alleviate this problem and make the clause simpler and more concise:
+
+\begin{verbatim}
+<seller> A(resource r == goods, receiver b == buyer)
+\end{verbatim}
+is interpreted as the old construction:
+\begin{verbatim}
+	<seller> A(resource r, receiver b)
+		where 	r == goods andalso
+			b == buyer
+\end{verbatim}
+
+Note also, that the where clause will still be possible to use in the ‘syntactic
+sugar’-version, where comparisons are more complicated, such as:
+
+\begin{verbatim}
+<seller> A(resource r == goods, receiver b == buyer, amount a)
+		where a = 1.1 * (amount / 2)
+\end{verbatim}
+
+for A being some action, e.g. transferAndDeliver.
+
+
+\paragraph{Example 3 - predicate language and list operators.}
+Story: Consider a scenario where a customer B wants her goods to be delivered in
+portions of all fragile wares separated from heavy-duty wares, but in the same
+contract. This is not immediately possible in the existing system, and can in
+cases of more complex separations of all the goods lead to very complex and
+hard-to-read contracts. We now propose predicates with list operators following
+the template:
+
+\begin{verbatim}
+<seller> Deliver(receiver b == customer, resource r)
+	where r == q(goods) p
+
+for q being a list operator, e.g. ‘all’.
+     p being a list predicate, e.g. \x.x == fragile (lambda x where x == fragile)
+\end{verbatim}
+
+\paragraph{Example 4 - date arithmetic.}
+Story: Contract templates allow only relative dates for fields such as
+deadlines. An instantiation of a contract will not always be worthwhile, when
+deadlines are set to be specific dates, as all arithmetic of constructing
+relative times from an absolute date is time consuming and not handled by the
+system. We introduce simple date arithmetic to allow the system to perform
+run-time conversion of absolute dates to relative time measures.
+
+\begin{verbatim}
+Contract sale : Sale =
+	SaleMult(deliveryDate - startDate, ...)
+\end{verbatim}
+
+During interpretation of this expression, deliverDate - startDate, is evaluated
+to a relative measure for the field deliveryDeadline, to comply with the
+contract language constraints regarding handling of dates.
+
+
+\subsection{Case 1}
+Story: Concrete contract case using list predicates, added syntactic sugar for
+“where”-clauses and contract templates using date arithmetic and list operators.
+\begin{itemize}
+\item Seller agrees to transfer and deliver to buyer. The goods: 1 bed (king
+size), 1 chair, 1 box of wine glass.
+\item The bed and chair, being heavy duty, must be delivered on or before
+2010-08-27. The box of wine glass, being fragile, must be delivered before
+2010-08-30 but after 2010-08-27. All goods are summing to the price of 2000 USD.
+\item All goods must be paid after first delivery.
+\end{itemize}
+Before we present the implementations of the system, we will provide the contract and contract instantiation template for the above contract definition.
 
 \renewcommand\bibname{References}
 \bibliography{/home/bsm/Dropbox/bib/bibliography}
