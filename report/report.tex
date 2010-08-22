@@ -1,11 +1,13 @@
 \documentclass[10pt,a4paper,final,oneside,openany,article]{memoir}
 \usepackage[utf8]{inputenc}
-\usepackage[british]{babel}
-\usepackage{hyperref}
+\usepackage[danish, british]{babel}
+%\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{listings}
-\usepackage{microtype}
+\usepackage[draft]{fixme}
+\usepackage{amsmath}
+\usepackage{semantic}
 
 % Fonts configuration
 %  - Palatino and Bitstream Vera Sans Mono for verbatim
@@ -14,6 +16,7 @@
 \usepackage[sc]{mathpazo} % Math font for Palatino
 \usepackage{bera}
 \linespread{1.05} % Palatino needs more leading (space between lines)
+\usepackage{microtype} % ++
 
 % Commands
 \newcommand{\twofig}[6]{
@@ -36,6 +39,8 @@
 \end{center}
 \end{figure}
 }
+
+\mathlig{||}{\ |\ }
 
 % Bibliography
 \usepackage[style=alphabetic,natbib=true]{biblatex}
@@ -67,30 +72,40 @@
 % Layouting
 \setcounter{tocdepth}{3}
 \pagestyle{plain}
-\chapterstyle{hangnum}
 \setcounter{secnumdepth}{1}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-  There has been developed a Contract Specification Language called
-  CSL, as part of the 3gERP and POETS projects [citation]. It makes it
-  possible to describe a set of commitments between a number of
-  parties (e.g. individuals and companies) and combining those
-  commitments into a legally binding agreement, a contract.
+  As part of the 3gERP and POETS projects [reference], there has been
+  developed a Contract Specification Language called CSL, which makes
+  it possible to write down sets of commitments between parties
+  (e.g. individuals and companies) and combining those commitments
+  into legally binding agreements, contracts. Although it overcomes a
+  number of limitations in earlier contract languages, it isn't as
+  feature complete as is expected from modern languages. For instance,
+  it supports lists, but has no primitives for manipulating them and
+  it provides no means for defining your own function primitives and
+  are thus limited to a small set of built in functions.
 
   This report is written as part of the course "`POETS Summer of
-  Code"' and presents a number of extensions to the existing
-  language on basis of a number of practically used contract schemes
-  that were impossible to formulate in the existing language. The
-  extensions ensure the integrity of the language core features
-  described in \cite{hvitved10}.
+  Code"' and presents a number of extensions to the existing language
+  on basis of a number of contract schemes of practical use, that were
+  impossible to formulate with the existing language. The extensions
+  ensure the integrity of the language core features described in
+  \cite{hvitved10}.
 \end{abstract}
 
+\listoffixmes
+
+\fxnote{Kalder vi det expression language eller predicate language?}
 
 \newpage
 \chapter{Introduction}
+% Har vi brug for hele Toms motivation? Det virker meget som en stor
+% gentagelse, når man har læst introduktionen til hans artikel eller
+% techreport.
 Recently, Tom Hvitved [citation], presented a language for specifying
 multi-party contracts between individuals or companies, for use in third
 generation ERP systems. The motivation of such a language is based on research
@@ -117,6 +132,68 @@ initial intentions of the language (??).
 To further highlight the need of these extensions, we will provide a number of
 examples usable in the real world, that are impossible to formalize in the
 existing system.
+
+\fxwarning{Forklaring af clause templates og contract templates}
+
+\section{Motivating cases}
+\label{motivation}
+% Case navnene skal måske omskrives så de antyder problemer frem for
+% løsninger, alternativt skal sektionen hede "limitations" frem for at
+% være motiverende.
+
+\paragraph{Case 1: Functions} The current language doesn't provide
+anyway of writing functions for the expression level. Clauses
+templates are on the clause-level. Functions are important
+abstractions in all modern languages and without them code maintenance
+can become complicated, if an expression has to be duplicated instead
+of defined once by a function.
+
+\paragraph{Case 2: List manipulation.} In the current language it is
+impossible to manipulate the contents of lists.
+% Example contract where lists needs to be manipulated
+
+\paragraph{Case 3: Conditional expression.} Decisions can't be taken
+on the expression level, only decisions that selects between several
+clauses can be taken and thus an amount of repetition would be needed
+without expression level conditionals.
+
+\chapter{Analysing requirements}
+In this section we analyse how we best can make it possible to solve
+the cases mentioned in Section \ref{motivation}.
+
+\paragraph{Case 1: Functions} As CSL is a declarative language, our
+functions should be inspired by declarative principles. We therefore
+draw from the world of functional programming and define functions as
+lambda expressions that acts as primitive values, which can be passed
+between other functions (higher-order functions).
+% Limitation: no recursion and why?
+
+\paragraph{Case 2: List manipulation}
+As we have banned recursion, we still have no way of iterating through
+lists and manipulating them, thus some other language primitives are
+needed. Our solution to this problem is simple: we provide two
+functions known from functional languages for iterating through lists. 
+
+\lstinline{foldl} and \lstinline{foldr}.
+
+\chapter{Implementation}
+\section{Syntactic extensions}
+The syntax of the complete language is defined in the tech report by
+Tom Hvitved \cite[p. 13]{hvitved10}. As we are solely interested with
+the predicate language, we
+
+\begin{align}
+  p ::= &\ \ldots || \\
+  e ::= &\ \ldots || \lambda x -> e || e_1\ e_2\\
+\end{align}
+
+
+\defbibheading{bibliography}{\chapter{Bibliography}}
+\printbibliography
+
+\appendix
+
+\chapter{Motivating cases}
 
 \paragraph{Example 1 - Syntactic sugar for recursive contracts.}
 Story: Defining recursive contracts can be complicated to define, take up much
@@ -221,8 +298,5 @@ size), 1 chair, 1 box of wine glass.
 \item All goods must be paid after first delivery.
 \end{itemize}
 Before we present the implementations of the system, we will provide the contract and contract instantiation template for the above contract definition.
-
-\defbibheading{bibliography}{\chapter{Bibliography}} 
-\printbibliography
 
 \end{document}
