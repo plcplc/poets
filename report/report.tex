@@ -1,20 +1,21 @@
-\documentclass[a4paper,oneside, final, twocolumn]{memoir}
+\documentclass[10pt,a4paper,final,oneside,openany,article]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage[british]{babel}
-\usepackage{graphicx}
 \usepackage{hyperref}
-\setcounter{tocdepth}{3}
-\usepackage{abstract}
-\usepackage{caption}
+\usepackage{graphicx}
 \usepackage{url}
 \usepackage{listings}
-\usepackage{alltt}
-\usepackage{color}
-\definecolor{blue}{rgb}{0,0,0.8}
-\definecolor{green}{rgb}{0,0.5,0}
-\definecolor{red}{rgb}{0.5,0,0}
-\definecolor{grey}{rgb}{0.5,0.5,0.5}
+\usepackage{microtype}
 
+% Fonts configuration
+%  - Palatino and Bitstream Vera Sans Mono for verbatim
+\usepackage[T1]{fontenc}
+\usepackage{palatino}
+\usepackage[sc]{mathpazo} % Math font for Palatino
+\usepackage{bera}
+\linespread{1.05} % Palatino needs more leading (space between lines)
+
+% Commands
 \newcommand{\twofig}[6]{
 \begin{figure}[htp!]
 \begin{center}
@@ -36,51 +37,59 @@
 \end{figure}
 }
 
-\lstset{
-  language=Python,                % choose the language of the code
-  numbers=left,                   % where to put the line-numbers
-  numberstyle=\tiny,      % the size of the fonts that are used for the line-numbers
-  stepnumber=1,                   % the step between two line-numbers.
-  numbersep=10pt,                  % how far the line-numbers are from the code
-  basicstyle= \ttfamily \scriptsize,       % the size of the fonts that are used for the code
-  breaklines=true,
-  identifierstyle=\color{black},
-  keywordstyle=\color{blue}\textbf,
-       stringstyle=\color{black},
-  commentstyle=\color{red},
-  showstringspaces=false,         % underline spaces within strings
-  inputencoding=utf8,
-  extendedchars= true,
-  frame=single,
+% Bibliography
+\usepackage[style=alphabetic,natbib=true]{biblatex}
+\bibliography{../bibliography}
+
+\lstdefinelanguage{CSL}{ keywords={contract, true, false, if, then,
+    else, where, due, immediately, within, after, or, and, andalso,
+    empty},
+  keywordstyle = \textbf,
+  commentstyle = \textit,
+  stringstyle = \ttfamily,
+  basicstyle   = \small\ttfamily,
+  numberstyle=\tiny,
+  sensitive = true,
+  morecomment=[s]{/*}{*/},
+  morecomment = [l]{//}
 }
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
-\usepackage{pslatex}
-\usepackage[urw-garamond]{mathdesign}
-%BEGIN
-\title{Extensions To The Contract Specification Language CLS\\
+\lstset{language = CSL}
+
+
+\title{Extending the POETS \\ Contract Specification Language\\
+       \vspace{0.1cm}
         \small{A POETS Coding Extravaganza}}
+\author{Brian Søborg Mathiasen (soborg@diku.dk) \and
+        Philip Lykke Carlsen (plcplc@gmail.com) \and
+        Martin Dybdal (dybber@dybber.dk)}
+\date{27th August 2010}
 
-\author{Brian Søborg Mathiasen (soborg@diku.dk) \\ Kim Lundsteen Juncher (juncher@diku.dk) \\ Philip Lykke Carlsen (plcplc@gmail.com) \\ Martin Dybdal (dybber@dybber.dk)}
-\date{\today} %\today
-
+% Layouting
+\setcounter{tocdepth}{3}
 \pagestyle{plain}
 \chapterstyle{hangnum}
 \setcounter{secnumdepth}{1}
-\date{\today}
+
 \begin{document}
 \maketitle
-\newpage
+
 \begin{abstract}
-The Contract Specification Language is a means of formalizing a
-series of actions in a legally binding agreement, describing commitments between
-a number of active individuals or companies. In this paper, we present a number
-of extensions to the existing language on basis of a number of practically used
-contract schemes that were impossible to formulate in the existing language. The
-extensions ensure the integrity of the language core features described in
-\cite{hvitved10}.
+  There has been developed a Contract Specification Language called
+  CSL, as part of the 3gERP and POETS projects [citation]. It makes it
+  possible to describe a set of commitments between a number of
+  parties (e.g. individuals and companies) and combining those
+  commitments into a legally binding agreement, a contract.
+
+  This report is written as part of the course "`POETS Summer of
+  Code"' and presents a number of extensions to the existing
+  language on basis of a number of practically used contract schemes
+  that were impossible to formulate in the existing language. The
+  extensions ensure the integrity of the language core features
+  described in \cite{hvitved10}.
 \end{abstract}
 
+
+\newpage
 \chapter{Introduction}
 Recently, Tom Hvitved [citation], presented a language for specifying
 multi-party contracts between individuals or companies, for use in third
@@ -89,7 +98,7 @@ generation ERP systems. The motivation of such a language is based on research
 critical key to success for enterprises. Current state-of-the-art enterprise
 systems such as Microsoft Dynamics NAV do not represent contracts explicitly as
 first-class objects, but rather via low-level code and database schemes. Such
-contracts are hard to maintain, costly and time consuming, and analyses are are
+contracts are hard to maintain, costly and time consuming, and analyses are
 difficult to perform. The proposed language overcomes these difficulties and
 introduce several features, such as absolute temporal constraints (deadlines),
 relative temporal constraints (sequential ordering), contrary-to-duty clauses,
@@ -115,53 +124,53 @@ space and are hard to read. We now propose syntactic sugar for defining
 recursive functions as iterative contracts using repeat-until/collect-until
 syntax:
 
-\begin{verbatim}
+\begin{lstlisting}
 repeat <a> A(...)
-	within e_{1} after e_{2}
+    within e_{1} after e_{2}
 as d until P(d)
-\end{verbatim}
+\end{lstlisting}
 alternatively
-\begin{verbatim}
+\begin{lstlisting}
 collect <a> A(...)
-	within e_{1} after e_{2}
+    within e_{1} after e_{2}
 in d until P(d)
 
 for d being a list of some accumulated elements
      P() being a predicate or list operation.
-\end{verbatim}     
+\end{lstlisting}     
 Since the semantics dictate collecting of actions, where a condition is met, in
 ‘d’, until predicate P(d) == T, the collect-until gives a better intuitive
 understanding of it’s functionality.
 The repeat-until/collect-until is equivalent to the following construction:
-\begin{verbatim}
-repeat(accumulator: \tau, x: \tau’, y: \tau’)
-	<a> A(...) @ t
-		within x after y
-	then 	if P(A({...} : accumulator)
-		then empty
-		else rep(A({...}: accumulator, x+y-t, 0)
-\end{verbatim}
+\begin{lstlisting}[escapechar=\#]
+repeat(accumulator: #$\tau$#, x: #$\tau’$#, y: #$\tau’$#)
+    <a> A(...) @ t
+        within x after y
+    then     if P(A({...} : accumulator)
+        then empty
+        else rep(A({...}: accumulator, x+y-t, 0)
+\end{lstlisting}
 
 \paragraph{Example 2 - syntactic sugar for parameter-transferring “where”-clauses in contracts.}
 Story: Existing “where”-clauses are bloated and verbose. We propose syntactic sugar to alleviate this problem and make the clause simpler and more concise:
 
-\begin{verbatim}
+\begin{lstlisting}
 <seller> A(resource r == goods, receiver b == buyer)
-\end{verbatim}
+\end{lstlisting}
 is interpreted as the old construction:
-\begin{verbatim}
-	<seller> A(resource r, receiver b)
-		where 	r == goods andalso
-			b == buyer
-\end{verbatim}
+\begin{lstlisting}
+    <seller> A(resource r, receiver b)
+        where     r == goods andalso
+            b == buyer
+\end{lstlisting}
 
 Note also, that the where clause will still be possible to use in the ‘syntactic
 sugar’-version, where comparisons are more complicated, such as:
 
-\begin{verbatim}
+\begin{lstlisting}
 <seller> A(resource r == goods, receiver b == buyer, amount a)
-		where a = 1.1 * (amount / 2)
-\end{verbatim}
+        where a = 1.1 * (amount / 2)
+\end{lstlisting}
 
 for A being some action, e.g. transferAndDeliver.
 
@@ -174,13 +183,13 @@ cases of more complex separations of all the goods lead to very complex and
 hard-to-read contracts. We now propose predicates with list operators following
 the template:
 
-\begin{verbatim}
+\begin{lstlisting}
 <seller> Deliver(receiver b == customer, resource r)
-	where r == q(goods) p
+    where r == q(goods) p
 
-for q being a list operator, e.g. ‘all’.
+for q being a list operator, e.g. 'all'.
      p being a list predicate, e.g. \x.x == fragile (lambda x where x == fragile)
-\end{verbatim}
+\end{lstlisting}
 
 \paragraph{Example 4 - date arithmetic.}
 Story: Contract templates allow only relative dates for fields such as
@@ -190,10 +199,10 @@ relative times from an absolute date is time consuming and not handled by the
 system. We introduce simple date arithmetic to allow the system to perform
 run-time conversion of absolute dates to relative time measures.
 
-\begin{verbatim}
+\begin{lstlisting}
 Contract sale : Sale =
-	SaleMult(deliveryDate - startDate, ...)
-\end{verbatim}
+    SaleMult(deliveryDate - startDate, ...)
+\end{lstlisting}
 
 During interpretation of this expression, deliverDate - startDate, is evaluated
 to a relative measure for the field deliveryDeadline, to comply with the
@@ -213,8 +222,7 @@ size), 1 chair, 1 box of wine glass.
 \end{itemize}
 Before we present the implementations of the system, we will provide the contract and contract instantiation template for the above contract definition.
 
-\renewcommand\bibname{References}
-\bibliography{/home/bsm/Dropbox/bib/bibliography}
-\bibliographystyle{apalike}
+\defbibheading{bibliography}{\chapter{Bibliography}} 
+\printbibliography
 
 \end{document}
