@@ -22,7 +22,7 @@
 \newcommand{\twofig}[6]{
 \begin{figure}[htp!]
 \begin{center}
-\fbox{    \subfigure[#1]{    \includegraphics[width=0.4\textwidth]{#2}    }
+\fbox{    \subfigure[#1]{    \includegraphics[width=0.4\textwidth]{#2}}
     \subfigure[#3]{    \includegraphics[width=0.4\textwidth]{#4}    } }
 \caption{#5}
 \label{#6}
@@ -46,6 +46,8 @@
 \usepackage[style=alphabetic,natbib=true]{biblatex}
 \bibliography{../bibliography}
 
+
+% Language syntax highlighting
 \lstdefinelanguage{CSL}{ keywords={contract, true, false, if, then,
     else, where, due, immediately, within, after, or, and, andalso,
     empty},
@@ -60,7 +62,7 @@
 }
 \lstset{language = CSL}
 
-
+% Document meta
 \title{Extending the POETS \\ Contract Specification Language\\
        \vspace{0.1cm}
         \small{A POETS Coding Extravaganza}}
@@ -108,30 +110,33 @@
 % techreport.
 Recently, Tom Hvitved [citation], presented a language for specifying
 multi-party contracts between individuals or companies, for use in third
-generation ERP systems. The motivation of such a language is based on research
-[citation] stating that contract lifecycle management (CLM) has become a
-critical key to success for enterprises. Current state-of-the-art enterprise
-systems such as Microsoft Dynamics NAV do not represent contracts explicitly as
-first-class objects, but rather via low-level code and database schemes. Such
-contracts are hard to maintain, costly and time consuming, and analyses are
-difficult to perform. The proposed language overcomes these difficulties and
-introduce several features, such as absolute temporal constraints (deadlines),
-relative temporal constraints (sequential ordering), contrary-to-duty clauses,
-run-time monitoring, blame assignment and much more [citation].
+generation ERP systems. The motivation of such a language is based on
+research [citation] stating that contract lifecycle management (CLM) has
+become a critical key to success for enterprises. Current
+state-of-the-art enterprise systems such as Microsoft Dynamics NAV do
+not represent contracts explicitly as first-class objects, but rather
+via low-level code and database schemes. Such contracts are hard to
+maintain, costly and time consuming, and analyses are difficult to
+perform. The proposed language overcomes these difficulties and
+introduce several features, such as absolute temporal constraints
+(deadlines), relative temporal constraints (sequential ordering),
+contrary-to-duty clauses, run-time monitoring, blame assignment and much
+more [citation].
 
-However, despite these many features of the language, it is far from complete.
-In fact, several key features used in real life contract management are
-impossible to define in the existing language. In this paper, we will introduce
-a number of extensions to the existing contract language, as well as define a
-small predicate language usable within contract templates, in order to provide a
-richer array of possibilities within the system. We will also ensure, that any
-and all pre-existing features of the system will co-exist with the extension,
-and that the semantics of all semantics remain sound and in line with the
-initial intentions of the language (??).
+However, despite these many features of the language, it is far from
+complete. In fact, several key features used in real life contract
+management are impossible to define in the existing language. In this
+paper, we will introduce a number of extensions to the existing contract
+language, as well as define an extension to the expression language
+usable within contract templates, in order to provide a richer array of
+possibilities within the system. We will also ensure, that any and all
+pre-existing features of the system will co-exist with the extension,
+and that the semantics of all semantics remain sound and in line with
+the initial intentions of the language (??).
 
-To further highlight the need of these extensions, we will provide a number of
-examples usable in the real world, that are impossible to formalize in the
-existing system.
+To further highlight the need of these extensions, we will provide a
+number of examples usable in the real world, that are impossible to
+formalize in the existing system.
 
 \fxwarning{Forklaring af clause templates og contract templates}
 
@@ -157,6 +162,7 @@ on the expression level, only decisions that selects between several
 clauses can be taken and thus an amount of repetition would be needed
 without expression level conditionals.
 
+
 \chapter{Analysing requirements}
 In this section we analyse how we best can make it possible to solve
 the cases mentioned in Section \ref{motivation}.
@@ -165,27 +171,52 @@ the cases mentioned in Section \ref{motivation}.
 functions should be inspired by declarative principles. We therefore
 draw from the world of functional programming and define functions as
 lambda expressions that acts as primitive values, which can be passed
-between other functions (higher-order functions).
+between other functions (higher-order functions). An important
+limitation for expressing functions on the expression level is that we
+do now allow recursive functions. The important rationale for this
+decision is termination. By allowing recursive functions, we can never
+be sure that they terminate and this would break with one of the
+main principles of CSL \fxwarning{citation needed}.
 % Limitation: no recursion and why?
 
 \paragraph{Case 2: List manipulation}
 As we have banned recursion, we still have no way of iterating through
 lists and manipulating them, thus some other language primitives are
-needed. Our solution to this problem is simple: we provide two
-functions known from functional languages for iterating through lists. 
+needed. Our solution to this problem is simple: we provide three
+functions known from functional languages for iterating through and
+manipulate lists. In particular, we have implemented \lstinline{foldl},
+\lstinline{foldr} and \lstinline{cons} as built-in functions, such to
+allow the user to specify a large array of functions expressable with
+these primitives.
 
-\lstinline{foldl} and \lstinline{foldr}.
 
 \chapter{Implementation}
 \section{Syntactic extensions}
 The syntax of the complete language is defined in the tech report by
 Tom Hvitved \cite[p. 13]{hvitved10}. As we are solely interested with
-the predicate language, we
+the expression language, we will focus on the relevant extensions.
 
 \begin{align}
-  p ::= &\ \ldots || \\
-  e ::= &\ \ldots || \lambda x -> e || e_1\ e_2\\
+  p ::= &\ \ldots || val~x = e || fun~ x (v) = e \\
+  e ::= &\ \ldots || \lambda x -> e || e_1\ e_2
 \end{align}
+
+\section{Built-in extensions}
+As a major motivation, in introducing function expressions through
+syntax, was to eliminate the previously built-in list primitives,
+\lstinline{max} and \lstinline{min}, we also introduced an explicit
+requirement of being able to specify exactly those functions throug
+other means. Thus we had to implement a small array of super-primitives,
+with which we through the extended expression syntax could specify the
+mentioned primitives. Implementing \lstinline{fold}'s as the
+super-primitives would not only ensure that we are able to express 
+\lstinline{max} and \lstinline{min}, but also be able to introduce more
+advanced functions, such as \lstinline{map}, \lstinline{length} and so 
+forth; in addition also ensure that the need for recursive operations
+in expressions are kept at an absolute minimum.
+
+
+\section{Type Inference}
 
 
 \defbibheading{bibliography}{\chapter{Bibliography}}
@@ -196,10 +227,10 @@ the predicate language, we
 \chapter{Motivating cases}
 
 \paragraph{Example 1 - Syntactic sugar for recursive contracts.}
-Story: Defining recursive contracts can be complicated to define, take up much
-space and are hard to read. We now propose syntactic sugar for defining
-recursive functions as iterative contracts using repeat-until/collect-until
-syntax:
+Story: Defining recursive contracts can be complicated to define, take
+up much space and are hard to read. We now propose syntactic sugar for
+defining recursive functions as iterative contracts using
+repeat-until/collect-until syntax:
 
 \begin{lstlisting}
 repeat <a> A(...)
@@ -252,7 +283,7 @@ sugar’-version, where comparisons are more complicated, such as:
 for A being some action, e.g. transferAndDeliver.
 
 
-\paragraph{Example 3 - predicate language and list operators.}
+\paragraph{Example 3 - Extended expression language and list operators.}
 Story: Consider a scenario where a customer B wants her goods to be delivered in
 portions of all fragile wares separated from heavy-duty wares, but in the same
 contract. This is not immediately possible in the existing system, and can in
