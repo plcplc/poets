@@ -81,9 +81,10 @@
 \setcounter{secnumdepth}{1}
 
 \begin{document}
+\listoffixmes
+\newpage
 \maketitle
 
-\listoffixmes
 
 \fxnote{Kalder vi det expression language eller predicate language?}
 
@@ -125,7 +126,7 @@ We have extended the predicate language of CSL, on the basis of a
 number of contract schemes of practical use, that were impossible to
 formulate with the previous version of the language. The extensions
 ensure the integrity of the language core features described in
-\cite{hvitved10}.
+\cite{hvitved10}. %In Section bla we will go through bla and Section n will be a describe our bla.
 
 \section{Motivating cases}
 \label{motivation}
@@ -281,6 +282,25 @@ order of their appearence in a file, extending the typing environment
 when each definition has been processed. This ensures that it is
 impossible to make self-referencing and thereby recursive definitions
 (including mutually recursive definitions).
+
+\chapter{Additional possible extensions}
+As we have worked with the language we have had additional ideas to
+features that could be \textit{nice to have} in the contract language.
+
+\begin{itemize}
+\item A module system
+\item \lstinline{let}-bindings in expressions (syntactic sugar for
+  lambda binding variable)
+\item Additional datatypes, for example pairs.
+\item Repeat-loop to repetitive clauses (e.g. an action that has to be
+  taken every 14 days)
+\end{itemize}
+
+\chapter{Conclusion}
+We have extended the Contract Specification Language of the POETS
+platform to include primitives for writing lambda expressions and
+conditional expressions, as well as definining named values which
+includes functions. 
 
 \defbibheading{bibliography}{\chapter{Bibliography}}
 \printbibliography
