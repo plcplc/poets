@@ -42,6 +42,8 @@
 
 \mathlig{||}{\ |\ }
 
+\newcommand{\kw}[1]{\text{\lstinline{#1}}}
+
 % Bibliography
 \usepackage[style=alphabetic,natbib=true]{biblatex}
 \bibliography{../bibliography}
@@ -50,7 +52,7 @@
 % Language syntax highlighting
 \lstdefinelanguage{CSL}{ keywords={contract, true, false, if, then,
     else, where, due, immediately, within, after, or, and, andalso,
-    empty},
+    empty, fun, val},
   keywordstyle = \textbf,
   commentstyle = \textit,
   stringstyle = \ttfamily,
@@ -65,10 +67,10 @@
 % Document meta
 \title{Extending the POETS \\ Contract Specification Language\\
        \vspace{0.1cm}
-        \small{A POETS Coding Extravaganza}}
-\author{Brian Søborg Mathiasen (soborg@diku.dk) \and
-        Philip Lykke Carlsen (plcplc@gmail.com) \and
-        Martin Dybdal (dybber@dybber.dk)}
+        \small{A Summer of POETS Coding Extravaganza}}
+\author{Philip Lykke Carlsen (plcplc@gmail.com) \and
+        Martin Dybdal (dybber@dybber.dk) \and
+        Brian Søborg Mathiasen (soborg@diku.dk)}
 \date{27th August 2010}
 
 % Layouting
@@ -79,87 +81,69 @@
 \begin{document}
 \maketitle
 
-\begin{abstract}
-  As part of the 3gERP and POETS projects [reference], there has been
-  developed a Contract Specification Language called CSL, which makes
-  it possible to write down sets of commitments between parties
-  (e.g. individuals and companies) and combining those commitments
-  into legally binding agreements, contracts. Although it overcomes a
-  number of limitations in earlier contract languages, it isn't as
-  feature complete as is expected from modern languages. For instance,
-  it supports lists, but has no primitives for manipulating them and
-  it provides no means for defining your own function primitives and
-  are thus limited to a small set of built in functions.
-
-  This report is written as part of the course "`POETS Summer of
-  Code"' and presents a number of extensions to the existing language
-  on basis of a number of contract schemes of practical use, that were
-  impossible to formulate with the existing language. The extensions
-  ensure the integrity of the language core features described in
-  \cite{hvitved10}.
-\end{abstract}
-
 \listoffixmes
 
 \fxnote{Kalder vi det expression language eller predicate language?}
 
-\newpage
+\chapter{Formalities}
+This report was written as part of the DIKU course "`POETS Summer of
+Code"' and presents a set of extensions to the existing contract
+specification language. The project was supervised by Tom Hvitved and
+the code is available in the default branch of the POETS Mercurial
+repository.
+
 \chapter{Introduction}
-% Har vi brug for hele Toms motivation? Det virker meget som en stor
-% gentagelse, når man har læst introduktionen til hans artikel eller
-% techreport.
-Recently, Tom Hvitved [citation], presented a language for specifying
-multi-party contracts between individuals or companies, for use in third
-generation ERP systems. The motivation of such a language is based on
-research [citation] stating that contract lifecycle management (CLM) has
-become a critical key to success for enterprises. Current
-state-of-the-art enterprise systems such as Microsoft Dynamics NAV do
-not represent contracts explicitly as first-class objects, but rather
-via low-level code and database schemes. Such contracts are hard to
-maintain, costly and time consuming, and analyses are difficult to
-perform. The proposed language overcomes these difficulties and
-introduce several features, such as absolute temporal constraints
-(deadlines), relative temporal constraints (sequential ordering),
-contrary-to-duty clauses, run-time monitoring, blame assignment and much
-more [citation].
+Recently, Tom Hvitved presented a language for specifying multi-party
+contracts \cite{hvitved10} as part of the 3gERP and POETS projects
+\cite{3gerp}. The \textit{Contract Specification Language},
+\textit{CSL} makes it possible to write down sets of commitments
+between several parties (e.g. individuals and companies) and combining
+those commitments into legally binding agreements,
+\textit{contracts}. The language overcomes a number of limitations in
+earlier defined contract languages, for example blame assignment and
+support for both relative and absolute temporal constraints.
 
-However, despite these many features of the language, it is far from
-complete. In fact, several key features used in real life contract
-management are impossible to define in the existing language. In this
-paper, we will introduce a number of extensions to the existing contract
-language, as well as define an extension to the expression language
-usable within contract templates, in order to provide a richer array of
-possibilities within the system. We will also ensure, that any and all
-pre-existing features of the system will co-exist with the extension,
-and that the semantics of all semantics remain sound and in line with
-the initial intentions of the language (??).
+The language is structured around \textit{clauses} which are combined
+into \textit{contract templates} by a set of provided
+combinators. These templates can then be instantiated in the running
+system. For example a company might describe a sale of goods as a
+contract template and when a specific article is sold, this contract
+template is instantiated. Clauses describes the actions that certain
+\textit{agents} (contract parties, e.g. a company) should perform and
+also contains information about when this should happen and a
+predicate \fxwarning{explain usage scenario}. This predicate language
+was very limited in the Tom Hvitveds incarnation, for instance, while
+CSL supports lists, the predicate language had no primitives for
+manipulating them and provides no means of defining important
+abstractions, like functions.
 
-To further highlight the need of these extensions, we will provide a
-number of examples usable in the real world, that are impossible to
-formalize in the existing system.
-
-\fxwarning{Forklaring af clause templates og contract templates}
+We have extended the predicate language of CSL, on the basis of a
+number of contract schemes of practical use, that were impossible to
+formulate with the previous version of the language. The extensions
+ensure the integrity of the language core features described in
+\cite{hvitved10}.
 
 \section{Motivating cases}
 \label{motivation}
-% Case navnene skal måske omskrives så de antyder problemer frem for
-% løsninger, alternativt skal sektionen hede "limitations" frem for at
-% være motiverende.
+To further highlight the need of extensions to CSL, we will provide a
+number of real world applications, that are impossible to formalize in
+the existing system. \fxnote{applications burde måske erstattes med noget andet}
 
-\paragraph{Case 1: Functions} The current language doesn't provide
+\paragraph{Case 1: Manipulating lists} In the existing language it was
+impossible to modify the contents of lists in any way. The only
+available operations on lists were computing its length and comparison
+operations.
+
+\paragraph{Case 2: Abstractions} The current language doesn't provide
 anyway of writing functions for the expression level. Clauses
 templates are on the clause-level. Functions are important
 abstractions in all modern languages and without them code maintenance
 can become complicated, if an expression has to be duplicated instead
 of defined once by a function.
 
-\paragraph{Case 2: List manipulation.} In the current language it is
-impossible to manipulate the contents of lists.
-% Example contract where lists needs to be manipulated
-
 \paragraph{Case 3: Conditional expression.} Decisions can't be taken
 on the expression level, only decisions that selects between several
-clauses can be taken and thus an amount of repetition would be needed
+clauses can be taken. and thus an amount of repetition would be needed
 without expression level conditionals.
 
 
@@ -186,7 +170,7 @@ needed. Our solution to this problem is simple: we provide three
 functions known from functional languages for iterating through and
 manipulate lists. In particular, we have implemented \lstinline{foldl},
 \lstinline{foldr} and \lstinline{cons} as built-in functions, such to
-allow the user to specify a large array of functions expressable with
+allow the user to specify a large array of functions expressible with
 these primitives.
 
 
@@ -196,10 +180,12 @@ The syntax of the complete language is defined in the tech report by
 Tom Hvitved \cite[p. 13]{hvitved10}. As we are solely interested with
 the expression language, we will focus on the relevant extensions.
 
-\begin{align}
-  p ::= &\ \ldots || val~x = e || fun~ x (v) = e \\
-  e ::= &\ \ldots || \lambda x -> e || e_1\ e_2
-\end{align}
+\begin{align*}
+  p ::= &\ \ldots || \kw{val}~ id : type = e \tag{CSL terms}\\
+& \quad\quad || \kw{fun}~  id : type~ (id_1 : type_1, id_2 : type_2, \ldots) = e \\
+  e ::= &\ \ldots || \lambda id -> e || e_1\ e_2 || \kw{if}~ e~ \kw{then}~ c_1~ \kw{else}~ c_2 \tag{CSL predicates} \\
+  type ::= &\ \kw{Int} || \kw{Bool} || \ldots || type_1 -> type_2 || typevar \tag{CSL types}
+\end{align*}
 
 \section{Built-in extensions}
 As a major motivation, in introducing function expressions through
@@ -222,112 +208,112 @@ in expressions are kept at an absolute minimum.
 \defbibheading{bibliography}{\chapter{Bibliography}}
 \printbibliography
 
-\appendix
+% \appendix
 
-\chapter{Motivating cases}
+% \chapter{Motivating cases}
 
-\paragraph{Example 1 - Syntactic sugar for recursive contracts.}
-Story: Defining recursive contracts can be complicated to define, take
-up much space and are hard to read. We now propose syntactic sugar for
-defining recursive functions as iterative contracts using
-repeat-until/collect-until syntax:
+% \paragraph{Example 1 - Syntactic sugar for recursive contracts.}
+% Story: Defining recursive contracts can be complicated to define, take
+% up much space and are hard to read. We now propose syntactic sugar for
+% defining recursive functions as iterative contracts using
+% repeat-until/collect-until syntax:
 
-\begin{lstlisting}
-repeat <a> A(...)
-    within e_{1} after e_{2}
-as d until P(d)
-\end{lstlisting}
-alternatively
-\begin{lstlisting}
-collect <a> A(...)
-    within e_{1} after e_{2}
-in d until P(d)
+% \begin{lstlisting}
+% repeat <a> A(...)
+%     within e_{1} after e_{2}
+% as d until P(d)
+% \end{lstlisting}
+% alternatively
+% \begin{lstlisting}
+% collect <a> A(...)
+%     within e_{1} after e_{2}
+% in d until P(d)
 
-for d being a list of some accumulated elements
-     P() being a predicate or list operation.
-\end{lstlisting}     
-Since the semantics dictate collecting of actions, where a condition is met, in
-‘d’, until predicate P(d) == T, the collect-until gives a better intuitive
-understanding of it’s functionality.
-The repeat-until/collect-until is equivalent to the following construction:
-\begin{lstlisting}[escapechar=\#]
-repeat(accumulator: #$\tau$#, x: #$\tau’$#, y: #$\tau’$#)
-    <a> A(...) @ t
-        within x after y
-    then     if P(A({...} : accumulator)
-        then empty
-        else rep(A({...}: accumulator, x+y-t, 0)
-\end{lstlisting}
+% for d being a list of some accumulated elements
+%      P() being a predicate or list operation.
+% \end{lstlisting}     
+% Since the semantics dictate collecting of actions, where a condition is met, in
+% ‘d’, until predicate P(d) == T, the collect-until gives a better intuitive
+% understanding of it’s functionality.
+% The repeat-until/collect-until is equivalent to the following construction:
+% \begin{lstlisting}[escapechar=\#]
+% repeat(accumulator: #$\tau$#, x: #$\tau’$#, y: #$\tau’$#)
+%     <a> A(...) @ t
+%         within x after y
+%     then     if P(A({...} : accumulator)
+%         then empty
+%         else rep(A({...}: accumulator, x+y-t, 0)
+% \end{lstlisting}
 
-\paragraph{Example 2 - syntactic sugar for parameter-transferring “where”-clauses in contracts.}
-Story: Existing “where”-clauses are bloated and verbose. We propose syntactic sugar to alleviate this problem and make the clause simpler and more concise:
+% \paragraph{Example 2 - syntactic sugar for parameter-transferring “where”-clauses in contracts.}
+% Story: Existing “where”-clauses are bloated and verbose. We propose syntactic sugar to alleviate this problem and make the clause simpler and more concise:
 
-\begin{lstlisting}
-<seller> A(resource r == goods, receiver b == buyer)
-\end{lstlisting}
-is interpreted as the old construction:
-\begin{lstlisting}
-    <seller> A(resource r, receiver b)
-        where     r == goods andalso
-            b == buyer
-\end{lstlisting}
+% \begin{lstlisting}
+% <seller> A(resource r == goods, receiver b == buyer)
+% \end{lstlisting}
+% is interpreted as the old construction:
+% \begin{lstlisting}
+%     <seller> A(resource r, receiver b)
+%         where     r == goods andalso
+%             b == buyer
+% \end{lstlisting}
 
-Note also, that the where clause will still be possible to use in the ‘syntactic
-sugar’-version, where comparisons are more complicated, such as:
+% Note also, that the where clause will still be possible to use in the ‘syntactic
+% sugar’-version, where comparisons are more complicated, such as:
 
-\begin{lstlisting}
-<seller> A(resource r == goods, receiver b == buyer, amount a)
-        where a = 1.1 * (amount / 2)
-\end{lstlisting}
+% \begin{lstlisting}
+% <seller> A(resource r == goods, receiver b == buyer, amount a)
+%         where a = 1.1 * (amount / 2)
+% \end{lstlisting}
 
-for A being some action, e.g. transferAndDeliver.
-
-
-\paragraph{Example 3 - Extended expression language and list operators.}
-Story: Consider a scenario where a customer B wants her goods to be delivered in
-portions of all fragile wares separated from heavy-duty wares, but in the same
-contract. This is not immediately possible in the existing system, and can in
-cases of more complex separations of all the goods lead to very complex and
-hard-to-read contracts. We now propose predicates with list operators following
-the template:
-
-\begin{lstlisting}
-<seller> Deliver(receiver b == customer, resource r)
-    where r == q(goods) p
-
-for q being a list operator, e.g. 'all'.
-     p being a list predicate, e.g. \x.x == fragile (lambda x where x == fragile)
-\end{lstlisting}
-
-\paragraph{Example 4 - date arithmetic.}
-Story: Contract templates allow only relative dates for fields such as
-deadlines. An instantiation of a contract will not always be worthwhile, when
-deadlines are set to be specific dates, as all arithmetic of constructing
-relative times from an absolute date is time consuming and not handled by the
-system. We introduce simple date arithmetic to allow the system to perform
-run-time conversion of absolute dates to relative time measures.
-
-\begin{lstlisting}
-Contract sale : Sale =
-    SaleMult(deliveryDate - startDate, ...)
-\end{lstlisting}
-
-During interpretation of this expression, deliverDate - startDate, is evaluated
-to a relative measure for the field deliveryDeadline, to comply with the
-contract language constraints regarding handling of dates.
+% for A being some action, e.g. transferAndDeliver.
 
 
-\subsection{Case 1}
-Story: Concrete contract case using list predicates, added syntactic sugar for
-“where”-clauses and contract templates using date arithmetic and list operators.
-\begin{itemize}
-\item Seller agrees to transfer and deliver to buyer. The goods: 1 bed (king
-size), 1 chair, 1 box of wine glass.
-\item The bed and chair, being heavy duty, must be delivered on or before
-2010-08-27. The box of wine glass, being fragile, must be delivered before
-2010-08-30 but after 2010-08-27. All goods are summing to the price of 2000 USD.
-\item All goods must be paid after first delivery.
-\end{itemize}
-Before we present the implementations of the system, we will provide the contract and contract instantiation template for the above contract definition.
+% \paragraph{Example 3 - Extended expression language and list operators.}
+% Story: Consider a scenario where a customer B wants her goods to be delivered in
+% portions of all fragile wares separated from heavy-duty wares, but in the same
+% contract. This is not immediately possible in the existing system, and can in
+% cases of more complex separations of all the goods lead to very complex and
+% hard-to-read contracts. We now propose predicates with list operators following
+% the template:
+
+% \begin{lstlisting}
+% <seller> Deliver(receiver b == customer, resource r)
+%     where r == q(goods) p
+
+% for q being a list operator, e.g. 'all'.
+%      p being a list predicate, e.g. \x.x == fragile (lambda x where x == fragile)
+% \end{lstlisting}
+
+% \paragraph{Example 4 - date arithmetic.}
+% Story: Contract templates allow only relative dates for fields such as
+% deadlines. An instantiation of a contract will not always be worthwhile, when
+% deadlines are set to be specific dates, as all arithmetic of constructing
+% relative times from an absolute date is time consuming and not handled by the
+% system. We introduce simple date arithmetic to allow the system to perform
+% run-time conversion of absolute dates to relative time measures.
+
+% \begin{lstlisting}
+% Contract sale : Sale =
+%     SaleMult(deliveryDate - startDate, ...)
+% \end{lstlisting}
+
+% During interpretation of this expression, deliverDate - startDate, is evaluated
+% to a relative measure for the field deliveryDeadline, to comply with the
+% contract language constraints regarding handling of dates.
+
+
+% \subsection{Case 1}
+% Story: Concrete contract case using list predicates, added syntactic sugar for
+% “where”-clauses and contract templates using date arithmetic and list operators.
+% \begin{itemize}
+% \item Seller agrees to transfer and deliver to buyer. The goods: 1 bed (king
+% size), 1 chair, 1 box of wine glass.
+% \item The bed and chair, being heavy duty, must be delivered on or before
+% 2010-08-27. The box of wine glass, being fragile, must be delivered before
+% 2010-08-30 but after 2010-08-27. All goods are summing to the price of 2000 USD.
+% \item All goods must be paid after first delivery.
+% \end{itemize}
+% Before we present the implementations of the system, we will provide the contract and contract instantiation template for the above contract definition.
 
 \end{document}

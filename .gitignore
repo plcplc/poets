@@ -5,3 +5,7 @@
 *.lox
 *.out
 *.pdf
+*.toc
+report/report-blx.bib
+report/auto
+
