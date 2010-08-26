@@ -360,13 +360,24 @@ language we have had additional ideas to features that could be
 \item Additional datatypes, for example pairs.
 \item Repeat-loop to repetitive clauses (e.g. an action that has to be
   taken every 14 days)
+\item Elimination of parameter-passing \lstinline{where}-clauses.
 \end{itemize}
 
 \chapter{Conclusion}
 We have extended the Contract Specification Language of the POETS
-platform to include primitives for writing lambda expressions and
-conditional expressions, as well as definining named values which
-includes functions. 
+platform to include primitives for writing lambda expressions,
+conditional expressions, as well as defining named values which includes
+functions as well as built-in list manipulation primitives. Given these
+extensions, we have established a solid foundation for providing rich
+functionality through the expression language, which will give more
+flexibility in contract specifications.
+%While a large portion of the extensions have been tested and verified
+%the type checking is still of unknown stability, as the constraint
+%solver for the CSL type inferer is not yet implemented at the time of
+%writing.
+
+\section{Future work}
+
 
 \defbibheading{bibliography}{\chapter{Bibliography}}
 \printbibliography
