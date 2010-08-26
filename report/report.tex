@@ -135,42 +135,48 @@ ensure the integrity of the language core features described in
 \label{extensions}
 In this section we will go through our extensions to CSL and at the
 same time motivating these extensions by describing contracts that
-could occur in real world applications. \fxnote{applications burde måske
-  erstattes med noget andet}
+could occur in real world applications.
 
 \paragraph{Case 1: Manipulating lists} In the existing language it was
 impossible to modify the contents of lists in any way. The only
 available operations on lists were computing its length and comparison
 operations. The language thus needs more general combinators for
-writing list manipulators.
+performing list manipulations.
 
 An example of a contract that could not be written in the previous
 language incarnation, is a sales contract where the order is delivered
 in several parcels. When the first parcel is received, the contract
 should be updated to reflect that seller only needs to deliver the
-remaining articles of the order.
-%See how this could be implemented in Appendix \ref{}
+remaining articles of the order.  We show how this could be
+implemented in Appendix
+\ref{chap:sale_partial_delivery}.
 
 \paragraph{Case 2: Abstractions and polymorphism} The current language
 does not provide any way of writing functions on the expression
-level. Contracts and clause templates provides are abstraction in the
-syntactic hierarchy above. Clausetemplates could be used for for some
-amount of
+level. Contracts and clause templates provides abstraction on
+syntactical hierarchy above. Clause templates could be used for for
+some amount of code-reuse and abstractions, but it wouldn't be
+worthwhile. Functions are important abstractions in all modern
+languages and without them code maintenance can become complicated. It
+is basic knowledge that code duplication should be avoided.
+Furthermore, functions should be as general as possible. It should not
+be necessary to restrict a length function for lists to only work on
+lists of e.g. integers. Thus, we want functions to have polymorphic
+types.
 
-Functions are important abstractions in all modern languages and
-without them code maintenance can become complicated, if an expression
-has to be duplicated instead of defined once by a function.
+Our example in Appendix \ref{chap:sale_partial_delivery} also
+illustrates the usefulness of functions for code reuse.
 
 \paragraph{Case 3: Conditional expression.} Decisions can not be taken
 on the expression level, only decisions that selects between several
 clauses can be taken. and thus an amount of repetition would be needed
 without expression level conditionals. As a very simple example, the
 minimum function can't be described in the current language and was
-previously a hardcoded in the expression evaluator.
+previously a hardcoded primitive in the expression evaluator.
 
-\chapter{Analysing requirements}
-In this section we analyse how we best can make it possible to solve
-the cases mentioned in Section \ref{motivation}.
+\chapter{Implementation considerations}
+In this section we analyse how we want to provide solutions for the
+cases mentioned in Section \ref{extensions}.
 
 \paragraph{Case 1: Functions} As CSL is a declarative language, our
 functions should be inspired by declarative principles. We therefore
@@ -298,9 +304,35 @@ impossible to make self-referencing and thereby recursive definitions
 
 \section{Evaluating expressions}
 
-\chapter{Additional possible extensions}
-As we have worked with the language we have had additional ideas to
-features that could be \textit{nice to have} in the contract language.
+\section{Testing}
+A specifically stated requirement from the 3gERP-team was that every
+project team must perform unit tests of the extensions that they
+produce. To meet this end we have created unit tests of the parser
+module and the evaluator module using the \emph{HUnit} framework.
+
+The tests of the parser each compare a piece of csl syntax with a
+directly constructed AST\footnote{Abstract Syntax Tree}.  The tests
+deal with the parsing of
+
+\begin{itemize}
+
+  \item value bindings
+
+  \item function application
+
+  \item lambda definitions
+
+  \item type annotations
+
+\end{itemize}
+
+The tests we have performed are only constructive, in the sense that
+only valid pieces of syntax are tested to parse to their expected
+ASTs.
+
+\chapter{Additional possible extensions} As we have worked with the
+language we have had additional ideas to features that could be
+\textit{nice to have} in the contract language.
 
 \begin{itemize}
 \item A module system
@@ -335,6 +367,7 @@ flexibility in contract specifications.
 \newpage
 \appendix
 \chapter{sale\_partial\_delivery.csl: Contract for partial deliveries}
+\label{chap:sale_partial_delivery}
 \lstinputlisting{sale_partial_delivery.csl}
 
 % \chapter{Motivating cases}
