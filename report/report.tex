@@ -7,6 +7,7 @@
 \usepackage{listings}
 \usepackage[draft]{fixme}
 \usepackage{amsmath}
+\usepackage[ntheorem, overload]{empheq}
 \usepackage{semantic}
 
 % Fonts configuration
@@ -43,6 +44,7 @@
 \mathlig{||}{\ |\ }
 
 \newcommand{\kw}[1]{\text{\lstinline{#1}}}
+\newcommand*\widefbox[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 
 % Bibliography
 \usepackage[style=alphabetic,natbib=true]{biblatex}
@@ -86,8 +88,8 @@
 \fxnote{Kalder vi det expression language eller predicate language?}
 
 \chapter{Formalities}
-This report was written as part of the DIKU course "`POETS Summer of
-Code"' and presents a set of extensions to the existing contract
+This report was written as part of the DIKU course ``POETS Summer of
+Code'' and presents a set of extensions to the existing contract
 specification language. The project was supervised by Tom Hvitved and
 the code is available in the default branch of the POETS Mercurial
 repository.
@@ -110,12 +112,14 @@ system. For example a company might describe a sale of goods as a
 contract template and when a specific article is sold, this contract
 template is instantiated. Clauses describes the actions that certain
 \textit{agents} (contract parties, e.g. a company) should perform and
-also contains information about when this should happen and a
-predicate \fxwarning{explain usage scenario}. This predicate language
-was very limited in the Tom Hvitveds incarnation, for instance, while
-CSL supports lists, the predicate language had no primitives for
-manipulating them and provides no means of defining important
-abstractions, like functions.
+also contains information about when this should happen (e.g., a
+package must be dispatched within 10 days) and a predicate detailing
+which constraints should be satisfied (e.g. a customer should transfer
+the agreed amount of money). This predicate language (which we often
+will call ``the CSL expression language'') was very limited in Tom
+Hvitveds incarnation. For instance, while CSL supports lists, the
+predicate language had no primitives for manipulating them and
+provides no means of defining important abstractions, like functions.
 
 We have extended the predicate language of CSL, on the basis of a
 number of contract schemes of practical use, that were impossible to
@@ -134,18 +138,22 @@ impossible to modify the contents of lists in any way. The only
 available operations on lists were computing its length and comparison
 operations.
 
-\paragraph{Case 2: Abstractions} The current language doesn't provide
-anyway of writing functions for the expression level. Clauses
-templates are on the clause-level. Functions are important
-abstractions in all modern languages and without them code maintenance
-can become complicated, if an expression has to be duplicated instead
-of defined once by a function.
+\paragraph{Case 2: Abstractions and polymorphism} The current language
+doesn't provide anyway of writing functions on the expression
+level. Contracts and clause templates provides are abstraction in the
+syntactic hierarchy above. Clausetemplates could be used for for some
+amount of
 
-\paragraph{Case 3: Conditional expression.} Decisions can't be taken
+Functions are important abstractions in all modern languages and
+without them code maintenance can become complicated, if an expression
+has to be duplicated instead of defined once by a function.
+
+\paragraph{Case 3: Conditional expression.} Decisions can not be taken
 on the expression level, only decisions that selects between several
 clauses can be taken. and thus an amount of repetition would be needed
-without expression level conditionals.
-
+without expression level conditionals. As a very simple example, the
+minimum function can't be described in the current language and was
+previously a hardcoded in the expression evaluator.
 
 \chapter{Analysing requirements}
 In this section we analyse how we best can make it possible to solve
@@ -173,19 +181,41 @@ manipulate lists. In particular, we have implemented \lstinline{foldl},
 allow the user to specify a large array of functions expressible with
 these primitives.
 
-
 \chapter{Implementation}
 \section{Syntactic extensions}
-The syntax of the complete language is defined in the tech report by
-Tom Hvitved \cite[p. 13]{hvitved10}. As we are solely interested with
-the expression language, we will focus on the relevant extensions.
+\begin{figure}
+  \begin{align*}[box=\widefbox]
+    p ::= &~ \ldots || \kw{val}~ id : type = e %\tag{CSL terms}
+    \\ & \quad\quad || \kw{fun}~  id : type~ (id_1 : type_1, id_2 : type_2, \ldots, id_n : type_n) = e \\
+    e ::= &~ \ldots || \lambda id_1~ id_2~ \ldots~ id_n -> e || e_1\ e_2 || \kw{if}~ c~ \kw{then}~ e_1~ \kw{else}~ e_2 %\tag{CSL predicates} 
+    \\ type ::= &~ \ldots || type_1 -> type_2 ||
+    typevar %\tag{CSL types}
+  \end{align*}
+  \caption{Our extensions to the CSL grammar}
+\label{fig:bnf}
+\end{figure}
 
-\begin{align*}
-  p ::= &\ \ldots || \kw{val}~ id : type = e \tag{CSL terms}\\
-& \quad\quad || \kw{fun}~  id : type~ (id_1 : type_1, id_2 : type_2, \ldots) = e \\
-  e ::= &\ \ldots || \lambda id -> e || e_1\ e_2 || \kw{if}~ e~ \kw{then}~ c_1~ \kw{else}~ c_2 \tag{CSL predicates} \\
-  type ::= &\ \kw{Int} || \kw{Bool} || \ldots || type_1 -> type_2 || typevar \tag{CSL types}
-\end{align*}
+The grammar of the complete language is defined in the tech report by
+Tom Hvitved \cite[p. 13]{hvitved10}, our extensions can be seen in
+Figure \ref{fig:bnf}. 
+
+We have extended the set of CSL terms $p$ to include \textit{value}
+and \textit{function definitions}.  As can be seen, our only syntactic
+extensions to the CSL language are lambda expressions, function
+application and conditional expressions. The multi parametered
+expressions unfold to several embedded lambda expressions and a
+function definition unfold to a value definition of a lambda
+expression.
+
+Type expressions are extended with function types and type
+variables.
+
+These extensions are made to the
+\texttt{Poets.Contracts.Language.CSL.Parser} module of Poets. The most
+interesting extensions are function application which are implemented
+as a left-associative operator and \ldots.  \fxwarning{Haddock links
+  to Parser and function application parsing}
+
 
 \section{Built-in extensions}
 As a major motivation, in introducing function expressions through
@@ -200,7 +230,6 @@ super-primitives would not only ensure that we are able to express
 advanced functions, such as \lstinline{map}, \lstinline{length} and so 
 forth; in addition also ensure that the need for recursive operations
 in expressions are kept at an absolute minimum.
-
 
 \section{Type Inference}
 
