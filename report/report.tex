@@ -304,9 +304,35 @@ impossible to make self-referencing and thereby recursive definitions
 
 \section{Evaluating expressions}
 
-\chapter{Additional possible extensions}
-As we have worked with the language we have had additional ideas to
-features that could be \textit{nice to have} in the contract language.
+\section{Testing}
+A specifically stated requirement from the 3gERP-team was that every
+project team must perform unit tests of the extensions that they
+produce. To meet this end we have created unit tests of the parser
+module and the evaluator module using the \emph{HUnit} framework.
+
+The tests of the parser each compare a piece of csl syntax with a
+directly constructed AST\footnote{Abstract Syntax Tree}.  The tests
+deal with the parsing of
+
+\begin{itemize}
+
+  \item value bindings
+
+  \item function application
+
+  \item lambda definitions
+
+  \item type annotations
+
+\end{itemize}
+
+The tests we have performed are only constructive, in the sense that
+only valid pieces of syntax are tested to parse to their expected
+ASTs.
+
+\chapter{Additional possible extensions} As we have worked with the
+language we have had additional ideas to features that could be
+\textit{nice to have} in the contract language.
 
 \begin{itemize}
 \item A module system
