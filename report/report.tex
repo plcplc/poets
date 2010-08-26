@@ -84,11 +84,10 @@
 
 \begin{document}
 \listoffixmes
+\fxnote{Kalder vi det expression language eller predicate language?}
+
 \newpage
 \maketitle
-
-
-\fxnote{Kalder vi det expression language eller predicate language?}
 
 \chapter{Formalities}
 This report was written as part of the DIKU course ``POETS Summer of
@@ -137,11 +136,12 @@ be. Section
 \label{implementation} describes how we have implemented the
 extensions.
 
-\chapter{Our selected extensions}
+\chapter{Extensions}
 \label{extensions}
-In this section we will go through our extensions to CSL and at the
-same time motivating these extensions by describing contracts that
-could occur in real world applications.
+In this section we will go through the extensions CSL that we have
+selected to implement and at the same time motivate these extensions
+by describing contracts that could occur in real world applications of
+the language.
 
 \paragraph{Case 1: Manipulating lists} In the existing language it was
 impossible to modify the contents of lists in any way. The only
@@ -161,7 +161,7 @@ implemented with our extensions in Appendix
 does not provide any way of writing functions on the expression
 level. Contracts and clause templates provides abstraction on
 syntactical hierarchy above. Clause templates could be used for for
-some amount of code-reuse and abstractions, but it wouldn't be
+some amount of code-reuse and abstractions, but it would not be
 worthwhile. Functions are important abstractions in all modern
 languages and without them code maintenance can become complicated. It
 is basic knowledge that code duplication should be avoided.
@@ -177,7 +177,7 @@ illustrates the usefulness of functions for code reuse.
 on the expression level, only decisions that selects between several
 clauses can be taken. and thus an amount of repetition would be needed
 without expression level conditionals. As a very simple example, the
-minimum function can't be described in the current language and was
+minimum function can not be expressed in the current language and was
 previously a hardcoded primitive in the expression evaluator.
 
 \chapter{Selecting language primitives}
@@ -188,28 +188,35 @@ language built-in primitives to a minimum, to limit implementation
 complexity. 
 
 \paragraph{Case 1: List manipulation}
-As we have banned recursion, we still have no way of iterating through
-lists and manipulating them, thus some other language primitives are
-needed. Our solution to this problem is simple: we provide three
-functions known from functional languages for iterating through and
-manipulate lists. In particular, we have implemented \lstinline{foldl},
-\lstinline{foldr} and \lstinline{cons} as built-in functions, such to
-allow the user to specify a large array of functions expressible with
-these primitives.
+A need of list manipulations implies a need of iteration or recursion
+primitives. We could implement recursive functions along with head,
+tail and cons to enable very minimal set of primitives, but we could
+can not allow recursion. This would break \ldots \fxwarning{why again}.
+Instead we need a way of iterating through lists while still
+guarenteeing that all expressions will terminate.  Our solution to
+this problem is simple: we provide three functions known from
+functional languages for iterating through and manipulate lists. In
+particular, we have implemented \lstinline{foldl}, \lstinline{foldr}
+and \lstinline{cons} as built-in functions, which allows the user to
+write the large array of functions expressible with these primitives.
 
 \paragraph{Case 2: Functions} As CSL is a declarative language, our
 functions should be inspired by declarative principles. We therefore
 draw from the world of functional programming and define functions as
-lambda expressions that acts as primitive values, which can be passed
+lambda expressions that acts as primitive values which can be passed
 between other functions (higher-order functions). An important
-limitation for expressing functions on the expression level is that we
-do now allow recursive functions. The important rationale for this
-decision is termination. By allowing recursive functions, we can never
-be sure that they terminate and this would break with one of the
-main principles of CSL \fxwarning{citation needed}.
+limitation on expression-level functions is the above mentioned
+limitation of terminating functions. If we were to allow recursive
+functions, we would never be sure whether they would terminate and
+this would break \ldots%with one of the main principles of CSL
+\fxwarning{citation needed}.
 % Limitation: no recursion and why?
 
 \paragraph{Case 3: Conditional expressions}
+Expression level conditionals are common feature of all functional
+languages and thus we simply adopt the notation and semantics from
+such languages.
+
 % ikke meget at rafle om: der mangler blot en if-then-else konstruktion
  
 
@@ -236,7 +243,8 @@ and \textit{function definitions}.  As can be seen, our only syntactic
 extensions to the CSL expression language (nonterminal $e$) are lambda
 expressions, function application and conditional
 expressions\footnote{Actually, negation is also our addition. It
-  existed only by coincidence in the previous version.}. The multi
+  existed only by coincidence in the previous version.} %negationaddition
+The multi
 parametered expressions unfold to several embedded lambda expressions
 and a function definition unfold to a value definition of a lambda
 expression.
@@ -303,7 +311,7 @@ to include the types of our four built-in functions:
 \end{equation*}
 
 As Tom Hvitved still has to implement the constraint solver for the
-CSL type inferer we haven't been able to test whether our generated
+CSL type inferer we have not been able to test whether our generated
 constraints are correct and suffice to perform the inference. We thus
 can not give any guarentees on the implemented functionality of this part.
 
