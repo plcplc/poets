@@ -1,0 +1,54 @@
+/*
+ * Sales contract supporting partial deliveries
+ */
+fun not : Bool (a : Bool) = if a then false else true
+
+// List functions
+fun map : [b] (f : a -> b, list : [a]) = 
+        foldr (\x b -> cons x b) [] list
+fun elem : Bool (needle : a, haystack : [a]) = 
+        foldr (\x b -> if x == needle then true else b) false haystack
+fun and : Bool (list : [Bool]) = 
+        foldr (\x y -> x andalso y) True list
+fun filter : [a] (f : a -> Bool, list : [a]) = 
+        foldr (\x b -> if f x then cons x b else b) [] list
+
+// Set functions
+fun subsetOf : Bool (list : [a], list2 : [a]) = 
+        and (map (\x -> elem x list2) list)
+fun setDiff : [a] (list : [a], list2 : [a]) = 
+        filter (\x -> not (elem x list2)) list
+
+
+sale(deliveryDeadline : Duration,
+     paymentDeadline : Duration,
+     goods : Resource,
+     currency : Currency,
+     amount : Double)<buyer, seller> =
+ // First seller must deliver goods
+ <seller> TransferAndDeliver(resource g, receiver r)
+  where subsetOf g goods andalso
+        r == buyer
+  due within deliveryDeadline
+  then
+    if subsetOf goods g
+    then
+    // Buyer must pay upon receipt of all goods
+    <buyer> Payment(currency c, amount a, receiver r)
+     where c == currency andalso
+           a == 0.5 * amount andalso
+           r == seller
+     due within 1H
+    else sale(deliveryDeadline,
+              paymentDeadline,
+              setDiff goods g, // only deliver what is not yet received
+              currency,
+              amount)<buyer, seller>
+
+
+contract sale : Sale =
+ sale(sellerExchangeDeadline,
+      buyerExchangeDeadline,
+      goods,
+      currency,
+      price)<buyer, seller>
