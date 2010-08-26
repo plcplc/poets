@@ -129,7 +129,7 @@ provides no means of defining important abstractions, like functions.
 We have extended the predicate language of CSL, on the basis of a
 number of contract schemes of practical use, that were impossible to
 formulate with the previous version of the language. The extensions
-ensure the integrity of the language core features described in
+ensure the integrity of the core features of the language described in
 \cite{hvitved10}.  In Section \ref{extensions} we will go through the
 limitations of the current language that we want to solve. In Section
 we will determine the syntax and semantics of these extensions should
@@ -204,9 +204,10 @@ lambda expressions that acts as primitive values, which can be passed
 between other functions (higher-order functions). An important
 limitation for expressing functions on the expression level is that we
 do now allow recursive functions. The important rationale for this
-decision is termination. By allowing recursive functions, we can never
-be sure that they terminate and this would break with one of the
-main principles of CSL \fxwarning{citation needed}.
+decision is termination. 
+%By allowing recursive functions, we can never
+%be sure that they terminate and this would break with one of the
+%main principles of CSL \fxwarning{citation needed}.
 % Limitation: no recursion and why?
 
 \paragraph{Case 3: Conditional expressions}
@@ -371,6 +372,9 @@ functions as well as built-in list manipulation primitives. Given these
 extensions, we have established a solid foundation for providing rich
 functionality through the expression language, which will give more
 flexibility in contract specifications.
+Finally, the core features of the original language have been preserved
+in the extended language.
+
 %While a large portion of the extensions have been tested and verified
 %the type checking is still of unknown stability, as the constraint
 %solver for the CSL type inferer is not yet implemented at the time of
