@@ -6,8 +6,8 @@ fun not : Bool (a : Bool) = if a then false else true
 // List functions
 fun map : [b] (f : a -> b, xs : [a]) =
         foldr (\x b -> cons x b) [] xs
-fun elem : Bool (needle : a, haystack : [a]) =
-        foldr (\x b -> if x == needle then true else b) false haystack
+fun elem : Bool (y : a, xs : [a]) =
+        foldr (\x b -> if x == y then true else b) false xs
 fun andList : Bool (xs : [Bool]) =
         foldr (\x b -> x andalso b) True xs
 fun filter : [a] (f : a -> Bool, xs : [a]) =

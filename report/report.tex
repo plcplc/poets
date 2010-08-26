@@ -92,10 +92,12 @@
 
 \chapter{Formalities}
 This report was written as part of the DIKU course ``POETS Summer of
-Code'' and presents a set of extensions to the existing contract
-specification language. The project was supervised by Tom Hvitved and
-the code is available in the default branch of the POETS Mercurial
-repository.
+Code'' and presents a set of extensions to contract specification
+language of the POETS\footnote{POETS abbreviates Process-Oriented
+  Event-driven Transaction Systems} platform. The project was
+supervised by Tom Hvitved and our code is available in the default
+branch of the POETS Mercurial repository. Together with this report we
+have handed in a Haddock documentation for POETS system.
 
 \chapter{Introduction}
 Recently, Tom Hvitved presented a language for specifying multi-party
@@ -128,10 +130,14 @@ We have extended the predicate language of CSL, on the basis of a
 number of contract schemes of practical use, that were impossible to
 formulate with the previous version of the language. The extensions
 ensure the integrity of the language core features described in
-\cite{hvitved10}. %In Section bla we will go through bla and Section n will describe our bla.
+\cite{hvitved10}.  In Section \ref{extensions} we will go through the
+limitations of the current language that we want to solve. In Section
+we will determine the syntax and semantics of these extensions should
+be. Section
+\label{implementation} describes how we have implemented the
+extensions.
 
-
-\chapter{Our Extensions}
+\chapter{Our selected extensions}
 \label{extensions}
 In this section we will go through our extensions to CSL and at the
 same time motivating these extensions by describing contracts that
@@ -148,7 +154,7 @@ language incarnation, is a sales contract where the order is delivered
 in several parcels. When the first parcel is received, the contract
 should be updated to reflect that seller only needs to deliver the
 remaining articles of the order.  We show how this could be
-implemented in Appendix
+implemented with our extensions in Appendix
 \ref{chap:sale_partial_delivery}.
 
 \paragraph{Case 2: Abstractions and polymorphism} The current language
@@ -174,11 +180,24 @@ without expression level conditionals. As a very simple example, the
 minimum function can't be described in the current language and was
 previously a hardcoded primitive in the expression evaluator.
 
-\chapter{Implementation considerations}
-In this section we analyse how we want to provide solutions for the
-cases mentioned in Section \ref{extensions}.
+\chapter{Selecting language primitives}
+In this section we analyse which language primitives we need to
+overcomes the problems described in the above mentioned cases of
+Section \ref{extensions}. It is desirable to restrict the amount of
+language built-in primitives to a minimum, to limit implementation
+complexity. 
 
-\paragraph{Case 1: Functions} As CSL is a declarative language, our
+\paragraph{Case 1: List manipulation}
+As we have banned recursion, we still have no way of iterating through
+lists and manipulating them, thus some other language primitives are
+needed. Our solution to this problem is simple: we provide three
+functions known from functional languages for iterating through and
+manipulate lists. In particular, we have implemented \lstinline{foldl},
+\lstinline{foldr} and \lstinline{cons} as built-in functions, such to
+allow the user to specify a large array of functions expressible with
+these primitives.
+
+\paragraph{Case 2: Functions} As CSL is a declarative language, our
 functions should be inspired by declarative principles. We therefore
 draw from the world of functional programming and define functions as
 lambda expressions that acts as primitive values, which can be passed
@@ -190,15 +209,9 @@ be sure that they terminate and this would break with one of the
 main principles of CSL \fxwarning{citation needed}.
 % Limitation: no recursion and why?
 
-\paragraph{Case 2: List manipulation}
-As we have banned recursion, we still have no way of iterating through
-lists and manipulating them, thus some other language primitives are
-needed. Our solution to this problem is simple: we provide three
-functions known from functional languages for iterating through and
-manipulate lists. In particular, we have implemented \lstinline{foldl},
-\lstinline{foldr} and \lstinline{cons} as built-in functions, such to
-allow the user to specify a large array of functions expressible with
-these primitives.
+\paragraph{Case 3: Conditional expressions}
+% ikke meget at rafle om: der mangler blot en if-then-else konstruktion
+ 
 
 \chapter{Implementation}
 \section{Syntactic extensions}
@@ -215,7 +228,7 @@ these primitives.
 \end{figure}
 
 The grammar of the complete language is defined in the tech report by
-Tom Hvitved \cite[p. 13]{hvitved10}, our extensions can be seen in
+Tom Hvitved \cite[page 13, Figure 1]{hvitved10}, our extensions can be seen in
 Figure \ref{fig:bnf}. 
 
 We have extended the set of CSL terms $p$ to include \textit{value}
@@ -253,7 +266,10 @@ in expressions are kept at an absolute minimum.
 
 \section{Type Inference}
 We have extended the type inference algebra for CSL expressions to
-include the constraints generated by the following three typing rules.
+include the constraints generated by the following three typing
+rules. The typing rules of the original language is found at
+\cite[page 17, Figure 3]{hvitved10}.  
+
 In addition we have extended the default typing environment $\Gamma$
 to include the types of our four built-in functions:
 \lstinline{foldl}, \lstinline{foldr}, \lstinline{cons} and
@@ -299,10 +315,13 @@ We had to extend the type checker to also type check the bound
 variables. This is done by type checking the definitions in sequential
 order of their appearence in a file, extending the typing environment
 when each definition has been processed. This ensures that it is
-impossible to make self-referencing and thereby recursive definitions
-(including mutually recursive definitions).
+impossible to make self-referencing, and thereby recursive, definitions.
+This also includes mutually recursive definitions.
 
 \section{Evaluating expressions}
+
+% Extensions of the evaluator monad with environments
+% Implementation of VLambda and extension of CValues
 
 \section{Testing}
 A specifically stated requirement from the 3gERP-team was that every
