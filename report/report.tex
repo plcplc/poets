@@ -15,6 +15,13 @@
 \usepackage{semantic}
 \usepackage{color}
 
+% makes sure we can make relative links.
+\usepackage{hyperref}
+\makeatletter
+\renewcommand\href[2]{\hyper@linkurl{#2}{#1}}
+\makeatother
+
+
 % Fonts configuration
 %  - Palatino and Bitstream Vera Sans Mono for verbatim
 \usepackage[T1]{fontenc}
@@ -150,7 +157,7 @@ ensure the integrity of the core features of the language described in
 limitations of the current language that we want to solve. In Section
 we will determine what the syntax and semantics of these extensions
 should be. \fxnote{reformulate} Section \ref{implementation} describes how we have
-implemented the extensions. We round of our report by explaining how
+implemented the extensions. We round off our report by explaining how
 the extensions were tested (Section \ref{tests}) and some concluding
 remarks, including a set of further language features that could be
 implemented.
@@ -249,8 +256,14 @@ such languages.
 
 \newpage
 \chapter{Implementation}
-\fxnote{section bla bla}
 \label{implementation}
+In this section, we will go through the implementation of the extensions
+giving an overview of only the most important details of the extensions.
+We will explain the syntax for all the extensions, describe built-in
+functions, type inferer and evaluator accompanied with the typing and
+big-step semantics for the extended language. Finally, we will highlight
+a number of test cases documenting the expressions function as expected.
+
 \section{Syntactic extensions}
 \begin{figure}
   \begin{align*}%[box=\widefbox]
@@ -287,10 +300,10 @@ insisting that all ordinary types start with a majuscule and all type
 variables start with a minuscule.
 
 These extensions are made to the
-\texttt{Poets.Contracts.Language.CSL.Parser} module of Poets. The most
+\href{doc/html/poets/Poets-Contracts-Language-CSL-Parser.html}{Poets.Contracts.Language.CSL.Parser} module of Poets. The most
 interesting extensions are function application which are implemented
-as a left-associative operator and \ldots.  \fxwarning{Haddock links
-  to Parser and function application parsing}
+as a left-associative operator and \ldots.
+
 
 \section{Built-in functions}
 A small set of built-in functions are necessary to define all the
@@ -345,7 +358,7 @@ but had to be extended to include function types.  This extended is
 implemented using method explained in \textit{Data types à la carte},
 \cite{swierstra2008data}, which are an integral part of the structure
 of the POETS platform. Our extension is implemented by the EType
-data type in Poets.Contracts.Language.CSL.ALaCarte.EType and the new
+data type in \href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-EType.html}{Poets.Contracts.Language.CSL.ALaCarte.EType} and the new
 CType declaration is then
 \begin{lstlisting}
   type CType = Term (TypeConstant :+: TypeList :+: TypeVar :+: EType)
@@ -423,7 +436,7 @@ lambda expressions, due to it's axiomatic nature.
 \end{figure}
 
 In particular, the class for the evaluation algebra, in
-Poets.Data.ALaCarte.Algebras.Evaluator, is listed as such:
+\href{doc/html/poets/Poets-Data-ALaCarte-Algebras-Evaluator.html}{Poets.Data.ALaCarte.Algebras.Evaluator}, is listed as such:
 \lstset{language=Haskell}
 \begin{lstlisting}
 class (Functor f, Error (err ())) => Evaluator f env err v where
@@ -450,7 +463,7 @@ lambda expressions. Knowing that we have to use an environment for this
 evaluation, we can make use of the beforementioned constructions to
 ensure the integrity of the environment throughout the calculation.
 The complete algebra for the evaluation in
-Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator of lamba
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html}{Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator} of lamba
 expressions is:
 \begin{lstlisting}
     evalAlg ELambda{expLArg = var,
@@ -467,14 +480,14 @@ We inject a VLambda construction in which we bind the argument
 \lstinline{var} in the environment \lstinline{env'}, run the body of the
 lambda using the updated environment, yeilding a \lstinline{Left} or
 \lstinline{Right} accordingly. In essence, \lstinline{VLambda} is an
-Poets.Contracts.Language.CSL.ALaCarte.EValue \lstinline{EValue} function
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-EValue.html}{Poets.Contracts.Language.CSL.ALaCarte.EValue} \lstinline{EValue} function
 type \lstinline{f -> e} in :
 \begin{lstlisting}
 data EValue f e = VLambda (f -> e)
 \end{lstlisting}
 
 %% describe the purpose of VLambda.
-in Poets.Contracts.Language.CSL.AST
+in \href{doc/html/poets/Poets-Contracts-Language-CSL-AST.html}{Poets.Contracts.Language.CSL.AST}
 \begin{lstlisting}
 newtype CValue = CValue {unCValue :: (Term (Value :+: EValue CValue))}
 \end{lstlisting}
@@ -485,6 +498,7 @@ newtype CValue = CValue {unCValue :: (Term (Value :+: EValue CValue))}
 % Implementation of VLambda and extension of CValues
 
 \section{Testing}
+\label{tests}
 A specifically stated requirement from the 3gERP-team was that every
 project team must perform unit tests of the extensions that they
 produce. To meet this end we have created unit tests of the parser
@@ -529,19 +543,34 @@ Finally, the core features of the original language \cite[page
 \section{Future work}
 As we have worked with the language we have had additional ideas to
 features that could be \textit{nice to have} in the contract language.
-
+Note that these suggestions are stricly related with the CSL expression
+language, for suggestions of the greater scheme of CSL, refer to
+\cite{hvitved10}.
 \begin{itemize}
-\item A module system.
-\item \lstinline{let}-bindings in expressions (syntactic sugar for
-  lambda binding variable)
-\item Additional datatypes, for example pairs or dynamic creation of
-  new record types. To provide a richer library of primitive
+%\item \textbf{A module system}. 
+%\item \textbf{\lstinline{let}-bindings in expressions}. (syntactic sugar for
+%  lambda binding variable).
+\item \textbf{Additional datatypes}. For example pairs or dynamic
+  creation of new record types. To provide a richer library of primitive
   datatypes.
-\item Repeat-loop to repetitive clauses (e.g. an action that has to be
-  taken every 14 days). The purpose would be to give a better
-  intuitive understanding of recursive clause templates. As such, this
-  extension would be implemented as purely syntactic sugar.
-\item Elimination of parameter-passing \lstinline{where}-clauses.
+\item \textbf{Repeat-loop to repetitive clauses} (e.g. an action that
+  has to be taken every 14 days). The purpose would be to give a better
+  intuitive understanding of recursive contracts. As such, this
+  extension can be implemented as purely syntactic sugar.
+\item \textbf{Elimination of parameter-passing \lstinline{where}-clauses.} It is
+  observed that a large amount of redundancy is performed in
+  \lstinline{where}-clauses. Such an extension will be able to eliminate
+  verbose operations as seen in the existing contract clauses:
+  \begin{lstlisting}
+  ...
+  <agent> SomeAction(arguments)
+  where g == goods andalso
+        a == amount andalso
+        c == currency
+        ...
+  \end{lstlisting}
+  This extension will eliminate a large amount of this redundancy as
+  the expressions can be collapsed into the arguments of the actions.
 \end{itemize}
 
 \defbibheading{bibliography}{\chapter{Bibliography}}
