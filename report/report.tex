@@ -167,18 +167,23 @@ languages and without them code maintenance can become complicated. It
 is basic knowledge that code duplication should be avoided.
 Furthermore, functions should be as general as possible. It should not
 be necessary to restrict a length function for lists to only work on
-lists of e.g. integers. Thus, we want functions to have polymorphic
-types.
+lists of e.g. integers. We thus want ML-style parametric polymorphism
+in our language..
 
 Our example in Appendix \ref{chap:sale_partial_delivery} also
 illustrates the usefulness of functions for code reuse.
 
 \paragraph{Case 3: Conditional expression.} Decisions can not be taken
 on the expression level, only decisions that selects between several
-clauses can be taken. and thus an amount of repetition would be needed
-without expression level conditionals. As a very simple example, the
-minimum function can not be expressed in the current language and was
-previously a hardcoded primitive in the expression evaluator.
+clauses can be taken. Clause-level conditionals could be used for
+implementing certain conditions, but for many applications they would
+add an amount of repetition that wouldn't be needed with expression
+level conditionals. 
+
+As a very simple example of the usefulness of expression-level
+conditionals, it should be noted that the minimum function could not
+be expressed in the original language and was previously a hardcoded
+primitive in the expression evaluator.
 
 \chapter{Selecting language primitives}
 In this section we analyse which language primitives we need to
