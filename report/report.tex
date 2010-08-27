@@ -47,6 +47,12 @@
 \newcommand{\kw}[1]{\text{\lstinline{#1}}}
 \newcommand*\widefbox[1]{\fbox{\hspace{1em}#1\hspace{1em}}}
 
+% Figure caption setup
+\usepackage{caption}
+\captionsetup{margin=0pt, font=small, labelfont=bf, format=hang}
+\setlength{\abovecaptionskip}{0pt}
+%\setlength{\belowcaptionskip}{0pt}
+
 % Bibliography
 \usepackage[style=alphabetic,natbib=true]{biblatex}
 \bibliography{../bibliography}
@@ -443,8 +449,9 @@ features that could be \textit{nice to have} in the contract language.
 \item \textit{A module system}
 \item \lstinline{let}-bindings in expressions (syntactic sugar for
   lambda binding variable)
-\item Additional datatypes, for example pairs. To provide a richer
-  library of primitive datatypes.
+\item Additional datatypes, for example pairs or dynamic creation of
+  new record types. To provide a richer library of primitive
+  datatypes.
 \item Repeat-loop to repetitive clauses (e.g. an action that has to be
   taken every 14 days). The purpose would be to give a better
   intuitive understanding of recursive clause templates. As such, this
