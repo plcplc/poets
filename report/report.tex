@@ -514,6 +514,92 @@ The tests we have performed are only constructive, in the sense that
 only valid pieces of syntax are tested to parse to their expected
 ASTs.
 
+\section{Listing of modifications and additions}
+
+Note: All modifications have been carried out in the haskell-directory
+of the Mercurial repository
+
+\begin{verbatim}
+/examples/contracts/function-library.csl
+/examples/contracts/installmentSale.csl
+/examples/contracts/lease.csl
+/examples/contracts/master.csl
+\end{verbatim}
+
+The example contracts have been updated to use the extended syntax,
+and along with them is now a small library of common functions,
+defined using the new primitives.
+
+\begin{verbatim}
+/poets.cabal
+\end{verbatim}
+
+The Cabal-file has been suitably expanded to include new files.
+
+
+%TODO: /src/Poets/Contracts.hs
+%TODO: /src/Poets/Contracts/Language/CSL.hs
+
+\begin{verbatim}
+/src/Poets/Contracts/Language/CSL/ALaCarte/EType.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/EValue.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp.hs
+/src/Poets/Contracts/Language/CSL/AST.hs
+\end{verbatim}
+
+These files contain the extensions to the AST at the expression level,
+except for \verb+AST.sh+, which extends the AST on the top level of
+the syntax.  They include the AST definitions of lambda expressions,
+if-then-else conditionals and extended types.
+
+\begin{verbatim}
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Evaluator.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Marshal.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Render.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Substitute.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/TypeInferer.hs
+\end{verbatim}
+
+These files contain the á la carte algebras that make out the logic of the implementation.
+Among the our extensions the most notable have been in the Evaluator
+algebra, which needed to be extended to use a value environment rather
+than substitution, which turned out to be a somewhat involved task.
+
+The other algebras have been extended to include support for the new
+syntactic constructs.
+
+%TODO: /src/Poets/Contracts/Language/CSL/ALaCarte/RecordFieldName/Algebras/Evaluator.hs
+%TODO: /src/Poets/Contracts/Language/CSL/Analysis/ExpectedTransactions.hs
+
+
+\begin{verbatim}
+/src/Poets/Contracts/Language/CSL/Interpreter.hs
+\end{verbatim}
+
+/src/Poets/Contracts/Language/CSL/Parser.hs
+/src/Poets/Contracts/Language/CSL/Render.hs
+/src/Poets/Contracts/Language/CSL/TypeChecker.hs
+\end{verbatim}
+
+
+/src/Poets/Data/ALaCarte.hs
+/src/Poets/Data/ALaCarte/Algebras/Evaluator.hs
+/src/Poets/Data/ALaCarte/Algebras/TypeInferer.hs
+/src/Poets/Data/Value/Algebras/Evaluator.hs
+
+\begin{verbatim}
+/test/contracts/Test.hs
+/test/contracts/test.contract
+/test/suites/Poets/Contracts/CSLEvaluator_Test.hs
+/test/suites/Poets/Contracts/CSLParser_Test.hs
+/test/suites/Poets/Contracts_Test.hs
+/test/suites/Poets_Test.hs
+\end{verbatim}
+
+These files contain the unit tests of our extensions. The files
+outside the \verb+Contracts+ folder contain only administrative code
+that includes the new tests to the total collection of POETS tests.
+
 \chapter{Conclusion}
 We have extended the Contract Specification Language of the POETS
 platform to include primitives for writing lambda expressions,
