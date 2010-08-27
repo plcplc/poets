@@ -133,7 +133,7 @@ ensure the integrity of the core features of the language described in
 limitations of the current language that we want to solve. In Section
 we will determine the syntax and semantics of these extensions should
 be. Section
-\label{implementation} describes how we have implemented the
+\ref{implementation} describes how we have implemented the
 extensions.
 
 \chapter{Extensions}
@@ -224,6 +224,7 @@ such languages.
 
 
 \chapter{Implementation}
+\label{implementation}
 \section{Syntactic extensions}
 \begin{figure}
   \begin{align*}%[box=\widefbox]
@@ -378,17 +379,6 @@ semantics of the extended language are as illustrated in Figure
 \caption{Big-step semantics for the extended language}
 \label{fig:bigstep_semantics}
 \end{figure}
-%\begin{equation*}
-%\frac{
-%  \sigma |- e_1 \Downarrow v_1
-%}{
-%  \sigma |- \lambda x \rightarrow e_1 \Downarrow v_1
-%}\label{eq:eval_lambda}
-%\end{equation*}
-
-As with conditional and application expressions, all execution
-semantics, bar lambda, leave the environment untouched, as these are
-still executed by substitution.
 
 % Extensions of the evaluator monad with environments
 % Implementation of VLambda and extension of CValues
@@ -440,7 +430,7 @@ As we have worked with the language we have had additional ideas to
 features that could be \textit{nice to have} in the contract language.
 
 \begin{itemize}
-\item \textit{A module system}
+\item A module system.
 \item \lstinline{let}-bindings in expressions (syntactic sugar for
   lambda binding variable)
 \item Additional datatypes, for example pairs. To provide a richer
