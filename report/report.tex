@@ -11,7 +11,7 @@
 \usepackage{color}
 
 % makes sure we can make relative links.
-\usepackage[colorlinks]{hyperref}
+\usepackage[colorlinks, filecolor=blue, urlcolor=blue]{hyperref}
 \usepackage{memhfixc} % hyperlink breaks memoir. This is the fix
 \makeatletter
 \renewcommand\href[2]{\hyper@linkurl{#2}{#1}}
@@ -665,9 +665,9 @@ Finally, the core features of the original language \cite[page
 \section{Future work}
 As we have worked with the language we have had additional ideas to
 features that could be \textit{nice to have} in the contract language.
-Note that these suggestions are stricly related with the CSL expression
-language, for suggestions of the greater scheme of CSL, refer to
-\cite{hvitved10}.
+Note that these suggestions are stricly related to the CSL expression
+language, for suggestions on improvements in the greater scheme of CSL,
+refer to \cite{hvitved10}.
 \begin{itemize}
 %\item \textbf{A module system}. 
 %\item \textbf{\lstinline{let}-bindings in expressions}. (syntactic sugar for
