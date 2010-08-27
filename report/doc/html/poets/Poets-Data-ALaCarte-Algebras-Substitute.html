@@ -118,6 +118,20 @@
 ><TR
 ><TD CLASS="decl"
 ><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASM"
+>SM</A
+> f = Reader (<A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitution"
+>Substitution</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
 >class</SPAN
 > (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
 >Functor</A
@@ -136,16 +150,40 @@
 ><TD CLASS="decl"
 ><A HREF="#v%3AsubstAlg"
 >substAlg</A
-> :: f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+> :: f (<A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
 >Term</A
-> g) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitution"
->Substitution</A
-> g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+> g)) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
 >Term</A
-> g</TD
+> g)</TD
 ></TR
 ></TABLE
 ></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreturnS"
+>returnS</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; f (<A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g)) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g)</TD
 ></TR
 ><TR
 ><TD CLASS="s8"
@@ -201,6 +239,29 @@
 ><TR
 ><TD CLASS="doc"
 >A substitution is a finite mapping from variables to terms.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:SM"
+><A NAME="t%3ASM"
+></A
+></A
+><B
+>SM</B
+> f = Reader (<A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitution"
+>Substitution</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The substitution monad.
 </TD
 ></TR
 ><TR
@@ -268,19 +329,52 @@
 ></A
 ><B
 >substAlg</B
-> :: f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+> :: f (<A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
 >Term</A
-> g) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitution"
->Substitution</A
-> g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+> g)) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
 >Term</A
-> g</TD
+> g)</TD
 ></TR
 ></TABLE
 ></TD
 ></TR
 ></TABLE
 ></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:returnS"
+><A NAME="v%3AreturnS"
+></A
+></A
+><B
+>returnS</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; f (<A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g)) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASM"
+>SM</A
+> g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Apply the same substitution to all sub terms and return.
+</TD
 ></TR
 ><TR
 ><TD CLASS="s15"
