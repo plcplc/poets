@@ -403,7 +403,8 @@ lambda expressions, due to it's axiomatic nature.
 \label{fig:bigstep_semantics}
 \end{figure}
 
-In particular, the class for the evaluation algebra is listed as such:
+In particular, the class for the evaluation algebra, in
+Poets.Data.ALaCarte.Algebras.Evaluator, is listed as such:
 \lstset{language=Haskell}
 \begin{lstlisting}
 class (Functor f, Error (err ())) => Evaluator f env err v where
@@ -429,8 +430,9 @@ Another important aspect of the evaluator algebra is how we handle
 lambda expressions. Knowing that we have to use an environment for this
 evaluation, we can make use of the beforementioned constructions to
 ensure the integrity of the environment through the calculation. 
-The
-complete algebra for the evaluation of lamba expressions is:
+The complete algebra for the evaluation in
+Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator of lamba
+expressions is:
 \begin{lstlisting}
     evalAlg ELambda{expLArg = var,
                     expLBody = e} = do
@@ -446,11 +448,17 @@ We inject a VLambda construction in which we bind the argument
 \lstinline{var} in the environment \lstinline{env'}, run the body of the
 lambda using the updated environment, yeilding a \lstinline{Left} or
 \lstinline{Right} accordingly. In essence, \lstinline{VLambda} is an
-\lstinline{EValue} function type \lstinline{f -> e}.
+Poets.Contracts.Language.CSL.ALaCarte.EValue \lstinline{EValue} function
+type \lstinline{f -> e} in :
+\begin{lstlisting}
+data EValue f e = VLambda (f -> e)
+\end{lstlisting}
 
 %% describe the purpose of VLambda.
-
-
+in Poets.Contracts.Language.CSL.AST
+\begin{lstlisting}
+newtype CValue = CValue {unCValue :: (Term (Value :+: EValue CValue))}
+\end{lstlisting}
 
 
 \lstset{language=CSL} % reset language to CSL.
