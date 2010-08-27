@@ -1,11 +1,6 @@
 \documentclass[10pt,a4paper,final,oneside,openany,article]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage[danish, british]{babel}
-\usepackage[colorlinks]{hyperref}
-\usepackage{memhfixc} % hyperlink breaks memoir. This is the fix
-\makeatletter
-\renewcommand\href[2]{\hyper@linkurl{#2}{#1}}
-\makeatother
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{listings}
@@ -16,7 +11,8 @@
 \usepackage{color}
 
 % makes sure we can make relative links.
-\usepackage{hyperref}
+\usepackage[colorlinks]{hyperref}
+\usepackage{memhfixc} % hyperlink breaks memoir. This is the fix
 \makeatletter
 \renewcommand\href[2]{\hyper@linkurl{#2}{#1}}
 \makeatother
