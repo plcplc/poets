@@ -551,7 +551,70 @@ ASTs.
 The tests of the evaluator performs a similar type of tests to assure
 that the added expressions evaluate to the expected values.
 
-\section{Listing of modifications and additions}
+
+\chapter{Future work}
+As we have worked with the language we have had additional ideas to
+features that could be \textit{nice to have} in the contract language.
+Note that these suggestions are stricly related to the CSL expression
+language, for suggestions on improvements in the greater scheme of CSL,
+refer to \cite{hvitved10}.
+\begin{itemize}
+%\item \textbf{A module system}. 
+%\item \textbf{\lstinline{let}-bindings in expressions}. (syntactic sugar for
+%  lambda binding variable).
+\item \textbf{Additional datatypes}. For example pairs or dynamic
+  creation of new record types. To provide a richer library of primitive
+  datatypes.
+\item \textbf{Repeat-loop to repetitive clauses} (e.g. an action that
+  has to be taken every 14 days). The purpose would be to give a better
+  intuitive understanding of recursive contracts. As such, this
+  extension can be implemented as purely syntactic sugar.
+\item \textbf{Elimination of parameter-passing \lstinline{where}-clauses.} It is
+  observed that a large amount of redundancy is performed in
+  \lstinline{where}-clauses. Such an extension will be able to eliminate
+  verbose operations as seen in the existing contract clauses:
+  \begin{lstlisting}
+  ...
+  <agent> SomeAction(arguments)
+  where g == goods andalso
+        a == amount andalso
+        c == currency
+        ...
+  \end{lstlisting}
+  This extension will eliminate a large amount of this redundancy as
+  the expressions can be collapsed into the arguments of the actions.
+\end{itemize}
+
+
+\chapter{Conclusion}
+We have extended the Contract Specification Language of the POETS
+platform to include primitives for writing lambda expressions,
+conditional expressions, as well as defining named values which includes
+functions as well as built-in list manipulation primitives. Given these
+extensions, we have established a solid foundation for providing rich
+functionality through the expression language, which will give more
+flexibility in contract specifications.
+Finally, the core features of the original language \cite[page
+4]{hvitved10} have been preserved in the extended language.
+
+%While a large portion of the extensions have been tested and verified
+%the type checking is still of unknown stability, as the constraint
+%solver for the CSL type inferer is not yet implemented at the time of
+%writing.
+
+\defbibheading{bibliography}{\chapter{Bibliography}}
+\printbibliography
+
+
+\newpage
+    \appendix
+\chapter{Contract for partial deliveries: sale\_partial\_delivery.csl}
+\label{chap:sale_partial_delivery}
+\lstinputlisting{sale_partial_delivery.csl}
+
+
+
+\chapter{Listing of modifications and additions}
 Note: All modifications have been carried out in the haskell-directory
 of the Mercurial repository
 
@@ -643,63 +706,5 @@ These files contain the unit tests of our extensions. The files
 outside the \verb+Contracts+ folder contain only administrative code
 that includes the new tests to the total collection of POETS tests.
 
-\chapter{Conclusion}
-We have extended the Contract Specification Language of the POETS
-platform to include primitives for writing lambda expressions,
-conditional expressions, as well as defining named values which includes
-functions as well as built-in list manipulation primitives. Given these
-extensions, we have established a solid foundation for providing rich
-functionality through the expression language, which will give more
-flexibility in contract specifications.
-Finally, the core features of the original language \cite[page
-4]{hvitved10} have been preserved in the extended language.
-
-%While a large portion of the extensions have been tested and verified
-%the type checking is still of unknown stability, as the constraint
-%solver for the CSL type inferer is not yet implemented at the time of
-%writing.
-
-\section{Future work}
-As we have worked with the language we have had additional ideas to
-features that could be \textit{nice to have} in the contract language.
-Note that these suggestions are stricly related to the CSL expression
-language, for suggestions on improvements in the greater scheme of CSL,
-refer to \cite{hvitved10}.
-\begin{itemize}
-%\item \textbf{A module system}. 
-%\item \textbf{\lstinline{let}-bindings in expressions}. (syntactic sugar for
-%  lambda binding variable).
-\item \textbf{Additional datatypes}. For example pairs or dynamic
-  creation of new record types. To provide a richer library of primitive
-  datatypes.
-\item \textbf{Repeat-loop to repetitive clauses} (e.g. an action that
-  has to be taken every 14 days). The purpose would be to give a better
-  intuitive understanding of recursive contracts. As such, this
-  extension can be implemented as purely syntactic sugar.
-\item \textbf{Elimination of parameter-passing \lstinline{where}-clauses.} It is
-  observed that a large amount of redundancy is performed in
-  \lstinline{where}-clauses. Such an extension will be able to eliminate
-  verbose operations as seen in the existing contract clauses:
-  \begin{lstlisting}
-  ...
-  <agent> SomeAction(arguments)
-  where g == goods andalso
-        a == amount andalso
-        c == currency
-        ...
-  \end{lstlisting}
-  This extension will eliminate a large amount of this redundancy as
-  the expressions can be collapsed into the arguments of the actions.
-\end{itemize}
-
-\defbibheading{bibliography}{\chapter{Bibliography}}
-\printbibliography
-
-
-\newpage
-    \appendix
-\chapter{Contract for partial deliveries: sale\_partial\_delivery.csl}
-\label{chap:sale_partial_delivery}
-\lstinputlisting{sale_partial_delivery.csl}
 
 \end{document}
