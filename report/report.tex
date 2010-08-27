@@ -316,27 +316,32 @@ added directly to the type inference algebra.
 \begin{figure}
   \begin{equation*}
     \frac{
-      \Gamma, C |- c_1 : ~\kw{Bool}
-      \quad \Gamma, C |- e_1 : \tau_1
-      \quad \Gamma, C |- e_1 : \tau_2
+      \Gamma |- C_1 => e_1 : ~\alpha
+      \quad \Gamma |- C_2 => e_2 : \beta
+      \quad \Gamma |- C_3 => e_3 : \gamma
     }{
-      \Gamma, C |- \kw{if}~ c_1 ~\kw{then}~ e_1 ~\kw{else}~ e_2 : \gamma
-    }(\tau_1=\tau_2)\label{eq:type_cond}
+      \Gamma |- C[Bool/\alpha][\gamma/\beta] ~\kw{if}~ e_1 ~\kw{then}~ e_2 ~\kw{else}~ e_3 : \gamma
+    }(C = C_1 \cup C_2 \cup C_3 \text{ and with fresh vars } \alpha, \gamma)
+\label{eq:type_cond}
   \end{equation*}
 
 \begin{equation*}
   \frac{
-    \Gamma\{id : \tau_1\} |- e : \tau_2
+    \Gamma\{id : \alpha\} |- C => e : \beta
   }{
-    \Gamma |- \lambda id -> e : \tau_1 -> \tau_2
+    \Gamma |- C => \lambda id -> e : \alpha -> \beta
   }
-  \quad \quad
+\label{eq:type_lambda}
+  \end{equation*}
+
+\begin{equation*}
   \frac{
-    \Gamma |- e_1 : \tau_1 -> \tau_2
-    \quad \Gamma |- e_2 : \tau_1
+    \Gamma |- C_1 => e_1 : \alpha
+    \quad \Gamma |- C_2 => e_2 : \beta
   }{
-    \Gamma |- e_1~ e_2 : \tau_2
-  }\label{eq:type_apply}
+    \Gamma |- C[(\beta -> \gamma)/\alpha] => e_1~ e_2 : \gamma
+  }(C = C_1 \cup C_2 \text{ and with fresh var } \gamma)
+\label{eq:type_apply}
 \end{equation*}
 
 \caption{Typing rules for the extended language}
