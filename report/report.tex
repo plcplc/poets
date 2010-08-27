@@ -396,15 +396,13 @@ In particular, the class for the evaluation algebra is listed as such:
 class (Functor f, Error (err ())) => Evaluator f env err v where
     evalAlg :: f (EI env (err ()) (Term v)) -> EI env (err ()) (Term v)
 \end{lstlisting}
-The most important feature of this class is the addition of the
-environment, such that each instance of \lstinline{evalAlg} carries an
-environment as dictacted by the above semantics. However, with such an
-extension to the class, we also need to be able to evaluate with that
-environment. For this purpose we introduce the \lstinline{EI} monad as
-both an argument and return type for the algebras.
-
- and
-a helper function \lstinline{runEI} as such:
+The most important extesion to this class is the environment, such that
+each instance of \lstinline{evalAlg} carries an environment as dictacted
+by the above semantics. However, with such an extension to the class, we
+also need to be able to evaluate using that environment. For this
+purpose we introduce the \lstinline{EI} monad on ``both sides'' of the
+evaluator class. This in turn, will let us define the \lstinline{EI}
+monad and monad execution helper function as such:
 \begin{lstlisting}
 -- |Monad for evaluation with an environment.
 type EI env err = ReaderT env (Either err)
@@ -413,7 +411,33 @@ type EI env err = ReaderT env (Either err)
 runEI :: EI env err v -> env -> Either err v
 runEI = runReaderT
 \end{lstlisting}
-This will in effect give us the possibility of \ldots
+
+Another important aspect of the evaluator algebra is how we handle
+lambda expressions. Knowing that we have to use an environment for this
+evaluation, we can make use of the beforementioned constructions to
+ensure the integrity of the environment through the calculation. 
+The
+complete algebra for the evaluation of lamba expressions is:
+\begin{lstlisting}
+    evalAlg ELambda{expLArg = var,
+                    expLBody = e} = do
+      env <- ask
+      return . inject $
+                 ((VLambda $ \v ->
+                       let env' = Map.insert var v (prj env)
+                       in case runEI e (upd env' env) of
+                            Left err -> evalLambdaError err
+                            Right v -> v) :: EValue (Term v) (Term v))
+\end{lstlisting}
+We inject a VLambda construction in which we bind the argument
+\lstinline{var} in the environment \lstinline{env'}, run the body of the
+lambda using the updated environment, yeilding a \lstinline{Left} or
+\lstinline{Right} accordingly. In essence, \lstinline{VLambda} is an
+\lstinline{EValue} function type \lstinline{f -> e}.
+
+%% describe the purpose of VLambda.
+
+
 
 
 \lstset{language=CSL} % reset language to CSL.
@@ -485,7 +509,7 @@ features that could be \textit{nice to have} in the contract language.
 
 
 \newpage
-\appendix
+    \appendix
 \chapter{sale\_partial\_delivery.csl: Contract for partial deliveries}
 \label{chap:sale_partial_delivery}
 \lstinputlisting{sale_partial_delivery.csl}
