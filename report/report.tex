@@ -302,11 +302,11 @@ added directly to the type inference algebra.
 \begin{figure}
   \begin{equation*}
     \frac{
-      \Gamma |- c_1 : ~\kw{Bool}
-      \quad \Gamma |- e_1 : \tau_1
-      \quad \Gamma |- e_1 : \tau_2
+      \Gamma, C |- c_1 : ~\kw{Bool}
+      \quad \Gamma, C |- e_1 : \tau_1
+      \quad \Gamma, C |- e_1 : \tau_2
     }{
-      \Gamma |- \kw{if}~ c_1 ~\kw{then}~ e_1 ~\kw{else}~ e_2 : \tau_1
+      \Gamma, C |- \kw{if}~ c_1 ~\kw{then}~ e_1 ~\kw{else}~ e_2 : \gamma
     }(\tau_1=\tau_2)\label{eq:type_cond}
   \end{equation*}
 
@@ -336,7 +336,9 @@ implemented using method explained in \textit{Data types à la carte},
 of the POETS platform. Our extension is implemented by the EType
 data type in Poets.Contracts.Language.CSL.ALaCarte.EType and the new
 CType declaration is then
-\begin{lstlisting}
+\begin{lstlisting}[language=Haskell]
+  -- |Types in CSL are regular POETS types extended with type variables
+  -- and function types.
   type CType = Term (TypeConstant :+: TypeList :+: TypeVar :+: EType)
 \end{lstlisting}
 
@@ -370,15 +372,6 @@ impossible to make self-referencing, and thereby recursive, definitions.
 This also includes mutually recursive definitions.
 
 \section{Evaluating expressions}
-An important addition to the evaluation algebra in CSL is the use of
-environments. We have extended the evaluator monad with an environment
-which is passed along where appropriate. The need for an environment is
-facilitated by the lambda abstraction; this also means the semantics of
-the expression evaluation is extended with this environment, while only
-utilized by the lambda evaluation algebra instance. Thus, the semantics
-of the extended language are as illustrated in Figure
-\ref{fig:bigstep_semantics}. There is no need to list the semantic for
-lambda expressions, due to it's axiomatic nature.
 
 \begin{figure}
 \begin{equation*}
@@ -410,22 +403,59 @@ lambda expressions, due to it's axiomatic nature.
 \caption{Big-step semantics for the extended language}
 \label{fig:bigstep_semantics}
 \end{figure}
-
-In particular, the class for the evaluation algebra, in
-Poets.Data.ALaCarte.Algebras.Evaluator, is listed as such:
-\lstset{language=Haskell}
-\begin{lstlisting}
-class (Functor f, Error (err ())) => Evaluator f env err v where
-    evalAlg :: f (EI env (err ()) (Term v)) -> EI env (err ()) (Term v)
+To implement our extensions to the language, we need to add a new kind
+of values to set of possible results of the evaluator: the lambda
+abstraction. This extension of values is implemented by the new value
+type \lstinline{EValue} (extended values), with the type constructor
+\lstinline{VLambda} for lambda abstractions. This is found in the
+module Poets.Contracts.Language.CSL.ALaCarte.EValue and implemented
+as:
+\begin{lstlisting}[language=Haskell]
+data EValue f e = VLambda (f -> e)
 \end{lstlisting}
-The most important extension to this class is the environment, such that
-each instance of \lstinline{evalAlg} carries an environment as dictacted
-by the above semantics. However, with such an extension to the class, we
-also need to be able to evaluate using that environment. For this
-purpose we introduce the \lstinline{EI} monad on ``both sides'' of the
-evaluator class. This in turn, will let us define the \lstinline{EI}
-monad and monad execution helper function as such:
-\begin{lstlisting}
+
+It should be noticed that we make a difference between the argument
+type and the result type of the function implementing the
+abstraction. This was necessary to be able to write a
+\lstinline{Functor} instance for the data type, which is a requirement
+if it should be used in a \textit{Data types à la carte}
+setting. Using this, we can extend the POETS values to include lambda
+abstractions, by redefining \lstinline{CValue} as
+Poets.Contracts.Language.CSL.AST:
+\begin{lstlisting}[language=Haskell]
+newtype CValue = CValue {unCValue :: (Term (Value :+: EValue CValue))}
+\end{lstlisting}
+
+To implement $\beta$-reduction of lambda abstractions we need a way to
+bind values in the body of the abstraction. This can be done in two
+ways. Either we can directly substitute our argument directly into the
+body, $\alpha$-converting variables where appropriate
+\fxnote{example}. Alternative, we can use a binding environment
+which we pass to the evaluator function, possibly extending it before
+evaluating subterms.
+
+% An important addition to the evaluation algebra in CSL is the use of
+% environments. We have extended the evaluator monad with an environment
+% which is passed along where appropriate. The need for an environment
+% is facilitated by the lambda abstraction; this also means the
+% semantics of the expression evaluation is extended with this
+% environment, while only utilized by the lambda evaluation algebra
+% instance. 
+We have selected to use the environment approach, as we find this most
+modular. \fxwarning{mere argumentation} These environment based
+semantics of the extended language are illustrated in Figure
+\ref{fig:bigstep_semantics}. As lambda abstractions are essentially
+values, there is no need to list their semantic. It should be noted
+that the evaluator implementation does not completely follow the
+big-step semantics of application. We will now go through some
+implementation details and note how our implementation differs from
+the semantics above.
+
+In particular, the evaluator monad for the evaluation algebra of
+module Poets.Data.ALaCarte.Algebras.Evaluator is extended to carry
+with it an extendable environment. This is done using the
+\lstinline{ReaderT} monad transformer:
+\begin{lstlisting}[language=Haskell]
 -- |Monad for evaluation with an environment.
 type EI env err = ReaderT env (Either err)
 
@@ -434,14 +464,31 @@ runEI :: EI env err v -> env -> Either err v
 runEI = runReaderT
 \end{lstlisting}
 
-Another important aspect of the evaluator algebra is how we handle
-lambda expressions. Knowing that we have to use an environment for this
-evaluation, we can make use of the beforementioned constructions to
-ensure the integrity of the environment throughout the calculation.
-The complete algebra for the evaluation in
-Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator of lamba
-expressions is:
-\begin{lstlisting}
+This also dictates a modification of how evaluation proceeds with
+the evaluator algebra:
+\begin{lstlisting}[language=Haskell]
+class (Functor f, Error (err ())) => Evaluator f env err v where
+    evalAlg :: f (EI env (err ()) (Term v)) -> EI env (err ()) (Term v)
+\end{lstlisting}
+The noteworthy extension of this type class is the occurence of the
+environment in the argument type to \lstinline{evalAlg}. This is
+necessary as algebra evaluation is essentially performed bottom up
+(i.e., when following the \textit{Data types à la carte} definition of
+\lstinline{foldTerm}). Thus to be able to bind variables in these
+subterms afterwards, the returned value should not be the result of
+the computation, but the monadic computation that given an environment
+calculates the term.
+
+% The most important extension to this class is the environment, such that
+% each instance of \lstinline{evalAlg} carries an environment as dictacted
+% by the above semantics. However, with such an extension to the class, we
+% also need to be able to evaluate using that environment. For this
+% purpose we introduce the \lstinline{EI} monad on ``both sides'' of the
+% evaluator class. This in turn, will let us define the \lstinline{EI}
+% monad and monad execution helper function as such:
+
+\begin{figure}
+  \begin{lstlisting}[language=Haskell]
     evalAlg ELambda{expLArg = var,
                     expLBody = e} = do
       env <- ask
@@ -451,29 +498,26 @@ expressions is:
                        in case runEI e (upd env' env) of
                             Left err -> evalLambdaError err
                             Right v -> v) :: EValue (Term v) (Term v))
-\end{lstlisting}
-We inject a VLambda construction in which we bind the argument
-\lstinline{var} in the environment \lstinline{env'}, run the body of the
-lambda using the updated environment, yeilding a \lstinline{Left} or
-\lstinline{Right} accordingly. In essence, \lstinline{VLambda} is an
-Poets.Contracts.Language.CSL.ALaCarte.EValue \lstinline{EValue} function
-type \lstinline{f -> e} in :
-\begin{lstlisting}
-data EValue f e = VLambda (f -> e)
-\end{lstlisting}
+  \end{lstlisting}
+  \caption{Evaluation algebra for lambda abstractions, as seen in
+    Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator}
+  \label{fig:eval_lambda}
+\end{figure}
+Now, to implement lambda expressions in this environment based
+algebra, we have to return a new lambda expression where the body is
+executed in a modified version of the environment where the lambda
+expression occurs, essentially constructing a closure. Our
+implementation of this strategy is shown in \ref{fig:eval_lambda}.
 
-%% describe the purpose of VLambda.
-in Poets.Contracts.Language.CSL.AST
-\begin{lstlisting}
-newtype CValue = CValue {unCValue :: (Term (Value :+: EValue CValue))}
-\end{lstlisting}
+The complete algebra for expression evaluation is found in 
+Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator.
 
 
-\lstset{language=CSL} % reset language to CSL.
 % Extensions of the evaluator monad with environments
 % Implementation of VLambda and extension of CValues
 
 \section{Testing}
+\label{tests}
 A specifically stated requirement from the 3gERP-team was that every
 project team must perform unit tests of the extensions that they
 produce. To meet this end we have created unit tests of the parser
