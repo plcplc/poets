@@ -353,7 +353,8 @@ facilitated by the lambda abstraction, this also means the semantics
 of the expression evaluation is extended with this environment, while
 only utilized by the lambda evaluation algebra instance. Thus, the
 semantics of the extended language are as illustrated in Figure
-\ref{fig:bigstep_semantics}.
+\ref{fig:bigstep_semantics}. There is no need to list the semantic for
+lambda expressions, due to it's axiomatic nature.
 
 \begin{figure}
 \begin{equation*}
@@ -386,6 +387,33 @@ semantics of the extended language are as illustrated in Figure
 \label{fig:bigstep_semantics}
 \end{figure}
 
+In particular, the class for the evaluation algebra is listed as such:
+\lstset{language=Haskell}
+\begin{lstlisting}
+class (Functor f, Error (err ())) => Evaluator f env err v where
+    evalAlg :: f (EI env (err ()) (Term v)) -> EI env (err ()) (Term v)
+\end{lstlisting}
+The most important feature of this class is the addition of the
+environment, such that each instance of \lstinline{evalAlg} carries an
+environment as dictacted by the above semantics. However, with such an
+extension to the class, we also need to be able to evaluate with that
+environment. For this purpose we introduce the \lstinline{EI} monad as
+both an argument and return type for the algebras.
+
+ and
+a helper function \lstinline{runEI} as such:
+\begin{lstlisting}
+-- |Monad for evaluation with an environment.
+type EI env err = ReaderT env (Either err)
+
+-- |Execute evaluation monad and obtain the result.
+runEI :: EI env err v -> env -> Either err v
+runEI = runReaderT
+\end{lstlisting}
+This will in effect give us the possibility of \ldots
+
+
+\lstset{language=CSL} % reset language to CSL.
 % Extensions of the evaluator monad with environments
 % Implementation of VLambda and extension of CValues
 
