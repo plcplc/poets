@@ -213,7 +213,7 @@ this would break \ldots %with one of the main principles of CSL
 % Limitation: no recursion and why?
 
 \paragraph{Case 3: Conditional expressions}
-Expression level conditionals are common feature of all functional
+Expression level conditionals are common features of all functional
 languages and thus we simply adopt the notation and semantics from
 such languages.
 
@@ -327,6 +327,53 @@ impossible to make self-referencing, and thereby recursive, definitions.
 This also includes mutually recursive definitions.
 
 \section{Evaluating expressions}
+An important addition to the evaluation algebra in CSL is the use of
+environments. We have extended the evaluator monad with an environment
+and pass this along where appropriate. The need for an environment is
+facilitated by the lambda abstraction, this also means the semantics
+of the expression evaluation is extended with this environment, while
+only utilized by the lambda evaluation algebra instance. Thus, the
+semantics of the extended language are as follows:
+
+\begin{equation*}
+\frac{
+  \sigma |- b \Downarrow \kw{false}
+  \quad \sigma |- c_2 \Downarrow v_2
+}{
+  \sigma |- \kw{if} ~b ~\kw{then} ~c_1 ~\kw{else} ~c_2 \Downarrow v_2
+}\label{eq:eval_condition_false}
+\end{equation*}
+
+\begin{equation*}
+\frac{
+  \sigma |- b \Downarrow \kw{true}
+  \quad \sigma |- c_1 \Downarrow v_1
+}{
+  \sigma |- \kw{if} ~b ~\kw{then} ~c_1 ~\kw{else} ~c_2 \Downarrow v_1
+}\label{eq:eval_condition_true}
+\end{equation*}
+
+\begin{equation*}
+\frac{
+  \sigma |- e_1 \Downarrow \lambda x \rightarrow e_3
+  \quad \sigma |- e_2 \Downarrow v_1
+  \quad \sigma[x\mapsto v_1] |- e_3 \Downarrow v_2
+}{
+  \sigma |- e_1 ~e_2 \Downarrow v_2
+}\label{eq:eval_apply}
+\end{equation*}
+
+%\begin{equation*}
+%\frac{
+%  \sigma |- e_1 \Downarrow v_1
+%}{
+%  \sigma |- \lambda x \rightarrow e_1 \Downarrow v_1
+%}\label{eq:eval_lambda}
+%\end{equation*}
+
+As with conditional and application expressions, all execution
+semantics, bar lambda, leave the environment untouched, as these are
+still executed by substitution.
 
 % Extensions of the evaluator monad with environments
 % Implementation of VLambda and extension of CValues
@@ -357,20 +404,6 @@ The tests we have performed are only constructive, in the sense that
 only valid pieces of syntax are tested to parse to their expected
 ASTs.
 
-\chapter{Additional possible extensions} As we have worked with the
-language we have had additional ideas to features that could be
-\textit{nice to have} in the contract language.
-
-\begin{itemize}
-\item A module system
-\item \lstinline{let}-bindings in expressions (syntactic sugar for
-  lambda binding variable)
-\item Additional datatypes, for example pairs.
-\item Repeat-loop to repetitive clauses (e.g. an action that has to be
-  taken every 14 days)
-\item Elimination of parameter-passing \lstinline{where}-clauses.
-\end{itemize}
-
 \chapter{Conclusion}
 We have extended the Contract Specification Language of the POETS
 platform to include primitives for writing lambda expressions,
@@ -379,8 +412,8 @@ functions as well as built-in list manipulation primitives. Given these
 extensions, we have established a solid foundation for providing rich
 functionality through the expression language, which will give more
 flexibility in contract specifications.
-Finally, the core features of the original language have been preserved
-in the extended language.
+Finally, the core features of the original language \cite[page
+4]{hvitved10} have been preserved in the extended language.
 
 %While a large portion of the extensions have been tested and verified
 %the type checking is still of unknown stability, as the constraint
@@ -388,7 +421,21 @@ in the extended language.
 %writing.
 
 \section{Future work}
+As we have worked with the language we have had additional ideas to
+features that could be \textit{nice to have} in the contract language.
 
+\begin{itemize}
+\item \textit{A module system}
+\item \lstinline{let}-bindings in expressions (syntactic sugar for
+  lambda binding variable)
+\item Additional datatypes, for example pairs. To provide a richer
+  library of primitive datatypes.
+\item Repeat-loop to repetitive clauses (e.g. an action that has to be
+  taken every 14 days). The purpose would be to give a better
+  intuitive understanding of recursive clause templates. As such, this
+  extension would be implemented as purely syntactic sugar.
+\item Elimination of parameter-passing \lstinline{where}-clauses.
+\end{itemize}
 
 \defbibheading{bibliography}{\chapter{Bibliography}}
 \printbibliography
