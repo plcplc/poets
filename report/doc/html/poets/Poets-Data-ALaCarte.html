@@ -1,0 +1,2754 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.ALaCarte</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-ALaCarte.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.ALaCarte</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Patrick Bahr, and Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This module defines the infrastructure necessary to use Wouter Swierstra's
+ Functional Pearl: <EM
+>Data types a la carte</EM
+>.
+</P
+><P
+>All common algebras over a la carte terms are defined in the
+ Poets.Data.ALaCarte.Algebras module; this file only contains the core
+ a la carte definitions (as in the original article, but with some
+ extensions).
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AHole"
+>Hole</A
+> </TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ANoHole"
+>NoHole</A
+> </TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ACxt"
+>Cxt</A
+>  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ATerm"
+>Term</A
+> ::  f (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AHole"
+>Hole</A
+> ::  a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+> f a</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AAlg"
+>Alg</A
+> f a = f a -&gt; a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldCxt%27"
+>foldCxt'</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+> f b -&gt; (a -&gt; b) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldCxt"
+>foldCxt</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+> f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AAlgM"
+>AlgM</A
+> m f a = f a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldCxtM"
+>foldCxtM</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlgM"
+>AlgM</A
+> m f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AapplyCxt"
+>applyCxt</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h' f a -&gt; (a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g b) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransC"
+>TransC</A
+> f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a h.  <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransU"
+>TransU</A
+> f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a.  f a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransN"
+>TransN</A
+> f g = <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+> g)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AapplyTransN"
+>applyTransN</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransC"
+>TransC</A
+> f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcompTransN"
+>compTransN</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> h, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f h</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AapplyTransU"
+>applyTransU</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransC"
+>TransC</A
+> f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcompTransU"
+>compTransU</A
+> ::  <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f h</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransCM"
+>TransCM</A
+> m f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a h.  <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; m (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransN"
+>transN</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransUM"
+>TransUM</A
+> m f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a.  f a -&gt; m (g a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransM"
+>transM</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransNM"
+>TransNM</A
+> m f g = <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+> g)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransN%27"
+>transN'</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransNM"
+>transNM</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AapplyTransNM"
+>applyTransNM</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransCM"
+>TransCM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AapplyTransUM"
+>applyTransUM</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransCM"
+>TransCM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcompTransNM"
+>compTransNM</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> h, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f h</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcompTransUM"
+>compTransUM</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f h</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ANothing"
+>Nothing</A
+> </TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATerm"
+>Term</A
+> f = <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3ANoHole"
+>NoHole</A
+> f <A HREF="Poets-Data-ALaCarte.html#t%3ANothing"
+>Nothing</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunTerm"
+>unTerm</A
+> ::  <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunfoldTerm"
+>unfoldTerm</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; (a -&gt; f a) -&gt; a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldTerm"
+>foldTerm</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+> f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldTermM"
+>foldTermM</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlgM"
+>AlgM</A
+> m f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  (f <A HREF="#t%3A%3A%2B%3A"
+>:+:</A
+> g) e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AInl"
+>Inl</A
+> (f e)</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AInr"
+>Inr</A
+> (g e)</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> sub, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> sup) =&gt; sub <A HREF="#t%3A%3A%3C%3A"
+>:&lt;:</A
+> sup  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainj"
+>inj</A
+> ::  sub a -&gt; sup a</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aproj"
+>proj</A
+> ::  sup a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (sub a)</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aproject"
+>project</A
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (g (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdeepProject"
+>deepProject</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdeepProject%27"
+>deepProject'</A
+> :: <SPAN CLASS="keyword"
+>forall</SPAN
+> g f h a. (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> g, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainject"
+>inject</A
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinjectCxt"
+>injectCxt</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h' g (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdeepInject"
+>deepInject</A
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainj2"
+>inj2</A
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f2) a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdeepInject2"
+>deepInject2</A
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f2) a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainj3"
+>inj3</A
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f3 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f3)) a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdeepInject3"
+>deepInject3</A
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f3 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f3)) a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  (f <A HREF="#t%3A%3A%2A%3A"
+>:*:</A
+> a) e = (f e) <A HREF="#v%3A%3A%2A%3A"
+>:*:</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3AProjectP"
+>ProjectP</A
+> f g | f -&gt; g <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AprojectP"
+>projectP</A
+> ::  f a -&gt; g a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftP"
+>liftP</A
+> :: <A HREF="Poets-Data-ALaCarte.html#t%3AProjectP"
+>ProjectP</A
+> f f' =&gt; (f' a -&gt; b) -&gt; f a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AstripP"
+>stripP</A
+> :: (<A HREF="Poets-Data-ALaCarte.html#t%3AProjectP"
+>ProjectP</A
+> f g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3AInjectP"
+>InjectP</A
+> f g c | g -&gt; c, g -&gt; f <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinjectP"
+>injectP</A
+> ::  c -&gt; f a -&gt; g a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconstP"
+>constP</A
+> :: (<A HREF="Poets-Data-ALaCarte.html#t%3AInjectP"
+>InjectP</A
+> f g c, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; c -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Hole"
+><A NAME="t%3AHole"
+></A
+></A
+><B
+>Hole</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Phantom type that signals that a <TT
+><A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+></TT
+> might contain holes.  
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:NoHole"
+><A NAME="t%3ANoHole"
+></A
+></A
+><B
+>NoHole</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Phantom type that signals that a <TT
+><A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+></TT
+> does not contain holes.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Cxt"
+><A NAME="t%3ACxt"
+></A
+></A
+><B
+>Cxt</B
+>  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents contexts over a signature. Contexts are
+terms containing zero or more holes. The first type parameter is
+supposed to be one of the phantom types <TT
+><A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+></TT
+> and <TT
+><A HREF="Poets-Data-ALaCarte.html#t%3ANoHole"
+>NoHole</A
+></TT
+>. The
+second parameter is the signature of the context. The third parameter
+is the type of the holes. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Term"
+><A NAME="v%3ATerm"
+></A
+></A
+><B
+>Term</B
+> ::  f (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Hole"
+><A NAME="v%3AHole"
+></A
+></A
+><B
+>Hole</B
+> ::  a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+> f a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Alg"
+><A NAME="t%3AAlg"
+></A
+></A
+><B
+>Alg</B
+> f a = f a -&gt; a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents an algebra over a functor <TT
+>f</TT
+> and domain
+<TT
+>a</TT
+>. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldCxt'"
+><A NAME="v%3AfoldCxt%27"
+></A
+></A
+><B
+>foldCxt'</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+> f b -&gt; (a -&gt; b) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldCxt"
+><A NAME="v%3AfoldCxt"
+></A
+></A
+><B
+>foldCxt</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+> f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies the given algebra recursively to each
+subcontext of the given context. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:AlgM"
+><A NAME="t%3AAlgM"
+></A
+></A
+><B
+>AlgM</B
+> m f a = f a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents a monadic algebra. It is similar to <TT
+><A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+></TT
+> but
+the return type is monadic.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldCxtM"
+><A NAME="v%3AfoldCxtM"
+></A
+></A
+><B
+>foldCxtM</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlgM"
+>AlgM</A
+> m f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies the given monadic algebra recursively to
+each subcontext of the given context. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:applyCxt"
+><A NAME="v%3AapplyCxt"
+></A
+></A
+><B
+>applyCxt</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h' f a -&gt; (a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g b) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g b</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies the given context with hole type <TT
+>a</TT
+> to a
+family <TT
+>f</TT
+> of contexts (possibly terms) indexed by <TT
+>a</TT
+>. That is, each
+hole <TT
+>h</TT
+> is replaced by the context <TT
+>f h</TT
+>. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransC"
+><A NAME="t%3ATransC"
+></A
+></A
+><B
+>TransC</B
+> f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a h.  <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents context transformations. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransU"
+><A NAME="t%3ATransU"
+></A
+></A
+><B
+>TransU</B
+> f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a.  f a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents uniform signature transformation
+specification.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransN"
+><A NAME="t%3ATransN"
+></A
+></A
+><B
+>TransN</B
+> f g = <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+> g)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents a non-uniform signature transformation. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:applyTransN"
+><A NAME="v%3AapplyTransN"
+></A
+></A
+><B
+>applyTransN</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransC"
+>TransC</A
+> f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies a non-uniform signature transformation to
+the given context.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:compTransN"
+><A NAME="v%3AcompTransN"
+></A
+></A
+><B
+>compTransN</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> h, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f h</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function composes two non-uniform signature transformation
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:applyTransU"
+><A NAME="v%3AapplyTransU"
+></A
+></A
+><B
+>applyTransU</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransC"
+>TransC</A
+> f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies a uniform signature transformation to the
+given context. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:compTransU"
+><A NAME="v%3AcompTransU"
+></A
+></A
+><B
+>compTransU</B
+> ::  <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f h</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function composes two uniform signature transformations.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransCM"
+><A NAME="t%3ATransCM"
+></A
+></A
+><B
+>TransCM</B
+> m f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a h.  <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; m (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents monadic context transformations.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transN"
+><A NAME="v%3AtransN"
+></A
+></A
+><B
+>transN</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransN"
+>TransN</A
+> f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Lifts the given uniform signature transformation to a non-uniform
+signature transformation.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransUM"
+><A NAME="t%3ATransUM"
+></A
+></A
+><B
+>TransUM</B
+> m f g = <SPAN CLASS="keyword"
+>forall</SPAN
+> a.  f a -&gt; m (g a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents monadic uniform signature transformations. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transM"
+><A NAME="v%3AtransM"
+></A
+></A
+><B
+>transM</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function lifts the given (uniform) signature transformation
+to a monadic (uniform) signature transformation. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransNM"
+><A NAME="t%3ATransNM"
+></A
+></A
+><B
+>TransNM</B
+> m f g = <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3AHole"
+>Hole</A
+> g)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents monadic non-uniform signature transformations.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transN'"
+><A NAME="v%3AtransN%27"
+></A
+></A
+><B
+>transN'</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function lifts the give monadic uniform signature
+transformation to a monadic non-uniform signature transformation. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transNM"
+><A NAME="v%3AtransNM"
+></A
+></A
+><B
+>transNM</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransU"
+>TransU</A
+> f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function lifts the given uniform signature transformation to
+a monadic non-uniform signature transformation. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:applyTransNM"
+><A NAME="v%3AapplyTransNM"
+></A
+></A
+><B
+>applyTransNM</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransCM"
+>TransCM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies the given monadic non-uniform signature
+transformation the given context. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:applyTransUM"
+><A NAME="v%3AapplyTransUM"
+></A
+></A
+><B
+>applyTransUM</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransCM"
+>TransCM</A
+> m f g</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function applies the given monadic uniform signature
+transformation to the given context 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:compTransNM"
+><A NAME="v%3AcompTransNM"
+></A
+></A
+><B
+>compTransNM</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> h, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransNM"
+>TransNM</A
+> m f h</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function composes two monadic non-uniform signature
+transformations. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:compTransUM"
+><A NAME="v%3AcompTransUM"
+></A
+></A
+><B
+>compTransUM</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m g h -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATransUM"
+>TransUM</A
+> m f h</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function composes two monadic uniform signature
+transformations.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Nothing"
+><A NAME="t%3ANothing"
+></A
+></A
+><B
+>Nothing</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Phantom type used to define <TT
+><A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+></TT
+>.  
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Term"
+><A NAME="t%3ATerm"
+></A
+></A
+><B
+>Term</B
+> f = <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3ANoHole"
+>NoHole</A
+> f <A HREF="Poets-Data-ALaCarte.html#t%3ANothing"
+>Nothing</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A term is a context with no holes.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unTerm"
+><A NAME="v%3AunTerm"
+></A
+></A
+><B
+>unTerm</B
+> ::  <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function unravels the given term at the topmost layer.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unfoldTerm"
+><A NAME="v%3AunfoldTerm"
+></A
+></A
+><B
+>unfoldTerm</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; (a -&gt; f a) -&gt; a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function unfolds the given value to a term using the given
+unravelling function. This is the unique homomorphism <TT
+>a -&gt; Term f</TT
+>
+from the given coalgebra of type <TT
+>a -&gt; f a</TT
+> to the final coalgebra
+<TT
+>Term f</TT
+>. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldTerm"
+><A NAME="v%3AfoldTerm"
+></A
+></A
+><B
+>foldTerm</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlg"
+>Alg</A
+> f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function folds the given term using the given fold
+function. This is the unique homomorphism <TT
+>Term f -&gt; a</TT
+> from the
+initial algebra <TT
+>Term f</TT
+> to the given algebra of type <TT
+>f a -&gt; a</TT
+>. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldTermM"
+><A NAME="v%3AfoldTermM"
+></A
+></A
+><B
+>foldTermM</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3AAlgM"
+>AlgM</A
+> m f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is a monadic version of <TT
+><A HREF="Poets-Data-ALaCarte.html#v%3AfoldTerm"
+>foldTerm</A
+></TT
+>.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  (f <A NAME="t::+:"
+><A NAME="t%3A%3A%2B%3A"
+></A
+></A
+><B
+>:+:</B
+> g) e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Data type defining coproducts.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Inl"
+><A NAME="v%3AInl"
+></A
+></A
+><B
+>Inl</B
+> (f e)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Inr"
+><A NAME="v%3AInr"
+></A
+></A
+><B
+>Inr</B
+> (g e)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> sub, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> sup) =&gt; sub <A NAME="t::<:"
+><A NAME="t%3A%3A%3C%3A"
+></A
+></A
+><B
+>:&lt;:</B
+> sup  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The subsumption relation.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:inj"
+><A NAME="v%3Ainj"
+></A
+></A
+><B
+>inj</B
+> ::  sub a -&gt; sup a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:proj"
+><A NAME="v%3Aproj"
+></A
+></A
+><B
+>proj</B
+> ::  sup a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (sub a)</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:project"
+><A NAME="v%3Aproject"
+></A
+></A
+><B
+>project</B
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (g (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Project a sub term from a compound term.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:deepProject"
+><A NAME="v%3AdeepProject"
+></A
+></A
+><B
+>deepProject</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Project a sub term recursively from a term.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:deepProject'"
+><A NAME="v%3AdeepProject%27"
+></A
+></A
+><B
+>deepProject'</B
+> :: <SPAN CLASS="keyword"
+>forall</SPAN
+> g f h a. (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> g, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Project a sub term recursively from a term, but where the subterm
+ signature is required to be traversable.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inject"
+><A NAME="v%3Ainject"
+></A
+></A
+><B
+>inject</B
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Inject a term into a compound term.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:injectCxt"
+><A NAME="v%3AinjectCxt"
+></A
+></A
+><B
+>injectCxt</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h' g (<A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function injects a whole context into another context. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:deepInject"
+><A NAME="v%3AdeepInject"
+></A
+></A
+><B
+>deepInject</B
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Deep injection function.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inj2"
+><A NAME="v%3Ainj2"
+></A
+></A
+><B
+>inj2</B
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f2) a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is a variant of <TT
+><A HREF="Poets-Data-ALaCarte.html#v%3Ainj"
+>inj</A
+></TT
+> for binary sum signatures.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:deepInject2"
+><A NAME="v%3AdeepInject2"
+></A
+></A
+><B
+>deepInject2</B
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f2) a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>A recursive version of <TT
+><A HREF="Poets-Data-ALaCarte.html#v%3Ainj2"
+>inj2</A
+></TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inj3"
+><A NAME="v%3Ainj3"
+></A
+></A
+><B
+>inj3</B
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f3 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f3)) a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is a variant of <TT
+><A HREF="Poets-Data-ALaCarte.html#v%3Ainj"
+>inj</A
+></TT
+> for ternary sum signatures.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:deepInject3"
+><A NAME="v%3AdeepInject3"
+></A
+></A
+><B
+>deepInject3</B
+> :: (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g, f3 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> g) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h (f1 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (f2 <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> f3)) a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>A recursive version of <TT
+><A HREF="Poets-Data-ALaCarte.html#v%3Ainj3"
+>inj3</A
+></TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  (f <A NAME="t::*:"
+><A NAME="t%3A%3A%2A%3A"
+></A
+></A
+><B
+>:*:</B
+> a) e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Data type defining products.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>(f e) <A NAME="v::*:"
+><A NAME="v%3A%3A%2A%3A"
+></A
+></A
+><B
+>:*:</B
+> a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t:ProjectP"
+><A NAME="t%3AProjectP"
+></A
+></A
+><B
+>ProjectP</B
+> f g | f -&gt; g <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Instances of this class provide functions to strip a product from
+a functor 
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:projectP"
+><A NAME="v%3AprojectP"
+></A
+></A
+><B
+>projectP</B
+> ::  f a -&gt; g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is intended to strip products from a
+      functor. Here <TT
+>g</TT
+> is supposed to be the same as functor <TT
+>f</TT
+> but
+      without a product 
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftP"
+><A NAME="v%3AliftP"
+></A
+></A
+><B
+>liftP</B
+> :: <A HREF="Poets-Data-ALaCarte.html#t%3AProjectP"
+>ProjectP</A
+> f f' =&gt; (f' a -&gt; b) -&gt; f a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function transforms a function with a domain constructed from
+a functor to a function with a domain constructed with the same
+functor but with an additional product. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:stripP"
+><A NAME="v%3AstripP"
+></A
+></A
+><B
+>stripP</B
+> :: (<A HREF="Poets-Data-ALaCarte.html#t%3AProjectP"
+>ProjectP</A
+> f g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function strips the products from a term over a
+functor with products. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t:InjectP"
+><A NAME="t%3AInjectP"
+></A
+></A
+><B
+>InjectP</B
+> f g c | g -&gt; c, g -&gt; f <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:injectP"
+><A NAME="v%3AinjectP"
+></A
+></A
+><B
+>injectP</B
+> ::  c -&gt; f a -&gt; g a</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:constP"
+><A NAME="v%3AconstP"
+></A
+></A
+><B
+>constP</B
+> :: (<A HREF="Poets-Data-ALaCarte.html#t%3AInjectP"
+>InjectP</A
+> f g c, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> g) =&gt; c -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h f a -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ACxt"
+>Cxt</A
+> h g a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function annotates each sub term of the given term
+with the given value (of type a). 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

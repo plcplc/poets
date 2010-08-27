@@ -1,0 +1,444 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.Value.Algebras.TypeInferer</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-Value-Algebras-TypeInferer.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.Value.Algebras.TypeInferer</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines an instance of the a la carte algebra
+ <TT
+><A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInferer"
+>TypeInferer</A
+></TT
+>
+ for <TT
+><A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TT
+>, i.e., type inference for values. Type inference of values is
+ performed in a record typing environment, and the instance adds constraints
+ that the type of each field in a record value is a sub type of the expected
+ type, and that there is a common super type for the values in a list value.
+ Only sub type constraints are generated, i.e., constraints of the form
+ <TT
+>tp1 &lt;: tp2</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeErrorRecordUndefined"
+>TypeErrorRecordUndefined</A
+> e = <A HREF="#v%3ATypeErrorRecordUndefined"
+>TypeErrorRecordUndefined</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeErrorRecordAbstract"
+>TypeErrorRecordAbstract</A
+> e = <A HREF="#v%3ATypeErrorRecordAbstract"
+>TypeErrorRecordAbstract</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeErrorFieldsMissing"
+>TypeErrorFieldsMissing</A
+> e = <A HREF="#v%3ATypeErrorFieldsMissing"
+>TypeErrorFieldsMissing</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeErrorFieldsUndefined"
+>TypeErrorFieldsUndefined</A
+> e = <A HREF="#v%3ATypeErrorFieldsUndefined"
+>TypeErrorFieldsUndefined</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AshowList"
+>showList</A
+> :: [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeErrorRecordUndefined"
+><A NAME="t%3ATypeErrorRecordUndefined"
+></A
+></A
+><B
+>TypeErrorRecordUndefined</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Type error: Undefined record type.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeErrorRecordUndefined"
+><A NAME="v%3ATypeErrorRecordUndefined"
+></A
+></A
+><B
+>TypeErrorRecordUndefined</B
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeErrorRecordAbstract"
+><A NAME="t%3ATypeErrorRecordAbstract"
+></A
+></A
+><B
+>TypeErrorRecordAbstract</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Type error: Abstract record type.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeErrorRecordAbstract"
+><A NAME="v%3ATypeErrorRecordAbstract"
+></A
+></A
+><B
+>TypeErrorRecordAbstract</B
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeErrorFieldsMissing"
+><A NAME="t%3ATypeErrorFieldsMissing"
+></A
+></A
+><B
+>TypeErrorFieldsMissing</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Type error: Record field(s) are missing.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeErrorFieldsMissing"
+><A NAME="v%3ATypeErrorFieldsMissing"
+></A
+></A
+><B
+>TypeErrorFieldsMissing</B
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeErrorFieldsUndefined"
+><A NAME="t%3ATypeErrorFieldsUndefined"
+></A
+></A
+><B
+>TypeErrorFieldsUndefined</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Type error: Undefined record field(s).
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeErrorFieldsUndefined"
+><A NAME="v%3ATypeErrorFieldsUndefined"
+></A
+></A
+><B
+>TypeErrorFieldsUndefined</B
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:showList"
+><A NAME="v%3AshowList"
+></A
+></A
+><B
+>showList</B
+> :: [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

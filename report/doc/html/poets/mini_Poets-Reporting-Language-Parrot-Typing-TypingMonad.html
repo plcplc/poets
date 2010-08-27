@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.TypingMonad</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><DIV CLASS="outer"
+><DIV CLASS="mini-topbar"
+>Poets.Reporting.Language.Parrot.Typing.TypingMonad</DIV
+><DIV CLASS="mini-synopsis"
+><DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr" TARGET="main"
+>TypingErr</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM" TARGET="main"
+>TypingM</A
+> a</DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3ArunTypingM" TARGET="main"
+>runTypingM</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping" TARGET="main"
+>MonadTyping</A
+> m</DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AaddErrMsg" TARGET="main"
+>addErrMsg</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtypeErr" TARGET="main"
+>typeErr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AliftTypeErr" TARGET="main"
+>liftTypeErr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AgetPos" TARGET="main"
+>getPos</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AwithPos%27" TARGET="main"
+>withPos'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AcHasField" TARGET="main"
+>cHasField</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AcSubType" TARGET="main"
+>cSubType</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AcOrd" TARGET="main"
+>cOrd</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtRecord" TARGET="main"
+>tRecord</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtNil" TARGET="main"
+>tNil</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtDouble" TARGET="main"
+>tDouble</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtString%27" TARGET="main"
+>tString'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtChar" TARGET="main"
+>tChar</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtInt" TARGET="main"
+>tInt</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtBool" TARGET="main"
+>tBool</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtDate" TARGET="main"
+>tDate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtDuration" TARGET="main"
+>tDuration</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtDurationDate" TARGET="main"
+>tDurationDate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtBin" TARGET="main"
+>tBin</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtFun" TARGET="main"
+>tFun</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtProd" TARGET="main"
+>tProd</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtSum" TARGET="main"
+>tSum</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtUn" TARGET="main"
+>tUn</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtList" TARGET="main"
+>tList</A
+></DIV
+></DIV
+></DIV
+></BODY
+></HTML
+>

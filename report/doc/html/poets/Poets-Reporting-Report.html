@@ -1,0 +1,616 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Report</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Report.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Report</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the types to represent reports.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AReportId"
+>ReportId</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AReportName"
+>ReportName</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AReportFunction"
+>ReportFunction</A
+> = [<A HREF="Poets-Reporting-ReportMonad.html#t%3ARValue"
+>RValue</A
+>] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARValue"
+>RValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AReportType"
+>ReportType</A
+>  = <A HREF="#v%3AReportType"
+>ReportType</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportArgTypes"
+>reportArgTypes</A
+> :: [<A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportRetType"
+>reportRetType</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AReportModule"
+>ReportModule</A
+>  = <A HREF="#v%3AReportModule"
+>ReportModule</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportType"
+>reportType</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportFunction"
+>reportFunction</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportFunction"
+>ReportFunction</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportName"
+>reportName</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportDesc"
+>reportDesc</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportFile"
+>reportFile</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportSubType"
+>reportSubType</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AreportId"
+>reportId</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AReportSpec"
+>ReportSpec</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ReportId"
+><A NAME="t%3AReportId"
+></A
+></A
+><B
+>ReportId</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ReportName"
+><A NAME="t%3AReportName"
+></A
+></A
+><B
+>ReportName</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the name of a report
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ReportFunction"
+><A NAME="t%3AReportFunction"
+></A
+></A
+><B
+>ReportFunction</B
+> = [<A HREF="Poets-Reporting-ReportMonad.html#t%3ARValue"
+>RValue</A
+>] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARValue"
+>RValue</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The type of a report function. The first argument is the list of
+arguments for the report.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ReportType"
+><A NAME="t%3AReportType"
+></A
+></A
+><B
+>ReportType</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This type represents the type of a report
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportType"
+><A NAME="v%3AReportType"
+></A
+></A
+><B
+>ReportType</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportArgTypes"
+><A NAME="v%3AreportArgTypes"
+></A
+></A
+><B
+>reportArgTypes</B
+> :: [<A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportRetType"
+><A NAME="v%3AreportRetType"
+></A
+></A
+><B
+>reportRetType</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ReportModule"
+><A NAME="t%3AReportModule"
+></A
+></A
+><B
+>ReportModule</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportModule"
+><A NAME="v%3AReportModule"
+></A
+></A
+><B
+>ReportModule</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportType"
+><A NAME="v%3AreportType"
+></A
+></A
+><B
+>reportType</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportFunction"
+><A NAME="v%3AreportFunction"
+></A
+></A
+><B
+>reportFunction</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportFunction"
+>ReportFunction</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportName"
+><A NAME="v%3AreportName"
+></A
+></A
+><B
+>reportName</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportDesc"
+><A NAME="v%3AreportDesc"
+></A
+></A
+><B
+>reportDesc</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportFile"
+><A NAME="v%3AreportFile"
+></A
+></A
+><B
+>reportFile</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportSubType"
+><A NAME="v%3AreportSubType"
+></A
+></A
+><B
+>reportSubType</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:reportId"
+><A NAME="v%3AreportId"
+></A
+></A
+><B
+>reportId</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ReportSpec"
+><A NAME="t%3AReportSpec"
+></A
+></A
+><B
+>ReportSpec</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This type represents a report specification. For now this means
+  a string that contains a well-formed Haskell program.
+</P
+><P
+>TODO define a proper report specification type
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

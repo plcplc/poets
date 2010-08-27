@@ -1,0 +1,816 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.Parser</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Contracts-Language-CSL-Parser.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Contracts.Language.CSL.Parser</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Philip Carlsen, Brian Mathiasen og Martin Dybdal</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parsing of CSL clause templates and contract templates.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AOp"
+>Op</A
+> = Operator <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> Identity</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Alexer"
+>lexer</A
+> :: TokenParser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseFile"
+>parseFile</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError ([<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+>]))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseTemplates"
+>parseTemplates</A
+> :: SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError ([<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseFun"
+>parseFun</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseVal"
+>parseVal</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontractTemplate"
+>contractTemplate</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AclauseTemplate"
+>clauseTemplate</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aclause"
+>clause</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AclauseOps"
+>clauseOps</A
+> :: [[<A HREF="Poets-Contracts-Language-CSL-Parser.html#t%3AOp"
+>Op</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>]]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AclauseFactor"
+>clauseFactor</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aaexp"
+>aexp</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aexp"
+>exp</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AexpOps"
+>expOps</A
+> :: [[<A HREF="Poets-Contracts-Language-CSL-Parser.html#t%3AOp"
+>Op</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AbaseValue"
+>baseValue</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Astring"
+>string</A
+> :: Parser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AvarIdent"
+>varIdent</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfunctionIdent"
+>functionIdent</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeIdent"
+>typeIdent</A
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArecordIdent"
+>recordIdent</A
+> :: Parser <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldIdent"
+>fieldIdent</A
+> :: Parser <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtemplateIdent"
+>templateIdent</A
+> :: Parser <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Op"
+><A NAME="t%3AOp"
+></A
+></A
+><B
+>Op</B
+> = Operator <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> Identity</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lexer"
+><A NAME="v%3Alexer"
+></A
+></A
+><B
+>lexer</B
+> :: TokenParser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseFile"
+><A NAME="v%3AparseFile"
+></A
+></A
+><B
+>parseFile</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+><TD CLASS="rdoc"
+>The path to the file containing the CSL definitions.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError ([<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+>]))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Parse a set of contract/clause templates defined in a file.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseTemplates"
+><A NAME="v%3AparseTemplates"
+></A
+></A
+><B
+>parseTemplates</B
+> :: SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError ([<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+>], [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parse a set of contract/clause templates and function definitions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseFun"
+><A NAME="v%3AparseFun"
+></A
+></A
+><B
+>parseFun</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseVal"
+><A NAME="v%3AparseVal"
+></A
+></A
+><B
+>parseVal</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AValueBinding"
+>ValueBinding</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:contractTemplate"
+><A NAME="v%3AcontractTemplate"
+></A
+></A
+><B
+>contractTemplate</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:clauseTemplate"
+><A NAME="v%3AclauseTemplate"
+></A
+></A
+><B
+>clauseTemplate</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:clause"
+><A NAME="v%3Aclause"
+></A
+></A
+><B
+>clause</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:clauseOps"
+><A NAME="v%3AclauseOps"
+></A
+></A
+><B
+>clauseOps</B
+> :: [[<A HREF="Poets-Contracts-Language-CSL-Parser.html#t%3AOp"
+>Op</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>]]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:clauseFactor"
+><A NAME="v%3AclauseFactor"
+></A
+></A
+><B
+>clauseFactor</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:aexp"
+><A NAME="v%3Aaexp"
+></A
+></A
+><B
+>aexp</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:exp"
+><A NAME="v%3Aexp"
+></A
+></A
+><B
+>exp</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:expOps"
+><A NAME="v%3AexpOps"
+></A
+></A
+><B
+>expOps</B
+> :: [[<A HREF="Poets-Contracts-Language-CSL-Parser.html#t%3AOp"
+>Op</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:baseValue"
+><A NAME="v%3AbaseValue"
+></A
+></A
+><B
+>baseValue</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:string"
+><A NAME="v%3Astring"
+></A
+></A
+><B
+>string</B
+> :: Parser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:varIdent"
+><A NAME="v%3AvarIdent"
+></A
+></A
+><B
+>varIdent</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:functionIdent"
+><A NAME="v%3AfunctionIdent"
+></A
+></A
+><B
+>functionIdent</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeIdent"
+><A NAME="v%3AtypeIdent"
+></A
+></A
+><B
+>typeIdent</B
+> :: Parser <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:recordIdent"
+><A NAME="v%3ArecordIdent"
+></A
+></A
+><B
+>recordIdent</B
+> :: Parser <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldIdent"
+><A NAME="v%3AfieldIdent"
+></A
+></A
+><B
+>fieldIdent</B
+> :: Parser <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:templateIdent"
+><A NAME="v%3AtemplateIdent"
+></A
+></A
+><B
+>templateIdent</B
+> :: Parser <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

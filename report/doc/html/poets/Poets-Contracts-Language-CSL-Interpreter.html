@@ -1,0 +1,2207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.Interpreter</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Contracts-Language-CSL-Interpreter.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Contracts.Language.CSL.Interpreter</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Martin Dybdal</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module implements the CSL small-step semantics (<EM
+>transaction matching</EM
+>).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AIntEnvironment"
+>IntEnvironment</A
+>  = <A HREF="#v%3AIntEnvironment"
+>IntEnvironment</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AintClauseTemplates"
+>intClauseTemplates</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AintValueBindings"
+>intValueBindings</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AClauseTemplates"
+>ClauseTemplates</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AContractTemplates"
+>ContractTemplates</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AIM"
+>IM</A
+> = ReaderT <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIntEnvironment"
+>IntEnvironment</A
+> (ErrorT <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (State <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AResult"
+>Result</A
+>  = <A HREF="#v%3AResult"
+>Result</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AresultCurrentTime"
+>resultCurrentTime</A
+> :: DateTime</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AresultContent"
+>resultContent</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AViolation"
+>Violation</A
+>  = <A HREF="#v%3AViolation"
+>Violation</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AviolationTime"
+>violationTime</A
+> :: DateTime</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AviolationAgents"
+>violationAgents</A
+> :: [<A HREF="Poets-Contracts-Base.html#t%3AAgent"
+>Agent</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AviolationDescription"
+>violationDescription</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AIError"
+>IError</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ARunTimeError"
+>RunTimeError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AIllegalUpdateTime"
+>IllegalUpdateTime</A
+> DateTime DateTime</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AUnexpectedRouting"
+>UnexpectedRouting</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AExpectedRouting"
+>ExpectedRouting</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARoutingError"
+>RoutingError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AContractTemplateNotFound"
+>ContractTemplateNotFound</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AContractTemplateTypeMismatch"
+>ContractTemplateTypeMismatch</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+> <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupTemplate"
+>lookupTemplate</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetTransactionRouting"
+>getTransactionRouting</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsetTransactionRouting"
+>setTransactionRouting</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunwrapAgent"
+>unwrapAgent</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asec"
+>sec</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AupdateClause"
+>updateClause</A
+> :: DateTime -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AevalCExpr"
+>evalCExpr</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AevalDeadline"
+>evalDeadline</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ADeadline"
+>Deadline</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> (DateTime, DateTime)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AresultConjunction"
+>resultConjunction</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AresultDisjunction"
+>resultDisjunction</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunfoldInstantiation"
+>unfoldInstantiation</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>] -&gt; [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>] -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AstepClause"
+>stepClause</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsubstCExpr"
+>substCExpr</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsubstClause"
+>substClause</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsubstAgentClause"
+>substAgentClause</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ares"
+>res</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; [<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+>] -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateContract"
+>createContract</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AContractTemplates"
+>ContractTemplates</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunTimeError"
+>runTimeError</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AillegalUpdateTimeError"
+>illegalUpdateTimeError</A
+> ::  DateTime -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtemplateUndefError"
+>templateUndefError</A
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunexpectedValueError"
+>unexpectedValueError</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtemplateArgsError"
+>templateArgsError</A
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtemplateAgentArgsError"
+>templateAgentArgsError</A
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AroutingUnexpectedError"
+>routingUnexpectedError</A
+> ::  <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AroutingExpectedError"
+>routingExpectedError</A
+> ::  <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AroutingError"
+>routingError</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontractTemplateUndefinedError"
+>contractTemplateUndefinedError</A
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontractTemplateTypeError"
+>contractTemplateTypeError</A
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Amatch"
+>match</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>) -&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aupdate"
+>update</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainstantiate"
+>instantiate</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AContractTemplates"
+>ContractTemplates</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>))</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:IntEnvironment"
+><A NAME="t%3AIntEnvironment"
+></A
+></A
+><B
+>IntEnvironment</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:IntEnvironment"
+><A NAME="v%3AIntEnvironment"
+></A
+></A
+><B
+>IntEnvironment</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:intClauseTemplates"
+><A NAME="v%3AintClauseTemplates"
+></A
+></A
+><B
+>intClauseTemplates</B
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:intValueBindings"
+><A NAME="v%3AintValueBindings"
+></A
+></A
+><B
+>intValueBindings</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ClauseTemplates"
+><A NAME="t%3AClauseTemplates"
+></A
+></A
+><B
+>ClauseTemplates</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The clause template environment maps template names to their definition.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ContractTemplates"
+><A NAME="t%3AContractTemplates"
+></A
+></A
+><B
+>ContractTemplates</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AContractTemplate"
+>ContractTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The contract template environment maps template names to their definition.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:IM"
+><A NAME="t%3AIM"
+></A
+></A
+><B
+>IM</B
+> = ReaderT <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIntEnvironment"
+>IntEnvironment</A
+> (ErrorT <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (State <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Result"
+><A NAME="t%3AResult"
+></A
+></A
+><B
+>Result</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The result of <TT
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Aupdate"
+>update</A
+></TT
+> and <TT
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Amatch"
+>match</A
+></TT
+> is either a violation, or an updated
+ clause.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Result"
+><A NAME="v%3AResult"
+></A
+></A
+><B
+>Result</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:resultCurrentTime"
+><A NAME="v%3AresultCurrentTime"
+></A
+></A
+><B
+>resultCurrentTime</B
+> :: DateTime</TD
+><TD CLASS="rdoc"
+>In case the result is an updated clause, this value represents the
+ base time w.r.t. which the deadlines are defined.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:resultContent"
+><A NAME="v%3AresultContent"
+></A
+></A
+><B
+>resultContent</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Violation"
+><A NAME="t%3AViolation"
+></A
+></A
+><B
+>Violation</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A violation comprises the time of violation and the agent(s) responsible.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Violation"
+><A NAME="v%3AViolation"
+></A
+></A
+><B
+>Violation</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:violationTime"
+><A NAME="v%3AviolationTime"
+></A
+></A
+><B
+>violationTime</B
+> :: DateTime</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:violationAgents"
+><A NAME="v%3AviolationAgents"
+></A
+></A
+><B
+>violationAgents</B
+> :: [<A HREF="Poets-Contracts-Base.html#t%3AAgent"
+>Agent</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:violationDescription"
+><A NAME="v%3AviolationDescription"
+></A
+></A
+><B
+>violationDescription</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:IError"
+><A NAME="t%3AIError"
+></A
+></A
+><B
+>IError</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The various errors the interpreter can produce.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:RunTimeError"
+><A NAME="v%3ARunTimeError"
+></A
+></A
+><B
+>RunTimeError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>Unexpected runtime error (i.e., &quot;this should not happen&quot;).
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:IllegalUpdateTime"
+><A NAME="v%3AIllegalUpdateTime"
+></A
+></A
+><B
+>IllegalUpdateTime</B
+> DateTime DateTime</TD
+><TD CLASS="rdoc"
+>The <EM
+>current time</EM
+> is illegal, and must be at least the value of the
+ second parameter.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:UnexpectedRouting"
+><A NAME="v%3AUnexpectedRouting"
+></A
+></A
+><B
+>UnexpectedRouting</B
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+></TD
+><TD CLASS="rdoc"
+>Routing (suffix) is not expected.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ExpectedRouting"
+><A NAME="v%3AExpectedRouting"
+></A
+></A
+><B
+>ExpectedRouting</B
+></TD
+><TD CLASS="rdoc"
+>Routing is expected.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:RoutingError"
+><A NAME="v%3ARoutingError"
+></A
+></A
+><B
+>RoutingError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+></TD
+><TD CLASS="rdoc"
+>Routing contains an illegal character; only <TT
+>l</TT
+> and <TT
+>r</TT
+> are allowed.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ContractTemplateNotFound"
+><A NAME="v%3AContractTemplateNotFound"
+></A
+></A
+><B
+>ContractTemplateNotFound</B
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+><TD CLASS="rdoc"
+>The specified contract template is not found.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ContractTemplateTypeMismatch"
+><A NAME="v%3AContractTemplateTypeMismatch"
+></A
+></A
+><B
+>ContractTemplateTypeMismatch</B
+> <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+> <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+></TD
+><TD CLASS="rdoc"
+>Mismatch between the type of a contract template and the type of the
+ supplied contract meta data.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupTemplate"
+><A NAME="v%3AlookupTemplate"
+></A
+></A
+><B
+>lookupTemplate</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClauseTemplate"
+>ClauseTemplate</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getTransactionRouting"
+><A NAME="v%3AgetTransactionRouting"
+></A
+></A
+><B
+>getTransactionRouting</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:setTransactionRouting"
+><A NAME="v%3AsetTransactionRouting"
+></A
+></A
+><B
+>setTransactionRouting</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unwrapAgent"
+><A NAME="v%3AunwrapAgent"
+></A
+></A
+><B
+>unwrapAgent</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:sec"
+><A NAME="v%3Asec"
+></A
+></A
+><B
+>sec</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:updateClause"
+><A NAME="v%3AupdateClause"
+></A
+></A
+><B
+>updateClause</B
+> :: DateTime -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:evalCExpr"
+><A NAME="v%3AevalCExpr"
+></A
+></A
+><B
+>evalCExpr</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:evalDeadline"
+><A NAME="v%3AevalDeadline"
+></A
+></A
+><B
+>evalDeadline</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ADeadline"
+>Deadline</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> (DateTime, DateTime)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:resultConjunction"
+><A NAME="v%3AresultConjunction"
+></A
+></A
+><B
+>resultConjunction</B
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:resultDisjunction"
+><A NAME="v%3AresultDisjunction"
+></A
+></A
+><B
+>resultDisjunction</B
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult"
+>Result</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unfoldInstantiation"
+><A NAME="v%3AunfoldInstantiation"
+></A
+></A
+><B
+>unfoldInstantiation</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>] -&gt; [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>] -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:stepClause"
+><A NAME="v%3AstepClause"
+></A
+></A
+><B
+>stepClause</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:substCExpr"
+><A NAME="v%3AsubstCExpr"
+></A
+></A
+><B
+>substCExpr</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:substClause"
+><A NAME="v%3AsubstClause"
+></A
+></A
+><B
+>substClause</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:substAgentClause"
+><A NAME="v%3AsubstAgentClause"
+></A
+></A
+><B
+>substAgentClause</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:res"
+><A NAME="v%3Ares"
+></A
+></A
+><B
+>res</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+> -&gt; [<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+>] -&gt; <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACSubstitution"
+>CSubstitution</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createContract"
+><A NAME="v%3AcreateContract"
+></A
+></A
+><B
+>createContract</B
+> :: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AContractTemplates"
+>ContractTemplates</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runTimeError"
+><A NAME="v%3ArunTimeError"
+></A
+></A
+><B
+>runTimeError</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:illegalUpdateTimeError"
+><A NAME="v%3AillegalUpdateTimeError"
+></A
+></A
+><B
+>illegalUpdateTimeError</B
+> ::  DateTime -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:templateUndefError"
+><A NAME="v%3AtemplateUndefError"
+></A
+></A
+><B
+>templateUndefError</B
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unexpectedValueError"
+><A NAME="v%3AunexpectedValueError"
+></A
+></A
+><B
+>unexpectedValueError</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:templateArgsError"
+><A NAME="v%3AtemplateArgsError"
+></A
+></A
+><B
+>templateArgsError</B
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:templateAgentArgsError"
+><A NAME="v%3AtemplateAgentArgsError"
+></A
+></A
+><B
+>templateAgentArgsError</B
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:routingUnexpectedError"
+><A NAME="v%3AroutingUnexpectedError"
+></A
+></A
+><B
+>routingUnexpectedError</B
+> ::  <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ARouting"
+>Routing</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:routingExpectedError"
+><A NAME="v%3AroutingExpectedError"
+></A
+></A
+><B
+>routingExpectedError</B
+> ::  <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:routingError"
+><A NAME="v%3AroutingError"
+></A
+></A
+><B
+>routingError</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:contractTemplateUndefinedError"
+><A NAME="v%3AcontractTemplateUndefinedError"
+></A
+></A
+><B
+>contractTemplateUndefinedError</B
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:contractTemplateTypeError"
+><A NAME="v%3AcontractTemplateTypeError"
+></A
+></A
+><B
+>contractTemplateTypeError</B
+> ::  <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM"
+>IM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:match"
+><A NAME="v%3Amatch"
+></A
+></A
+><B
+>match</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+></TD
+><TD CLASS="rdoc"
+>The clause template environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+><TD CLASS="rdoc"
+>Value environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>)</TD
+><TD CLASS="rdoc"
+>The contract to match against.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+></TD
+><TD CLASS="rdoc"
+>The transaction to match.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Match a transaction against a clause in the context of a template
+ environment, and return the updated clause/violation.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:update"
+><A NAME="v%3Aupdate"
+></A
+></A
+><B
+>update</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+></TD
+><TD CLASS="rdoc"
+>The clause template environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+><TD CLASS="rdoc"
+>Value environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; DateTime</TD
+><TD CLASS="rdoc"
+>The <EM
+>current</EM
+> time.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>)</TD
+><TD CLASS="rdoc"
+>The contract to update.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Update a contract at a given point in time (check deadlines etc).
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:instantiate"
+><A NAME="v%3Ainstantiate"
+></A
+></A
+><B
+>instantiate</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+></TD
+><TD CLASS="rdoc"
+>The clause template environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AContractTemplates"
+>ContractTemplates</A
+></TD
+><TD CLASS="rdoc"
+>The contract template environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+></TD
+><TD CLASS="rdoc"
+>Value environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+></TD
+><TD CLASS="rdoc"
+>The contract meta data.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+> (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Instantiate a new CSL contract, by supplying the clause/contract template
+ definitions, and the meta data of the contract to instantiate (the meta data
+ includes all parameters, and the start date and the name of the contract
+ template to instantiate).
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

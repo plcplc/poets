@@ -1,0 +1,1011 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.ALaCarte.Algebras.TypeInferer</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-ALaCarte-Algebras-TypeInferer.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.ALaCarte.Algebras.TypeInferer</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Type inference algebra. Type inference maps a term to a type variable, and a
+ set of typing constraints, with the invariant that the <EM
+>actual</EM
+> type is a
+ <EM
+>sub type</EM
+> of returned type variable. Both the set of constraints and the
+ type terms occurring in the constraints are defined as a la carte signatures.
+ Furthermore, type inference is performed inside a <EM
+>typing environment</EM
+>, and
+ in case of errors, the environment is also returned for debugging purposes
+ (using the function <TT
+><A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#v%3AtypeInfError"
+>typeInfError</A
+></TT
+>).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeVar"
+>TypeVar</A
+> e = <A HREF="#v%3ATypeVar"
+>TypeVar</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> tp = <A HREF="#v%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> tp tp</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeInfState"
+>TypeInfState</A
+> env c t = <A HREF="#v%3ATypeInfState"
+>TypeInfState</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtypeInfStateVarCounter"
+>typeInfStateVarCounter</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtypeInfStateTypeConstraints"
+>typeInfStateTypeConstraints</A
+> :: [(c (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t), env)]</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATI"
+>TI</A
+> env err c t = ReaderT env (ErrorT (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env) (State (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t)))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeInfError"
+>typeInfError</A
+> :: (MonadReader env m, MonadError (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env) m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> err) =&gt; f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetFreshTypeVar"
+>getFreshTypeVar</A
+> :: (MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t) =&gt; m (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddConstraint"
+>addConstraint</A
+> :: (MonadReader env m, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c) =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddSubTypeConstraint"
+>addSubTypeConstraint</A
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c, MonadReader env m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m) =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunifyType"
+>unifyType</A
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> c, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitute"
+>Substitute</A
+> t t) =&gt; <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreturnType"
+>returnType</A
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c, MonadReader env m, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t) =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitute"
+>Substitute</A
+> t t, Error (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env), <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c) =&gt; <A HREF="#t%3ATypeInferer"
+>TypeInferer</A
+> f env err c t  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeInfAlg"
+>typeInfAlg</A
+> :: f (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATI"
+>TI</A
+> env err c t (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATI"
+>TI</A
+> env err c t (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeInfTerm"
+>typeInfTerm</A
+> :: <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInferer"
+>TypeInferer</A
+> f env err c t =&gt; env -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env) (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t), [(c (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t), env)])</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeVar"
+><A NAME="t%3ATypeVar"
+></A
+></A
+><B
+>TypeVar</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A la carte signature for type variables.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeVar"
+><A NAME="v%3ATypeVar"
+></A
+></A
+><B
+>TypeVar</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:SubTypeConstraint"
+><A NAME="t%3ASubTypeConstraint"
+></A
+></A
+><B
+>SubTypeConstraint</B
+> tp </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Sub type constraint. <TT
+>SubTypeConstraint tp1 tp2</TT
+> means that <TT
+>tp1</TT
+> is
+ required to be a sub type of <TT
+>tp2</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:SubTypeConstraint"
+><A NAME="v%3ASubTypeConstraint"
+></A
+></A
+><B
+>SubTypeConstraint</B
+> tp tp</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeInfState"
+><A NAME="t%3ATypeInfState"
+></A
+></A
+><B
+>TypeInfState</B
+> env c t </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The state used in type inference includes a counter for generating fresh
+ type variable names, and a list of current type constraints. For generating
+ better error messages, each constraint is annotated with the environment.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeInfState"
+><A NAME="v%3ATypeInfState"
+></A
+></A
+><B
+>TypeInfState</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:typeInfStateVarCounter"
+><A NAME="v%3AtypeInfStateVarCounter"
+></A
+></A
+><B
+>typeInfStateVarCounter</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:typeInfStateTypeConstraints"
+><A NAME="v%3AtypeInfStateTypeConstraints"
+></A
+></A
+><B
+>typeInfStateTypeConstraints</B
+> :: [(c (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t), env)]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TI"
+><A NAME="t%3ATI"
+></A
+></A
+><B
+>TI</B
+> env err c t = ReaderT env (ErrorT (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env) (State (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t)))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The type inference monad.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeInfError"
+><A NAME="v%3AtypeInfError"
+></A
+></A
+><B
+>typeInfError</B
+> :: (MonadReader env m, MonadError (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env) m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> err) =&gt; f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Throw a type error. Besides throwing the passed value, the error also
+ includes the environment for debugging purposes (e.g., source position
+ information).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getFreshTypeVar"
+><A NAME="v%3AgetFreshTypeVar"
+></A
+></A
+><B
+>getFreshTypeVar</B
+> :: (MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t) =&gt; m (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Generate a fresh type variable.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addConstraint"
+><A NAME="v%3AaddConstraint"
+></A
+></A
+><B
+>addConstraint</B
+> :: (MonadReader env m, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c) =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Add a type constraint.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addSubTypeConstraint"
+><A NAME="v%3AaddSubTypeConstraint"
+></A
+></A
+><B
+>addSubTypeConstraint</B
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c, MonadReader env m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m) =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Add a sub type constraint.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unifyType"
+><A NAME="v%3AunifyType"
+></A
+></A
+><B
+>unifyType</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> c, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitute"
+>Substitute</A
+> t t) =&gt; <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Unify be equating the given type variable with the given type, in all
+ existing type constraints.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:returnType"
+><A NAME="v%3AreturnType"
+></A
+></A
+><B
+>returnType</B
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c, MonadReader env m, MonadState (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInfState"
+>TypeInfState</A
+> env c t) m, <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t) =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t) -&gt; m (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Return a type. The function maintains the invariant that the returned type
+ represents all possible super types of the actual type.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> t, <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitute"
+>Substitute</A
+> t t, Error (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env), <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ASubTypeConstraint"
+>SubTypeConstraint</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> c) =&gt; <A NAME="t:TypeInferer"
+><A NAME="t%3ATypeInferer"
+></A
+></A
+><B
+>TypeInferer</B
+> f env err c t  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The type inference algebra. An instance, <TT
+><A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInferer"
+>TypeInferer</A
+></TT
+> <TT
+>f</TT
+> <TT
+>env</TT
+> <TT
+>err</TT
+> <TT
+>c</TT
+>
+ <TT
+>t</TT
+>, means that terms over the signature <TT
+>f</TT
+> can be type inferred in the
+ typing environment <TT
+>env</TT
+>, generating a set of constraints over the signature
+ <TT
+>c</TT
+>, where the type terms are over the signature <TT
+>t</TT
+> (it is required that the
+ signature <TT
+>t</TT
+> contains type variables, <TT
+><A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+></TT
+>). Errors over the signature
+ <TT
+>err</TT
+> may be thrown.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeInfAlg"
+><A NAME="v%3AtypeInfAlg"
+></A
+></A
+><B
+>typeInfAlg</B
+> :: f (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATI"
+>TI</A
+> env err c t (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))) -&gt; <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATI"
+>TI</A
+> env err c t (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t))</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeInfTerm"
+><A NAME="v%3AtypeInfTerm"
+></A
+></A
+><B
+>typeInfTerm</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeInferer"
+>TypeInferer</A
+> f env err c t</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; env</TD
+><TD CLASS="rdoc"
+>The term to type check.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+><TD CLASS="rdoc"
+>The result is either an error (which includes the typing environment at the error point), or the inferred type variable, and a set of constraints.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> (err <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>, env) (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t), [(c (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> t), env)])</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Infer the type of a term.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

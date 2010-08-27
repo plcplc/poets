@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.FreeVars</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-FreeVars.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.FreeVars</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides a facility to compute the set of free
+ variables of certain constructs.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3AFreeVars"
+>FreeVars</A
+> a  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfreeVars"
+>freeVars</A
+> :: a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsomeFreeVarsIn"
+>someFreeVarsIn</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t:FreeVars"
+><A NAME="t%3AFreeVars"
+></A
+></A
+><B
+>FreeVars</B
+> a  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Instances of this class are supposed to be objects that can
+contain free (type) variables.  
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:freeVars"
+><A NAME="v%3AfreeVars"
+></A
+></A
+><B
+>freeVars</B
+> :: a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function computes the set of free (type) variables of the
+      given object.  
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:someFreeVarsIn"
+><A NAME="v%3AsomeFreeVarsIn"
+></A
+></A
+><B
+>someFreeVarsIn</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function computes whether the given object has at least
+      one free variable which is also contained in the given set of
+      variables. A witness is returned in case this is true 
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

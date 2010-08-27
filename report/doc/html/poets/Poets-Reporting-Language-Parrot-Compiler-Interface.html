@@ -1,0 +1,1267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Compiler.Interface</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Compiler-Interface.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Compiler.Interface</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides the interface used by the Haskell code
+ generated from a Parrot program (via module
+ ''Poets.Reporting.Language.Parrot.Compiler.Haskell'').
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:EValueSig"
+><A NAME="t%3AEValueSig"
+></A
+></A
+><B
+>EValueSig</B
+> = <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:EValue"
+><A NAME="t%3AEValue"
+></A
+></A
+><B
+>EValue</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AEValueSig"
+>EValueSig</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ERValue"
+><A NAME="t%3AERValue"
+></A
+></A
+><B
+>ERValue</B
+> = <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:EReportFunction"
+><A NAME="t%3AEReportFunction"
+></A
+></A
+><B
+>EReportFunction</B
+> = [<A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rChar"
+><A NAME="v%3ArChar"
+></A
+></A
+><B
+>rChar</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRight"
+><A NAME="v%3ArRight"
+></A
+></A
+><B
+>rRight</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rLeft"
+><A NAME="v%3ArLeft"
+></A
+></A
+><B
+>rLeft</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rPair"
+><A NAME="v%3ArPair"
+></A
+></A
+><B
+>rPair</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rUnit"
+><A NAME="v%3ArUnit"
+></A
+></A
+><B
+>rUnit</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rProj2"
+><A NAME="v%3ArProj2"
+></A
+></A
+><B
+>rProj2</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rProj1"
+><A NAME="v%3ArProj1"
+></A
+></A
+><B
+>rProj1</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rProj"
+><A NAME="v%3ArProj"
+></A
+></A
+><B
+>rProj</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; ((<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f, <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f) -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDate1"
+><A NAME="v%3ArDate1"
+></A
+></A
+><B
+>rDate1</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDate2"
+><A NAME="v%3ArDate2"
+></A
+></A
+><B
+>rDate2</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDate3"
+><A NAME="v%3ArDate3"
+></A
+></A
+><B
+>rDate3</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rCase"
+><A NAME="v%3ArCase"
+></A
+></A
+><B
+>rCase</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; (<A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>) -&gt; (<A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rCharList"
+><A NAME="v%3ArCharList"
+></A
+></A
+><B
+>rCharList</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rEvents"
+><A NAME="v%3ArEvents"
+></A
+></A
+><B
+>rEvents</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTypeOf"
+><A NAME="v%3ArTypeOf"
+></A
+></A
+><B
+>rTypeOf</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTypeOf'"
+><A NAME="v%3ArTypeOf%27"
+></A
+></A
+><B
+>rTypeOf'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rHasType"
+><A NAME="v%3ArHasType"
+></A
+></A
+><B
+>rHasType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rString"
+><A NAME="v%3ArString"
+></A
+></A
+><B
+>rString</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rError"
+><A NAME="v%3ArError"
+></A
+></A
+><B
+>rError</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRecord"
+><A NAME="v%3ArRecord"
+></A
+></A
+><B
+>rRecord</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rList"
+><A NAME="v%3ArList"
+></A
+></A
+><B
+>rList</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rCons"
+><A NAME="v%3ArCons"
+></A
+></A
+><B
+>rCons</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFieldLookup"
+><A NAME="v%3ArFieldLookup"
+></A
+></A
+><B
+>rFieldLookup</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFieldsMod"
+><A NAME="v%3ArFieldsMod"
+></A
+></A
+><B
+>rFieldsMod</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFoldr"
+><A NAME="v%3ArFoldr"
+></A
+></A
+><B
+>rFoldr</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rIf"
+><A NAME="v%3ArIf"
+></A
+></A
+><B
+>rIf</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFalse"
+><A NAME="v%3ArFalse"
+></A
+></A
+><B
+>rFalse</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTrue"
+><A NAME="v%3ArTrue"
+></A
+></A
+><B
+>rTrue</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rNeq"
+><A NAME="v%3ArNeq"
+></A
+></A
+><B
+>rNeq</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rEq"
+><A NAME="v%3ArEq"
+></A
+></A
+><B
+>rEq</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rGt"
+><A NAME="v%3ArGt"
+></A
+></A
+><B
+>rGt</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rLte"
+><A NAME="v%3ArLte"
+></A
+></A
+><B
+>rLte</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rGte"
+><A NAME="v%3ArGte"
+></A
+></A
+><B
+>rGte</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rLt"
+><A NAME="v%3ArLt"
+></A
+></A
+><B
+>rLt</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rMin"
+><A NAME="v%3ArMin"
+></A
+></A
+><B
+>rMin</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rMax"
+><A NAME="v%3ArMax"
+></A
+></A
+><B
+>rMax</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rOr"
+><A NAME="v%3ArOr"
+></A
+></A
+><B
+>rOr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rAnd"
+><A NAME="v%3ArAnd"
+></A
+></A
+><B
+>rAnd</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rNot"
+><A NAME="v%3ArNot"
+></A
+></A
+><B
+>rNot</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rMinus"
+><A NAME="v%3ArMinus"
+></A
+></A
+><B
+>rMinus</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTimes"
+><A NAME="v%3ArTimes"
+></A
+></A
+><B
+>rTimes</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rPlus"
+><A NAME="v%3ArPlus"
+></A
+></A
+><B
+>rPlus</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rSignum"
+><A NAME="v%3ArSignum"
+></A
+></A
+><B
+>rSignum</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rNegate"
+><A NAME="v%3ArNegate"
+></A
+></A
+><B
+>rNegate</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rAbs"
+><A NAME="v%3ArAbs"
+></A
+></A
+><B
+>rAbs</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rInteger"
+><A NAME="v%3ArInteger"
+></A
+></A
+><B
+>rInteger</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRational"
+><A NAME="v%3ArRational"
+></A
+></A
+><B
+>rRational</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ARational"
+>Rational</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRecip"
+><A NAME="v%3ArRecip"
+></A
+></A
+><B
+>rRecip</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDiv"
+><A NAME="v%3ArDiv"
+></A
+></A
+><B
+>rDiv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDurPlus"
+><A NAME="v%3ArDurPlus"
+></A
+></A
+><B
+>rDurPlus</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDurMinus"
+><A NAME="v%3ArDurMinus"
+></A
+></A
+><B
+>rDurMinus</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDuration"
+><A NAME="v%3ArDuration"
+></A
+></A
+><B
+>rDuration</B
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDuration'"
+><A NAME="v%3ArDuration%27"
+></A
+></A
+><B
+>rDuration'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AERValue"
+>ERValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

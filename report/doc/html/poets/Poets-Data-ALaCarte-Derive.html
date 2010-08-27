@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.ALaCarte.Derive</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-ALaCarte-Derive.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.ALaCarte.Derive</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Patrick Bahr, and Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines some utility functions for deriving instances
+ for functor based type classes.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AabstractNewtypeQ"
+>abstractNewtypeQ</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AQ"
+>Q</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AQ"
+>Q</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AabstractNewtype"
+>abstractNewtype</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AabstractConType"
+>abstractConType</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3ACon"
+>Con</A
+> -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AName"
+>Name</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnewNames"
+>newNames</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AQ"
+>Q</A
+> [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AName"
+>Name</A
+>]</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:abstractNewtypeQ"
+><A NAME="v%3AabstractNewtypeQ"
+></A
+></A
+><B
+>abstractNewtypeQ</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AQ"
+>Q</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AQ"
+>Q</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the <TT
+>Q</TT
+>-lifted version of 'abstractNewtypeQ.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:abstractNewtype"
+><A NAME="v%3AabstractNewtype"
+></A
+></A
+><B
+>abstractNewtype</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AInfo"
+>Info</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function abstracts away <TT
+>newtype</TT
+> declaration, it turns them into
+  <TT
+>data</TT
+> declarations.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:abstractConType"
+><A NAME="v%3AabstractConType"
+></A
+></A
+><B
+>abstractConType</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3ACon"
+>Con</A
+> -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AName"
+>Name</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the name and the arity of the given data constructor.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:newNames"
+><A NAME="v%3AnewNames"
+></A
+></A
+><B
+>newNames</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AQ"
+>Q</A
+> [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/template-haskell-2.4.0.0/Language-Haskell-TH-Syntax.html#t%3AName"
+>Name</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This function returns the name of a bound type variable
+</P
+><P
+>This function provides a list (of the given length) of new names based
+  on the given string.
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

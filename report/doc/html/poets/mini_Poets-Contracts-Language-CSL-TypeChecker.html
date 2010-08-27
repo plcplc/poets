@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.TypeChecker</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><DIV CLASS="outer"
+><DIV CLASS="mini-topbar"
+>Poets.Contracts.Language.CSL.TypeChecker</DIV
+><DIV CLASS="mini-synopsis"
+><DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#t%3AClauseTemplateEnv" TARGET="main"
+>ClauseTemplateEnv</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#t%3ATypeEnvironment" TARGET="main"
+>TypeEnvironment</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#t%3ATM" TARGET="main"
+>TM</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3ArunTM" TARGET="main"
+>runTM</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#t%3ATError" TARGET="main"
+>TError</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AwithVars" TARGET="main"
+>withVars</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AwithSrcPos" TARGET="main"
+>withSrcPos</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AlookupClauseTemplate" TARGET="main"
+>lookupClauseTemplate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AlookupTransaction" TARGET="main"
+>lookupTransaction</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AbuildEnv" TARGET="main"
+>buildEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckClause" TARGET="main"
+>typeCheckClause</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckDeadline" TARGET="main"
+>typeCheckDeadline</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckPredicate" TARGET="main"
+>typeCheckPredicate</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#t%3AUnexpectedError" TARGET="main"
+>UnexpectedError</A
+> e</DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#t%3ATypeInfError" TARGET="main"
+>TypeInfError</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckCExpr" TARGET="main"
+>typeCheckCExpr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckAgentExpr" TARGET="main"
+>typeCheckAgentExpr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeError" TARGET="main"
+>typeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AshowList" TARGET="main"
+>showList</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AclauseTemplateUndefError" TARGET="main"
+>clauseTemplateUndefError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AduplicateFieldsError" TARGET="main"
+>duplicateFieldsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AduplicateVarsError" TARGET="main"
+>duplicateVarsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AundefFieldsError" TARGET="main"
+>undefFieldsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtemplateArgsError" TARGET="main"
+>templateArgsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtemplateAgentArgsError" TARGET="main"
+>templateAgentArgsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AagentExpressionError" TARGET="main"
+>agentExpressionError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AdisjunctionAgentsError" TARGET="main"
+>disjunctionAgentsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtemplateUndefinedRecord" TARGET="main"
+>templateUndefinedRecord</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtemplateDuplicateVarsError" TARGET="main"
+>templateDuplicateVarsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtemplateAgentMismatch" TARGET="main"
+>templateAgentMismatch</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AcontractTemplateIllegalType" TARGET="main"
+>contractTemplateIllegalType</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AcontractTemplateUndefinedAgent" TARGET="main"
+>contractTemplateUndefinedAgent</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AcontractTemplateIlltypedAgent" TARGET="main"
+>contractTemplateIlltypedAgent</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckClauseTemplate" TARGET="main"
+>typeCheckClauseTemplate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckClauseTemplates" TARGET="main"
+>typeCheckClauseTemplates</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckContractTemplate" TARGET="main"
+>typeCheckContractTemplate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckContractTemplates" TARGET="main"
+>typeCheckContractTemplates</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-TypeChecker.html#v%3AtypeCheckValueBindings" TARGET="main"
+>typeCheckValueBindings</A
+></DIV
+></DIV
+></DIV
+></BODY
+></HTML
+>

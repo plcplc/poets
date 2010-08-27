@@ -1,0 +1,1822 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Base</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Contracts-Base.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Contracts.Base</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines base contract definitions that should be present
+ no matter what contract language is used.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> Error e =&gt; <A HREF="#t%3AContractLanguage"
+>ContractLanguage</A
+> a b e  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aregister"
+>register</A
+> :: b -&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> e (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aupdate"
+>update</A
+> :: b -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> e (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainstantiate"
+>instantiate</A
+> :: b -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> e (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a)</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AContract"
+>Contract</A
+> a = <A HREF="#v%3AContract"
+>Contract</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AcontractCurrentTime"
+>contractCurrentTime</A
+> :: DateTime</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AcontractMetaData"
+>contractMetaData</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AcontractContent"
+>contractContent</A
+> :: a</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AContractMetaData"
+>ContractMetaData</A
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AContractId"
+>ContractId</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransactionType"
+>TransactionType</A
+> = <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AAgent"
+>Agent</A
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATemplateName"
+>TemplateName</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AContractType"
+>ContractType</A
+> = <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATransaction"
+>Transaction</A
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontractClass"
+>contractClass</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransactionClass"
+>transactionClass</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AagentClass"
+>agentClass</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateContractClass"
+>createContractClass</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconcludeContractClass"
+>concludeContractClass</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontractFieldTemplateName"
+>contractFieldTemplateName</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontractFieldStartDate"
+>contractFieldStartDate</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransactionFieldContractId"
+>transactionFieldContractId</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransactionFieldTimeStamp"
+>transactionFieldTimeStamp</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransactionFieldAgent"
+>transactionFieldAgent</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateContractFieldMetaData"
+>createContractFieldMetaData</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateContractFieldContractId"
+>createContractFieldContractId</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconcludeContractFieldTimeStamp"
+>concludeContractFieldTimeStamp</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconcludeContractFieldContractId"
+>concludeContractFieldContractId</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetTransactionContractId"
+>getTransactionContractId</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetTransactionTimeStamp"
+>getTransactionTimeStamp</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m DateTime</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetTransactionType"
+>getTransactionType</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetTransactionAgent"
+>getTransactionAgent</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AAgent"
+>Agent</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetContractTemplateName"
+>getContractTemplateName</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetContractStartDate"
+>getContractStartDate</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; m DateTime</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetContractType"
+>getContractType</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetCreateContractMetaData"
+>getCreateContractMetaData</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetCreateContractContractId"
+>getCreateContractContractId</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetConcludeContractContractId"
+>getConcludeContractContractId</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateContractEvent"
+>createContractEvent</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconcludeContractEvent"
+>concludeContractEvent</A
+> :: DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeCheckContractMetaData"
+>typeCheckContractMetaData</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeCheckTransaction"
+>typeCheckTransaction</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> Error e =&gt; <A NAME="t:ContractLanguage"
+><A NAME="t%3AContractLanguage"
+></A
+></A
+><B
+>ContractLanguage</B
+> a b e  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Abstract definition of a contract language. The type <TT
+>a</TT
+> represents the
+ contract terms/clauses; the type <TT
+>b</TT
+> represents any auxiliary data that might
+ be needed for registering transactions, updating, and instantiation; and the
+ type <TT
+>e</TT
+> represents any errors that can occur.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:register"
+><A NAME="v%3Aregister"
+></A
+></A
+><B
+>register</B
+> :: b -&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> e (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Register a transaction against a contract.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:update"
+><A NAME="v%3Aupdate"
+></A
+></A
+><B
+>update</B
+> :: b -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> e (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Viewing/updating a contract at a specific point in time.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:instantiate"
+><A NAME="v%3Ainstantiate"
+></A
+></A
+><B
+>instantiate</B
+> :: b -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> e (<A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Instantiation of a contract.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Contract"
+><A NAME="t%3AContract"
+></A
+></A
+><B
+>Contract</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A contract consists of contract meta data, the actual normative content of
+ the contract (the type depends on the contract language at hand), and a
+ time stamp representing the <EM
+>current</EM
+> time of the contract: in this way we
+ can check that transactions are matched with increasing timestamps.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Contract"
+><A NAME="v%3AContract"
+></A
+></A
+><B
+>Contract</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:contractCurrentTime"
+><A NAME="v%3AcontractCurrentTime"
+></A
+></A
+><B
+>contractCurrentTime</B
+> :: DateTime</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:contractMetaData"
+><A NAME="v%3AcontractMetaData"
+></A
+></A
+><B
+>contractMetaData</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:contractContent"
+><A NAME="v%3AcontractContent"
+></A
+></A
+><B
+>contractContent</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ContractMetaData"
+><A NAME="t%3AContractMetaData"
+></A
+></A
+><B
+>ContractMetaData</B
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Contract <EM
+>meta data</EM
+> (or header information) is a POETS record
+ (the record type must extend the special <TT
+><A HREF="Poets-Contracts-Base.html#v%3AcontractClass"
+>contractClass</A
+></TT
+> record type).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ContractId"
+><A NAME="t%3AContractId"
+></A
+></A
+><B
+>ContractId</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>All running contracts are identified with a unique ID.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TransactionType"
+><A NAME="t%3ATransactionType"
+></A
+></A
+><B
+>TransactionType</B
+> = <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A transaction type is a record name (which must extend the special
+ <TT
+><A HREF="Poets-Contracts-Base.html#v%3AtransactionClass"
+>transactionClass</A
+></TT
+> record type).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Agent"
+><A NAME="t%3AAgent"
+></A
+></A
+><B
+>Agent</B
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Contract <EM
+>agents</EM
+> are POETS records (the records must extend the special
+ <TT
+><A HREF="Poets-Contracts-Base.html#v%3AagentClass"
+>agentClass</A
+></TT
+> record type).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TemplateName"
+><A NAME="t%3ATemplateName"
+></A
+></A
+><B
+>TemplateName</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Contract templates are identified by a name.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ContractType"
+><A NAME="t%3AContractType"
+></A
+></A
+><B
+>ContractType</B
+> = <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A contract type is a record name (which must extend the
+ <TT
+><A HREF="Poets-Contracts-Base.html#v%3AcontractClass"
+>contractClass</A
+></TT
+> class).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Transaction"
+><A NAME="t%3ATransaction"
+></A
+></A
+><B
+>Transaction</B
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A transaction is a POETS record (the record type must extend the special
+ <TT
+><A HREF="Poets-Contracts-Base.html#v%3AtransactionClass"
+>transactionClass</A
+></TT
+> record type).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:contractClass"
+><A NAME="v%3AcontractClass"
+></A
+></A
+><B
+>contractClass</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The super class for contracts.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transactionClass"
+><A NAME="v%3AtransactionClass"
+></A
+></A
+><B
+>transactionClass</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The super class for transactions (i.e., events in a contract).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:agentClass"
+><A NAME="v%3AagentClass"
+></A
+></A
+><B
+>agentClass</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The super class for agents.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createContractClass"
+><A NAME="v%3AcreateContractClass"
+></A
+></A
+><B
+>createContractClass</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The class for creation/instantiation of contracts.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:concludeContractClass"
+><A NAME="v%3AconcludeContractClass"
+></A
+></A
+><B
+>concludeContractClass</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The class for conclusion of contracts.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:contractFieldTemplateName"
+><A NAME="v%3AcontractFieldTemplateName"
+></A
+></A
+><B
+>contractFieldTemplateName</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The contract template specified in the meta data of a contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:contractFieldStartDate"
+><A NAME="v%3AcontractFieldStartDate"
+></A
+></A
+><B
+>contractFieldStartDate</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The start date specified in the meta data of a contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transactionFieldContractId"
+><A NAME="v%3AtransactionFieldContractId"
+></A
+></A
+><B
+>transactionFieldContractId</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The ID of the contract to which a transaction belongs.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transactionFieldTimeStamp"
+><A NAME="v%3AtransactionFieldTimeStamp"
+></A
+></A
+><B
+>transactionFieldTimeStamp</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The time of a transaction.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transactionFieldAgent"
+><A NAME="v%3AtransactionFieldAgent"
+></A
+></A
+><B
+>transactionFieldAgent</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The agent responsible for a transaction.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createContractFieldMetaData"
+><A NAME="v%3AcreateContractFieldMetaData"
+></A
+></A
+><B
+>createContractFieldMetaData</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The contract meta in a create contract event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createContractFieldContractId"
+><A NAME="v%3AcreateContractFieldContractId"
+></A
+></A
+><B
+>createContractFieldContractId</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The contract ID in a create contract event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:concludeContractFieldTimeStamp"
+><A NAME="v%3AconcludeContractFieldTimeStamp"
+></A
+></A
+><B
+>concludeContractFieldTimeStamp</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The time stamp in a conclude contract event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:concludeContractFieldContractId"
+><A NAME="v%3AconcludeContractFieldContractId"
+></A
+></A
+><B
+>concludeContractFieldContractId</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The contract ID in a conclude contract event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getTransactionContractId"
+><A NAME="v%3AgetTransactionContractId"
+></A
+></A
+><B
+>getTransactionContractId</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the contract ID of a transaction.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getTransactionTimeStamp"
+><A NAME="v%3AgetTransactionTimeStamp"
+></A
+></A
+><B
+>getTransactionTimeStamp</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m DateTime</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the timestamp of a transaction.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getTransactionType"
+><A NAME="v%3AgetTransactionType"
+></A
+></A
+><B
+>getTransactionType</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the type of the transaction.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getTransactionAgent"
+><A NAME="v%3AgetTransactionAgent"
+></A
+></A
+><B
+>getTransactionAgent</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AAgent"
+>Agent</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the agent responsible for a transaction.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getContractTemplateName"
+><A NAME="v%3AgetContractTemplateName"
+></A
+></A
+><B
+>getContractTemplateName</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the contract template specified in the meta data of a contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getContractStartDate"
+><A NAME="v%3AgetContractStartDate"
+></A
+></A
+><B
+>getContractStartDate</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; m DateTime</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the start date specified in the meta data of a contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getContractType"
+><A NAME="v%3AgetContractType"
+></A
+></A
+><B
+>getContractType</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the contract type defined specified in the meta data of a contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getCreateContractMetaData"
+><A NAME="v%3AgetCreateContractMetaData"
+></A
+></A
+><B
+>getCreateContractMetaData</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the meta data of the instantiated contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getCreateContractContractId"
+><A NAME="v%3AgetCreateContractContractId"
+></A
+></A
+><B
+>getCreateContractContractId</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the ID of the instantiated contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getConcludeContractContractId"
+><A NAME="v%3AgetConcludeContractContractId"
+></A
+></A
+><B
+>getConcludeContractContractId</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; m <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the ID of the concluded contract.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createContractEvent"
+><A NAME="v%3AcreateContractEvent"
+></A
+></A
+><B
+>createContractEvent</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+> -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Generate a <TT
+>CreateContract</TT
+> event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:concludeContractEvent"
+><A NAME="v%3AconcludeContractEvent"
+></A
+></A
+><B
+>concludeContractEvent</B
+> :: DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractId"
+>ContractId</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Generate a <TT
+>ConcludeContract</TT
+> event.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeCheckContractMetaData"
+><A NAME="v%3AtypeCheckContractMetaData"
+></A
+></A
+><B
+>typeCheckContractMetaData</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+></TD
+><TD CLASS="rdoc"
+>The record typing environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Base.html#t%3AContractMetaData"
+>ContractMetaData</A
+></TD
+><TD CLASS="rdoc"
+>The meta data to type check.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Type check a POETS value as contract meta data wrt. a record typing
+ environment.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeCheckTransaction"
+><A NAME="v%3AtypeCheckTransaction"
+></A
+></A
+><B
+>typeCheckTransaction</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+></TD
+><TD CLASS="rdoc"
+>The record typing environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Contracts-Base.html#t%3ATransaction"
+>Transaction</A
+></TD
+><TD CLASS="rdoc"
+>The transaction to type check.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Type check a POETS value as a transaction wrt. a record typing environment.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

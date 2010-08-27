@@ -1,0 +1,648 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.Analysis.ExpectedTransactions</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Contracts.Language.CSL.Analysis.ExpectedTransactions</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines very simple analysis for CSL clauses: return the set
+ of currently expected/accepted transactions. Since an atomic
+ obligation/permission may expect a potentially infinite set of transactions,
+ we collect such classes of transactions in <TT
+><A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3ATransactionPattern"
+>TransactionPattern</A
+></TT
+>s.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AETError"
+>ETError</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ARunTimeError"
+>RunTimeError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AIError"
+>IError</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATransactionPattern"
+>TransactionPattern</A
+>  = <A HREF="#v%3ATransactionPattern"
+>TransactionPattern</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtransactionPatternDescription"
+>transactionPatternDescription</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtransactionPatternKind"
+>transactionPatternKind</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3ATransactionKind"
+>TransactionKind</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtransactionPatternTransactionType"
+>transactionPatternTransactionType</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtransactionPatternConstraint"
+>transactionPatternConstraint</A
+> :: <A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3AConstraint"
+>Constraint</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtransactionPatternDeadline"
+>transactionPatternDeadline</A
+> :: (DateTime, DateTime)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATransactionKind"
+>TransactionKind</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ATKObligation"
+>TKObligation</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATKPermission"
+>TKPermission</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AConstraint"
+>Constraint</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AExp"
+>Exp</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-RecordFieldName.html#t%3ARecordFieldName"
+>RecordFieldName</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetTransactionPatterns"
+>getTransactionPatterns</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+> -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3AETError"
+>ETError</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> [<A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3ATransactionPattern"
+>TransactionPattern</A
+>])</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ETError"
+><A NAME="t%3AETError"
+></A
+></A
+><B
+>ETError</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The various errors the analysis can produce.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:RunTimeError"
+><A NAME="v%3ARunTimeError"
+></A
+></A
+><B
+>RunTimeError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>Unexpected runtime error (i.e., &quot;this should not happen&quot;).
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:IError"
+><A NAME="v%3AIError"
+></A
+></A
+><B
+>IError</B
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError"
+>IError</A
+></TD
+><TD CLASS="rdoc"
+>Interpretation error.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TransactionPattern"
+><A NAME="t%3ATransactionPattern"
+></A
+></A
+><B
+>TransactionPattern</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A transaction pattern represents a set of transactions.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TransactionPattern"
+><A NAME="v%3ATransactionPattern"
+></A
+></A
+><B
+>TransactionPattern</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:transactionPatternDescription"
+><A NAME="v%3AtransactionPatternDescription"
+></A
+></A
+><B
+>transactionPatternDescription</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>A text describing the set of transactions.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:transactionPatternKind"
+><A NAME="v%3AtransactionPatternKind"
+></A
+></A
+><B
+>transactionPatternKind</B
+> :: <A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3ATransactionKind"
+>TransactionKind</A
+></TD
+><TD CLASS="rdoc"
+>A transaction is a response to either an obligation or a permission.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:transactionPatternTransactionType"
+><A NAME="v%3AtransactionPatternTransactionType"
+></A
+></A
+><B
+>transactionPatternTransactionType</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+><TD CLASS="rdoc"
+>The transaction type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:transactionPatternConstraint"
+><A NAME="v%3AtransactionPatternConstraint"
+></A
+></A
+><B
+>transactionPatternConstraint</B
+> :: <A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3AConstraint"
+>Constraint</A
+></TD
+><TD CLASS="rdoc"
+>The constraint to fulfill.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:transactionPatternDeadline"
+><A NAME="v%3AtransactionPatternDeadline"
+></A
+></A
+><B
+>transactionPatternDeadline</B
+> :: (DateTime, DateTime)</TD
+><TD CLASS="rdoc"
+>The transaction deadline.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TransactionKind"
+><A NAME="t%3ATransactionKind"
+></A
+></A
+><B
+>TransactionKind</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A transaction is a response to either an obligation or a permission.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TKObligation"
+><A NAME="v%3ATKObligation"
+></A
+></A
+><B
+>TKObligation</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TKPermission"
+><A NAME="v%3ATKPermission"
+></A
+></A
+><B
+>TKPermission</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Constraint"
+><A NAME="t%3AConstraint"
+></A
+></A
+><B
+>Constraint</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AExp"
+>Exp</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-RecordFieldName.html#t%3ARecordFieldName"
+>RecordFieldName</A
+>))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>A constraint is an ordinary CSL expression extended with field names (but
+ omitting source code information).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getTransactionPatterns"
+><A NAME="v%3AgetTransactionPatterns"
+></A
+></A
+><B
+>getTransactionPatterns</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html#t%3AValueBindings"
+>ValueBindings</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+> -&gt; <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates"
+>ClauseTemplates</A
+> -&gt; DateTime -&gt; <A HREF="Poets-Contracts-Base.html#t%3AContract"
+>Contract</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3AETError"
+>ETError</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation"
+>Violation</A
+> [<A HREF="Poets-Contracts-Language-CSL-Analysis-ExpectedTransactions.html#t%3ATransactionPattern"
+>TransactionPattern</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Get a list of expected transactions for a given contract at a specified
+ point in time.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

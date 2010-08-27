@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.Interpreter</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><DIV CLASS="outer"
+><DIV CLASS="mini-topbar"
+>Poets.Contracts.Language.CSL.Interpreter</DIV
+><DIV CLASS="mini-synopsis"
+><DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIntEnvironment" TARGET="main"
+>IntEnvironment</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AClauseTemplates" TARGET="main"
+>ClauseTemplates</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AContractTemplates" TARGET="main"
+>ContractTemplates</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIM" TARGET="main"
+>IM</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AResult" TARGET="main"
+>Result</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AViolation" TARGET="main"
+>Violation</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Contracts-Language-CSL-Interpreter.html#t%3AIError" TARGET="main"
+>IError</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AlookupTemplate" TARGET="main"
+>lookupTemplate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AgetTransactionRouting" TARGET="main"
+>getTransactionRouting</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AsetTransactionRouting" TARGET="main"
+>setTransactionRouting</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AunwrapAgent" TARGET="main"
+>unwrapAgent</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Asec" TARGET="main"
+>sec</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AupdateClause" TARGET="main"
+>updateClause</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AevalCExpr" TARGET="main"
+>evalCExpr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AevalDeadline" TARGET="main"
+>evalDeadline</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AresultConjunction" TARGET="main"
+>resultConjunction</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AresultDisjunction" TARGET="main"
+>resultDisjunction</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AunfoldInstantiation" TARGET="main"
+>unfoldInstantiation</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AstepClause" TARGET="main"
+>stepClause</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AsubstCExpr" TARGET="main"
+>substCExpr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AsubstClause" TARGET="main"
+>substClause</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AsubstAgentClause" TARGET="main"
+>substAgentClause</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Ares" TARGET="main"
+>res</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AcreateContract" TARGET="main"
+>createContract</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3ArunTimeError" TARGET="main"
+>runTimeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AillegalUpdateTimeError" TARGET="main"
+>illegalUpdateTimeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AtemplateUndefError" TARGET="main"
+>templateUndefError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AunexpectedValueError" TARGET="main"
+>unexpectedValueError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AtemplateArgsError" TARGET="main"
+>templateArgsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AtemplateAgentArgsError" TARGET="main"
+>templateAgentArgsError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AroutingUnexpectedError" TARGET="main"
+>routingUnexpectedError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AroutingExpectedError" TARGET="main"
+>routingExpectedError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AroutingError" TARGET="main"
+>routingError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AcontractTemplateUndefinedError" TARGET="main"
+>contractTemplateUndefinedError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3AcontractTemplateTypeError" TARGET="main"
+>contractTemplateTypeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Amatch" TARGET="main"
+>match</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Aupdate" TARGET="main"
+>update</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Contracts-Language-CSL-Interpreter.html#v%3Ainstantiate" TARGET="main"
+>instantiate</A
+></DIV
+></DIV
+></DIV
+></BODY
+></HTML
+>

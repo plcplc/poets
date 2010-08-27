@@ -1,0 +1,2977 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.Inference</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-Inference.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.Inference</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module implements the type inference for the Parrot reporting
+ language.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVVarOcc"
+>VVarOcc</A
+>  = <A HREF="#v%3AVVarOcc"
+>VVarOcc</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AvarOccType"
+>varOccType</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AvarOccPos"
+>varOccPos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3AMonoEnv"
+>MonoEnv</A
+>  = <A HREF="#v%3AMonoEnv"
+>MonoEnv</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AunMonoEnv"
+>unMonoEnv</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AVVarOcc"
+>VVarOcc</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AemptyEnv"
+>emptyEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkEnv"
+>mkEnv</A
+> :: [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddToEnv"
+>addToEnv</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupEnv"
+>lookupEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetVarOcc"
+>getVarOcc</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AremoveFromEnv"
+>removeFromEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcombineEnvs"
+>combineEnvs</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AequateTypes"
+>equateTypes</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupEnvVars"
+>lookupEnvVars</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>, [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AInferRes"
+>InferRes</A
+>  = <A HREF="#v%3AInferRes"
+>InferRes</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AirConstrs"
+>irConstrs</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AirEnv"
+>irEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AirType"
+>irType</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunzipInferRes"
+>unzipInferRes</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; ([[<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>]], [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunzipInferRes%27"
+>unzipInferRes'</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AemptyRes"
+>emptyRes</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APolyEnv"
+>PolyEnv</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AInferState"
+>InferState</A
+>  = <A HREF="#v%3AInferState"
+>InferState</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AieRecords"
+>ieRecords</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AieNewRecords"
+>ieNewRecords</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AiePolyEnv"
+>iePolyEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3APolyEnv"
+>PolyEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AieFunTypes"
+>ieFunTypes</A
+> :: [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>)]</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3AInferM"
+>InferM</A
+> a = <A HREF="#v%3AInferM"
+>InferM</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AunInferM"
+>unInferM</A
+> :: StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferState"
+>InferState</A
+> (<A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarT"
+>FreshVarT</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+>) a</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunInferM"
+>runInferM</A
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> t -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> (t, [<A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+>], [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>)])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftTyErr"
+>liftTyErr</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetRecEnv"
+>getRecEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckRecDefined"
+>checkRecDefined</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddRec"
+>addRec</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckRecord"
+>checkRecord</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckField"
+>checkField</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupRecord"
+>lookupRecord</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Alocal%27"
+>local'</A
+> :: MonadState s m =&gt; (s -&gt; s) -&gt; m b -&gt; m b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddFunctionTyping"
+>addFunctionTyping</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AwithBinding"
+>withBinding</A
+> ::  (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupBinding"
+>lookupBinding</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArenamePolytype"
+>renamePolytype</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="#t%3AInferAlg"
+>InferAlg</A
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinferAlg"
+>inferAlg</A
+> :: f (<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Ainfer"
+>infer</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferAlg"
+>InferAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinferFun"
+>inferFun</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisTypeSchemeValid"
+>isTypeSchemeValid</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisTypeValid"
+>isTypeValid</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisTypeConstrValid"
+>isTypeConstrValid</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckDecl"
+>checkDecl</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclSugar"
+>DeclSugar</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckProg"
+>checkProg</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeProg"
+>typeProg</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> ([<A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+>], [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>)])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinferLam"
+>inferLam</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinferPrimOp"
+>inferPrimOp</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APrimOp"
+>PrimOp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinferOp"
+>inferOp</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinferOp%27"
+>inferOp'</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsimpType"
+>simpType</A
+> :: (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+> =&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsimpType%27"
+>simpType'</A
+> :: (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+> =&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmatchAndSimplify"
+>matchAndSimplify</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AoperatorType"
+>operatorType</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m) =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpSugar"
+>BinOpSugar</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AFunctionType"
+>FunctionType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AFunctionType"
+>FunctionType</A
+>  = <A HREF="#v%3AFunctionType"
+>FunctionType</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>] <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:VVarOcc"
+><A NAME="t%3AVVarOcc"
+></A
+></A
+><B
+>VVarOcc</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents an occurrences of a (value) variable in
+a parrot program 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VVarOcc"
+><A NAME="v%3AVVarOcc"
+></A
+></A
+><B
+>VVarOcc</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:varOccType"
+><A NAME="v%3AvarOccType"
+></A
+></A
+><B
+>varOccType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+>the (expected) type of the variable
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:varOccPos"
+><A NAME="v%3AvarOccPos"
+></A
+></A
+><B
+>varOccPos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>the position in the code
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:MonoEnv"
+><A NAME="t%3AMonoEnv"
+></A
+></A
+><B
+>MonoEnv</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Type for the environment for mono-typed variables, i.e. those
+bound in lambda abstractions (or as arguments in function
+definitions). 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:MonoEnv"
+><A NAME="v%3AMonoEnv"
+></A
+></A
+><B
+>MonoEnv</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:unMonoEnv"
+><A NAME="v%3AunMonoEnv"
+></A
+></A
+><B
+>unMonoEnv</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AVVarOcc"
+>VVarOcc</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:emptyEnv"
+><A NAME="v%3AemptyEnv"
+></A
+></A
+><B
+>emptyEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This represents an empty mono-environment, i.e. an environment
+with the empty set as its domain.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkEnv"
+><A NAME="v%3AmkEnv"
+></A
+></A
+><B
+>mkEnv</B
+> :: [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function creates a mono-environment from the given
+mono-typings.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addToEnv"
+><A NAME="v%3AaddToEnv"
+></A
+></A
+><B
+>addToEnv</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds the given mono-typing to the mono-environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupEnv"
+><A NAME="v%3AlookupEnv"
+></A
+></A
+><B
+>lookupEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function looks up the given (value) variable in the given
+mono-environment.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getVarOcc"
+><A NAME="v%3AgetVarOcc"
+></A
+></A
+><B
+>getVarOcc</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function picks one mono-typing from the given
+mono-environment and returns it. If the mono-environment is empty,
+<TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#v%3ANothing"
+>Nothing</A
+></TT
+> is returned. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:removeFromEnv"
+><A NAME="v%3AremoveFromEnv"
+></A
+></A
+><B
+>removeFromEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function removes the given (value) variable from the domain
+of the given mono-environment. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:combineEnvs"
+><A NAME="v%3AcombineEnvs"
+></A
+></A
+><B
+>combineEnvs</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function forms the union of the given list of
+mono-environments. The environments are assumed to be compatible (same
+(value) variables have the same type). 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:equateTypes"
+><A NAME="v%3AequateTypes"
+></A
+></A
+><B
+>equateTypes</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function takes a list of mono-environments and generates
+equations that equate types with common preimages. That is, two types
+t1, t2 are stipulated to be equal if there are two mono-environments
+e1, e2 and a (value) variable v s.t. e1 and e2 contain a mapping v:t1
+resp. v:t2. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupEnvVars"
+><A NAME="v%3AlookupEnvVars"
+></A
+></A
+><B
+>lookupEnvVars</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+> -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>, [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function looks up the type of each of the given variables in
+the given mono-environment. The result of this lookup operation is
+provided as a corresponding list of types. If a corresponding typing
+for a (value) variable is found, it is given in the result list and
+the typing is removed from the environment. Otherwise, a fresh type
+variable is generated for it instead. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:InferRes"
+><A NAME="t%3AInferRes"
+></A
+></A
+><B
+>InferRes</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents typings. In particular it represents the
+result of the type inference algorithm, which is then (supposed to be)
+the principal typing. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:InferRes"
+><A NAME="v%3AInferRes"
+></A
+></A
+><B
+>InferRes</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:irConstrs"
+><A NAME="v%3AirConstrs"
+></A
+></A
+><B
+>irConstrs</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>]</TD
+><TD CLASS="rdoc"
+>the list of generated constraints
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:irEnv"
+><A NAME="v%3AirEnv"
+></A
+></A
+><B
+>irEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+></TD
+><TD CLASS="rdoc"
+>the mono-environment needed for the inference
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:irType"
+><A NAME="v%3AirType"
+></A
+></A
+><B
+>irType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+>the inferred type (which is constrained by the generated constraints
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unzipInferRes"
+><A NAME="v%3AunzipInferRes"
+></A
+></A
+><B
+>unzipInferRes</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; ([[<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>]], [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function unzips a list of inference results, i.e. turns it
+into a tuple of list of the individual components of the inference
+results.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unzipInferRes'"
+><A NAME="v%3AunzipInferRes%27"
+></A
+></A
+><B
+>unzipInferRes'</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv"
+>MonoEnv</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AunzipInferRes"
+>unzipInferRes</A
+></TT
+> but it combines the
+list of list of constraints.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:emptyRes"
+><A NAME="v%3AemptyRes"
+></A
+></A
+><B
+>emptyRes</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns a inference result which is empty except for
+the given type, i.e. both the mono-environment and the list of
+constraints are empty. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:PolyEnv"
+><A NAME="t%3APolyEnv"
+></A
+></A
+><B
+>PolyEnv</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the environment for poly-typed variables,
+i.e. variables bound by let expressions and function
+definitions. Poly-types are represented type by inference results
+(i.e. typings) as variables bound by let expressions might be bound to
+expressions with free variables, which are then contained in the
+domain of the mono-environment or the poly-environment in the
+inference monad. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:InferState"
+><A NAME="t%3AInferState"
+></A
+></A
+><B
+>InferState</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This type represents the state of the inference monad.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:InferState"
+><A NAME="v%3AInferState"
+></A
+></A
+><B
+>InferState</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ieRecords"
+><A NAME="v%3AieRecords"
+></A
+></A
+><B
+>ieRecords</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+></TD
+><TD CLASS="rdoc"
+>the current record environment
+ list of records definitions generated (by record declarations in the parrot program)
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ieNewRecords"
+><A NAME="v%3AieNewRecords"
+></A
+></A
+><B
+>ieNewRecords</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:iePolyEnv"
+><A NAME="v%3AiePolyEnv"
+></A
+></A
+><B
+>iePolyEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3APolyEnv"
+>PolyEnv</A
+></TD
+><TD CLASS="rdoc"
+>the current poly-environment
+ list of type signatures generated (by function definitions in the parrot program)
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ieFunTypes"
+><A NAME="v%3AieFunTypes"
+></A
+></A
+><B
+>ieFunTypes</B
+> :: [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>)]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:InferM"
+><A NAME="t%3AInferM"
+></A
+></A
+><B
+>InferM</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This is the inference monad used in the implementation of the type
+inference algorithm for parrot. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:InferM"
+><A NAME="v%3AInferM"
+></A
+></A
+><B
+>InferM</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:unInferM"
+><A NAME="v%3AunInferM"
+></A
+></A
+><B
+>unInferM</B
+> :: StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferState"
+>InferState</A
+> (<A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarT"
+>FreshVarT</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+>) a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runInferM"
+><A NAME="v%3ArunInferM"
+></A
+></A
+><B
+>runInferM</B
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> t -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> (t, [<A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+>], [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>)])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function runs an inference monad type by providing a record
+environment to it. It returns the list of records and a list of
+signatures of top-level defined functions that were generated during
+the inference. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftTyErr"
+><A NAME="v%3AliftTyErr"
+></A
+></A
+><B
+>liftTyErr</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getRecEnv"
+><A NAME="v%3AgetRecEnv"
+></A
+></A
+><B
+>getRecEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the current record environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkRecDefined"
+><A NAME="v%3AcheckRecDefined"
+></A
+></A
+><B
+>checkRecDefined</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function checks whether the given record is defined. If not,
+a type error is raised.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addRec"
+><A NAME="v%3AaddRec"
+></A
+></A
+><B
+>addRec</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds a record definition to the inference monad
+(i.e. it is added both to the record environment and the list of
+generated record definitions. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkRecord"
+><A NAME="v%3AcheckRecord"
+></A
+></A
+><B
+>checkRecord</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This function checks whether the given record is well-defined in
+the context of the give record environment. This includes checking
+that
+</P
+><UL
+><LI
+> it is not yet defined already,
+</LI
+><LI
+> its super type (if present) is defined,
+</LI
+><LI
+> it does not contain duplicate definitions of fields,
+</LI
+><LI
+> it does not redefine fields that are already defined in its
+    supertype (if present), and
+</LI
+><LI
+> its fields are well-defined (cf. <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckField"
+>checkField</A
+></TT
+>).
+</LI
+></UL
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkField"
+><A NAME="v%3AcheckField"
+></A
+></A
+><B
+>checkField</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function checks whether the field of a record is
+well-defined. This includes checking whether record types mentioned in
+the type declaration are defined and are not a supertype of the
+field's record (in order to exclude recursive data types).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupRecord"
+><A NAME="v%3AlookupRecord"
+></A
+></A
+><B
+>lookupRecord</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function looks up the given record name in the current record
+environment. It returns the corresponding field environment or
+generates an error indicating that the requested record name is not
+defined.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:local'"
+><A NAME="v%3Alocal%27"
+></A
+></A
+><B
+>local'</B
+> :: MonadState s m =&gt; (s -&gt; s) -&gt; m b -&gt; m b</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function emulates the local function of the MonadReader
+class in the <TT
+>MonadState</TT
+> class. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addFunctionTyping"
+><A NAME="v%3AaddFunctionTyping"
+></A
+></A
+><B
+>addFunctionTyping</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function add the given typed function identifier to the
+inference state. This also includes adding this binding to the
+poly-environment (see <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AwithBinding"
+>withBinding</A
+></TT
+> and
+<TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AlookupBinding"
+>lookupBinding</A
+></TT
+>). 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:withBinding"
+><A NAME="v%3AwithBinding"
+></A
+></A
+><B
+>withBinding</B
+> ::  (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function binds the given (value) variable to the given
+polytype with context in the given inference monad. This function is
+supposed to be used to implement let polymorphism. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupBinding"
+><A NAME="v%3AlookupBinding"
+></A
+></A
+><B
+>lookupBinding</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function looks up the given identifier in the current
+poly-environment.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:renamePolytype"
+><A NAME="v%3ArenamePolytype"
+></A
+></A
+><B
+>renamePolytype</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This function renames the free variables in the given polytype
+using fresh type variables. Type variables occurring in the
+mono-environment of the poly-type are considered bound.
+</P
+><P
+>NB: I think variables in the mono-environment are not considered
+bound, and have to be renamed as well!  - No, actually, that is okay,
+since bound variables are renamed apart. 
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A NAME="t:InferAlg"
+><A NAME="t%3AInferAlg"
+></A
+></A
+><B
+>InferAlg</B
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This class declares the algebra type inference. 
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:inferAlg"
+><A NAME="v%3AinferAlg"
+></A
+></A
+><B
+>inferAlg</B
+> :: f (<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the signature for the type inference algebra. 
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:infer"
+><A NAME="v%3Ainfer"
+></A
+></A
+><B
+>infer</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferAlg"
+>InferAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function defines the catamorphism induced by the inference
+algebra. That is, it executes the type inference algorithm on an
+(appropriate) expression. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inferFun"
+><A NAME="v%3AinferFun"
+></A
+></A
+><B
+>inferFun</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function infers the principal type of the function given by
+the list of its argument variables and its body (expression).  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isTypeSchemeValid"
+><A NAME="v%3AisTypeSchemeValid"
+></A
+></A
+><B
+>isTypeSchemeValid</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isTypeValid"
+><A NAME="v%3AisTypeValid"
+></A
+></A
+><B
+>isTypeValid</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isTypeConstrValid"
+><A NAME="v%3AisTypeConstrValid"
+></A
+></A
+><B
+>isTypeConstrValid</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkDecl"
+><A NAME="v%3AcheckDecl"
+></A
+></A
+><B
+>checkDecl</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclSugar"
+>DeclSugar</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function type checks the given top-level declaration. For
+record definitions it checks whether the definition is
+well-formed. For function definitions, it infers the type of the
+function and checks whether the inferred principal type is more
+general than the one provided as a type signature for it (if there is
+given one). The defined record resp. function is then added to the
+environment. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkProg"
+><A NAME="v%3AcheckProg"
+></A
+></A
+><B
+>checkProg</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function type checks the given Parrot program. This is done
+by applying <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckDecl"
+>checkDecl</A
+></TT
+> to each top-level declaration of the program.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeProg"
+><A NAME="v%3AtypeProg"
+></A
+></A
+><B
+>typeProg</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> ([<A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecord"
+>ExtRecord</A
+>], [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+>)])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function type checks the given Parrot program. On success it
+returns the record types declared in the module as well as the typed
+functions. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inferLam"
+><A NAME="v%3AinferLam"
+></A
+></A
+><B
+>inferLam</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function infers the type of an lambda abstraction given the
+principal typing of the body of the lambda abstraction and the list of
+the variables that it abstracts from.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inferPrimOp"
+><A NAME="v%3AinferPrimOp"
+></A
+></A
+><B
+>inferPrimOp</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APrimOp"
+>PrimOp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inferOp"
+><A NAME="v%3AinferOp"
+></A
+></A
+><B
+>inferOp</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function performs type inference for an operator. Informally
+speaking, for an n-ary operator <TT
+>op</TT
+> of type <TT
+>cs =&gt; t1 -&gt; ... -&gt; tn -&gt;
+t</TT
+>, the type of the expression <TT
+>op e1 ... en</TT
+> is inferred by <TT
+>inverOp
+[r1,..,rn] cs [t1,...,tn] t</TT
+>, where <TT
+>ri</TT
+> is the inferred principal
+typing of <TT
+>ei</TT
+>. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:inferOp'"
+><A NAME="v%3AinferOp%27"
+></A
+></A
+><B
+>inferOp'</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AinferOp"
+>inferOp</A
+></TT
+>, but instead of a list of
+principal typings it takes a list of inference monads returning a
+principal typing. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:simpType"
+><A NAME="v%3AsimpType"
+></A
+></A
+><B
+>simpType</B
+> :: (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+> =&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function takes a type constant (e.g. <TT
+><A HREF="Poets-Data-Type.html#v%3ATInt"
+>TInt</A
+></TT
+>, <TT
+><A HREF="Poets-Data-Type.html#v%3ATRecord"
+>TRecord</A
+></TT
+> etc.)
+and returns a typing of that type with empty constraint set and
+mono-environment. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:simpType'"
+><A NAME="v%3AsimpType%27"
+></A
+></A
+><B
+>simpType'</B
+> :: (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+> =&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes"
+>InferRes</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function takes a type constant (e.g. <TT
+><A HREF="Poets-Data-Type.html#v%3ATInt"
+>TInt</A
+></TT
+>, <TT
+><A HREF="Poets-Data-Type.html#v%3ATRecord"
+>TRecord</A
+></TT
+> etc.)
+and returns a typing with a fresh type variable <TT
+>v</TT
+> as type, a single
+constraint stipulating that <TT
+>v</TT
+> is a supertype of the given type
+constant. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:matchAndSimplify"
+><A NAME="v%3AmatchAndSimplify"
+></A
+></A
+><B
+>matchAndSimplify</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM"
+>InferM</A
+> ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function at first performs the <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#v%3Amatch"
+>match</A
+></TT
+> algorithm on the given
+list of constraints and subsequently simplifies the result. The result
+of this transformation is returned along with the substitution which
+was effectively applied to the constraints. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:operatorType"
+><A NAME="v%3AoperatorType"
+></A
+></A
+><B
+>operatorType</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m) =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpSugar"
+>BinOpSugar</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AFunctionType"
+>FunctionType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns the (function) type for a given binary
+operator. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:FunctionType"
+><A NAME="t%3AFunctionType"
+></A
+></A
+><B
+>FunctionType</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type is used to pass function types around 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:FunctionType"
+><A NAME="v%3AFunctionType"
+></A
+></A
+><B
+>FunctionType</B
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>] <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

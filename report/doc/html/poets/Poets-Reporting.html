@@ -1,0 +1,1319 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Reporting engine of POETS
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AReports"
+>Reports</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AReportEngine"
+>ReportEngine</A
+>  = <A HREF="#v%3AReportEngine"
+>ReportEngine</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArepEventLog"
+>repEventLog</A
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArepReports"
+>repReports</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="Poets-Reporting.html#t%3AReports"
+>Reports</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArepConfig"
+>repConfig</A
+> :: <A HREF="Poets-Config.html#t%3AReportsConfig"
+>ReportsConfig</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArepRecordEnv"
+>repRecordEnv</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArepCounter"
+>repCounter</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AQueryException"
+>QueryException</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AReportNotFound"
+>ReportNotFound</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AIllTypedArgument"
+>IllTypedArgument</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AReportFunctionError"
+>ReportFunctionError</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftIllTypedArgument"
+>liftIllTypedArgument</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting.html#t%3AQueryException"
+>QueryException</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftReportFunctionError"
+>liftReportFunctionError</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting.html#t%3AQueryException"
+>QueryException</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddReport"
+>addReport</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportSpec"
+>ReportSpec</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AremoveReport"
+>removeReport</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlistReports"
+>listReports</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> [<A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetReportNames"
+>getReportNames</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetReportModule"
+>getReportModule</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AqueryReport"
+>queryReport</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; [<A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>] -&gt; [<A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting.html#t%3AQueryException"
+>QueryException</A
+> <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckArgTypes"
+>checkArgTypes</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; [<A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+>] -&gt; [<A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+>] -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AwriteReportSpec"
+>writeReportSpec</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportSpec"
+>ReportSpec</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AremoveReportDecl"
+>removeReportDecl</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreadReportDecls"
+>readReportDecls</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AloadReportDecls"
+>loadReportDecls</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+>, <A HREF="Poets-Reporting.html#t%3AReports"
+>Reports</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreportDeclPath"
+>reportDeclPath</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AstopReportEngine"
+>stopReportEngine</A
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateReportEngine"
+>createReportEngine</A
+> :: <A HREF="Poets-Config.html#t%3AReportsConfig"
+>ReportsConfig</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Reports"
+><A NAME="t%3AReports"
+></A
+></A
+><B
+>Reports</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the type of the in memory report repository.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ReportEngine"
+><A NAME="t%3AReportEngine"
+></A
+></A
+><B
+>ReportEngine</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This type represents a handle to a reporting engine.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportEngine"
+><A NAME="v%3AReportEngine"
+></A
+></A
+><B
+>ReportEngine</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:repEventLog"
+><A NAME="v%3ArepEventLog"
+></A
+></A
+><B
+>repEventLog</B
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:repReports"
+><A NAME="v%3ArepReports"
+></A
+></A
+><B
+>repReports</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="Poets-Reporting.html#t%3AReports"
+>Reports</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:repConfig"
+><A NAME="v%3ArepConfig"
+></A
+></A
+><B
+>repConfig</B
+> :: <A HREF="Poets-Config.html#t%3AReportsConfig"
+>ReportsConfig</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:repRecordEnv"
+><A NAME="v%3ArepRecordEnv"
+></A
+></A
+><B
+>repRecordEnv</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:repCounter"
+><A NAME="v%3ArepCounter"
+></A
+></A
+><B
+>repCounter</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:QueryException"
+><A NAME="t%3AQueryException"
+></A
+></A
+><B
+>QueryException</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This type represents exceptions that may occur when querying a report.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportNotFound"
+><A NAME="v%3AReportNotFound"
+></A
+></A
+><B
+>ReportNotFound</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:IllTypedArgument"
+><A NAME="v%3AIllTypedArgument"
+></A
+></A
+><B
+>IllTypedArgument</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportFunctionError"
+><A NAME="v%3AReportFunctionError"
+></A
+></A
+><B
+>ReportFunctionError</B
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftIllTypedArgument"
+><A NAME="v%3AliftIllTypedArgument"
+></A
+></A
+><B
+>liftIllTypedArgument</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting.html#t%3AQueryException"
+>QueryException</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftReportFunctionError"
+><A NAME="v%3AliftReportFunctionError"
+></A
+></A
+><B
+>liftReportFunctionError</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting.html#t%3AQueryException"
+>QueryException</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addReport"
+><A NAME="v%3AaddReport"
+></A
+></A
+><B
+>addReport</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+></TD
+><TD CLASS="rdoc"
+>reporting engine
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportSpec"
+>ReportSpec</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function adds the given report to the reporting engine.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:removeReport"
+><A NAME="v%3AremoveReport"
+></A
+></A
+><B
+>removeReport</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+></TD
+><TD CLASS="rdoc"
+>reporting engine
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+></TD
+><TD CLASS="rdoc"
+>name of the report to remove
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function removes the given report from the reporting engine.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:listReports"
+><A NAME="v%3AlistReports"
+></A
+></A
+><B
+>listReports</B
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> [<A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function lists all reports registered in the given reporting engine.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getReportNames"
+><A NAME="v%3AgetReportNames"
+></A
+></A
+><B
+>getReportNames</B
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function lists all reports registered in the given reporting engine.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getReportModule"
+><A NAME="v%3AgetReportModule"
+></A
+></A
+><B
+>getReportModule</B
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the report module for the given report name. If no
+  report is registered under this name <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#v%3ANothing"
+>Nothing</A
+></TT
+> is returned.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:queryReport"
+><A NAME="v%3AqueryReport"
+></A
+></A
+><B
+>queryReport</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+></TD
+><TD CLASS="rdoc"
+>the reporting engine
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+></TD
+><TD CLASS="rdoc"
+>the name of the report that should be queried
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; [<A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>]</TD
+><TD CLASS="rdoc"
+>list of additional events to supply to the reporting function
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; [<A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+>]</TD
+><TD CLASS="rdoc"
+>list of arguments for the report
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting.html#t%3AQueryException"
+>QueryException</A
+> <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+>)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function queries the given report by supplying the given list of additional events
+  as well as the given list of arguments.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkArgTypes"
+><A NAME="v%3AcheckArgTypes"
+></A
+></A
+><B
+>checkArgTypes</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; [<A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+>] -&gt; [<A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+>] -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function checks whether each element of the given list of
+values has the right type according to the given list of expected
+types. If not, including the case that the two lists have different
+lengths, an error message is issued through the monad. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:writeReportSpec"
+><A NAME="v%3AwriteReportSpec"
+></A
+></A
+><B
+>writeReportSpec</B
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportSpec"
+>ReportSpec</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function writes the report declaration of the given report into the repository
+  of the given report engine
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:removeReportDecl"
+><A NAME="v%3AremoveReportDecl"
+></A
+></A
+><B
+>removeReportDecl</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function removes the report declaration file of the given report from
+  the repository of the given report engine.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:readReportDecls"
+><A NAME="v%3AreadReportDecls"
+></A
+></A
+><B
+>readReportDecls</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function reads all report declarations in the given repository. It returns
+  a list of pairs containing the report declaration and the corresponding report id.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:loadReportDecls"
+><A NAME="v%3AloadReportDecls"
+></A
+></A
+><B
+>loadReportDecls</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+>, <A HREF="Poets-Reporting.html#t%3AReports"
+>Reports</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function loads reads the report declarations in the given report
+  repository and subsequently compiles and loads the report declarations.
+  It returns the new report id counter and the loaded reports.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:reportDeclPath"
+><A NAME="v%3AreportDeclPath"
+></A
+></A
+><B
+>reportDeclPath</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportName"
+>ReportName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the file path for the report declaration with the given
+  report id in the given report repository.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:stopReportEngine"
+><A NAME="v%3AstopReportEngine"
+></A
+></A
+><B
+>stopReportEngine</B
+> :: <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createReportEngine"
+><A NAME="v%3AcreateReportEngine"
+></A
+></A
+><B
+>createReportEngine</B
+> :: <A HREF="Poets-Config.html#t%3AReportsConfig"
+>ReportsConfig</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="Poets-Reporting.html#t%3AReportEngine"
+>ReportEngine</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function spawns a reporting engine with the given event log and type environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

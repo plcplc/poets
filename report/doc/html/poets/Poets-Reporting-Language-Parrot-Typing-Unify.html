@@ -1,0 +1,739 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.Unify</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-Unify.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.Unify</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function implements the Martelli-Montanari unification
+ algorithm for type terms.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AEquation"
+>Equation</A
+> = (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AEquations"
+>Equations</A
+> = [<A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Alunify"
+>lunify</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aunify"
+>unify</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AUnifyState"
+>UnifyState</A
+>  = <A HREF="#v%3AUnifyState"
+>UnifyState</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AusEqs"
+>usEqs</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AusSubst"
+>usSubst</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AUnifyM"
+>UnifyM</A
+> m a = StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyState"
+>UnifyState</A
+> m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunUnifyM"
+>runUnifyM</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AwithNextEq"
+>withNextEq</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AputEqs"
+>putEqs</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AputBinding"
+>putBinding</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunLeftUnify"
+>runLeftUnify</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlunifyStep"
+>lunifyStep</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunUnify"
+>runUnify</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunifyStep"
+>unifyStep</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Equation"
+><A NAME="t%3AEquation"
+></A
+></A
+><B
+>Equation</B
+> = (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Equations"
+><A NAME="t%3AEquations"
+></A
+></A
+><B
+>Equations</B
+> = [<A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lunify"
+><A NAME="v%3Alunify"
+></A
+></A
+><B
+>lunify</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns the most general unifier of the given
+equations, considering the variables in the right-hand sides of the
+equations as constants. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unify"
+><A NAME="v%3Aunify"
+></A
+></A
+><B
+>unify</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns the most general unifier of the given
+equations using the algorithm of Martelli and Montanari. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:UnifyState"
+><A NAME="t%3AUnifyState"
+></A
+></A
+><B
+>UnifyState</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:UnifyState"
+><A NAME="v%3AUnifyState"
+></A
+></A
+><B
+>UnifyState</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:usEqs"
+><A NAME="v%3AusEqs"
+></A
+></A
+><B
+>usEqs</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:usSubst"
+><A NAME="v%3AusSubst"
+></A
+></A
+><B
+>usSubst</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:UnifyM"
+><A NAME="t%3AUnifyM"
+></A
+></A
+><B
+>UnifyM</B
+> m a = StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyState"
+>UnifyState</A
+> m a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runUnifyM"
+><A NAME="v%3ArunUnifyM"
+></A
+></A
+><B
+>runUnifyM</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:withNextEq"
+><A NAME="v%3AwithNextEq"
+></A
+></A
+><B
+>withNextEq</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:putEqs"
+><A NAME="v%3AputEqs"
+></A
+></A
+><B
+>putEqs</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquations"
+>Equations</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:putBinding"
+><A NAME="v%3AputBinding"
+></A
+></A
+><B
+>putBinding</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runLeftUnify"
+><A NAME="v%3ArunLeftUnify"
+></A
+></A
+><B
+>runLeftUnify</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lunifyStep"
+><A NAME="v%3AlunifyStep"
+></A
+></A
+><B
+>lunifyStep</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runUnify"
+><A NAME="v%3ArunUnify"
+></A
+></A
+><B
+>runUnify</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unifyStep"
+><A NAME="v%3AunifyStep"
+></A
+></A
+><B
+>unifyStep</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AEquation"
+>Equation</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Unify.html#t%3AUnifyM"
+>UnifyM</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

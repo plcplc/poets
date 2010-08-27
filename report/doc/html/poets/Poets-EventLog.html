@@ -1,0 +1,1803 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.EventLog</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-EventLog.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.EventLog</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Event log for the POETS system.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AEvent"
+>Event</A
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AeventSuperClass"
+>eventSuperClass</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeCheckEvent"
+>typeCheckEvent</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AEventLog"
+>EventLog</A
+>  = <A HREF="#v%3AEventLog"
+>EventLog</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogHead"
+>logHead</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>)</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogTail"
+>logTail</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>))</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogLock"
+>logLock</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Concurrent-MVar.html#t%3AMVar"
+>MVar</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogFile"
+>logFile</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/GHC-IO-Handle.html#t%3AHandle"
+>Handle</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogConfig"
+>logConfig</A
+> :: <A HREF="Poets-Config.html#t%3AEventsConfig"
+>EventsConfig</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogActive"
+>logActive</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AlogFlushThread"
+>logFlushThread</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Concurrent.html#t%3AThreadId"
+>ThreadId</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ANode"
+>Node</A
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ANode"
+>Node</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnodeValue"
+>nodeValue</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnodeNext"
+>nodeNext</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnodePrev"
+>nodePrev</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AHead"
+>Head</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnodeNext"
+>nodeNext</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATail"
+>Tail</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnodePrev"
+>nodePrev</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlogEvent"
+>logEvent</A
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreadLogFileToList"
+>readLogFileToList</A
+> :: <A HREF="Poets-Config.html#t%3AEventsConfig"
+>EventsConfig</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddToList"
+>addToList</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a) -&gt; a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3ALListClass"
+>LListClass</A
+> l  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A_foldlL"
+>_foldlL</A
+> ::  (b -&gt; a -&gt; b) -&gt; b -&gt; l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> b</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A_foldrL"
+>_foldrL</A
+> ::  (a -&gt; b -&gt; b) -&gt; b -&gt; l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> b</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A_tailL"
+>_tailL</A
+> ::  l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a))</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3A_headL"
+>_headL</A
+> ::  l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> a)</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALList"
+>LList</A
+> a = <SPAN CLASS="keyword"
+>forall</SPAN
+> l . <A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l =&gt; <A HREF="#v%3ALList"
+>LList</A
+> (l a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALListConcat"
+>LListConcat</A
+> a = <SPAN CLASS="keyword"
+>forall</SPAN
+> l l' . (<A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l, <A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l') =&gt; <A HREF="#v%3ALListConcat"
+>LListConcat</A
+> (l a) (l' a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldrL"
+>foldrL</A
+> ::  (a -&gt; b -&gt; b) -&gt; b -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfoldlL"
+>foldlL</A
+> ::  (b -&gt; a -&gt; b) -&gt; b -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALListMap"
+>LListMap</A
+> b = <SPAN CLASS="keyword"
+>forall</SPAN
+> a l . <A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l =&gt; <A HREF="#v%3ALListMap"
+>LListMap</A
+> (l a) (a -&gt; b)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmapL"
+>mapL</A
+> ::  (a -&gt; b) -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtoLList"
+>toLList</A
+> ::  [a] -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromLList"
+>fromLList</A
+> ::  <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; [a]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconcatL"
+>concatL</A
+> ::  <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ANodeList"
+>NodeList</A
+> a = <A HREF="#v%3ANodeList"
+>NodeList</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnlHead"
+>nlHead</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AnlTail"
+>nlTail</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetEvents"
+>getEvents</A
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetEvents%27"
+>getEvents'</A
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> [<A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AstopLog"
+>stopLog</A
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcreateLog"
+>createLog</A
+> :: <A HREF="Poets-Config.html#t%3AEventsConfig"
+>EventsConfig</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Event"
+><A NAME="t%3AEvent"
+></A
+></A
+><B
+>Event</B
+> = <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>An event is a POETS record value, which is a sub class of the
+ <TT
+><A HREF="Poets-EventLog.html#v%3AeventSuperClass"
+>eventSuperClass</A
+></TT
+> class.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:eventSuperClass"
+><A NAME="v%3AeventSuperClass"
+></A
+></A
+><B
+>eventSuperClass</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The super class for events.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeCheckEvent"
+><A NAME="v%3AtypeCheckEvent"
+></A
+></A
+><B
+>typeCheckEvent</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+></TD
+><TD CLASS="rdoc"
+>The record typing environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+></TD
+><TD CLASS="rdoc"
+>The event to type check.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Type check a POETS event w.r.t. the supplied record typing environment.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:EventLog"
+><A NAME="t%3AEventLog"
+></A
+></A
+><B
+>EventLog</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Abstract data type representing a running event log.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:EventLog"
+><A NAME="v%3AEventLog"
+></A
+></A
+><B
+>EventLog</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:logHead"
+><A NAME="v%3AlogHead"
+></A
+></A
+><B
+>logHead</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:logTail"
+><A NAME="v%3AlogTail"
+></A
+></A
+><B
+>logTail</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:logLock"
+><A NAME="v%3AlogLock"
+></A
+></A
+><B
+>logLock</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Concurrent-MVar.html#t%3AMVar"
+>MVar</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:logFile"
+><A NAME="v%3AlogFile"
+></A
+></A
+><B
+>logFile</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/GHC-IO-Handle.html#t%3AHandle"
+>Handle</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:logConfig"
+><A NAME="v%3AlogConfig"
+></A
+></A
+><B
+>logConfig</B
+> :: <A HREF="Poets-Config.html#t%3AEventsConfig"
+>EventsConfig</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:logActive"
+><A NAME="v%3AlogActive"
+></A
+></A
+><B
+>logActive</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:logFlushThread"
+><A NAME="v%3AlogFlushThread"
+></A
+></A
+><B
+>logFlushThread</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Concurrent.html#t%3AThreadId"
+>ThreadId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Node"
+><A NAME="t%3ANode"
+></A
+></A
+><B
+>Node</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents a node in a (doubly) linked list.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Node"
+><A NAME="v%3ANode"
+></A
+></A
+><B
+>Node</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:nodeValue"
+><A NAME="v%3AnodeValue"
+></A
+></A
+><B
+>nodeValue</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:nodeNext"
+><A NAME="v%3AnodeNext"
+></A
+></A
+><B
+>nodeNext</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:nodePrev"
+><A NAME="v%3AnodePrev"
+></A
+></A
+><B
+>nodePrev</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Head"
+><A NAME="v%3AHead"
+></A
+></A
+><B
+>Head</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:nodeNext"
+><A NAME="v%3AnodeNext"
+></A
+></A
+><B
+>nodeNext</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Tail"
+><A NAME="v%3ATail"
+></A
+></A
+><B
+>Tail</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:nodePrev"
+><A NAME="v%3AnodePrev"
+></A
+></A
+><B
+>nodePrev</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:logEvent"
+><A NAME="v%3AlogEvent"
+></A
+></A
+><B
+>logEvent</B
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function logs an event in the event log. It assumes that the event has
+  been type checked.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:readLogFileToList"
+><A NAME="v%3AreadLogFileToList"
+></A
+></A
+><B
+>readLogFileToList</B
+> :: <A HREF="Poets-Config.html#t%3AEventsConfig"
+>EventsConfig</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function reads the events stored in the given file to the given
+  tail of a list and returns the tail of the new list. All events are
+  typechecked w.r.t. the supplied record typing environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addToList"
+><A NAME="v%3AaddToList"
+></A
+></A
+><B
+>addToList</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a) -&gt; a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds the given element to the given tail of the list
+  and returns the new tail of the list.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t:LListClass"
+><A NAME="t%3ALListClass"
+></A
+></A
+><B
+>LListClass</B
+> l  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:_foldlL"
+><A NAME="v%3A_foldlL"
+></A
+></A
+><B
+>_foldlL</B
+> ::  (b -&gt; a -&gt; b) -&gt; b -&gt; l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:_foldrL"
+><A NAME="v%3A_foldrL"
+></A
+></A
+><B
+>_foldrL</B
+> ::  (a -&gt; b -&gt; b) -&gt; b -&gt; l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> b</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:_tailL"
+><A NAME="v%3A_tailL"
+></A
+></A
+><B
+>_tailL</B
+> ::  l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:_headL"
+><A NAME="v%3A_headL"
+></A
+></A
+><B
+>_headL</B
+> ::  l a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> a)</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:LList"
+><A NAME="t%3ALList"
+></A
+></A
+><B
+>LList</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><SPAN CLASS="keyword"
+>forall</SPAN
+> l . <A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l =&gt; <A NAME="v:LList"
+><A NAME="v%3ALList"
+></A
+></A
+><B
+>LList</B
+> (l a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:LListConcat"
+><A NAME="t%3ALListConcat"
+></A
+></A
+><B
+>LListConcat</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><SPAN CLASS="keyword"
+>forall</SPAN
+> l l' . (<A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l, <A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l') =&gt; <A NAME="v:LListConcat"
+><A NAME="v%3ALListConcat"
+></A
+></A
+><B
+>LListConcat</B
+> (l a) (l' a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldrL"
+><A NAME="v%3AfoldrL"
+></A
+></A
+><B
+>foldrL</B
+> ::  (a -&gt; b -&gt; b) -&gt; b -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:foldlL"
+><A NAME="v%3AfoldlL"
+></A
+></A
+><B
+>foldlL</B
+> ::  (b -&gt; a -&gt; b) -&gt; b -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; b</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:LListMap"
+><A NAME="t%3ALListMap"
+></A
+></A
+><B
+>LListMap</B
+> b </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><SPAN CLASS="keyword"
+>forall</SPAN
+> a l . <A HREF="Poets-EventLog.html#t%3ALListClass"
+>LListClass</A
+> l =&gt; <A NAME="v:LListMap"
+><A NAME="v%3ALListMap"
+></A
+></A
+><B
+>LListMap</B
+> (l a) (a -&gt; b)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mapL"
+><A NAME="v%3AmapL"
+></A
+></A
+><B
+>mapL</B
+> ::  (a -&gt; b) -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> b</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toLList"
+><A NAME="v%3AtoLList"
+></A
+></A
+><B
+>toLList</B
+> ::  [a] -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromLList"
+><A NAME="v%3AfromLList"
+></A
+></A
+><B
+>fromLList</B
+> ::  <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; [a]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:concatL"
+><A NAME="v%3AconcatL"
+></A
+></A
+><B
+>concatL</B
+> ::  <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a -&gt; <A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:NodeList"
+><A NAME="t%3ANodeList"
+></A
+></A
+><B
+>NodeList</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:NodeList"
+><A NAME="v%3ANodeList"
+></A
+></A
+><B
+>NodeList</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:nlHead"
+><A NAME="v%3AnlHead"
+></A
+></A
+><B
+>nlHead</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:nlTail"
+><A NAME="v%3AnlTail"
+></A
+></A
+><B
+>nlTail</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-IORef.html#t%3AIORef"
+>IORef</A
+> (<A HREF="Poets-EventLog.html#t%3ANode"
+>Node</A
+> a)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getEvents"
+><A NAME="v%3AgetEvents"
+></A
+></A
+><B
+>getEvents</B
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="Poets-EventLog.html#t%3ALList"
+>LList</A
+> <A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns an LList containing a the current events of 
+  the given event log.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getEvents'"
+><A NAME="v%3AgetEvents%27"
+></A
+></A
+><B
+>getEvents'</B
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> [<A HREF="Poets-EventLog.html#t%3AEvent"
+>Event</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns a lazy list containing a the current events of 
+  the given event log.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:stopLog"
+><A NAME="v%3AstopLog"
+></A
+></A
+><B
+>stopLog</B
+> :: <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This function performs a left associative fold on the event log.
+- }
+</P
+><P
+>foldlLog :: EventLog -&gt; (a -&gt; Event -&gt; a) -&gt; a -&gt; IO a
+foldlLog EventLog{logHead = headR} op val = foldNode headR val
+    where foldNode headR val = do
+            head &lt;- readIORef headR
+            case head of
+              Node {nodeValue = nVal, nodeNext = next} -&gt;
+                  foldNode next (val op nVal)                        
+              Tail {} -&gt; return val
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:createLog"
+><A NAME="v%3AcreateLog"
+></A
+></A
+><B
+>createLog</B
+> :: <A HREF="Poets-Config.html#t%3AEventsConfig"
+>EventsConfig</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="Poets-EventLog.html#t%3AEventLog"
+>EventLog</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function creates a new event log.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,0 +1,1852 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.Match</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-Match.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.Match</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module implements a match algorithm according to Fuh and
+ Mishra [Theor. Comp. Sci. 73 (1990) 155-175]
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ASubTypeConstr"
+>SubTypeConstr</A
+>  = <A HREF="#v%3ASubTypeConstr"
+>SubTypeConstr</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>  = <A HREF="#v%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AEquivValue"
+>EquivValue</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AEquivDesc"
+>EquivDesc</A
+> = (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcombineEquivDesc"
+>combineEquivDesc</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmakeEquivDesc"
+>makeEquivDesc</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivValue"
+>EquivValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AMatchLog"
+>MatchLog</A
+> = [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AMatchState"
+>MatchState</A
+>  = <A HREF="#v%3AMatchState"
+>MatchState</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AmsSubst"
+>msSubst</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AmsWorkingSet"
+>msWorkingSet</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AMatchEnv"
+>MatchEnv</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AMatchM"
+>MatchM</A
+> a = <SPAN CLASS="keyword"
+>forall</SPAN
+> s m. (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchT"
+>MatchT</A
+> s m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AMatchT"
+>MatchT</A
+> s m = EquivT s <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivValue"
+>EquivValue</A
+> (ReaderT <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchEnv"
+>MatchEnv</A
+> (StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchState"
+>MatchState</A
+> (WriterT <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchLog"
+>MatchLog</A
+> m)))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunMatchT"
+>runMatchT</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>] -&gt; (<SPAN CLASS="keyword"
+>forall</SPAN
+> s.  <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchT"
+>MatchT</A
+> s m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>) -&gt; m ([<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddSubConstr"
+>addSubConstr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddSubConstr%27"
+>addSubConstr'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetWorkingSet"
+>getWorkingSet</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AputWorkingSet"
+>putWorkingSet</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetSubst"
+>getSubst</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AputSubst"
+>putSubst</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnextConstr"
+>nextConstr</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddToWorkingSet"
+>addToWorkingSet</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AwithConstrPos"
+>withConstrPos</A
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetConstrPos"
+>getConstrPos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Amatch"
+>match</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; m ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Amatch%27"
+>match'</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>] -&gt; m ([<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdecompSubTypeConstr"
+>decompSubTypeConstr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+> -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmatchM"
+>matchM</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmatchM%27"
+>matchM'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeErr%27"
+>typeErr'</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsubtypeErr"
+>subtypeErr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVariance"
+>Variance</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AContravariant"
+>Contravariant</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACovariant"
+>Covariant</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArevVar"
+>revVar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AbuildBinding"
+>buildBinding</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AputBindings"
+>putBindings</A
+> :: [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:SubTypeConstr"
+><A NAME="t%3ASubTypeConstr"
+></A
+></A
+><B
+>SubTypeConstr</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents subtyping constraints.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:SubTypeConstr"
+><A NAME="v%3ASubTypeConstr"
+></A
+></A
+><B
+>SubTypeConstr</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:SubTypeConstrPos"
+><A NAME="t%3ASubTypeConstrPos"
+></A
+></A
+><B
+>SubTypeConstrPos</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents subtyping constraints annotated with a
+source position.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:SubTypeConstrPos"
+><A NAME="v%3ASubTypeConstrPos"
+></A
+></A
+><B
+>SubTypeConstrPos</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:EquivValue"
+><A NAME="t%3AEquivValue"
+></A
+></A
+><B
+>EquivValue</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the type of the over which we build equivalence classes
+for the match algorithm 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:EquivDesc"
+><A NAME="t%3AEquivDesc"
+></A
+></A
+><B
+>EquivDesc</B
+> = (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the information we attach to each equivalence
+class. The first component is the set of variables in the equivalence
+class (i.e. the equivalence class minus the set of constants) and the
+second component is some type constant in the equivalence class or
+<TT
+>Nothing</TT
+> if the equivalence class just contains variables. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:combineEquivDesc"
+><A NAME="v%3AcombineEquivDesc"
+></A
+></A
+><B
+>combineEquivDesc</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is used to combine the descriptors of two
+equivalence classes, which are combined.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:makeEquivDesc"
+><A NAME="v%3AmakeEquivDesc"
+></A
+></A
+><B
+>makeEquivDesc</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivValue"
+>EquivValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is used to create the descriptor of a singleton
+equivalence class.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:MatchLog"
+><A NAME="t%3AMatchLog"
+></A
+></A
+><B
+>MatchLog</B
+> = [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the type of the log of the matching monad <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+>. It
+represents the list of atomic subtyping constraints generated during
+the match algorithm (without the substitution being applied to it).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:MatchState"
+><A NAME="t%3AMatchState"
+></A
+></A
+><B
+>MatchState</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This is the type of the state of the matching monad <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+>. It
+contains the accumulated substitution and a working set of subtyping
+constraints that still need to be processed.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:MatchState"
+><A NAME="v%3AMatchState"
+></A
+></A
+><B
+>MatchState</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:msSubst"
+><A NAME="v%3AmsSubst"
+></A
+></A
+><B
+>msSubst</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:msWorkingSet"
+><A NAME="v%3AmsWorkingSet"
+></A
+></A
+><B
+>msWorkingSet</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:MatchEnv"
+><A NAME="t%3AMatchEnv"
+></A
+></A
+><B
+>MatchEnv</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the type of the environment for the matching monad <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:MatchM"
+><A NAME="t%3AMatchM"
+></A
+></A
+><B
+>MatchM</B
+> a = <SPAN CLASS="keyword"
+>forall</SPAN
+> s m. (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchT"
+>MatchT</A
+> s m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The matching monad is used to implement the matching algorithm. It
+keeps track of a working set of subtype constraints that still need to
+be processed, the substitution that has been accumulated so far, a
+list of atomic subtype constraints that have been generated by the
+matching algorithm, and an equivalence relation over atomic
+types. Moreover, it also maintains the position information of the
+constraint currently working on. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:MatchT"
+><A NAME="t%3AMatchT"
+></A
+></A
+><B
+>MatchT</B
+> s m = EquivT s <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivDesc"
+>EquivDesc</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AEquivValue"
+>EquivValue</A
+> (ReaderT <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchEnv"
+>MatchEnv</A
+> (StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchState"
+>MatchState</A
+> (WriterT <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchLog"
+>MatchLog</A
+> m)))</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runMatchT"
+><A NAME="v%3ArunMatchT"
+></A
+></A
+><B
+>runMatchT</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>] -&gt; (<SPAN CLASS="keyword"
+>forall</SPAN
+> s.  <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchT"
+>MatchT</A
+> s m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>) -&gt; m ([<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function runs the <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchT"
+>MatchT</A
+></TT
+> monad transformer. It takes a list
+of subtyping constraints to initialise the working set, and returns
+the accumulated substitution and a list of the generated atomic
+subtyping constraints (with the substitution already applied to
+them). 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addSubConstr"
+><A NAME="v%3AaddSubConstr"
+></A
+></A
+><B
+>addSubConstr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds a subtyping constraint to the constraint store.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addSubConstr'"
+><A NAME="v%3AaddSubConstr%27"
+></A
+></A
+><B
+>addSubConstr'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#v%3AaddSubConstr"
+>addSubConstr</A
+></TT
+> but it swaps the
+direction of the subtyping constraint if the variance argument is
+Constravariant.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getWorkingSet"
+><A NAME="v%3AgetWorkingSet"
+></A
+></A
+><B
+>getWorkingSet</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns the current working set.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:putWorkingSet"
+><A NAME="v%3AputWorkingSet"
+></A
+></A
+><B
+>putWorkingSet</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function sets the working set.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getSubst"
+><A NAME="v%3AgetSubst"
+></A
+></A
+><B
+>getSubst</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns the current value of the accumulated
+substitution.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:putSubst"
+><A NAME="v%3AputSubst"
+></A
+></A
+><B
+>putSubst</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function sets the current value of the accumulated
+substitution.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:nextConstr"
+><A NAME="v%3AnextConstr"
+></A
+></A
+><B
+>nextConstr</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function takes a <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+> monad depending on a subtyping
+constraint and runs it with the next subtyping constraint in the
+working set and afterwards runs the <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+> monad given as the second
+argument. If the working set is empty, this function does nothing. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addToWorkingSet"
+><A NAME="v%3AaddToWorkingSet"
+></A
+></A
+><B
+>addToWorkingSet</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds the given list of subtyping constraints to the
+working set. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:withConstrPos"
+><A NAME="v%3AwithConstrPos"
+></A
+></A
+><B
+>withConstrPos</B
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function runs the given <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+> monad in the context of the
+given position. This is meant to be the position information of a
+subtyping constraint which is then used when constructing the atomic
+subtyping constraints obtained from it. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getConstrPos"
+><A NAME="v%3AgetConstrPos"
+></A
+></A
+><B
+>getConstrPos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function obtains the current constraint's position.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:match"
+><A NAME="v%3Amatch"
+></A
+></A
+><B
+>match</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; m ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function implements the match algorithm. It takes a list of
+type constraints, and returns the most general matching substitution
+along with a modified list of constraints with the substitution
+applied to it and where the subtyping constraints were replaced by
+their corresponding atomic subtyping constraints. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:match'"
+><A NAME="v%3Amatch%27"
+></A
+></A
+><B
+>match'</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>] -&gt; m ([<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function implements the match algorithm. It takes a list of
+subtype constraints, and returns the most general matching substitution
+along with a modified list of constraints with the substitution
+applied to it and where the subtyping constraints were replaced by
+their corresponding atomic subtyping constraints. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:decompSubTypeConstr"
+><A NAME="v%3AdecompSubTypeConstr"
+></A
+></A
+><B
+>decompSubTypeConstr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+> -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstrPos"
+>SubTypeConstrPos</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:matchM"
+><A NAME="v%3AmatchM"
+></A
+></A
+><B
+>matchM</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the implementation of the match algorithm within the
+<TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+></TT
+> monad.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:matchM'"
+><A NAME="v%3AmatchM%27"
+></A
+></A
+><B
+>matchM'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3ASubTypeConstr"
+>SubTypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function executes a the match algorithm on a single subtyping
+constraint.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeErr'"
+><A NAME="v%3AtypeErr%27"
+></A
+></A
+><B
+>typeErr'</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function calls <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AtypeErr"
+>typeErr</A
+></TT
+> but with the current constraint's
+position as context.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:subtypeErr"
+><A NAME="v%3AsubtypeErr"
+></A
+></A
+><B
+>subtypeErr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function reports an error that states that the given
+subtyping constraint cannot be satisfied. The subtyping constraint <TT
+>t1
+&lt; t2</TT
+> if the variance argument is <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#v%3ACovariant"
+>Covariant</A
+></TT
+> and vice versa
+otherwise, where <TT
+>t1</TT
+>, <TT
+>t2</TT
+> are the first and the second type argument
+to this function. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Variance"
+><A NAME="t%3AVariance"
+></A
+></A
+><B
+>Variance</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Contravariant"
+><A NAME="v%3AContravariant"
+></A
+></A
+><B
+>Contravariant</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Covariant"
+><A NAME="v%3ACovariant"
+></A
+></A
+><B
+>Covariant</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:revVar"
+><A NAME="v%3ArevVar"
+></A
+></A
+><B
+>revVar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function reverses the given variance.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:buildBinding"
+><A NAME="v%3AbuildBinding"
+></A
+></A
+><B
+>buildBinding</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AVariance"
+>Variance</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function takes a type and builds a list of types of the same
+shape but with atomic types replaced by a fresh variable. The
+generated types are supposed to the constrained to be subtypes of the
+given type if the variance argument is <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#v%3ACovariant"
+>Covariant</A
+></TT
+> and vice versa
+otherwise. The corresponding atomic subtyping constraints are added to
+the constraint store plus according equations in the equivalence
+relation between atomic types. The integer argument determines how
+many types to generate, i.e. the length of the returned list of
+types. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:putBindings"
+><A NAME="v%3AputBindings"
+></A
+></A
+><B
+>putBindings</B
+> :: [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Match.html#t%3AMatchM"
+>MatchM</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds a binding to the current substitution.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>
