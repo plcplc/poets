@@ -1,7 +1,11 @@
 \documentclass[10pt,a4paper,final,oneside,openany,article]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage[danish, british]{babel}
-%\usepackage{hyperref}
+\usepackage[colorlinks]{hyperref}
+\usepackage{memhfixc} % hyperlink breaks memoir. This is the fix
+\makeatletter
+\renewcommand\href[2]{\hyper@linkurl{#2}{#1}}
+\makeatother
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{listings}
@@ -94,8 +98,8 @@
 This report was written as part of the DIKU course ``POETS Summer of
 Code'' and presents a set of extensions to the existing contract
 specification language. The project was supervised by Tom Hvitved and
-the code is available in the default branch of the POETS Mercurial
-repository.
+the code is available in the csl-ext branch of the
+POETS\cite{DBLP:journals/jlp/HengleinLSS09} Mercurial repository.
 
 \chapter{Introduction}
 Recently, Tom Hvitved presented a language for specifying multi-party
@@ -112,44 +116,46 @@ The language is structured around \textit{clauses} which are combined
 into \textit{contract templates} by a set of provided
 combinators. These templates can then be instantiated in the running
 system. For example a company might describe a sale of goods as a
-contract template and when a specific article is sold, this contract
-template is instantiated. Clauses describes the actions that certain
+contract template and when a specific item is sold, this contract
+template is instantiated. Clauses describe the actions that certain
 \textit{agents} (contract parties, e.g. a company) should perform and
 also contains information about when this should happen (e.g., a
 package must be dispatched within 10 days) and a predicate detailing
 which constraints should be satisfied (e.g. a customer should transfer
-the agreed amount of money). This predicate language (which we often
-will call ``the CSL expression language'') was very limited in Tom
-Hvitveds incarnation. For instance, while CSL supports lists, the
-predicate language had no primitives for manipulating them and
-provides no means of defining important abstractions, like functions.
+the agreed amount of money). This predicate language (which we will
+call ``the CSL expression language'') was very limited in Tom Hvitveds
+incarnation. For instance, while the CSL implementation supports
+lists, the predicate language has no primitives for manipulating them
+and provides no means of defining important abstractions, like
+functions.
 
-We have extended the predicate language of CSL, on the basis of a
-number of contract schemes of practical use, that were impossible to
-formulate with the previous version of the language. The extensions
-ensure the integrity of the language core features described in
-\cite{hvitved10}. %In Section bla we will go through bla and Section n will describe our bla.
+In light of these limitations we have extended the predicate language
+of CSL, on the basis of a number of contract schemes of practical use,
+that were impossible to formulate with the previous version of the
+language. The extensions ensure the integrity of the language core
+features described in \cite{hvitved10}.
+%In Section bla we will go through bla and Section n will describe our
+%bla.
 
 
 \chapter{Our Extensions}
-\label{extensions}
-In this section we will go through our extensions to CSL and at the
-same time motivating these extensions by describing contracts that
-could occur in real world applications.
 
-\paragraph{Case 1: Manipulating lists} In the existing language it was
+\label{extensions} In this section we will go through our extensions
+of CSL and at the same time motivating these extensions by describing
+contracts that could occur in real world applications.
+
+\paragraph{Case 1: Manipulating lists} In the existing language it is
 impossible to modify the contents of lists in any way. The only
-available operations on lists were computing its length and comparison
+available operations on lists are computing its length and comparison
 operations. The language thus needs more general combinators for
 performing list manipulations.
 
-An example of a contract that could not be written in the previous
+An example of a contract that con not be written in the previous
 language incarnation, is a sales contract where the order is delivered
 in several parcels. When the first parcel is received, the contract
 should be updated to reflect that seller only needs to deliver the
-remaining articles of the order.  We show how this could be
-implemented in Appendix
-\ref{chap:sale_partial_delivery}.
+remaining items of the order.  We show how this could be implemented
+in Appendix \ref{chap:sale_partial_delivery}.
 
 \paragraph{Case 2: Abstractions and polymorphism} The current language
 does not provide any way of writing functions on the expression
@@ -171,8 +177,8 @@ illustrates the usefulness of functions for code reuse.
 on the expression level, only decisions that selects between several
 clauses can be taken. and thus an amount of repetition would be needed
 without expression level conditionals. As a very simple example, the
-minimum function can't be described in the current language and was
-previously a hardcoded primitive in the expression evaluator.
+\lstinline{minimum} function can't be described in the current language
+and was previously a hardcoded primitive in the expression evaluator.
 
 \chapter{Implementation considerations}
 In this section we analyse how we want to provide solutions for the
@@ -184,11 +190,13 @@ draw from the world of functional programming and define functions as
 lambda expressions that acts as primitive values, which can be passed
 between other functions (higher-order functions). An important
 limitation for expressing functions on the expression level is that we
-do now allow recursive functions. The important rationale for this
-decision is termination. By allowing recursive functions, we can never
-be sure that they terminate and this would break with one of the
-main principles of CSL \fxwarning{citation needed}.
-% Limitation: no recursion and why?
+do now allow recursive functions. The important rationale for this is
+that contracts containing potentially diverging predicates are
+essentially meaningless and therefore void of any legal value. So in
+order to assure that any contract that is accepted by the CSL system
+is indeed well defined we are restricted from allowing recursion or
+any other language construction that entails turing completeness.
+
 
 \paragraph{Case 2: List manipulation}
 As we have banned recursion, we still have no way of iterating through
@@ -216,20 +224,20 @@ these primitives.
 
 The grammar of the complete language is defined in the tech report by
 Tom Hvitved \cite[p. 13]{hvitved10}, our extensions can be seen in
-Figure \ref{fig:bnf}. 
+Figure \ref{fig:bnf}.
 
-We have extended the set of CSL terms $p$ to include \textit{value}
+We have extended the set of CSL terms, $p$, to include \textit{value}
 and \textit{function definitions}.  As can be seen, our only syntactic
 extensions to the CSL expression language (nonterminal $e$) are lambda
 expressions, function application and conditional
 expressions\footnote{Actually, negation is also our addition. It
   existed only by coincidence in the previous version.}. The multi
 parametered expressions unfold to several embedded lambda expressions
-and a function definition unfold to a value definition of a lambda
+and a function definition unfolds to a value binding of a lambda
 expression.
 
 Type expressions are extended with function types and type
-variables.
+variables to accomodate for the newly introduced lambda abstractions.
 
 These extensions are made to the
 \texttt{Poets.Contracts.Language.CSL.Parser} module of Poets. The most
@@ -241,13 +249,13 @@ as a left-associative operator and \ldots.  \fxwarning{Haddock links
 As a major motivation, in introducing function expressions through
 syntax, was to eliminate the previously built-in list primitives,
 \lstinline{max} and \lstinline{min}, we also introduced an explicit
-requirement of being able to specify exactly those functions throug
+requirement of being able to specify exactly those functions through
 other means. Thus we had to implement a small array of super-primitives,
 with which we through the extended expression syntax could specify the
 mentioned primitives. Implementing \lstinline{fold}'s as the
-super-primitives would not only ensure that we are able to express 
+super-primitives would not only ensure that we are able to express
 \lstinline{max} and \lstinline{min}, but also be able to introduce more
-advanced functions, such as \lstinline{map}, \lstinline{length} and so 
+advanced functions, such as \lstinline{map}, \lstinline{length} and so
 forth; in addition also ensure that the need for recursive operations
 in expressions are kept at an absolute minimum.
 
@@ -292,11 +300,11 @@ constraints are correct and suffice to perform the inference. We thus
 can not give any guarentees on the implemented functionality of this part.
 
 % These rules ensure that it is impossible to make recursive functions
-% by writing fix-point combinators. 
+% by writing fix-point combinators.
 
 \section{Type Checking}
-We had to extend the type checker to also type check the bound
-variables. This is done by type checking the definitions in sequential
+We had to extend the type checker to also type check the value
+definitions. This is done by type checking the definitions in sequential
 order of their appearence in a file, extending the typing environment
 when each definition has been processed. This ensures that it is
 impossible to make self-referencing and thereby recursive definitions
