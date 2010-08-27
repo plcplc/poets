@@ -372,11 +372,11 @@ This also includes mutually recursive definitions.
 \section{Evaluating expressions}
 An important addition to the evaluation algebra in CSL is the use of
 environments. We have extended the evaluator monad with an environment
-and pass this along where appropriate. The need for an environment is
-facilitated by the lambda abstraction, this also means the semantics
-of the expression evaluation is extended with this environment, while
-only utilized by the lambda evaluation algebra instance. Thus, the
-semantics of the extended language are as illustrated in Figure
+which is passed along where appropriate. The need for an environment is
+facilitated by the lambda abstraction; this also means the semantics of
+the expression evaluation is extended with this environment, while only
+utilized by the lambda evaluation algebra instance. Thus, the semantics
+of the extended language are as illustrated in Figure
 \ref{fig:bigstep_semantics}. There is no need to list the semantic for
 lambda expressions, due to it's axiomatic nature.
 
@@ -418,7 +418,7 @@ Poets.Data.ALaCarte.Algebras.Evaluator, is listed as such:
 class (Functor f, Error (err ())) => Evaluator f env err v where
     evalAlg :: f (EI env (err ()) (Term v)) -> EI env (err ()) (Term v)
 \end{lstlisting}
-The most important extesion to this class is the environment, such that
+The most important extension to this class is the environment, such that
 each instance of \lstinline{evalAlg} carries an environment as dictacted
 by the above semantics. However, with such an extension to the class, we
 also need to be able to evaluate using that environment. For this
@@ -437,7 +437,7 @@ runEI = runReaderT
 Another important aspect of the evaluator algebra is how we handle
 lambda expressions. Knowing that we have to use an environment for this
 evaluation, we can make use of the beforementioned constructions to
-ensure the integrity of the environment through the calculation. 
+ensure the integrity of the environment throughout the calculation.
 The complete algebra for the evaluation in
 Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator of lamba
 expressions is:
