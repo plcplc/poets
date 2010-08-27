@@ -103,17 +103,17 @@ language of the POETS\footnote{POETS abbreviates Process-Oriented
   Event-driven Transaction Systems} platform. The project was
 supervised by Tom Hvitved and our code is available in the default
 branch of the POETS Mercurial repository. Together with this report we
-have handed in a Haddock documentation for POETS system.
+have handed in Haddock documentation for POETS system.
 
 \chapter{Introduction}
 Recently, Tom Hvitved presented a language for specifying multi-party
 contracts \cite{hvitved10} as part of the 3gERP and POETS projects
-\cite{3gerp}. The \textit{Contract Specification Language},
-\textit{CSL} makes it possible to write down sets of commitments
+\cite{3gerp}. The \textit{Contract Specification Language}
+(\textit{CSL}) makes it possible to write down sets of commitments
 between several parties (e.g. individuals and companies) and combining
 those commitments into legally binding agreements,
 \textit{contracts}. The language overcomes a number of limitations in
-earlier defined contract languages, for example blame assignment and
+earlier published contract formalisations, for example blame assignment and
 support for both relative and absolute temporal constraints.
 
 The language is structured around \textit{clauses} which are combined
@@ -122,17 +122,19 @@ combinators. These templates can then be instantiated in the running
 system. For example a company might describe a sale of goods as a
 contract template and when a specific article is sold, this contract
 template is instantiated with the information about the article and
-its price and all relative temporal constraints are also instantiated
-to absolute constraints. Clauses describes the actions that certain
-\textit{agents} (contract parties, e.g. a company) should perform and
-also contains information about when this should happen (e.g., a
-package must be dispatched within 10 days) and a predicate detailing
-which constraints should be satisfied (e.g. a customer should transfer
-the agreed amount of money). This predicate language (which we often
-will call ``the CSL expression language'') was very limited in Tom
-Hvitveds incarnation. For instance, while CSL supports lists, the
-predicate language had no primitives for manipulating them and
-provides no means of defining important abstractions, like functions.
+its price. At instantiation time all relative temporal constraints are
+instantiated to absolute constraints, running from the time of
+instantiation. Clauses describes the \textit{actions} or
+\textit{transactions} that certain \textit{agents} (contract parties,
+e.g. a company) should perform and specifies temporal constraints for
+these actions (e.g., a package must be dispatched within 10 days), at
+last a clause also contains a predicate detailing which constraints
+that should be satisfied (e.g. a customer should transfer the agreed
+amount of money). This predicate language (which we will often call
+``the CSL expression language'') was very limited in Tom Hvitved's
+incarnation. For instance, while CSL supports lists, the predicate
+language had no primitives for manipulating them and provides no means
+of defining important abstractions, like functions.
 
 We have extended the predicate language of CSL, on the basis of a
 number of contract schemes of practical use, that were impossible to
@@ -140,10 +142,12 @@ formulate with the previous version of the language. The extensions
 ensure the integrity of the core features of the language described in
 \cite{hvitved10}.  In Section \ref{extensions} we will go through the
 limitations of the current language that we want to solve. In Section
-we will determine the syntax and semantics of these extensions should
-be. Section
-\ref{implementation} describes how we have implemented the
-extensions.
+we will determine what the syntax and semantics of these extensions
+should be. Section \ref{implementation} describes how we have
+implemented the extensions. We round of our report by explaining how
+the extensions were tested (Section \ref{tests}) and some concluding
+remarks, including a set of further language features that could be
+implemented.
 
 \chapter{Extensions}
 \label{extensions}
