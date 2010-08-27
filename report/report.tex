@@ -509,24 +509,29 @@ The tests we have performed are only constructive, in the sense that
 only valid pieces of syntax are tested to parse to their expected
 ASTs.
 
+The tests of the evaluator performs a similar type of tests to assure
+that the added expressions evaluate to the expected values.
+
 \section{Listing of modifications and additions}
 
 Note: All modifications have been carried out in the haskell-directory
 of the Mercurial repository
 
+\vspace{2em}
 \begin{verbatim}
-/examples/contracts/function-library.csl
-/examples/contracts/installmentSale.csl
-/examples/contracts/lease.csl
-/examples/contracts/master.csl
+examples/contracts/function-library.csl
+examples/contracts/installmentSale.csl
+examples/contracts/lease.csl
+examples/contracts/master.csl
 \end{verbatim}
 
 The example contracts have been updated to use the extended syntax,
 and along with them is now a small library of common functions,
 defined using the new primitives.
 
+\vspace{2em}
 \begin{verbatim}
-/poets.cabal
+poets.cabal
 \end{verbatim}
 
 The Cabal-file has been suitably expanded to include new files.
@@ -535,25 +540,24 @@ The Cabal-file has been suitably expanded to include new files.
 %TODO: /src/Poets/Contracts.hs
 %TODO: /src/Poets/Contracts/Language/CSL.hs
 
-\begin{verbatim}
-/src/Poets/Contracts/Language/CSL/ALaCarte/EType.hs
-/src/Poets/Contracts/Language/CSL/ALaCarte/EValue.hs
-/src/Poets/Contracts/Language/CSL/ALaCarte/Exp.hs
-/src/Poets/Contracts/Language/CSL/AST.hs
-\end{verbatim}
+%\href{doc/html/poets/Poets-Contracts-Language-CSL-AST.html}{Poets.Contracts.Language.CSL.AST}
+\vspace{2em}
+\noindent\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-EType.html}{src/Poets/Contracts/Language/CSL/ALaCarte/EType.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-EValue.html}{src/Poets/Contracts/Language/CSL/ALaCarte/EValue.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp.html}{src/Poets/Contracts/Language/CSL/ALaCarte/Exp.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-AST.html}{src/Poets/Contracts/Language/CSL/AST.hs} \\
 
 These files contain the extensions to the AST at the expression level,
 except for \verb+AST.sh+, which extends the AST on the top level of
 the syntax.  They include the AST definitions of lambda expressions,
 if-then-else conditionals and extended types.
 
-\begin{verbatim}
-/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Evaluator.hs
-/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Marshal.hs
-/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Render.hs
-/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Substitute.hs
-/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/TypeInferer.hs
-\end{verbatim}
+\vspace{2em}
+\noindent\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html}{src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Evaluator.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Marshal.html}{src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Marshal.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Render.html}{src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Render.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Substitute.html}{src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Substitute.hs} \\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-TypeInferer.html}{src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/TypeInferer.hs} \\
 
 These files contain the á la carte algebras that make out the logic of the implementation.
 Among the our extensions the most notable have been in the Evaluator
@@ -567,36 +571,34 @@ syntactic constructs.
 %TODO: /src/Poets/Contracts/Language/CSL/Analysis/ExpectedTransactions.hs
 
 
-\begin{verbatim}
-/src/Poets/Contracts/Language/CSL/Interpreter.hs
-\end{verbatim}
+\vspace{2em}
+\noindent\href{doc/html/poets/Poets-Contracts-Language-CSL-Interpreter.html}{src/Poets/Contracts/Language/CSL/Interpreter.hs}\\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-Parser.html}{src/Poets/Contracts/Language/CSL/Parser.hs}\\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-Render.html}{src/Poets/Contracts/Language/CSL/Render.hs}\\
+\href{doc/html/poets/Poets-Contracts-Language-CSL-TypeChecker.html}{src/Poets/Contracts/Language/CSL/TypeChecker.hs}\\
+
+These files contain the extensions to the interpreter, parser and type
+checker, and the CSL rendering functions.
 
 
-
-\begin{verbatim}
-/src/Poets/Contracts/Language/CSL/Parser.hs
-/src/Poets/Contracts/Language/CSL/Render.hs
-/src/Poets/Contracts/Language/CSL/TypeChecker.hs
-\end{verbatim}
-
-
-\begin{verbatim}
-/src/Poets/Data/ALaCarte.hs
-/src/Poets/Data/ALaCarte/Algebras/Evaluator.hs
-/src/Poets/Data/ALaCarte/Algebras/TypeInferer.hs
-/src/Poets/Data/Value/Algebras/Evaluator.hs
-\end{verbatim}
+\vspace{2em}
+\noindent\href{doc/html/poets/Poets-Data-ALaCarte.html}{src/Poets/Data/ALaCarte.html}
+\href{doc/html/poets/Poets-Data-ALaCarte-Algebras-Evaluator.html}{src/Poets/Data/ALaCarte/Algebras/Evaluator.hs}
+\href{doc/html/poets/Poets-Data-ALaCarte-Algebras-TypeInferer.html}{src/Poets/Data/ALaCarte/Algebras/TypeInferer.hs}
+\href{doc/html/poets/Poets-Data-Value-Algebras-Evaluator.html}{src/Poets/Data/Value/Algebras/Evaluator.hs}
 
 These files contain changes made to the general datatypes á la carte code.
-Most notably m
+The basic á la carte code has been supplemented with the function \verb+deepInject+,
+And the Evaluator algebra has been altered to conform to the needs of having a value environment.
 
+\vspace{2em}
 \begin{verbatim}
-/test/contracts/Test.hs
-/test/contracts/test.contract
-/test/suites/Poets/Contracts/CSLEvaluator_Test.hs
-/test/suites/Poets/Contracts/CSLParser_Test.hs
-/test/suites/Poets/Contracts_Test.hs
-/test/suites/Poets_Test.hs
+test/contracts/Test.hs
+test/contracts/test.contract
+test/suites/Poets/Contracts/CSLEvaluator_Test.hs
+test/suites/Poets/Contracts/CSLParser_Test.hs
+test/suites/Poets/Contracts_Test.hs
+test/suites/Poets_Test.hs
 \end{verbatim}
 
 These files contain the unit tests of our extensions. The files
