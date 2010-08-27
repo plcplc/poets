@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.ReportMonad</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><DIV CLASS="outer"
+><DIV CLASS="mini-topbar"
+>Poets.Reporting.ReportMonad</DIV
+><DIV CLASS="mini-synopsis"
+><DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError" TARGET="main"
+>ReportError</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred" TARGET="main"
+>SubTypePred</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3AEvents" TARGET="main"
+>Events</A
+> f</DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3ARMEnv" TARGET="main"
+>RMEnv</A
+> f</DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3ARM" TARGET="main"
+>RM</A
+> f a</DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AliftRM" TARGET="main"
+>liftRM</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AreportRuntimeError" TARGET="main"
+>reportRuntimeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AreportUserError" TARGET="main"
+>reportUserError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AreportTypeError" TARGET="main"
+>reportTypeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AliftTypeError" TARGET="main"
+>liftTypeError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArunRM%27" TARGET="main"
+>runRM'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArunRM" TARGET="main"
+>runRM</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr" TARGET="main"
+>RExpr</A
+> f</DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Reporting-ReportMonad.html#t%3ARValue" TARGET="main"
+>RValue</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArEvents" TARGET="main"
+>rEvents</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArTypeOf" TARGET="main"
+>rTypeOf</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArTypeOf%27" TARGET="main"
+>rTypeOf'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArHasType" TARGET="main"
+>rHasType</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AisSubtype" TARGET="main"
+>isSubtype</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AhasType%27" TARGET="main"
+>hasType'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AinjectR" TARGET="main"
+>injectR</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArString" TARGET="main"
+>rString</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArError" TARGET="main"
+>rError</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArRecord" TARGET="main"
+>rRecord</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArList" TARGET="main"
+>rList</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArCons" TARGET="main"
+>rCons</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArEmpty" TARGET="main"
+>rEmpty</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArFieldLookup" TARGET="main"
+>rFieldLookup</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArFieldMod" TARGET="main"
+>rFieldMod</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArFieldsMod" TARGET="main"
+>rFieldsMod</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArFoldr" TARGET="main"
+>rFoldr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArIf" TARGET="main"
+>rIf</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArBool" TARGET="main"
+>rBool</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArFalse" TARGET="main"
+>rFalse</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArTrue" TARGET="main"
+>rTrue</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArNeq" TARGET="main"
+>rNeq</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArEq" TARGET="main"
+>rEq</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArGt" TARGET="main"
+>rGt</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArLte" TARGET="main"
+>rLte</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArGte" TARGET="main"
+>rGte</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArLt" TARGET="main"
+>rLt</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArMin" TARGET="main"
+>rMin</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArMax" TARGET="main"
+>rMax</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArCompare" TARGET="main"
+>rCompare</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AboolOp" TARGET="main"
+>boolOp</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArOr" TARGET="main"
+>rOr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArAnd" TARGET="main"
+>rAnd</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArNot" TARGET="main"
+>rNot</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AarithOp" TARGET="main"
+>arithOp</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArMinus" TARGET="main"
+>rMinus</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArTimes" TARGET="main"
+>rTimes</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArPlus" TARGET="main"
+>rPlus</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3AarithUn" TARGET="main"
+>arithUn</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArSignum" TARGET="main"
+>rSignum</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArNegate" TARGET="main"
+>rNegate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArAbs" TARGET="main"
+>rAbs</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArInteger" TARGET="main"
+>rInteger</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArRational" TARGET="main"
+>rRational</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArRecip" TARGET="main"
+>rRecip</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDiv" TARGET="main"
+>rDiv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDuration" TARGET="main"
+>rDuration</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDate" TARGET="main"
+>rDate</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDate%27" TARGET="main"
+>rDate'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDurPlus" TARGET="main"
+>rDurPlus</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDurMinus" TARGET="main"
+>rDurMinus</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-ReportMonad.html#v%3ArDurOp" TARGET="main"
+>rDurOp</A
+></DIV
+></DIV
+></DIV
+></BODY
+></HTML
+>

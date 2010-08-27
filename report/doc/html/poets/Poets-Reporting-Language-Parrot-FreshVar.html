@@ -1,0 +1,659 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.FreshVar</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-FreshVar.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.FreshVar</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides facilities to generate fresh (type)
+ variables. This functionality is encapsulated in the <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarT"
+>FreshVarT</A
+></TT
+>
+ monad transformer and the <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+></TT
+> monad type class.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AFreshVarState"
+>FreshVarState</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3AFreshVarT"
+>FreshVarT</A
+> m a = <A HREF="#v%3AFreshVarT"
+>FreshVarT</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AunFreshVarT"
+>unFreshVarT</A
+> :: StateT <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarState"
+>FreshVarState</A
+> m a</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunFreshVarT"
+>runFreshVarT</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarT"
+>FreshVarT</A
+> m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVarId"
+>VarId</A
+> a, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> a m  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfreshVar"
+>freshVar</A
+> :: m a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfreshTVar"
+>freshTVar</A
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; m (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfreshTVars"
+>freshTVars</A
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; m [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfreshVVar"
+>freshVVar</A
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> m) =&gt; m (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfreshVVars"
+>freshVVars</A
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> m) =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; m [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f]</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:FreshVarState"
+><A NAME="t%3AFreshVarState"
+></A
+></A
+><B
+>FreshVarState</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the type of the state of the <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarT"
+>FreshVarT</A
+></TT
+> monad transformer.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:FreshVarT"
+><A NAME="t%3AFreshVarT"
+></A
+></A
+><B
+>FreshVarT</B
+> m a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This defines a monad transformer that provides a means to generate
+fresh variables.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:FreshVarT"
+><A NAME="v%3AFreshVarT"
+></A
+></A
+><B
+>FreshVarT</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:unFreshVarT"
+><A NAME="v%3AunFreshVarT"
+></A
+></A
+><B
+>unFreshVarT</B
+> :: StateT <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarState"
+>FreshVarState</A
+> m a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runFreshVarT"
+><A NAME="v%3ArunFreshVarT"
+></A
+></A
+><B
+>runFreshVarT</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AFreshVarT"
+>FreshVarT</A
+> m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function runs the given fresh variable computation
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVarId"
+>VarId</A
+> a, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A NAME="t:MonadFreshVar"
+><A NAME="t%3AMonadFreshVar"
+></A
+></A
+><B
+>MonadFreshVar</B
+> a m  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This defines a class of monads that provide an operation to
+generate fresh variables.  
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:freshVar"
+><A NAME="v%3AfreshVar"
+></A
+></A
+><B
+>freshVar</B
+> :: m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function generates a fresh (type or expression) 
+      variable. 
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:freshTVar"
+><A NAME="v%3AfreshTVar"
+></A
+></A
+><B
+>freshTVar</B
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; m (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#v%3AfreshVar"
+>freshVar</A
+></TT
+> but instead of a plain
+variable identifier it returns a type variable as an expression.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:freshTVars"
+><A NAME="v%3AfreshTVars"
+></A
+></A
+><B
+>freshTVars</B
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> m) =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; m [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function generates a list of <TT
+>n</TT
+> fresh type variables, where
+<TT
+>n</TT
+> is the integer argument provided to this function (see <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#v%3AfreshTVar"
+>freshTVar</A
+></TT
+>). 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:freshVVar"
+><A NAME="v%3AfreshVVar"
+></A
+></A
+><B
+>freshVVar</B
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> m) =&gt; m (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#v%3AfreshVar"
+>freshVar</A
+></TT
+> but instead of a plain
+variable identifier it returns an expression variable as an expression.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:freshVVars"
+><A NAME="v%3AfreshVVars"
+></A
+></A
+><B
+>freshVVars</B
+> :: ((<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#t%3AMonadFreshVar"
+>MonadFreshVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> m) =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; m [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function generates a list of <TT
+>n</TT
+> fresh variables, where <TT
+>n</TT
+>
+is the integer argument provided to this function (see <TT
+><A HREF="Poets-Reporting-Language-Parrot-FreshVar.html#v%3AfreshVVar"
+>freshVVar</A
+></TT
+>). 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

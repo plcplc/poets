@@ -1,0 +1,3310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.ReportMonad</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-ReportMonad.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.ReportMonad</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the monad in which reports are executed.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AReportError"
+>ReportError</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AReportTypeError"
+>ReportTypeError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AReportUserError"
+>ReportUserError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AReportRuntimeError"
+>ReportRuntimeError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AReportError"
+>ReportError</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASubTypePred"
+>SubTypePred</A
+> = <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AEvents"
+>Events</A
+> f = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ARMEnv"
+>RMEnv</A
+> f = <A HREF="#v%3ARMEnv"
+>RMEnv</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArmEvents"
+>rmEvents</A
+> :: <A HREF="Poets-Reporting-ReportMonad.html#t%3AEvents"
+>Events</A
+> f</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArmIsSubtype"
+>rmIsSubtype</A
+> :: <A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred"
+>SubTypePred</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3ARM"
+>RM</A
+> f a = <A HREF="#v%3ARM"
+>RM</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AunRM"
+>unRM</A
+> :: ReaderT (<A HREF="Poets-Reporting-ReportMonad.html#t%3ARMEnv"
+>RMEnv</A
+> f) (ErrorT <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> Identity) a</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftRM"
+>liftRM</A
+> ::  (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f a -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> g a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreportRuntimeError"
+>reportRuntimeError</A
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreportUserError"
+>reportUserError</A
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreportTypeError"
+>reportTypeError</A
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftTypeError"
+>liftTypeError</A
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunRM%27"
+>runRM'</A
+> ::  <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f a -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3AEvents"
+>Events</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred"
+>SubTypePred</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunRM"
+>runRM</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f a -&gt; [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred"
+>SubTypePred</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ARExpr"
+>RExpr</A
+> f = <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ARValue"
+>RValue</A
+> = <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArEvents"
+>rEvents</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArTypeOf"
+>rTypeOf</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArTypeOf%27"
+>rTypeOf'</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArHasType"
+>rHasType</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisSubtype"
+>isSubtype</A
+> ::  <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AhasType%27"
+>hasType'</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AinjectR"
+>injectR</A
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArString"
+>rString</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArError"
+>rError</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArRecord"
+>rRecord</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArList"
+>rList</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; [<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArCons"
+>rCons</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArEmpty"
+>rEmpty</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArFieldLookup"
+>rFieldLookup</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArFieldMod"
+>rFieldMod</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArFieldsMod"
+>rFieldsMod</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArFoldr"
+>rFoldr</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; (<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArIf"
+>rIf</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArBool"
+>rBool</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArFalse"
+>rFalse</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArTrue"
+>rTrue</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArNeq"
+>rNeq</A
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-Equality.html#t%3AFunctorEq"
+>FunctorEq</A
+> f, <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArEq"
+>rEq</A
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-Equality.html#t%3AFunctorEq"
+>FunctorEq</A
+> f, <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArGt"
+>rGt</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArLte"
+>rLte</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArGte"
+>rGte</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArLt"
+>rLt</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArMin"
+>rMin</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArMax"
+>rMax</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArCompare"
+>rCompare</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Ord.html#t%3AOrdering"
+>Ordering</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AboolOp"
+>boolOp</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArOr"
+>rOr</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArAnd"
+>rAnd</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArNot"
+>rNot</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AarithOp"
+>arithOp</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>) -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArMinus"
+>rMinus</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArTimes"
+>rTimes</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArPlus"
+>rPlus</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AarithUn"
+>arithUn</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>) -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArSignum"
+>rSignum</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArNegate"
+>rNegate</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArAbs"
+>rAbs</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArInteger"
+>rInteger</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArRational"
+>rRational</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ARational"
+>Rational</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArRecip"
+>rRecip</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDiv"
+>rDiv</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDuration"
+>rDuration</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> (<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDate"
+>rDate</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; DateTime -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDate%27"
+>rDate'</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDurPlus"
+>rDurPlus</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDurMinus"
+>rDurMinus</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArDurOp"
+>rDurOp</A
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; (DateTime -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; DateTime) -&gt; (<A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ReportError"
+><A NAME="t%3AReportError"
+></A
+></A
+><B
+>ReportError</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents errors during the computation in
+  a reporting function.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportTypeError"
+><A NAME="v%3AReportTypeError"
+></A
+></A
+><B
+>ReportTypeError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportUserError"
+><A NAME="v%3AReportUserError"
+></A
+></A
+><B
+>ReportUserError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportRuntimeError"
+><A NAME="v%3AReportRuntimeError"
+></A
+></A
+><B
+>ReportRuntimeError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ReportError"
+><A NAME="v%3AReportError"
+></A
+></A
+><B
+>ReportError</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:SubTypePred"
+><A NAME="t%3ASubTypePred"
+></A
+></A
+><B
+>SubTypePred</B
+> = <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Events"
+><A NAME="t%3AEvents"
+></A
+></A
+><B
+>Events</B
+> f = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:RMEnv"
+><A NAME="t%3ARMEnv"
+></A
+></A
+><B
+>RMEnv</B
+> f </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:RMEnv"
+><A NAME="v%3ARMEnv"
+></A
+></A
+><B
+>RMEnv</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:rmEvents"
+><A NAME="v%3ArmEvents"
+></A
+></A
+><B
+>rmEvents</B
+> :: <A HREF="Poets-Reporting-ReportMonad.html#t%3AEvents"
+>Events</A
+> f</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:rmIsSubtype"
+><A NAME="v%3ArmIsSubtype"
+></A
+></A
+><B
+>rmIsSubtype</B
+> :: <A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred"
+>SubTypePred</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:RM"
+><A NAME="t%3ARM"
+></A
+></A
+><B
+>RM</B
+> f a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The reporting monad.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:RM"
+><A NAME="v%3ARM"
+></A
+></A
+><B
+>RM</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:unRM"
+><A NAME="v%3AunRM"
+></A
+></A
+><B
+>unRM</B
+> :: ReaderT (<A HREF="Poets-Reporting-ReportMonad.html#t%3ARMEnv"
+>RMEnv</A
+> f) (ErrorT <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> Identity) a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftRM"
+><A NAME="v%3AliftRM"
+></A
+></A
+><B
+>liftRM</B
+> ::  (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f a -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> g a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:reportRuntimeError"
+><A NAME="v%3AreportRuntimeError"
+></A
+></A
+><B
+>reportRuntimeError</B
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:reportUserError"
+><A NAME="v%3AreportUserError"
+></A
+></A
+><B
+>reportUserError</B
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:reportTypeError"
+><A NAME="v%3AreportTypeError"
+></A
+></A
+><B
+>reportTypeError</B
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftTypeError"
+><A NAME="v%3AliftTypeError"
+></A
+></A
+><B
+>liftTypeError</B
+> :: MonadError <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runRM'"
+><A NAME="v%3ArunRM%27"
+></A
+></A
+><B
+>runRM'</B
+> ::  <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f a -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3AEvents"
+>Events</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred"
+>SubTypePred</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runRM"
+><A NAME="v%3ArunRM"
+></A
+></A
+><B
+>runRM</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f a -&gt; [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ASubTypePred"
+>SubTypePred</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportMonad.html#t%3AReportError"
+>ReportError</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:RExpr"
+><A NAME="t%3ARExpr"
+></A
+></A
+><B
+>RExpr</B
+> f = <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:RValue"
+><A NAME="t%3ARValue"
+></A
+></A
+><B
+>RValue</B
+> = <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rEvents"
+><A NAME="v%3ArEvents"
+></A
+></A
+><B
+>rEvents</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTypeOf"
+><A NAME="v%3ArTypeOf"
+></A
+></A
+><B
+>rTypeOf</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This operator provides a case distinction for type membership
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTypeOf'"
+><A NAME="v%3ArTypeOf%27"
+></A
+></A
+><B
+>rTypeOf'</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rHasType"
+><A NAME="v%3ArHasType"
+></A
+></A
+><B
+>rHasType</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This operator checks for type membership.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isSubtype"
+><A NAME="v%3AisSubtype"
+></A
+></A
+><B
+>isSubtype</B
+> ::  <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:hasType'"
+><A NAME="v%3AhasType%27"
+></A
+></A
+><B
+>hasType'</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:injectR"
+><A NAME="v%3AinjectR"
+></A
+></A
+><B
+>injectR</B
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rString"
+><A NAME="v%3ArString"
+></A
+></A
+><B
+>rString</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rError"
+><A NAME="v%3ArError"
+></A
+></A
+><B
+>rError</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRecord"
+><A NAME="v%3ArRecord"
+></A
+></A
+><B
+>rRecord</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function constructs record values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rList"
+><A NAME="v%3ArList"
+></A
+></A
+><B
+>rList</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; [<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function constructs list values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rCons"
+><A NAME="v%3ArCons"
+></A
+></A
+><B
+>rCons</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rEmpty"
+><A NAME="v%3ArEmpty"
+></A
+></A
+><B
+>rEmpty</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the empty list value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFieldLookup"
+><A NAME="v%3ArFieldLookup"
+></A
+></A
+><B
+>rFieldLookup</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This operator looks up a field in a record value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFieldMod"
+><A NAME="v%3ArFieldMod"
+></A
+></A
+><B
+>rFieldMod</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This operator sets a field value in a record value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFieldsMod"
+><A NAME="v%3ArFieldsMod"
+></A
+></A
+><B
+>rFieldsMod</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; [(<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+>, <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f)] -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This operator sets a field value in a record value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFoldr"
+><A NAME="v%3ArFoldr"
+></A
+></A
+><B
+>rFoldr</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; (<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is the right fold function on list values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rIf"
+><A NAME="v%3ArIf"
+></A
+></A
+><B
+>rIf</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rBool"
+><A NAME="v%3ArBool"
+></A
+></A
+><B
+>rBool</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rFalse"
+><A NAME="v%3ArFalse"
+></A
+></A
+><B
+>rFalse</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Boolean false value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTrue"
+><A NAME="v%3ArTrue"
+></A
+></A
+><B
+>rTrue</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Boolean true value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rNeq"
+><A NAME="v%3ArNeq"
+></A
+></A
+><B
+>rNeq</B
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-Equality.html#t%3AFunctorEq"
+>FunctorEq</A
+> f, <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rEq"
+><A NAME="v%3ArEq"
+></A
+></A
+><B
+>rEq</B
+> :: (<A HREF="Poets-Data-ALaCarte-Algebras-Equality.html#t%3AFunctorEq"
+>FunctorEq</A
+> f, <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f) =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rGt"
+><A NAME="v%3ArGt"
+></A
+></A
+><B
+>rGt</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rLte"
+><A NAME="v%3ArLte"
+></A
+></A
+><B
+>rLte</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rGte"
+><A NAME="v%3ArGte"
+></A
+></A
+><B
+>rGte</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rLt"
+><A NAME="v%3ArLt"
+></A
+></A
+><B
+>rLt</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rMin"
+><A NAME="v%3ArMin"
+></A
+></A
+><B
+>rMin</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rMax"
+><A NAME="v%3ArMax"
+></A
+></A
+><B
+>rMax</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rCompare"
+><A NAME="v%3ArCompare"
+></A
+></A
+><B
+>rCompare</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARM"
+>RM</A
+> f <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Ord.html#t%3AOrdering"
+>Ordering</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This is an auxiliary function for defining the comparison operators.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:boolOp"
+><A NAME="v%3AboolOp"
+></A
+></A
+><B
+>boolOp</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rOr"
+><A NAME="v%3ArOr"
+></A
+></A
+><B
+>rOr</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rAnd"
+><A NAME="v%3ArAnd"
+></A
+></A
+><B
+>rAnd</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rNot"
+><A NAME="v%3ArNot"
+></A
+></A
+><B
+>rNot</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:arithOp"
+><A NAME="v%3AarithOp"
+></A
+></A
+><B
+>arithOp</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>) -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Auxiliary function for defining the binary operators of <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+></TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rMinus"
+><A NAME="v%3ArMinus"
+></A
+></A
+><B
+>rMinus</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rTimes"
+><A NAME="v%3ArTimes"
+></A
+></A
+><B
+>rTimes</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rPlus"
+><A NAME="v%3ArPlus"
+></A
+></A
+><B
+>rPlus</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:arithUn"
+><A NAME="v%3AarithUn"
+></A
+></A
+><B
+>arithUn</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>) -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+>) -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Auxiliary function for defining the unary operators of <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+></TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rSignum"
+><A NAME="v%3ArSignum"
+></A
+></A
+><B
+>rSignum</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rNegate"
+><A NAME="v%3ArNegate"
+></A
+></A
+><B
+>rNegate</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rAbs"
+><A NAME="v%3ArAbs"
+></A
+></A
+><B
+>rAbs</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rInteger"
+><A NAME="v%3ArInteger"
+></A
+></A
+><B
+>rInteger</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRational"
+><A NAME="v%3ArRational"
+></A
+></A
+><B
+>rRational</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ARational"
+>Rational</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rRecip"
+><A NAME="v%3ArRecip"
+></A
+></A
+><B
+>rRecip</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDiv"
+><A NAME="v%3ArDiv"
+></A
+></A
+><B
+>rDiv</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDuration"
+><A NAME="v%3ArDuration"
+></A
+></A
+><B
+>rDuration</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> (<A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDate"
+><A NAME="v%3ArDate"
+></A
+></A
+><B
+>rDate</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; DateTime -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDate'"
+><A NAME="v%3ArDate%27"
+></A
+></A
+><B
+>rDate'</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+> -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDurPlus"
+><A NAME="v%3ArDurPlus"
+></A
+></A
+><B
+>rDurPlus</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDurMinus"
+><A NAME="v%3ArDurMinus"
+></A
+></A
+><B
+>rDurMinus</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:rDurOp"
+><A NAME="v%3ArDurOp"
+></A
+></A
+><B
+>rDurOp</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; (DateTime -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; DateTime) -&gt; (<A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>) -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f -&gt; <A HREF="Poets-Reporting-ReportMonad.html#t%3ARExpr"
+>RExpr</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

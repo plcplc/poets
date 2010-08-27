@@ -1,0 +1,598 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.PCE.Parser</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-PCE-Parser.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.PCE.Parser</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Mikkel Jnsson Thomsen, Tom Hvitved</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides a parser for the POETS dialect of Attempto Controlled 
+ English (ACE)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Alexer"
+>lexer</A
+> :: TokenParser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseFile"
+>parseFile</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparsePCE"
+>parsePCE</A
+> :: SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ApceItems"
+>pceItems</A
+> :: Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisSentence"
+>isSentence</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Avalidated"
+>validated</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsuperClass"
+>superClass</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AquantifierSingle"
+>quantifierSingle</A
+> :: Parser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AhasSentence"
+>hasSentence</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Acomment"
+>comment</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldDefinition"
+>fieldDefinition</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AruleSet"
+>ruleSet</A
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfileName"
+>fileName</A
+> :: Parser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aname"
+>name</A
+> :: Parser <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldType"
+>fieldType</A
+> :: Parser <A HREF="Poets-Data-PCE-Types.html#t%3AName"
+>Name</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lexer"
+><A NAME="v%3Alexer"
+></A
+></A
+><B
+>lexer</B
+> :: TokenParser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseFile"
+><A NAME="v%3AparseFile"
+></A
+></A
+><B
+>parseFile</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parse file containing PCE.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parsePCE"
+><A NAME="v%3AparsePCE"
+></A
+></A
+><B
+>parsePCE</B
+> :: SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parse a string containing PCE.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:pceItems"
+><A NAME="v%3ApceItems"
+></A
+></A
+><B
+>pceItems</B
+> :: Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isSentence"
+><A NAME="v%3AisSentence"
+></A
+></A
+><B
+>isSentence</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:validated"
+><A NAME="v%3Avalidated"
+></A
+></A
+><B
+>validated</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:superClass"
+><A NAME="v%3AsuperClass"
+></A
+></A
+><B
+>superClass</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:quantifierSingle"
+><A NAME="v%3AquantifierSingle"
+></A
+></A
+><B
+>quantifierSingle</B
+> :: Parser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:hasSentence"
+><A NAME="v%3AhasSentence"
+></A
+></A
+><B
+>hasSentence</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:comment"
+><A NAME="v%3Acomment"
+></A
+></A
+><B
+>comment</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldDefinition"
+><A NAME="v%3AfieldDefinition"
+></A
+></A
+><B
+>fieldDefinition</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:ruleSet"
+><A NAME="v%3AruleSet"
+></A
+></A
+><B
+>ruleSet</B
+> :: <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+> -&gt; Parser [<A HREF="Poets-Data-PCE-Types.html#t%3ASentence"
+>Sentence</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fileName"
+><A NAME="v%3AfileName"
+></A
+></A
+><B
+>fileName</B
+> :: Parser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:name"
+><A NAME="v%3Aname"
+></A
+></A
+><B
+>name</B
+> :: Parser <A HREF="Poets-Data-PCE-Types.html#t%3AObjectName"
+>ObjectName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldType"
+><A NAME="v%3AfieldType"
+></A
+></A
+><B
+>fieldType</B
+> :: Parser <A HREF="Poets-Data-PCE-Types.html#t%3AName"
+>Name</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

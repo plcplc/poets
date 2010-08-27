@@ -1,0 +1,2111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.Type</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-Type.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.Type</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Patrick Bahr, and Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the AST for POETS types and POETS record typing
+ environments.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AField"
+>Field</A
+> e = <A HREF="#v%3AField"
+>Field</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AfieldName"
+>fieldName</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AfieldType"
+>fieldType</A
+> :: e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AfieldDescription"
+>fieldDescription</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AFieldEnv"
+>FieldEnv</A
+> e = <A HREF="#v%3AFieldEnv"
+>FieldEnv</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ARecord"
+>Record</A
+> e = <A HREF="#v%3ARecord"
+>Record</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordName"
+>recordName</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordFields"
+>recordFields</A
+> :: <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordExtends"
+>recordExtends</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordDescription"
+>recordDescription</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordValidatingRuleSet"
+>recordValidatingRuleSet</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Type.html#t%3AValidatingRuleSet"
+>ValidatingRuleSet</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordIsAbstract"
+>recordIsAbstract</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ARecordEnv"
+>RecordEnv</A
+> e = <A HREF="#v%3ARecordEnv"
+>RecordEnv</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> (<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeConstant"
+>TypeConstant</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ATInt"
+>TInt</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATBool"
+>TBool</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATString"
+>TString</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATDateTime"
+>TDateTime</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATDuration"
+>TDuration</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATDouble"
+>TDouble</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATRecord"
+>TRecord</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeList"
+>TypeList</A
+> e = <A HREF="#v%3ATList"
+>TList</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> = <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APOETSFieldEnv"
+>POETSFieldEnv</A
+> = <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AValidatingRuleSet"
+>ValidatingRuleSet</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APOETSType"
+>POETSType</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnewRecordEnv"
+>newRecordEnv</A
+> ::  [<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e] -&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArecordEnvList"
+>recordEnvList</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; [<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArecordEnvMap"
+>recordEnvMap</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> (<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArecordEnvSize"
+>recordEnvSize</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> t -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AremRecordInfo"
+>remRecordInfo</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddRecordInfo"
+>addRecordInfo</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e -&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddRecordInfos"
+>addRecordInfos</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; [<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e] -&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisEmpty"
+>isEmpty</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetRecordNames%27"
+>getRecordNames'</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; [<A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetRecordNames"
+>getRecordNames</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisDefined"
+>isDefined</A
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetRecordInfo"
+>getRecordInfo</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; m (<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnewFieldEnv"
+>newFieldEnv</A
+> ::  [<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> e] -&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldNamesSorted"
+>fieldNamesSorted</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldNames"
+>fieldNames</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldNamesSet"
+>fieldNamesSet</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AemptyFieldEnv"
+>emptyFieldEnv</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcombFieldEnvs"
+>combFieldEnvs</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e -&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e -&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldEnvSorted"
+>fieldEnvSorted</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> t]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldEnvList"
+>fieldEnvList</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> t]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldEnvMap"
+>fieldEnvMap</A
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> t)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetFieldInfo"
+>getFieldInfo</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; m (<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> e)</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Field"
+><A NAME="t%3AField"
+></A
+></A
+><B
+>Field</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The definition of a field type.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Field"
+><A NAME="v%3AField"
+></A
+></A
+><B
+>Field</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:fieldName"
+><A NAME="v%3AfieldName"
+></A
+></A
+><B
+>fieldName</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>The name of the field type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:fieldType"
+><A NAME="v%3AfieldType"
+></A
+></A
+><B
+>fieldType</B
+> :: e</TD
+><TD CLASS="rdoc"
+>The type of the field.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:fieldDescription"
+><A NAME="v%3AfieldDescription"
+></A
+></A
+><B
+>fieldDescription</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>A description of the field type.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:FieldEnv"
+><A NAME="t%3AFieldEnv"
+></A
+></A
+><B
+>FieldEnv</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A field typing environment is a mapping of field names to their type
+ definition.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:FieldEnv"
+><A NAME="v%3AFieldEnv"
+></A
+></A
+><B
+>FieldEnv</B
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> e))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Record"
+><A NAME="t%3ARecord"
+></A
+></A
+><B
+>Record</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The definition of a record type.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Record"
+><A NAME="v%3ARecord"
+></A
+></A
+><B
+>Record</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordName"
+><A NAME="v%3ArecordName"
+></A
+></A
+><B
+>recordName</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>The name of the record type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordFields"
+><A NAME="v%3ArecordFields"
+></A
+></A
+><B
+>recordFields</B
+> :: <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>The field definitions.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordExtends"
+><A NAME="v%3ArecordExtends"
+></A
+></A
+><B
+>recordExtends</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>A record type may extend an existing record type, thereby inheriting all field definitions.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordDescription"
+><A NAME="v%3ArecordDescription"
+></A
+></A
+><B
+>recordDescription</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>A description of the record type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordValidatingRuleSet"
+><A NAME="v%3ArecordValidatingRuleSet"
+></A
+></A
+><B
+>recordValidatingRuleSet</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Type.html#t%3AValidatingRuleSet"
+>ValidatingRuleSet</A
+></TD
+><TD CLASS="rdoc"
+>Rules for validating records of the defining type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordIsAbstract"
+><A NAME="v%3ArecordIsAbstract"
+></A
+></A
+><B
+>recordIsAbstract</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Abstract record types cannot be inhabited directly, only by records of non-abstract, sub type.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:RecordEnv"
+><A NAME="t%3ARecordEnv"
+></A
+></A
+><B
+>RecordEnv</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A record typing environment is a mapping of record names to their type
+ definition.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:RecordEnv"
+><A NAME="v%3ARecordEnv"
+></A
+></A
+><B
+>RecordEnv</B
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> (<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeConstant"
+><A NAME="t%3ATypeConstant"
+></A
+></A
+><B
+>TypeConstant</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The AST for POETS type constants.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TInt"
+><A NAME="v%3ATInt"
+></A
+></A
+><B
+>TInt</B
+></TD
+><TD CLASS="rdoc"
+>Integer type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TBool"
+><A NAME="v%3ATBool"
+></A
+></A
+><B
+>TBool</B
+></TD
+><TD CLASS="rdoc"
+>Boolean type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TString"
+><A NAME="v%3ATString"
+></A
+></A
+><B
+>TString</B
+></TD
+><TD CLASS="rdoc"
+>String type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TDateTime"
+><A NAME="v%3ATDateTime"
+></A
+></A
+><B
+>TDateTime</B
+></TD
+><TD CLASS="rdoc"
+>Date type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TDuration"
+><A NAME="v%3ATDuration"
+></A
+></A
+><B
+>TDuration</B
+></TD
+><TD CLASS="rdoc"
+>Duration type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TDouble"
+><A NAME="v%3ATDouble"
+></A
+></A
+><B
+>TDouble</B
+></TD
+><TD CLASS="rdoc"
+>Double type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TRecord"
+><A NAME="v%3ATRecord"
+></A
+></A
+><B
+>TRecord</B
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>Record type.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeList"
+><A NAME="t%3ATypeList"
+></A
+></A
+><B
+>TypeList</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The AST for POETS <EM
+>list</EM
+> types.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TList"
+><A NAME="v%3ATList"
+></A
+></A
+><B
+>TList</B
+> e</TD
+><TD CLASS="rdoc"
+>List type.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:POETSRecordEnv"
+><A NAME="t%3APOETSRecordEnv"
+></A
+></A
+><B
+>POETSRecordEnv</B
+> = <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>POETS record typing environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:POETSFieldEnv"
+><A NAME="t%3APOETSFieldEnv"
+></A
+></A
+><B
+>POETSFieldEnv</B
+> = <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>POETS field typing environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ValidatingRuleSet"
+><A NAME="t%3AValidatingRuleSet"
+></A
+></A
+><B
+>ValidatingRuleSet</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A rule set is a string identifying the relevant rule set (file name).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:POETSType"
+><A NAME="t%3APOETSType"
+></A
+></A
+><B
+>POETSType</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>POETS types are either type constants, or list types.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:newRecordEnv"
+><A NAME="v%3AnewRecordEnv"
+></A
+></A
+><B
+>newRecordEnv</B
+> ::  [<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e] -&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:recordEnvList"
+><A NAME="v%3ArecordEnvList"
+></A
+></A
+><B
+>recordEnvList</B
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; [<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Extract a list of record definitions from a record environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:recordEnvMap"
+><A NAME="v%3ArecordEnvMap"
+></A
+></A
+><B
+>recordEnvMap</B
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> (<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Extract a list of record definitions from a record environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:recordEnvSize"
+><A NAME="v%3ArecordEnvSize"
+></A
+></A
+><B
+>recordEnvSize</B
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> t -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:remRecordInfo"
+><A NAME="v%3AremRecordInfo"
+></A
+></A
+><B
+>remRecordInfo</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: </TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>A record name.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>The new record environment.  
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function removes the given record name from the record environment.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addRecordInfo"
+><A NAME="v%3AaddRecordInfo"
+></A
+></A
+><B
+>addRecordInfo</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: </TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>A record.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e</TD
+><TD CLASS="rdoc"
+>The new record environment.  
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function adds the given list of records to the given record
+environment. If a record of the same name is present, it is
+overwritten.  
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addRecordInfos"
+><A NAME="v%3AaddRecordInfos"
+></A
+></A
+><B
+>addRecordInfos</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: </TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>A record.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; [<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e]</TD
+><TD CLASS="rdoc"
+>The new record environment.  
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isEmpty"
+><A NAME="v%3AisEmpty"
+></A
+></A
+><B
+>isEmpty</B
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns True iff the given record environment is empty.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getRecordNames'"
+><A NAME="v%3AgetRecordNames%27"
+></A
+></A
+><B
+>getRecordNames'</B
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; [<A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getRecordNames"
+><A NAME="v%3AgetRecordNames"
+></A
+></A
+><B
+>getRecordNames</B
+> ::  <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isDefined"
+><A NAME="v%3AisDefined"
+></A
+></A
+><B
+>isDefined</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: </TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>A record name.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>True iff the record with the given name is defined in the record environment.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function returns true iff the record with the given name is
+defined in the record environment.  
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getRecordInfo"
+><A NAME="v%3AgetRecordInfo"
+></A
+></A
+><B
+>getRecordInfo</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Type.html#t%3ARecordEnv"
+>RecordEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>A record name.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>Information about the record with the given name.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; m (<A HREF="Poets-Data-Type.html#t%3ARecord"
+>Record</A
+> e)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>This function returns the record definition with the given name in
+the given record environment. If there is no such record defined, then
+the monadic computation <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#v%3Afail"
+>fail</A
+></TT
+>s. 
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:newFieldEnv"
+><A NAME="v%3AnewFieldEnv"
+></A
+></A
+><B
+>newFieldEnv</B
+> ::  [<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> e] -&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Constructor for field environments.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldNamesSorted"
+><A NAME="v%3AfieldNamesSorted"
+></A
+></A
+><B
+>fieldNamesSorted</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the list of field names defined in the
+given field environment sorted in ascending order 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldNames"
+><A NAME="v%3AfieldNames"
+></A
+></A
+><B
+>fieldNames</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the list of field names defined in the
+  given field environment. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldNamesSet"
+><A NAME="v%3AfieldNamesSet"
+></A
+></A
+><B
+>fieldNamesSet</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function provides the set of field names defined in the given field
+ environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:emptyFieldEnv"
+><A NAME="v%3AemptyFieldEnv"
+></A
+></A
+><B
+>emptyFieldEnv</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The empty field environment.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:combFieldEnvs"
+><A NAME="v%3AcombFieldEnvs"
+></A
+></A
+><B
+>combFieldEnvs</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e -&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e -&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function combines two field environments.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldEnvSorted"
+><A NAME="v%3AfieldEnvSorted"
+></A
+></A
+><B
+>fieldEnvSorted</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> t]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This functions returns the list of all fields defined in the given
+field environment sorted by their names in ascending order.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldEnvList"
+><A NAME="v%3AfieldEnvList"
+></A
+></A
+><B
+>fieldEnvList</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; [<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> t]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This functions returns the list of all fields defined in the given
+field environment.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldEnvMap"
+><A NAME="v%3AfieldEnvMap"
+></A
+></A
+><B
+>fieldEnvMap</B
+> ::  <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> t -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> t)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getFieldInfo"
+><A NAME="v%3AgetFieldInfo"
+></A
+></A
+><B
+>getFieldInfo</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Type.html#t%3AFieldEnv"
+>FieldEnv</A
+> e</TD
+><TD CLASS="rdoc"
+>A field name.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>Information about the field with the given name (if it exists).
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; m (<A HREF="Poets-Data-Type.html#t%3AField"
+>Field</A
+> e)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Get the type definition of a field for a field of the supplied name.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,7 +1,6 @@
 \documentclass[10pt,a4paper,final,oneside,openany,article]{memoir}
 \usepackage[utf8]{inputenc}
 \usepackage[danish, british]{babel}
-%\usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{url}
 \usepackage{listings}
@@ -10,6 +9,14 @@
 %\usepackage[ntheorem, overload]{empheq}
 \usepackage{semantic}
 \usepackage{color}
+
+% makes sure we can make relative links.
+\usepackage[colorlinks]{hyperref}
+\usepackage{memhfixc} % hyperlink breaks memoir. This is the fix
+\makeatletter
+\renewcommand\href[2]{\hyper@linkurl{#2}{#1}}
+\makeatother
+
 
 % Fonts configuration
 %  - Palatino and Bitstream Vera Sans Mono for verbatim
@@ -100,31 +107,33 @@
 This report was written as part of the DIKU course ``POETS Summer of
 Code'' and presents a set of extensions to the contract specification
 language of the POETS\footnote{POETS abbreviates Process-Oriented
-  Event-driven Transaction Systems} platform. The project was
+Event-driven Transaction Systems}
+\cite{DBLP:journals/jlp/HengleinLSS09} platform. The project was
 supervised by Tom Hvitved and our code is available in the default
 branch of the POETS Mercurial repository. Together with this report we
 have handed in Haddock documentation for POETS system.
 
 \chapter{Introduction}
+
 Recently, Tom Hvitved presented a language for specifying multi-party
 contracts \cite{hvitved10} as part of the 3gERP and POETS projects
 \cite{3gerp}. The \textit{Contract Specification Language}
 (\textit{CSL}) makes it possible to write down sets of commitments
 between several parties (e.g. individuals and companies) and combining
-those commitments into legally binding agreements,
-\textit{contracts}. The language overcomes a number of limitations in
-earlier published contract formalisations, for example blame assignment and
-support for both relative and absolute temporal constraints.
+those commitments into legally binding agreements, \textit{contracts}.
+The language overcomes a number of limitations in earlier published
+contract formalisations, for example blame assignment and support for
+both relative and absolute temporal constraints.
 
 The language is structured around \textit{clauses} which are combined
 into \textit{contract templates} by a set of provided
 combinators. These templates can then be instantiated in the running
 system. For example a company might describe a sale of goods as a
-contract template and when a specific article is sold, this contract
+contract template and when a specific item is sold, this contract
 template is instantiated with the information about the article and
 its price. At instantiation time all relative temporal constraints are
 instantiated to absolute constraints, running from the time of
-instantiation. Clauses describes the \textit{actions} or
+instantiation. Clauses describe the \textit{actions} or
 \textit{transactions} that certain \textit{agents} (contract parties,
 e.g. a company) should perform and specifies temporal constraints for
 these actions (e.g., a package must be dispatched within 10 days), at
@@ -143,32 +152,29 @@ ensure the integrity of the core features of the language described in
 \cite{hvitved10}.  In Section \ref{extensions} we will go through the
 limitations of the current language that we want to solve. In Section
 we will determine what the syntax and semantics of these extensions
-should be. \fxnote{reformulate} Section \ref{implementation} describes how we have
-implemented the extensions. We round of our report by explaining how
+should be. Section \ref{implementation} describes how we have
+implemented the extensions. We round off our report by explaining how
 the extensions were tested (Section \ref{tests}) and some concluding
 remarks, including a set of further language features that could be
 implemented.
 
 \chapter{Extensions}
-\label{extensions}
-In this section we will go through the extensions of CSL that we have
-selected to implement and at the same time motivate these extensions
-by describing contracts that could occur in real world applications of
-the language.
+\label{extensions} In this section we will go through our extensions
+of CSL and at the same time motivating these extensions by describing
+contracts that could occur in real world applications.
 
-\paragraph{Case 1: Manipulating lists} In the existing language it was
+\paragraph{Case 1: Manipulating lists} In the existing language it is
 impossible to modify the contents of lists in any way. The only
 available operations on lists were computing its length and comparison
 operations. The language thus need more general operators for
 performing list manipulations.
 
-An example of a contract that could not be written in the previous
+An example of a contract that con not be written in the previous
 language incarnation, is a sales contract where the order is delivered
 in several parcels. When the first parcel is received, the contract
 should be updated to reflect that seller only needs to deliver the
-remaining articles of the order.  We show how this could be
-implemented with our extensions in Appendix
-\ref{chap:sale_partial_delivery}.
+remaining items of the order.  We show how this could be implemented
+in Appendix \ref{chap:sale_partial_delivery}.
 
 \paragraph{Case 2: Abstractions and polymorphism} The current language
 does not provide any way of writing functions on the expression
@@ -191,7 +197,7 @@ on the expression level, only decisions that selects between several
 clauses can be taken. Clause-level conditionals could be used for
 implementing certain conditions, but for many applications they would
 add an amount of repetition that would not be needed with expression
-level conditionals. 
+level conditionals.
 
 As a very simple example of the usefulness of expression-level
 conditionals, it should be noted that the minimum function could not
@@ -204,33 +210,34 @@ In this section we analyse which language primitives we need to
 overcome the problems described in the cases mentioned in
 Section \ref{extensions} above. It is desirable to restrict the amount of
 language built-in primitives to a minimum, to limit implementation
-complexity. 
+complexity.
 
 \paragraph{Case 1: List manipulation}
-A need of list manipulations implies a need of iteration or recursion
+A need for list manipulations implies a need of iteration or recursion
 primitives. We could implement recursive functions along with head,
-tail and cons as a very minimal set of primitives, but we could can
-not allow recursion. This would break \ldots \fxwarning{hvorfor var
-  det nu lige?}.  Instead we need a way of iterating through lists
-while still guaranteeing that all expressions will terminate.  Our
-solution to this problem is simple: we provide three functions known
-from functional programming languages for iterating through and
-manipulate lists. In particular, we have implemented
-\lstinline{foldl}, \lstinline{foldr} and \lstinline{cons} as built-in
-functions, which allows the user to write the large array of functions
-expressible with these primitives.
+tail and cons as a very minimajl set of primitives, but we must not
+allow recursion, as this will make it possible to write potentially
+non-terminating functions, and all expressions must terminate. Instead
+we need a way of iterating through lists while still guaranteeing that
+all expressions will terminate. Our solution to this problem is simple:
+we provide three functions known from functional programming languages
+for iterating through and manipulate lists. In particular, we have
+implemented \lstinline{foldl}, \lstinline{foldr} and \lstinline{cons} as
+built-in functions, which allows the user to write the large array of
+functions expressible with these primitives.
 
 \paragraph{Case 2: Functions} As CSL is a declarative language, our
 functions should be inspired by declarative principles. We therefore
 draw from the world of functional programming and define functions as
 lambda expressions that acts as primitive values which can be passed
 between other functions (higher-order functions). An important
-limitation on expression-level functions is the above mentioned
-limitation of terminating functions. If we were to allow recursive
-functions, we would never be sure whether they would terminate and
-this would break \ldots %with one of the main principles of CSL
-\fxwarning{citation needed}.
-% Limitation: no recursion and why?
+limitation for expressing functions on the expression level is that we
+do now allow recursive functions. The important rationale for this is
+that contracts containing potentially diverging predicates are
+essentially meaningless and therefore void of any legal value. So in
+order to assure that any contract that is accepted by the CSL system
+is indeed well defined we are restricted from allowing recursion or
+any other language construction that entails turing completeness.
 
 \paragraph{Case 3: Conditional expressions}
 Expression level conditionals are common features of all functional
@@ -239,8 +246,14 @@ such languages.
 
 \newpage
 \chapter{Implementation}
-\fxnote{section bla bla}
 \label{implementation}
+In this section, we will go through the implementation of the extensions
+giving an overview of only the most important details of the extensions.
+We will explain the syntax for all the extensions, describe built-in
+functions, type inferer and evaluator accompanied with the typing and
+big-step semantics for the extended language. Finally, we will highlight
+a number of test cases documenting the expressions function as expected.
+
 \section{Syntactic extensions}
 \begin{figure}
   \begin{align*}%[box=\widefbox]
@@ -257,9 +270,9 @@ such languages.
 
 The grammar of the complete language is defined in the tech report by
 Tom Hvitved \cite[page 13, Figure 1]{hvitved10}, our extensions can be seen in
-Figure \ref{fig:bnf}. 
+Figure \ref{fig:bnf}.
 
-We have extended the set of CSL terms $p$ to include \textit{value}
+We have extended the set of CSL terms, $p$, to include \textit{value}
 and \textit{function definitions}.  As can be seen, our only syntactic
 extensions to the CSL expression language (nonterminal $e$) are lambda
 expressions, function application and conditional
@@ -267,19 +280,20 @@ expressions\footnote{Actually, negation is also our addition. It
   existed only by coincidence in the previous version.} %negationaddition
 The multi
 parametered expressions unfold to several embedded lambda expressions
-and a function definition unfold to a value definition of a lambda
+and a function definition unfolds to a value binding of a lambda
 expression.
 
 Type expressions are extended with function types and type
-variables. We distinguish type variables from ordinary types by
+variables to accomodate for the newly introduced lambda abstractions.
+We distinguish type variables from ordinary types by
 insisting that all ordinary types start with a majuscule and all type
 variables start with a minuscule.
 
 These extensions are made to the
-\texttt{Poets.Contracts.Language.CSL.Parser} module of Poets. The most
+\href{doc/html/poets/Poets-Contracts-Language-CSL-Parser.html}{Poets.Contracts.Language.CSL.Parser} module of Poets. The most
 interesting extensions are function application which are implemented
-as a left-associative operator and \ldots.  \fxwarning{Haddock links
-  to Parser and function application parsing}
+as a left-associative operator and \ldots.
+
 
 \section{Built-in functions}
 A small set of built-in functions are necessary to define all the
@@ -316,7 +330,7 @@ added directly to the type inference algebra.
   }{
     \Gamma |- \lambda id -> e : \tau_1 -> \tau_2
   }
-  \quad \quad 
+  \quad \quad
   \frac{
     \Gamma |- e_1 : \tau_1 -> \tau_2
     \quad \Gamma |- e_2 : \tau_1
@@ -334,7 +348,7 @@ but had to be extended to include function types.  This extended is
 implemented using method explained in \textit{Data types à la carte},
 \cite{swierstra2008data}, which are an integral part of the structure
 of the POETS platform. Our extension is implemented by the EType
-data type in Poets.Contracts.Language.CSL.ALaCarte.EType and the new
+data type in \href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-EType.html}{Poets.Contracts.Language.CSL.ALaCarte.EType} and the new
 CType declaration is then
 \begin{lstlisting}[language=Haskell]
   -- |Types in CSL are regular POETS types extended with type variables
@@ -361,15 +375,15 @@ they suffice to perform the inference. We thus can not give any
 guarentees on the implemented functionality of this part.
 
 % These rules ensure that it is impossible to make recursive functions
-% by writing fix-point combinators. 
+% by writing fix-point combinators.
 
 \section{Type Checking}
-We had to extend the type checker to also type check the bound
-variables. This is done by type checking the definitions in sequential
+We had to extend the type checker to also type check the value
+bindings.  This is done by type checking the definitions in sequential
 order of their appearence in a file, extending the typing environment
 when each definition has been processed. This ensures that it is
-impossible to make self-referencing, and thereby recursive, definitions.
-This also includes mutually recursive definitions.
+impossible to make self-referencing, and thereby recursive,
+definitions.  This also includes mutually recursive definitions.
 
 \section{Evaluating expressions}
 
@@ -408,11 +422,12 @@ of values to set of possible results of the evaluator: the lambda
 abstraction. This extension of values is implemented by the new value
 type \lstinline{EValue} (extended values), with the type constructor
 \lstinline{VLambda} for lambda abstractions. This is found in the
-module Poets.Contracts.Language.CSL.ALaCarte.EValue and implemented
+module \href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-EValue.html}{Poets.Contracts.Language.CSL.ALaCarte.EValue} and implemented
 as:
 \begin{lstlisting}[language=Haskell]
 data EValue f e = VLambda (f -> e)
 \end{lstlisting}
+
 
 It should be noticed that we make a difference between the argument
 type and the result type of the function implementing the
@@ -421,7 +436,7 @@ abstraction. This was necessary to be able to write a
 if it should be used in a \textit{Data types à la carte}
 setting. Using this, we can extend the POETS values to include lambda
 abstractions, by redefining \lstinline{CValue} as
-Poets.Contracts.Language.CSL.AST:
+(done in \href{doc/html/poets/Poets-Contracts-Language-CSL-AST.html}{Poets.Contracts.Language.CSL.AST}):
 \begin{lstlisting}[language=Haskell]
 newtype CValue = CValue {unCValue :: (Term (Value :+: EValue CValue))}
 \end{lstlisting}
@@ -452,7 +467,7 @@ implementation details and note how our implementation differs from
 the semantics above.
 
 In particular, the evaluator monad for the evaluation algebra of
-module Poets.Data.ALaCarte.Algebras.Evaluator is extended to carry
+\href{doc/html/poets/Poets-Data-ALaCarte-Algebras-Evaluator.html}{module Poets.Data.ALaCarte.Algebras.Evaluator} is extended to carry
 with it an extendable environment. This is done using the
 \lstinline{ReaderT} monad transformer:
 \begin{lstlisting}[language=Haskell]
@@ -463,6 +478,7 @@ type EI env err = ReaderT env (Either err)
 runEI :: EI env err v -> env -> Either err v
 runEI = runReaderT
 \end{lstlisting}
+
 
 This also dictates a modification of how evaluation proceeds with
 the evaluator algebra:
@@ -500,7 +516,7 @@ calculates the term.
                             Right v -> v) :: EValue (Term v) (Term v))
   \end{lstlisting}
   \caption{Evaluation algebra for lambda abstractions, as seen in
-    Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator}
+    \href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html}{Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator}}
   \label{fig:eval_lambda}
 \end{figure}
 Now, to implement lambda expressions in this environment based
@@ -509,9 +525,8 @@ executed in a modified version of the environment where the lambda
 expression occurs, essentially constructing a closure. Our
 implementation of this strategy is shown in \ref{fig:eval_lambda}.
 
-The complete algebra for expression evaluation is found in 
-Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator.
-
+The complete algebra for expression evaluation is found in the module
+\href{doc/html/poets/Poets-Contracts-Language-CSL-ALaCarte-Exp-Algebras-Evaluator.html}{Poets.Contracts.Language.CSL.ALaCarte.Exp.Algebras.Evaluator}.
 
 % Extensions of the evaluator monad with environments
 % Implementation of VLambda and extension of CValues
@@ -528,20 +543,101 @@ directly constructed AST\footnote{Abstract Syntax Tree}.  The tests
 deal with the parsing of
 
 \begin{itemize}
-
   \item value bindings
-
   \item function application
-
   \item lambda definitions
-
   \item type annotations
-
 \end{itemize}
 
 The tests we have performed are only constructive, in the sense that
 only valid pieces of syntax are tested to parse to their expected
 ASTs.
+
+\section{Listing of modifications and additions}
+
+Note: All modifications have been carried out in the haskell-directory
+of the Mercurial repository
+
+\begin{verbatim}
+/examples/contracts/function-library.csl
+/examples/contracts/installmentSale.csl
+/examples/contracts/lease.csl
+/examples/contracts/master.csl
+\end{verbatim}
+
+The example contracts have been updated to use the extended syntax,
+and along with them is now a small library of common functions,
+defined using the new primitives.
+
+\begin{verbatim}
+/poets.cabal
+\end{verbatim}
+
+The Cabal-file has been suitably expanded to include new files.
+
+
+%TODO: /src/Poets/Contracts.hs
+%TODO: /src/Poets/Contracts/Language/CSL.hs
+
+\begin{verbatim}
+/src/Poets/Contracts/Language/CSL/ALaCarte/EType.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/EValue.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp.hs
+/src/Poets/Contracts/Language/CSL/AST.hs
+\end{verbatim}
+
+These files contain the extensions to the AST at the expression level,
+except for \verb+AST.sh+, which extends the AST on the top level of
+the syntax.  They include the AST definitions of lambda expressions,
+if-then-else conditionals and extended types.
+
+\begin{verbatim}
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Evaluator.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Marshal.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Render.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/Substitute.hs
+/src/Poets/Contracts/Language/CSL/ALaCarte/Exp/Algebras/TypeInferer.hs
+\end{verbatim}
+
+These files contain the á la carte algebras that make out the logic of the implementation.
+Among the our extensions the most notable have been in the Evaluator
+algebra, which needed to be extended to use a value environment rather
+than substitution, which turned out to be a somewhat involved task.
+
+The other algebras have been extended to include support for the new
+syntactic constructs.
+
+%TODO: /src/Poets/Contracts/Language/CSL/ALaCarte/RecordFieldName/Algebras/Evaluator.hs
+%TODO: /src/Poets/Contracts/Language/CSL/Analysis/ExpectedTransactions.hs
+
+
+\begin{verbatim}
+/src/Poets/Contracts/Language/CSL/Interpreter.hs
+\end{verbatim}
+
+/src/Poets/Contracts/Language/CSL/Parser.hs
+/src/Poets/Contracts/Language/CSL/Render.hs
+/src/Poets/Contracts/Language/CSL/TypeChecker.hs
+\end{verbatim}
+
+
+/src/Poets/Data/ALaCarte.hs
+/src/Poets/Data/ALaCarte/Algebras/Evaluator.hs
+/src/Poets/Data/ALaCarte/Algebras/TypeInferer.hs
+/src/Poets/Data/Value/Algebras/Evaluator.hs
+
+\begin{verbatim}
+/test/contracts/Test.hs
+/test/contracts/test.contract
+/test/suites/Poets/Contracts/CSLEvaluator_Test.hs
+/test/suites/Poets/Contracts/CSLParser_Test.hs
+/test/suites/Poets/Contracts_Test.hs
+/test/suites/Poets_Test.hs
+\end{verbatim}
+
+These files contain the unit tests of our extensions. The files
+outside the \verb+Contracts+ folder contain only administrative code
+that includes the new tests to the total collection of POETS tests.
 
 \chapter{Conclusion}
 We have extended the Contract Specification Language of the POETS
@@ -562,19 +658,34 @@ Finally, the core features of the original language \cite[page
 \section{Future work}
 As we have worked with the language we have had additional ideas to
 features that could be \textit{nice to have} in the contract language.
-
+Note that these suggestions are stricly related with the CSL expression
+language, for suggestions of the greater scheme of CSL, refer to
+\cite{hvitved10}.
 \begin{itemize}
-\item A module system.
-\item \lstinline{let}-bindings in expressions (syntactic sugar for
-  lambda binding variable)
-\item Additional datatypes, for example pairs or dynamic creation of
-  new record types. To provide a richer library of primitive
+%\item \textbf{A module system}. 
+%\item \textbf{\lstinline{let}-bindings in expressions}. (syntactic sugar for
+%  lambda binding variable).
+\item \textbf{Additional datatypes}. For example pairs or dynamic
+  creation of new record types. To provide a richer library of primitive
   datatypes.
-\item Repeat-loop to repetitive clauses (e.g. an action that has to be
-  taken every 14 days). The purpose would be to give a better
-  intuitive understanding of recursive clause templates. As such, this
-  extension would be implemented as purely syntactic sugar.
-\item Elimination of parameter-passing \lstinline{where}-clauses.
+\item \textbf{Repeat-loop to repetitive clauses} (e.g. an action that
+  has to be taken every 14 days). The purpose would be to give a better
+  intuitive understanding of recursive contracts. As such, this
+  extension can be implemented as purely syntactic sugar.
+\item \textbf{Elimination of parameter-passing \lstinline{where}-clauses.} It is
+  observed that a large amount of redundancy is performed in
+  \lstinline{where}-clauses. Such an extension will be able to eliminate
+  verbose operations as seen in the existing contract clauses:
+  \begin{lstlisting}
+  ...
+  <agent> SomeAction(arguments)
+  where g == goods andalso
+        a == amount andalso
+        c == currency
+        ...
+  \end{lstlisting}
+  This extension will eliminate a large amount of this redundancy as
+  the expressions can be collapsed into the arguments of the actions.
 \end{itemize}
 
 \defbibheading{bibliography}{\chapter{Bibliography}}

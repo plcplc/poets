@@ -1,0 +1,545 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.Value.Serialize</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-Value-Serialize.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.Value.Serialize</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Morten Ib Nielsen, Tom Hvitved</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines instances of <TT
+><A HREF="Poets-Data-Serialize.html#t%3ASerialize"
+>Serialize</A
+></TT
+> for
+ <TT
+><A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TT
+> and <TT
+><A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+></TT
+> <TT
+><A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TT
+>, i.e., XML serialization of values
+ and records.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addNamespace"
+><A NAME="v%3AaddNamespace"
+></A
+></A
+><B
+>addNamespace</B
+> :: Element -&gt; Element</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:value2xml"
+><A NAME="v%3Avalue2xml"
+></A
+></A
+><B
+>value2xml</B
+> :: <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+> -&gt; Element</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:xml2vrecord"
+><A NAME="v%3Axml2vrecord"
+></A
+></A
+><B
+>xml2vrecord</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:xml2value"
+><A NAME="v%3Axml2value"
+></A
+></A
+><B
+>xml2value</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkElementName"
+><A NAME="v%3AcheckElementName"
+></A
+></A
+><B
+>checkElementName</B
+> :: QName -&gt; QName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:findAttr'"
+><A NAME="v%3AfindAttr%27"
+></A
+></A
+><B
+>findAttr'</B
+> :: QName -&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processValue"
+><A NAME="v%3AprocessValue"
+></A
+></A
+><B
+>processValue</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processT"
+><A NAME="v%3AprocessT"
+></A
+></A
+><B
+>processT</B
+> :: g <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> f =&gt; QName -&gt; (b -&gt; g (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)) -&gt; (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> b) -&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processBool"
+><A NAME="v%3AprocessBool"
+></A
+></A
+><B
+>processBool</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processInt"
+><A NAME="v%3AprocessInt"
+></A
+></A
+><B
+>processInt</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processDouble"
+><A NAME="v%3AprocessDouble"
+></A
+></A
+><B
+>processDouble</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processDateTime"
+><A NAME="v%3AprocessDateTime"
+></A
+></A
+><B
+>processDateTime</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processDuration"
+><A NAME="v%3AprocessDuration"
+></A
+></A
+><B
+>processDuration</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processString"
+><A NAME="v%3AprocessString"
+></A
+></A
+><B
+>processString</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processList"
+><A NAME="v%3AprocessList"
+></A
+></A
+><B
+>processList</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processRecord"
+><A NAME="v%3AprocessRecord"
+></A
+></A
+><B
+>processRecord</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processRecord'"
+><A NAME="v%3AprocessRecord%27"
+></A
+></A
+><B
+>processRecord'</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:processField"
+><A NAME="v%3AprocessField"
+></A
+></A
+><B
+>processField</B
+> :: <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> e =&gt; Element -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

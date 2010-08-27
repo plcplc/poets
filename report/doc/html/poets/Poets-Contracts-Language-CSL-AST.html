@@ -1,0 +1,2165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.AST</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Contracts-Language-CSL-AST.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Contracts.Language.CSL.AST</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Philip Carlsen, Brian Mathiasen and Martin Dybdal</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the AST for the contract language CSL.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASrcPos"
+>SrcPos</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> SourcePos</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ACExpr"
+>CExpr</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> ((<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AExp"
+>Exp</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3ACValue"
+>CValue</A
+>  = <A HREF="#v%3ACValue"
+>CValue</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AunCValue"
+>unCValue</A
+> :: <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-EValue.html#t%3AEValue"
+>EValue</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+>)</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ACType"
+>CType</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-EType.html#t%3AEType"
+>EType</A
+>)))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ACSubstitution"
+>CSubstitution</A
+> = <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitution"
+>Substitution</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AExp"
+>Exp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ACVariableEnv"
+>CVariableEnv</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AClause"
+>Clause</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AEmpty"
+>Empty</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AObligation"
+>Obligation</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseResponsible"
+>clauseResponsible</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseTransactionType"
+>clauseTransactionType</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseVarFieldMap"
+>clauseVarFieldMap</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseFreezeVar"
+>clauseFreezeVar</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclausePredicate"
+>clausePredicate</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseDeadline"
+>clauseDeadline</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ADeadline"
+>Deadline</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseContinuation"
+>clauseContinuation</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3APermission"
+>Permission</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseResponsibles"
+>clauseResponsibles</A
+> :: [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseTransactionType"
+>clauseTransactionType</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseVarFieldMap"
+>clauseVarFieldMap</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseFreezeVar"
+>clauseFreezeVar</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclausePredicate"
+>clausePredicate</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseDeadline"
+>clauseDeadline</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ADeadline"
+>Deadline</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseContinuation"
+>clauseContinuation</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseElse"
+>clauseElse</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AAnd"
+>And</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseLeft"
+>clauseLeft</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseRight"
+>clauseRight</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOr"
+>Or</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseLeft"
+>clauseLeft</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseRight"
+>clauseRight</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AIf"
+>If</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseCondition"
+>clauseCondition</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseThen"
+>clauseThen</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseElse"
+>clauseElse</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AInstantiate"
+>Instantiate</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseClauseTemplate"
+>clauseClauseTemplate</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseArgs"
+>clauseArgs</A
+> :: [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseAgentArgs"
+>clauseAgentArgs</A
+> :: [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseSrcPos"
+>clauseSrcPos</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ADeadline"
+>Deadline</A
+> = (<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>, <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AClauseTemplate"
+>ClauseTemplate</A
+>  = <A HREF="#v%3AClauseTemplate"
+>ClauseTemplate</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseTemplateName"
+>clauseTemplateName</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseTemplateParams"
+>clauseTemplateParams</A
+> :: [(<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+>, <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseTemplateAgentParams"
+>clauseTemplateAgentParams</A
+> :: [<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AclauseTemplateBody"
+>clauseTemplateBody</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AContractTemplate"
+>ContractTemplate</A
+>  = <A HREF="#v%3AContractTemplate"
+>ContractTemplate</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AcontractTemplateName"
+>contractTemplateName</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AcontractTemplateType"
+>contractTemplateType</A
+> :: <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AcontractTemplateBody"
+>contractTemplateBody</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AValueBinding"
+>ValueBinding</A
+>  = <A HREF="#v%3AValueBinding"
+>ValueBinding</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AbindingType"
+>bindingType</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AbindingName"
+>bindingName</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AbindingValue"
+>bindingValue</A
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AChoice"
+>Choice</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AL"
+>L</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AR"
+>R</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ARouting"
+>Routing</A
+> = [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AChoice"
+>Choice</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtransactionFieldRouting"
+>transactionFieldRouting</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:SrcPos"
+><A NAME="t%3ASrcPos"
+></A
+></A
+><B
+>SrcPos</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> SourcePos</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Source position information.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:CExpr"
+><A NAME="t%3ACExpr"
+></A
+></A
+><B
+>CExpr</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> ((<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AExp"
+>Exp</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+>))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The expressions used in CSL clauses are either POETS values, or extended CSL
+ expressions. In either case the term is annotated with source code
+ information in order to print out useful typing errors.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:CValue"
+><A NAME="t%3ACValue"
+></A
+></A
+><B
+>CValue</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>CSL values are POETS values.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:CValue"
+><A NAME="v%3ACValue"
+></A
+></A
+><B
+>CValue</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:unCValue"
+><A NAME="v%3AunCValue"
+></A
+></A
+><B
+>unCValue</B
+> :: <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-EValue.html#t%3AEValue"
+>EValue</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACValue"
+>CValue</A
+>)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:CType"
+><A NAME="t%3ACType"
+></A
+></A
+><B
+>CType</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Data-ALaCarte-Algebras-TypeInferer.html#t%3ATypeVar"
+>TypeVar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-EType.html#t%3AEType"
+>EType</A
+>)))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Types in CSL are regular POETS types extended with type variables and
+ function types.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:CSubstitution"
+><A NAME="t%3ACSubstitution"
+></A
+></A
+><B
+>CSubstitution</B
+> = <A HREF="Poets-Data-ALaCarte-Algebras-Substitute.html#t%3ASubstitution"
+>Substitution</A
+> (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AExp"
+>Exp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The substitution type used in CSL expressions. (Source code information is
+ not included, since substitution values are not read from a file.)
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:CVariableEnv"
+><A NAME="t%3ACVariableEnv"
+></A
+></A
+><B
+>CVariableEnv</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+> <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The variable environment used in type checking of CSL expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Clause"
+><A NAME="t%3AClause"
+></A
+></A
+><B
+>Clause</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The AST for CSL clauses.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Empty"
+><A NAME="v%3AEmpty"
+></A
+></A
+><B
+>Empty</B
+></TD
+><TD CLASS="rdoc"
+>The empty clause.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Obligation"
+><A NAME="v%3AObligation"
+></A
+></A
+><B
+>Obligation</B
+></TD
+><TD CLASS="rdoc"
+>Atomic obligation.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseResponsible"
+><A NAME="v%3AclauseResponsible"
+></A
+></A
+><B
+>clauseResponsible</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+><TD CLASS="rdoc"
+>The responsible agent.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseTransactionType"
+><A NAME="v%3AclauseTransactionType"
+></A
+></A
+><B
+>clauseTransactionType</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+><TD CLASS="rdoc"
+>The type of the obligation.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseVarFieldMap"
+><A NAME="v%3AclauseVarFieldMap"
+></A
+></A
+><B
+>clauseVarFieldMap</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>Association of variables with fields defined for the transaction type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseFreezeVar"
+><A NAME="v%3AclauseFreezeVar"
+></A
+></A
+><B
+>clauseFreezeVar</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+><TD CLASS="rdoc"
+>The name of the <EM
+>freeze variable</EM
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clausePredicate"
+><A NAME="v%3AclausePredicate"
+></A
+></A
+><B
+>clausePredicate</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+><TD CLASS="rdoc"
+>The predicate to fulfill.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseDeadline"
+><A NAME="v%3AclauseDeadline"
+></A
+></A
+><B
+>clauseDeadline</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ADeadline"
+>Deadline</A
+></TD
+><TD CLASS="rdoc"
+>The deadline to fulfill.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseContinuation"
+><A NAME="v%3AclauseContinuation"
+></A
+></A
+><B
+>clauseContinuation</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The continuation clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Permission"
+><A NAME="v%3APermission"
+></A
+></A
+><B
+>Permission</B
+></TD
+><TD CLASS="rdoc"
+>Atomic permission.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseResponsibles"
+><A NAME="v%3AclauseResponsibles"
+></A
+></A
+><B
+>clauseResponsibles</B
+> :: [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]</TD
+><TD CLASS="rdoc"
+>The responsible agents.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseTransactionType"
+><A NAME="v%3AclauseTransactionType"
+></A
+></A
+><B
+>clauseTransactionType</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATransactionType"
+>TransactionType</A
+></TD
+><TD CLASS="rdoc"
+>The type of the obligation.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseVarFieldMap"
+><A NAME="v%3AclauseVarFieldMap"
+></A
+></A
+><B
+>clauseVarFieldMap</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>Association of variables with fields defined for the transaction type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseFreezeVar"
+><A NAME="v%3AclauseFreezeVar"
+></A
+></A
+><B
+>clauseFreezeVar</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+><TD CLASS="rdoc"
+>The name of the <EM
+>freeze variable</EM
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clausePredicate"
+><A NAME="v%3AclausePredicate"
+></A
+></A
+><B
+>clausePredicate</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+><TD CLASS="rdoc"
+>The predicate to fulfill.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseDeadline"
+><A NAME="v%3AclauseDeadline"
+></A
+></A
+><B
+>clauseDeadline</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ADeadline"
+>Deadline</A
+></TD
+><TD CLASS="rdoc"
+>The deadline to fulfill.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseContinuation"
+><A NAME="v%3AclauseContinuation"
+></A
+></A
+><B
+>clauseContinuation</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The continuation clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseElse"
+><A NAME="v%3AclauseElse"
+></A
+></A
+><B
+>clauseElse</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The <EM
+>else</EM
+> branch.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:And"
+><A NAME="v%3AAnd"
+></A
+></A
+><B
+>And</B
+></TD
+><TD CLASS="rdoc"
+>Clause conjunction.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseLeft"
+><A NAME="v%3AclauseLeft"
+></A
+></A
+><B
+>clauseLeft</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The left clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseRight"
+><A NAME="v%3AclauseRight"
+></A
+></A
+><B
+>clauseRight</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The right clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Or"
+><A NAME="v%3AOr"
+></A
+></A
+><B
+>Or</B
+></TD
+><TD CLASS="rdoc"
+>Clause disjunction
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseLeft"
+><A NAME="v%3AclauseLeft"
+></A
+></A
+><B
+>clauseLeft</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The left clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseRight"
+><A NAME="v%3AclauseRight"
+></A
+></A
+><B
+>clauseRight</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The right clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:If"
+><A NAME="v%3AIf"
+></A
+></A
+><B
+>If</B
+></TD
+><TD CLASS="rdoc"
+>Branching.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseCondition"
+><A NAME="v%3AclauseCondition"
+></A
+></A
+><B
+>clauseCondition</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+><TD CLASS="rdoc"
+>The branch condition.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseThen"
+><A NAME="v%3AclauseThen"
+></A
+></A
+><B
+>clauseThen</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The <EM
+>then</EM
+> clause.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseElse"
+><A NAME="v%3AclauseElse"
+></A
+></A
+><B
+>clauseElse</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The <EM
+>else</EM
+> branch.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Instantiate"
+><A NAME="v%3AInstantiate"
+></A
+></A
+><B
+>Instantiate</B
+></TD
+><TD CLASS="rdoc"
+>Template instantiation.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseClauseTemplate"
+><A NAME="v%3AclauseClauseTemplate"
+></A
+></A
+><B
+>clauseClauseTemplate</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+><TD CLASS="rdoc"
+>The name of the template to instantiate.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseArgs"
+><A NAME="v%3AclauseArgs"
+></A
+></A
+><B
+>clauseArgs</B
+> :: [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]</TD
+><TD CLASS="rdoc"
+>Arguments to the template.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseAgentArgs"
+><A NAME="v%3AclauseAgentArgs"
+></A
+></A
+><B
+>clauseAgentArgs</B
+> :: [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>]</TD
+><TD CLASS="rdoc"
+>Agent arguments to the template.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseSrcPos"
+><A NAME="v%3AclauseSrcPos"
+></A
+></A
+><B
+>clauseSrcPos</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+>Source code information.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Deadline"
+><A NAME="t%3ADeadline"
+></A
+></A
+><B
+>Deadline</B
+> = (<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>, <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>A deadline constitutes two duration expressions (the typechecker will check
+ that the CSL expressions have the right type).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ClauseTemplate"
+><A NAME="t%3AClauseTemplate"
+></A
+></A
+><B
+>ClauseTemplate</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Clause template.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ClauseTemplate"
+><A NAME="v%3AClauseTemplate"
+></A
+></A
+><B
+>ClauseTemplate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseTemplateName"
+><A NAME="v%3AclauseTemplateName"
+></A
+></A
+><B
+>clauseTemplateName</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+><TD CLASS="rdoc"
+>The name of the clause template.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseTemplateParams"
+><A NAME="v%3AclauseTemplateParams"
+></A
+></A
+><B
+>clauseTemplateParams</B
+> :: [(<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+>, <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+>)]</TD
+><TD CLASS="rdoc"
+>The named parameters and their types.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseTemplateAgentParams"
+><A NAME="v%3AclauseTemplateAgentParams"
+></A
+></A
+><B
+>clauseTemplateAgentParams</B
+> :: [<A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+>]</TD
+><TD CLASS="rdoc"
+>The named agent parameters.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauseTemplateBody"
+><A NAME="v%3AclauseTemplateBody"
+></A
+></A
+><B
+>clauseTemplateBody</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The (parametrized) clause defining the template.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ContractTemplate"
+><A NAME="t%3AContractTemplate"
+></A
+></A
+><B
+>ContractTemplate</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Contract template.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ContractTemplate"
+><A NAME="v%3AContractTemplate"
+></A
+></A
+><B
+>ContractTemplate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:contractTemplateName"
+><A NAME="v%3AcontractTemplateName"
+></A
+></A
+><B
+>contractTemplateName</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3ATemplateName"
+>TemplateName</A
+></TD
+><TD CLASS="rdoc"
+>The name of the contract template.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:contractTemplateType"
+><A NAME="v%3AcontractTemplateType"
+></A
+></A
+><B
+>contractTemplateType</B
+> :: <A HREF="Poets-Contracts-Base.html#t%3AContractType"
+>ContractType</A
+></TD
+><TD CLASS="rdoc"
+>The type of the contract template. The type refers to a record type defined in the ontology, and it defines the parameters which are available to the contract template.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:contractTemplateBody"
+><A NAME="v%3AcontractTemplateBody"
+></A
+></A
+><B
+>contractTemplateBody</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>The (parametrized) clause defining the template.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ValueBinding"
+><A NAME="t%3AValueBinding"
+></A
+></A
+><B
+>ValueBinding</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Value binding.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ValueBinding"
+><A NAME="v%3AValueBinding"
+></A
+></A
+><B
+>ValueBinding</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:bindingType"
+><A NAME="v%3AbindingType"
+></A
+></A
+><B
+>bindingType</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACType"
+>CType</A
+></TD
+><TD CLASS="rdoc"
+>Type
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:bindingName"
+><A NAME="v%3AbindingName"
+></A
+></A
+><B
+>bindingName</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+><TD CLASS="rdoc"
+>Variable name of binding.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:bindingValue"
+><A NAME="v%3AbindingValue"
+></A
+></A
+><B
+>bindingValue</B
+> :: <A HREF="Poets-Contracts-Language-CSL-AST.html#t%3ACExpr"
+>CExpr</A
+></TD
+><TD CLASS="rdoc"
+>Value to be bound.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Choice"
+><A NAME="t%3AChoice"
+></A
+></A
+><B
+>Choice</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Explicit choice is needed for events where the clause is a conjunction.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:L"
+><A NAME="v%3AL"
+></A
+></A
+><B
+>L</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:R"
+><A NAME="v%3AR"
+></A
+></A
+><B
+>R</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Routing"
+><A NAME="t%3ARouting"
+></A
+></A
+><B
+>Routing</B
+> = [<A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AChoice"
+>Choice</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Event routing is a sequence of <TT
+><A HREF="Poets-Contracts-Language-CSL-AST.html#t%3AChoice"
+>Choice</A
+></TT
+>s (there can be nested conjunctions).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:transactionFieldRouting"
+><A NAME="v%3AtransactionFieldRouting"
+></A
+></A
+><B
+>transactionFieldRouting</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Transactions are required to contain a field for routing information.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.Inference</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+></HEAD
+><BODY
+><DIV CLASS="outer"
+><DIV CLASS="mini-topbar"
+>Poets.Reporting.Language.Parrot.Typing.Inference</DIV
+><DIV CLASS="mini-synopsis"
+><DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AVVarOcc" TARGET="main"
+>VVarOcc</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AMonoEnv" TARGET="main"
+>MonoEnv</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AemptyEnv" TARGET="main"
+>emptyEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AmkEnv" TARGET="main"
+>mkEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AaddToEnv" TARGET="main"
+>addToEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AlookupEnv" TARGET="main"
+>lookupEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AgetVarOcc" TARGET="main"
+>getVarOcc</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AremoveFromEnv" TARGET="main"
+>removeFromEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcombineEnvs" TARGET="main"
+>combineEnvs</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AequateTypes" TARGET="main"
+>equateTypes</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AlookupEnvVars" TARGET="main"
+>lookupEnvVars</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferRes" TARGET="main"
+>InferRes</A
+> </DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AunzipInferRes" TARGET="main"
+>unzipInferRes</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AunzipInferRes%27" TARGET="main"
+>unzipInferRes'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AemptyRes" TARGET="main"
+>emptyRes</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3APolyEnv" TARGET="main"
+>PolyEnv</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferState" TARGET="main"
+>InferState</A
+> </DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferM" TARGET="main"
+>InferM</A
+> a</DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3ArunInferM" TARGET="main"
+>runInferM</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AliftTyErr" TARGET="main"
+>liftTyErr</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AgetRecEnv" TARGET="main"
+>getRecEnv</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckRecDefined" TARGET="main"
+>checkRecDefined</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AaddRec" TARGET="main"
+>addRec</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckRecord" TARGET="main"
+>checkRecord</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckField" TARGET="main"
+>checkField</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AlookupRecord" TARGET="main"
+>lookupRecord</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3Alocal%27" TARGET="main"
+>local'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AaddFunctionTyping" TARGET="main"
+>addFunctionTyping</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AwithBinding" TARGET="main"
+>withBinding</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AlookupBinding" TARGET="main"
+>lookupBinding</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3ArenamePolytype" TARGET="main"
+>renamePolytype</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AInferAlg" TARGET="main"
+>InferAlg</A
+> f</DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3Ainfer" TARGET="main"
+>infer</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AinferFun" TARGET="main"
+>inferFun</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AisTypeSchemeValid" TARGET="main"
+>isTypeSchemeValid</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AisTypeValid" TARGET="main"
+>isTypeValid</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AisTypeConstrValid" TARGET="main"
+>isTypeConstrValid</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckDecl" TARGET="main"
+>checkDecl</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AcheckProg" TARGET="main"
+>checkProg</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AtypeProg" TARGET="main"
+>typeProg</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AinferLam" TARGET="main"
+>inferLam</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AinferPrimOp" TARGET="main"
+>inferPrimOp</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AinferOp" TARGET="main"
+>inferOp</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AinferOp%27" TARGET="main"
+>inferOp'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AsimpType" TARGET="main"
+>simpType</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AsimpType%27" TARGET="main"
+>simpType'</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AmatchAndSimplify" TARGET="main"
+>matchAndSimplify</A
+></DIV
+> <DIV CLASS="decl"
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#v%3AoperatorType" TARGET="main"
+>operatorType</A
+></DIV
+> <DIV CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>&nbsp;<A HREF="Poets-Reporting-Language-Parrot-Typing-Inference.html#t%3AFunctionType" TARGET="main"
+>FunctionType</A
+> </DIV
+></DIV
+></DIV
+></BODY
+></HTML
+>

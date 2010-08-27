@@ -1,0 +1,4757 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Syntax</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Syntax.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Syntax</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the abstract syntax of the Parrot reporting
+ language.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASrcPos"
+>SrcPos</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> SourcePos</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATVarId"
+>TVarId</A
+>  = <A HREF="#v%3ATVarId"
+>TVarId</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3AVarId"
+>VarId</A
+> a  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AvarName"
+>varName</A
+> :: a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtVarId"
+>tVarId</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeExt"
+>TypeExt</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ATVar"
+>TVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATFun"
+>TFun</A
+> e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATSum"
+>TSum</A
+> e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATProd"
+>TProd</A
+> e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATDurationDate"
+>TDurationDate</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATChar"
+>TChar</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATUnit"
+>TUnit</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATypeSigPos"
+>TypeSigPos</A
+> = (<A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> ((<A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATypeSig"
+>TypeSig</A
+> = <A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APType"
+>PType</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APType%27"
+>PType'</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSig"
+>TypeSig</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeConstr"
+>TypeConstr</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ASubType"
+>SubType</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AHasField"
+>HasField</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOrd"
+>Ord</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeScheme"
+>TypeScheme</A
+>  = <A HREF="#v%3ATypeScheme"
+>TypeScheme</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVVarId"
+>VVarId</A
+>  = <A HREF="#v%3AVVarId"
+>VVarId</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AvVarId"
+>vVarId</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AValueExt"
+>ValueExt</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AVVar"
+>VVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVLam"
+>VLam</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVChar"
+>VChar</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVCons"
+>VCons</A
+> e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVLeft"
+>VLeft</A
+> e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVRight"
+>VRight</A
+> e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVPair"
+>VPair</A
+> e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVUnit"
+>VUnit</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AValueSigPos"
+>ValueSigPos</A
+> = (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APValue"
+>PValue</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueSigPos"
+>ValueSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypeCase"
+>TypeCase</A
+> e = <A HREF="#v%3ATypeCase"
+>TypeCase</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtypeCaseRec"
+>typeCaseRec</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtypeCaseBody"
+>typeCaseBody</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ADefTypeCase"
+>DefTypeCase</A
+> e = <A HREF="#v%3ADefTypeCase"
+>DefTypeCase</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdefTypeCaseBody"
+>defTypeCaseBody</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ADefTypeCasePos"
+>DefTypeCasePos</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADefTypeCase"
+>DefTypeCase</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ABinOpCore"
+>BinOpCore</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AOpPlus"
+>OpPlus</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpMinus"
+>OpMinus</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpTimes"
+>OpTimes</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpDiv"
+>OpDiv</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpAnd"
+>OpAnd</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpOr"
+>OpOr</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpEq"
+>OpEq</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpLt"
+>OpLt</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpLe"
+>OpLe</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpGt"
+>OpGt</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpGe"
+>OpGe</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpDurPlus"
+>OpDurPlus</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOpDurMinus"
+>OpDurMinus</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ABinOpSugar"
+>BinOpSugar</A
+>  = <A HREF="#v%3AOpAppend"
+>OpAppend</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3APrimOp"
+>PrimOp</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AFold"
+>Fold</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ANot"
+>Not</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACase"
+>Case</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AError"
+>Error</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEvents"
+>Events</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALeftOp"
+>LeftOp</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARightOp"
+>RightOp</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AProj"
+>Proj</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AProjLeft"
+>ProjLeft</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AProjRight"
+>ProjRight</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AVFieldPos"
+>VFieldPos</A
+> = <A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ALetBindPos"
+>LetBindPos</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ALetBind"
+>LetBind</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATypeCasePos"
+>TypeCasePos</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeCase"
+>TypeCase</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ADurationExp"
+>DurationExp</A
+> = <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AExpExt"
+>ExpExt</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AApp"
+>App</A
+> e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ABinOpCore"
+>BinOpCore</A
+> e <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+> e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALet"
+>Let</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ALetBindPos"
+>LetBindPos</A
+> e] e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATypeOf"
+>TypeOf</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeCasePos"
+>TypeCasePos</A
+> e] (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADefTypeCasePos"
+>DefTypeCasePos</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARecAcc"
+>RecAcc</A
+> e <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARecMod"
+>RecMod</A
+> e [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADateTime"
+>DateTime</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADayExp"
+>DayExp</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATimeExp"
+>TimeExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADuration"
+>Duration</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADurationExp"
+>DurationExp</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AIf"
+>If</A
+> e e e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3APrimOp"
+>PrimOp</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APrimOp"
+>PrimOp</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AProj"
+>Proj</A
+> e <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProj"
+>Proj</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AExpSugar"
+>ExpSugar</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ABinOpSugar"
+>BinOpSugar</A
+> e <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpSugar"
+>BinOpSugar</A
+> e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATypePred"
+>TypePred</A
+> e <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AListComprehension"
+>ListComprehension</A
+> e [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AListFilters"
+>ListFilters</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOperatorSection"
+>OperatorSection</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AOperatorSection"
+>OperatorSection</A
+> e)</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AOperatorSection"
+>OperatorSection</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ANormalSection"
+>NormalSection</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AOperand"
+>Operand</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AConsSection"
+>ConsSection</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AOperand"
+>Operand</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATypePredSection"
+>TypePredSection</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AOperand"
+>Operand</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ANoOperand"
+>NoOperand</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALeftOperand"
+>LeftOperand</A
+> e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARightOperand"
+>RightOperand</A
+> e</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AListFilters"
+>ListFilters</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AListGuard"
+>ListGuard</A
+> e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AListGenerator"
+>ListGenerator</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+>) e</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AListLet"
+>ListLet</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+>) e</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ADayExp"
+>DayExp</A
+>  = <A HREF="#v%3ADayExp"
+>DayExp</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdayExpYear"
+>dayExpYear</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdayExpMonth"
+>dayExpMonth</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdayExpDay"
+>dayExpDay</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATimeExp"
+>TimeExp</A
+>  = <A HREF="#v%3ATimeExp"
+>TimeExp</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtimeExpHour"
+>timeExpHour</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtimeExpMinute"
+>timeExpMinute</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtimeExpSecond"
+>timeExpSecond</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ADateComp"
+>DateComp</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ADateLit"
+>DateLit</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADateVar"
+>DateVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ALetBind"
+>LetBind</A
+> e = <A HREF="#v%3ALetBind"
+>LetBind</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AletBindVar"
+>letBindVar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AletBindArgs"
+>letBindArgs</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AletBindBody"
+>letBindBody</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+> = (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpExt"
+>ExpExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueSigPos"
+>ValueSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APExpCore"
+>PExpCore</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AExpSigPos"
+>ExpSigPos</A
+> = (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSugar"
+>ExpSugar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APExp"
+>PExp</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSigPos"
+>ExpSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AFunId"
+>FunId</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ADecl"
+>Decl</A
+> f </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AFunDecl"
+>FunDecl</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclPos"
+>declPos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclId"
+>declId</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclType"
+>declType</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclArgs"
+>declArgs</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>]</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclBody"
+>declBody</A
+> :: <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ARecDecl"
+>RecDecl</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclPos"
+>declPos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclRec"
+>declRec</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclSuper"
+>declSuper</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdeclFields"
+>declFields</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFieldDecl"
+>FieldDecl</A
+>]</TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ADeclCore"
+>DeclCore</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADecl"
+>Decl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ADeclSugar"
+>DeclSugar</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADecl"
+>Decl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSigPos"
+>ExpSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AFieldDecl"
+>FieldDecl</A
+>  = <A HREF="#v%3AFieldDecl"
+>FieldDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AProgram"
+>Program</A
+> f = <A HREF="#v%3AProgram"
+>Program</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AprogramName"
+>programName</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AprogramDesc"
+>programDesc</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AprogramDecls"
+>programDecls</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADecl"
+>Decl</A
+> f]</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AProgramCore"
+>ProgramCore</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgram"
+>Program</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AProgramSugar"
+>ProgramSugar</A
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgram"
+>Program</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSigPos"
+>ExpSigPos</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:SrcPos"
+><A NAME="t%3ASrcPos"
+></A
+></A
+><B
+>SrcPos</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> SourcePos</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents a position in the original source code.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TVarId"
+><A NAME="t%3ATVarId"
+></A
+></A
+><B
+>TVarId</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This is the type of a type variable identifier.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TVarId"
+><A NAME="v%3ATVarId"
+></A
+></A
+><B
+>TVarId</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t:VarId"
+><A NAME="t%3AVarId"
+></A
+></A
+><B
+>VarId</B
+> a  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:varName"
+><A NAME="v%3AvarName"
+></A
+></A
+><B
+>varName</B
+> :: a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tVarId"
+><A NAME="v%3AtVarId"
+></A
+></A
+><B
+>tVarId</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeExt"
+><A NAME="t%3ATypeExt"
+></A
+></A
+><B
+>TypeExt</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the additional types for Parrot.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TVar"
+><A NAME="v%3ATVar"
+></A
+></A
+><B
+>TVar</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TFun"
+><A NAME="v%3ATFun"
+></A
+></A
+><B
+>TFun</B
+> e e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TSum"
+><A NAME="v%3ATSum"
+></A
+></A
+><B
+>TSum</B
+> e e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TProd"
+><A NAME="v%3ATProd"
+></A
+></A
+><B
+>TProd</B
+> e e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TDurationDate"
+><A NAME="v%3ATDurationDate"
+></A
+></A
+><B
+>TDurationDate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TChar"
+><A NAME="v%3ATChar"
+></A
+></A
+><B
+>TChar</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TUnit"
+><A NAME="v%3ATUnit"
+></A
+></A
+><B
+>TUnit</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TypeSigPos"
+><A NAME="t%3ATypeSigPos"
+></A
+></A
+><B
+>TypeSigPos</B
+> = (<A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> ((<A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>))</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the signature for type expressions used in Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TypeSig"
+><A NAME="t%3ATypeSig"
+></A
+></A
+><B
+>TypeSig</B
+> = <A HREF="Poets-Data-Type.html#t%3ATypeConstant"
+>TypeConstant</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Data-Type.html#t%3ATypeList"
+>TypeList</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeExt"
+>TypeExt</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the signature for type expressions used in Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:PType"
+><A NAME="t%3APType"
+></A
+></A
+><B
+>PType</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This Type represents the type expressions used in Parrot 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:PType'"
+><A NAME="t%3APType%27"
+></A
+></A
+><B
+>PType'</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSig"
+>TypeSig</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This Type represents the type expressions used in Parrot 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeConstr"
+><A NAME="t%3ATypeConstr"
+></A
+></A
+><B
+>TypeConstr</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents atomic type constraints used in Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:SubType"
+><A NAME="v%3ASubType"
+></A
+></A
+><B
+>SubType</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+>Subtyping constraint
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:HasField"
+><A NAME="v%3AHasField"
+></A
+></A
+><B
+>HasField</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Ord"
+><A NAME="v%3AOrd"
+></A
+></A
+><B
+>Ord</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeScheme"
+><A NAME="t%3ATypeScheme"
+></A
+></A
+><B
+>TypeScheme</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents type schemes.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeScheme"
+><A NAME="v%3ATypeScheme"
+></A
+></A
+><B
+>TypeScheme</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:VVarId"
+><A NAME="t%3AVVarId"
+></A
+></A
+><B
+>VVarId</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This type represents (value) variable identifiers.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VVarId"
+><A NAME="v%3AVVarId"
+></A
+></A
+><B
+>VVarId</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:vVarId"
+><A NAME="v%3AvVarId"
+></A
+></A
+><B
+>vVarId</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ValueExt"
+><A NAME="t%3AValueExt"
+></A
+></A
+><B
+>ValueExt</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the signature extension for
+Parrot values.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VVar"
+><A NAME="v%3AVVar"
+></A
+></A
+><B
+>VVar</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+><TD CLASS="rdoc"
+>variable
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VLam"
+><A NAME="v%3AVLam"
+></A
+></A
+><B
+>VLam</B
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] e</TD
+><TD CLASS="rdoc"
+>lambda abstraction
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VChar"
+><A NAME="v%3AVChar"
+></A
+></A
+><B
+>VChar</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+></TD
+><TD CLASS="rdoc"
+>character value
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VCons"
+><A NAME="v%3AVCons"
+></A
+></A
+><B
+>VCons</B
+> e e</TD
+><TD CLASS="rdoc"
+>cons cell
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VLeft"
+><A NAME="v%3AVLeft"
+></A
+></A
+><B
+>VLeft</B
+> e</TD
+><TD CLASS="rdoc"
+>left injection
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VRight"
+><A NAME="v%3AVRight"
+></A
+></A
+><B
+>VRight</B
+> e</TD
+><TD CLASS="rdoc"
+>right injection
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VPair"
+><A NAME="v%3AVPair"
+></A
+></A
+><B
+>VPair</B
+> e e</TD
+><TD CLASS="rdoc"
+>pairing
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VUnit"
+><A NAME="v%3AVUnit"
+></A
+></A
+><B
+>VUnit</B
+></TD
+><TD CLASS="rdoc"
+>unit element
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ValueSigPos"
+><A NAME="t%3AValueSigPos"
+></A
+></A
+><B
+>ValueSigPos</B
+> = (<A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueExt"
+>ValueExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the signature for Parrot values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:PValue"
+><A NAME="t%3APValue"
+></A
+></A
+><B
+>PValue</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueSigPos"
+>ValueSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the value expressions of Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypeCase"
+><A NAME="t%3ATypeCase"
+></A
+></A
+><B
+>TypeCase</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents a single type case of a type case
+distinction as used by ht <TT
+>type of</TT
+> language construct. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeCase"
+><A NAME="v%3ATypeCase"
+></A
+></A
+><B
+>TypeCase</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:typeCaseRec"
+><A NAME="v%3AtypeCaseRec"
+></A
+></A
+><B
+>typeCaseRec</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:typeCaseBody"
+><A NAME="v%3AtypeCaseBody"
+></A
+></A
+><B
+>typeCaseBody</B
+> :: e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:DefTypeCase"
+><A NAME="t%3ADefTypeCase"
+></A
+></A
+><B
+>DefTypeCase</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:DefTypeCase"
+><A NAME="v%3ADefTypeCase"
+></A
+></A
+><B
+>DefTypeCase</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:defTypeCaseBody"
+><A NAME="v%3AdefTypeCaseBody"
+></A
+></A
+><B
+>defTypeCaseBody</B
+> :: e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:DefTypeCasePos"
+><A NAME="t%3ADefTypeCasePos"
+></A
+></A
+><B
+>DefTypeCasePos</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADefTypeCase"
+>DefTypeCase</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:BinOpCore"
+><A NAME="t%3ABinOpCore"
+></A
+></A
+><B
+>BinOpCore</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type enumerates all build-in binary operators of Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpPlus"
+><A NAME="v%3AOpPlus"
+></A
+></A
+><B
+>OpPlus</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpMinus"
+><A NAME="v%3AOpMinus"
+></A
+></A
+><B
+>OpMinus</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpTimes"
+><A NAME="v%3AOpTimes"
+></A
+></A
+><B
+>OpTimes</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpDiv"
+><A NAME="v%3AOpDiv"
+></A
+></A
+><B
+>OpDiv</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpAnd"
+><A NAME="v%3AOpAnd"
+></A
+></A
+><B
+>OpAnd</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpOr"
+><A NAME="v%3AOpOr"
+></A
+></A
+><B
+>OpOr</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpEq"
+><A NAME="v%3AOpEq"
+></A
+></A
+><B
+>OpEq</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpLt"
+><A NAME="v%3AOpLt"
+></A
+></A
+><B
+>OpLt</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpLe"
+><A NAME="v%3AOpLe"
+></A
+></A
+><B
+>OpLe</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpGt"
+><A NAME="v%3AOpGt"
+></A
+></A
+><B
+>OpGt</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpGe"
+><A NAME="v%3AOpGe"
+></A
+></A
+><B
+>OpGe</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpDurPlus"
+><A NAME="v%3AOpDurPlus"
+></A
+></A
+><B
+>OpDurPlus</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpDurMinus"
+><A NAME="v%3AOpDurMinus"
+></A
+></A
+><B
+>OpDurMinus</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:BinOpSugar"
+><A NAME="t%3ABinOpSugar"
+></A
+></A
+><B
+>BinOpSugar</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type enumerates all syntactic sugar binary operators of Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:OpAppend"
+><A NAME="v%3AOpAppend"
+></A
+></A
+><B
+>OpAppend</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:PrimOp"
+><A NAME="t%3APrimOp"
+></A
+></A
+><B
+>PrimOp</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Fold"
+><A NAME="v%3AFold"
+></A
+></A
+><B
+>Fold</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Not"
+><A NAME="v%3ANot"
+></A
+></A
+><B
+>Not</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Case"
+><A NAME="v%3ACase"
+></A
+></A
+><B
+>Case</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Error"
+><A NAME="v%3AError"
+></A
+></A
+><B
+>Error</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Events"
+><A NAME="v%3AEvents"
+></A
+></A
+><B
+>Events</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:LeftOp"
+><A NAME="v%3ALeftOp"
+></A
+></A
+><B
+>LeftOp</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:RightOp"
+><A NAME="v%3ARightOp"
+></A
+></A
+><B
+>RightOp</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Proj"
+><A NAME="t%3AProj"
+></A
+></A
+><B
+>Proj</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the type of a projection (from a product
+type).  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ProjLeft"
+><A NAME="v%3AProjLeft"
+></A
+></A
+><B
+>ProjLeft</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ProjRight"
+><A NAME="v%3AProjRight"
+></A
+></A
+><B
+>ProjRight</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:VFieldPos"
+><A NAME="t%3AVFieldPos"
+></A
+></A
+><B
+>VFieldPos</B
+> = <A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:LetBindPos"
+><A NAME="t%3ALetBindPos"
+></A
+></A
+><B
+>LetBindPos</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ALetBind"
+>LetBind</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TypeCasePos"
+><A NAME="t%3ATypeCasePos"
+></A
+></A
+><B
+>TypeCasePos</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeCase"
+>TypeCase</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:DurationExp"
+><A NAME="t%3ADurationExp"
+></A
+></A
+><B
+>DurationExp</B
+> = <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ExpExt"
+><A NAME="t%3AExpExt"
+></A
+></A
+><B
+>ExpExt</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the extensions to the Parrot value
+signature that then makes up the signature Parrot expressions.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:App"
+><A NAME="v%3AApp"
+></A
+></A
+><B
+>App</B
+> e e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:BinOpCore"
+><A NAME="v%3ABinOpCore"
+></A
+></A
+><B
+>BinOpCore</B
+> e <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Let"
+><A NAME="v%3ALet"
+></A
+></A
+><B
+>Let</B
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ALetBindPos"
+>LetBindPos</A
+> e] e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypeOf"
+><A NAME="v%3ATypeOf"
+></A
+></A
+><B
+>TypeOf</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeCasePos"
+>TypeCasePos</A
+> e] (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADefTypeCasePos"
+>DefTypeCasePos</A
+> e))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:RecAcc"
+><A NAME="v%3ARecAcc"
+></A
+></A
+><B
+>RecAcc</B
+> e <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:RecMod"
+><A NAME="v%3ARecMod"
+></A
+></A
+><B
+>RecMod</B
+> e [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> e]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DateTime"
+><A NAME="v%3ADateTime"
+></A
+></A
+><B
+>DateTime</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADayExp"
+>DayExp</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATimeExp"
+>TimeExp</A
+>)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Duration"
+><A NAME="v%3ADuration"
+></A
+></A
+><B
+>Duration</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADurationExp"
+>DurationExp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:If"
+><A NAME="v%3AIf"
+></A
+></A
+><B
+>If</B
+> e e e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:PrimOp"
+><A NAME="v%3APrimOp"
+></A
+></A
+><B
+>PrimOp</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APrimOp"
+>PrimOp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Proj"
+><A NAME="v%3AProj"
+></A
+></A
+><B
+>Proj</B
+> e <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProj"
+>Proj</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ExpSugar"
+><A NAME="t%3AExpSugar"
+></A
+></A
+><B
+>ExpSugar</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the extensions to the Parrot syntax that
+are merely syntactic sugar. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:BinOpSugar"
+><A NAME="v%3ABinOpSugar"
+></A
+></A
+><B
+>BinOpSugar</B
+> e <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpSugar"
+>BinOpSugar</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypePred"
+><A NAME="v%3ATypePred"
+></A
+></A
+><B
+>TypePred</B
+> e <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>Returns True if the expression is of the given type and False otherwise.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ListComprehension"
+><A NAME="v%3AListComprehension"
+></A
+></A
+><B
+>ListComprehension</B
+> e [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AListFilters"
+>ListFilters</A
+> e]</TD
+><TD CLASS="rdoc"
+>A set-comprehension-like syntactic sugar for map and filter.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OperatorSection"
+><A NAME="v%3AOperatorSection"
+></A
+></A
+><B
+>OperatorSection</B
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AOperatorSection"
+>OperatorSection</A
+> e)</TD
+><TD CLASS="rdoc"
+>Operator sections (to support (+1) as a shorthand for x -&gt; x + 1, etc.)
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:OperatorSection"
+><A NAME="t%3AOperatorSection"
+></A
+></A
+><B
+>OperatorSection</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Operator sections reprsent partially applied operators. For example, the section (*2)
+represented as OperatorSection (NormalSection OpTimes (Just (RightOperand (VInt 1)))) is
+equivalent to the lambda expression x -&gt; x * 2. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:NormalSection"
+><A NAME="v%3ANormalSection"
+></A
+></A
+><B
+>NormalSection</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AOperand"
+>Operand</A
+> e)</TD
+><TD CLASS="rdoc"
+>Sections that use the BinOp operators.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ConsSection"
+><A NAME="v%3AConsSection"
+></A
+></A
+><B
+>ConsSection</B
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AOperand"
+>Operand</A
+> e)</TD
+><TD CLASS="rdoc"
+>Sections for the VCons (#) operator.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypePredSection"
+><A NAME="v%3ATypePredSection"
+></A
+></A
+><B
+>TypePredSection</B
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>Sections for the TypePred (:?) operator.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Operand"
+><A NAME="t%3AOperand"
+></A
+></A
+><B
+>Operand</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Represents an operand on the left hand or right hand side of an operator. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:NoOperand"
+><A NAME="v%3ANoOperand"
+></A
+></A
+><B
+>NoOperand</B
+></TD
+><TD CLASS="rdoc"
+>When no operand is given.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:LeftOperand"
+><A NAME="v%3ALeftOperand"
+></A
+></A
+><B
+>LeftOperand</B
+> e</TD
+><TD CLASS="rdoc"
+>When only the left operand is given.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:RightOperand"
+><A NAME="v%3ARightOperand"
+></A
+></A
+><B
+>RightOperand</B
+> e</TD
+><TD CLASS="rdoc"
+>When only the right operand is given.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ListFilters"
+><A NAME="t%3AListFilters"
+></A
+></A
+><B
+>ListFilters</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the elements in a list comprehension 
+after the where bar (|). 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:ListGuard"
+><A NAME="v%3AListGuard"
+></A
+></A
+><B
+>ListGuard</B
+> e</TD
+><TD CLASS="rdoc"
+>All results where the expression evaluates to False are thrown out.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ListGenerator"
+><A NAME="v%3AListGenerator"
+></A
+></A
+><B
+>ListGenerator</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+>) e</TD
+><TD CLASS="rdoc"
+>Binds the variable to every element in the list, one at a time.
+  If the record name is given, the variable name will have this
+  type and all elements that are not of this type will be skipped.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ListLet"
+><A NAME="v%3AListLet"
+></A
+></A
+><B
+>ListLet</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+>) e</TD
+><TD CLASS="rdoc"
+>Binds a variable to a value.
+  If the record name is given, the variable name will have this type 
+  and all results where the value is not of this type will be skipped.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:DayExp"
+><A NAME="t%3ADayExp"
+></A
+></A
+><B
+>DayExp</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the day specification of a date
+expression. That is, it has three components representing year, month,
+and day respectively. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:DayExp"
+><A NAME="v%3ADayExp"
+></A
+></A
+><B
+>DayExp</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:dayExpYear"
+><A NAME="v%3AdayExpYear"
+></A
+></A
+><B
+>dayExpYear</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:dayExpMonth"
+><A NAME="v%3AdayExpMonth"
+></A
+></A
+><B
+>dayExpMonth</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:dayExpDay"
+><A NAME="v%3AdayExpDay"
+></A
+></A
+><B
+>dayExpDay</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TimeExp"
+><A NAME="t%3ATimeExp"
+></A
+></A
+><B
+>TimeExp</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the (optional) time specification of a
+date expression. That is, it contains at least two components, the
+hours and the minutes, and possibly an additional one representing the
+seconds. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TimeExp"
+><A NAME="v%3ATimeExp"
+></A
+></A
+><B
+>TimeExp</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:timeExpHour"
+><A NAME="v%3AtimeExpHour"
+></A
+></A
+><B
+>timeExpHour</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:timeExpMinute"
+><A NAME="v%3AtimeExpMinute"
+></A
+></A
+><B
+>timeExpMinute</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:timeExpSecond"
+><A NAME="v%3AtimeExpSecond"
+></A
+></A
+><B
+>timeExpSecond</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:DateComp"
+><A NAME="t%3ADateComp"
+></A
+></A
+><B
+>DateComp</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents atomic components of a date
+expression. That is, they are either numerals or variables. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:DateLit"
+><A NAME="v%3ADateLit"
+></A
+></A
+><B
+>DateLit</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DateVar"
+><A NAME="v%3ADateVar"
+></A
+></A
+><B
+>DateVar</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:LetBind"
+><A NAME="t%3ALetBind"
+></A
+></A
+><B
+>LetBind</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents simple let bindings. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:LetBind"
+><A NAME="v%3ALetBind"
+></A
+></A
+><B
+>LetBind</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:letBindVar"
+><A NAME="v%3AletBindVar"
+></A
+></A
+><B
+>letBindVar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:letBindArgs"
+><A NAME="v%3AletBindArgs"
+></A
+></A
+><B
+>letBindArgs</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:letBindBody"
+><A NAME="v%3AletBindBody"
+></A
+></A
+><B
+>letBindBody</B
+> :: e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ExpCoreSigPos"
+><A NAME="t%3AExpCoreSigPos"
+></A
+></A
+><B
+>ExpCoreSigPos</B
+> = (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpExt"
+>ExpExt</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AValueSigPos"
+>ValueSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents the signature of Parrot's expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:PExpCore"
+><A NAME="t%3APExpCore"
+></A
+></A
+><B
+>PExpCore</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents core expressions in Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ExpSigPos"
+><A NAME="t%3AExpSigPos"
+></A
+></A
+><B
+>ExpSigPos</B
+> = (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSugar"
+>ExpSugar</A
+> <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2B%3A"
+>:+:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents the signature of Parrot's expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:PExp"
+><A NAME="t%3APExp"
+></A
+></A
+><B
+>PExp</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSigPos"
+>ExpSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents core expressions in Parrot.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:FunId"
+><A NAME="t%3AFunId"
+></A
+></A
+><B
+>FunId</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents function name identifiers
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Decl"
+><A NAME="t%3ADecl"
+></A
+></A
+><B
+>Decl</B
+> f </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents top-level declarations in a Parrot program.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:FunDecl"
+><A NAME="v%3AFunDecl"
+></A
+></A
+><B
+>FunDecl</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:declPos"
+><A NAME="v%3AdeclPos"
+></A
+></A
+><B
+>declPos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declId"
+><A NAME="v%3AdeclId"
+></A
+></A
+><B
+>declId</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declType"
+><A NAME="v%3AdeclType"
+></A
+></A
+><B
+>declType</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declArgs"
+><A NAME="v%3AdeclArgs"
+></A
+></A
+><B
+>declArgs</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declBody"
+><A NAME="v%3AdeclBody"
+></A
+></A
+><B
+>declBody</B
+> :: <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:RecDecl"
+><A NAME="v%3ARecDecl"
+></A
+></A
+><B
+>RecDecl</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:declPos"
+><A NAME="v%3AdeclPos"
+></A
+></A
+><B
+>declPos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declRec"
+><A NAME="v%3AdeclRec"
+></A
+></A
+><B
+>declRec</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declSuper"
+><A NAME="v%3AdeclSuper"
+></A
+></A
+><B
+>declSuper</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:declFields"
+><A NAME="v%3AdeclFields"
+></A
+></A
+><B
+>declFields</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFieldDecl"
+>FieldDecl</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:DeclCore"
+><A NAME="t%3ADeclCore"
+></A
+></A
+><B
+>DeclCore</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADecl"
+>Decl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents top-level declarations in a Parrot program without sugar 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:DeclSugar"
+><A NAME="t%3ADeclSugar"
+></A
+></A
+><B
+>DeclSugar</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADecl"
+>Decl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSigPos"
+>ExpSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents top-level declarations in a Parrot program with sugar 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:FieldDecl"
+><A NAME="t%3AFieldDecl"
+></A
+></A
+><B
+>FieldDecl</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents declarations of field names as used in
+record type declarations.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:FieldDecl"
+><A NAME="v%3AFieldDecl"
+></A
+></A
+><B
+>FieldDecl</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Program"
+><A NAME="t%3AProgram"
+></A
+></A
+><B
+>Program</B
+> f </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents a Parrot program with parameterized
+  declarations. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Program"
+><A NAME="v%3AProgram"
+></A
+></A
+><B
+>Program</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:programName"
+><A NAME="v%3AprogramName"
+></A
+></A
+><B
+>programName</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:programDesc"
+><A NAME="v%3AprogramDesc"
+></A
+></A
+><B
+>programDesc</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:programDecls"
+><A NAME="v%3AprogramDecls"
+></A
+></A
+><B
+>programDecls</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADecl"
+>Decl</A
+> f]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ProgramCore"
+><A NAME="t%3AProgramCore"
+></A
+></A
+><B
+>ProgramCore</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgram"
+>Program</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpCoreSigPos"
+>ExpCoreSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents a Parrot program without sugar 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ProgramSugar"
+><A NAME="t%3AProgramSugar"
+></A
+></A
+><B
+>ProgramSugar</B
+> = <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgram"
+>Program</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AExpSigPos"
+>ExpSigPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This data type represents a Parrot program with sugar 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,0 +1,1137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.Value</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-Value.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.Value</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Patrick Bahr, and Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the AST for values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ARecordName"
+>RecordName</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AFieldName"
+>FieldName</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVFields"
+>VFields</A
+> e = <A HREF="#v%3AVFields"
+>VFields</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e))</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVRecord"
+>VRecord</A
+> e = <A HREF="#v%3AVR"
+>VR</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AvrecordName"
+>vrecordName</A
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AvrecordFields"
+>vrecordFields</A
+> :: <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVField"
+>VField</A
+> e = <A HREF="#v%3AVF"
+>VF</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AvfieldName"
+>vfieldName</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AvfieldValue"
+>vfieldValue</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AValue"
+>Value</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AVInt"
+>VInt</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVBool"
+>VBool</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVString"
+>VString</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVDateTime"
+>VDateTime</A
+> DateTime</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVDuration"
+>VDuration</A
+> (<A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>)</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVDouble"
+>VDouble</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVRecord"
+>VRecord</A
+> (<A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AVList"
+>VList</A
+> [e]</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3APOETSValue"
+>POETSValue</A
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldsMap"
+>fieldsMap</A
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldsList"
+>fieldsList</A
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldsSorted"
+>fieldsSorted</A
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnewFields"
+>newFields</A
+> ::  [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e] -&gt; <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldsNull"
+>fieldsNull</A
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupField%27"
+>lookupField'</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; m (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AlookupField"
+>lookupField</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> e -&gt; m e</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsetFieldValue"
+>setFieldValue</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; e -&gt; <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; m (<A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e)</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:RecordName"
+><A NAME="t%3ARecordName"
+></A
+></A
+><B
+>RecordName</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The name of a record.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:FieldName"
+><A NAME="t%3AFieldName"
+></A
+></A
+><B
+>FieldName</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The name of a field in a record.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:VFields"
+><A NAME="t%3AVFields"
+></A
+></A
+><B
+>VFields</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A set of record fields.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VFields"
+><A NAME="v%3AVFields"
+></A
+></A
+><B
+>VFields</B
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e))</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:VRecord"
+><A NAME="t%3AVRecord"
+></A
+></A
+><B
+>VRecord</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A record.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VR"
+><A NAME="v%3AVR"
+></A
+></A
+><B
+>VR</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:vrecordName"
+><A NAME="v%3AvrecordName"
+></A
+></A
+><B
+>vrecordName</B
+> :: <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+><TD CLASS="rdoc"
+>The name (type) of the record.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:vrecordFields"
+><A NAME="v%3AvrecordFields"
+></A
+></A
+><B
+>vrecordFields</B
+> :: <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e</TD
+><TD CLASS="rdoc"
+>The fields of the record.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:VField"
+><A NAME="t%3AVField"
+></A
+></A
+><B
+>VField</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>A record field.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VF"
+><A NAME="v%3AVF"
+></A
+></A
+><B
+>VF</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:vfieldName"
+><A NAME="v%3AvfieldName"
+></A
+></A
+><B
+>vfieldName</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>The name of the field.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:vfieldValue"
+><A NAME="v%3AvfieldValue"
+></A
+></A
+><B
+>vfieldValue</B
+> :: e</TD
+><TD CLASS="rdoc"
+>The value of the field.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Value"
+><A NAME="t%3AValue"
+></A
+></A
+><B
+>Value</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The AST for values.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VInt"
+><A NAME="v%3AVInt"
+></A
+></A
+><B
+>VInt</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+><TD CLASS="rdoc"
+>Integer value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VBool"
+><A NAME="v%3AVBool"
+></A
+></A
+><B
+>VBool</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+>Boolean value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VString"
+><A NAME="v%3AVString"
+></A
+></A
+><B
+>VString</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+>String value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VDateTime"
+><A NAME="v%3AVDateTime"
+></A
+></A
+><B
+>VDateTime</B
+> DateTime</TD
+><TD CLASS="rdoc"
+>Date value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VDuration"
+><A NAME="v%3AVDuration"
+></A
+></A
+><B
+>VDuration</B
+> (<A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+>)</TD
+><TD CLASS="rdoc"
+>Duration value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VDouble"
+><A NAME="v%3AVDouble"
+></A
+></A
+><B
+>VDouble</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3ADouble"
+>Double</A
+></TD
+><TD CLASS="rdoc"
+>Double value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VRecord"
+><A NAME="v%3AVRecord"
+></A
+></A
+><B
+>VRecord</B
+> (<A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> e)</TD
+><TD CLASS="rdoc"
+>Record value.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:VList"
+><A NAME="v%3AVList"
+></A
+></A
+><B
+>VList</B
+> [e]</TD
+><TD CLASS="rdoc"
+>List value.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:POETSValue"
+><A NAME="t%3APOETSValue"
+></A
+></A
+><B
+>POETSValue</B
+> = <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> <A HREF="Poets-Data-Value.html#t%3AValue"
+>Value</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>POETS values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldsMap"
+><A NAME="v%3AfieldsMap"
+></A
+></A
+><B
+>fieldsMap</B
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldsList"
+><A NAME="v%3AfieldsList"
+></A
+></A
+><B
+>fieldsList</B
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldsSorted"
+><A NAME="v%3AfieldsSorted"
+></A
+></A
+><B
+>fieldsSorted</B
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:newFields"
+><A NAME="v%3AnewFields"
+></A
+></A
+><B
+>newFields</B
+> ::  [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e] -&gt; <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function constructs a new collection of fields from the given
+list of fields. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldsNull"
+><A NAME="v%3AfieldsNull"
+></A
+></A
+><B
+>fieldsNull</B
+> ::  <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupField'"
+><A NAME="v%3AlookupField%27"
+></A
+></A
+><B
+>lookupField'</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>fields
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; m (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> e)</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:lookupField"
+><A NAME="v%3AlookupField"
+></A
+></A
+><B
+>lookupField</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>=&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>Value record.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; m e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>Extract the value of a field in a value record.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:setFieldValue"
+><A NAME="v%3AsetFieldValue"
+></A
+></A
+><B
+>setFieldValue</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; e -&gt; <A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e -&gt; m (<A HREF="Poets-Data-Value.html#t%3AVFields"
+>VFields</A
+> e)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

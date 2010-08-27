@@ -1,0 +1,1075 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Compiler.Haskell</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Compiler-Haskell.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Compiler.Haskell</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines a translation of Parrot into Haskell using
+ GHC's AST representation of Haskell.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkInt"
+>mkInt</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AIntegral"
+>Integral</A
+> a =&gt; a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkRepInt"
+>mkRepInt</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AIntegral"
+>Integral</A
+> a =&gt; a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkChar"
+>mkChar</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkChar%27"
+>mkChar'</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkList"
+>mkList</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkTuple"
+>mkTuple</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkPair"
+>mkPair</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkApps"
+>mkApps</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkString"
+>mkString</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkStringRep"
+>mkStringRep</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkSimpGRHS"
+>mkSimpGRHS</A
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3ALHsExpr"
+>LHsExpr</A
+> id -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3AGRHSs"
+>GRHSs</A
+> id</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkVarId"
+>mkVarId</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkSimpId"
+>mkSimpId</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkVar"
+>mkVar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkVarsMatch"
+>mkVarsMatch</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3ALHsExpr"
+>LHsExpr</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3AMatchGroup"
+>MatchGroup</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkLam"
+>mkLam</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3ACompileException"
+>CompileException</A
+>  = <A HREF="#v%3ACompileException"
+>CompileException</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtoHsModule"
+>toHsModule</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramCore"
+>ProgramCore</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-Haskell.html#t%3ACompileException"
+>CompileException</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsSyn.html#t%3AHsModule"
+>HsModule</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArepFunDecl%27"
+>repFunDecl'</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArepFunDecl"
+>repFunDecl</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclCore"
+>DeclCore</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtoHsDecl"
+>toHsDecl</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclCore"
+>DeclCore</A
+> -&gt; [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtoHsDecls"
+>toHsDecls</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclCore"
+>DeclCore</A
+>] -&gt; [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtoHsExp"
+>toHsExp</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Haskell.html#t%3AToHsExpAlg"
+>ToHsExpAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="#t%3AToHsExpAlg"
+>ToHsExpAlg</A
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtoHsExpAlg"
+>toHsExpAlg</A
+> :: f <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkInt"
+><A NAME="v%3AmkInt"
+></A
+></A
+><B
+>mkInt</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AIntegral"
+>Integral</A
+> a =&gt; a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function constructs an integer representation in the form of
+a Haskell expression.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkRepInt"
+><A NAME="v%3AmkRepInt"
+></A
+></A
+><B
+>mkRepInt</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AIntegral"
+>Integral</A
+> a =&gt; a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkChar"
+><A NAME="v%3AmkChar"
+></A
+></A
+><B
+>mkChar</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function constructs a character representation in the form of
+a Haskell expression.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkChar'"
+><A NAME="v%3AmkChar%27"
+></A
+></A
+><B
+>mkChar'</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function constructs a character representation in the POETS
+data type system in the form of a corresponding Haskell expression
+using <TT
+><A HREF="Poets-Reporting-Language-Parrot-Compiler-Haskell.html#v%3AmkChar"
+>mkChar</A
+></TT
+> and <TT
+>hsChar</TT
+>.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkList"
+><A NAME="v%3AmkList"
+></A
+></A
+><B
+>mkList</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkTuple"
+><A NAME="v%3AmkTuple"
+></A
+></A
+><B
+>mkTuple</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkPair"
+><A NAME="v%3AmkPair"
+></A
+></A
+><B
+>mkPair</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkApps"
+><A NAME="v%3AmkApps"
+></A
+></A
+><B
+>mkApps</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkString"
+><A NAME="v%3AmkString"
+></A
+></A
+><B
+>mkString</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkStringRep"
+><A NAME="v%3AmkStringRep"
+></A
+></A
+><B
+>mkStringRep</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkSimpGRHS"
+><A NAME="v%3AmkSimpGRHS"
+></A
+></A
+><B
+>mkSimpGRHS</B
+> ::  <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3ALHsExpr"
+>LHsExpr</A
+> id -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3AGRHSs"
+>GRHSs</A
+> id</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkVarId"
+><A NAME="v%3AmkVarId"
+></A
+></A
+><B
+>mkVarId</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkSimpId"
+><A NAME="v%3AmkSimpId"
+></A
+></A
+><B
+>mkSimpId</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkVar"
+><A NAME="v%3AmkVar"
+></A
+></A
+><B
+>mkVar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkVarsMatch"
+><A NAME="v%3AmkVarsMatch"
+></A
+></A
+><B
+>mkVarsMatch</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3ALHsExpr"
+>LHsExpr</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsExpr.html#t%3AMatchGroup"
+>MatchGroup</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkLam"
+><A NAME="v%3AmkLam"
+></A
+></A
+><B
+>mkLam</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:CompileException"
+><A NAME="t%3ACompileException"
+></A
+></A
+><B
+>CompileException</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:CompileException"
+><A NAME="v%3ACompileException"
+></A
+></A
+><B
+>CompileException</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toHsModule"
+><A NAME="v%3AtoHsModule"
+></A
+></A
+><B
+>toHsModule</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramCore"
+>ProgramCore</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-Haskell.html#t%3ACompileException"
+>CompileException</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsSyn.html#t%3AHsModule"
+>HsModule</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:repFunDecl'"
+><A NAME="v%3ArepFunDecl%27"
+></A
+></A
+><B
+>repFunDecl'</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function generates a function declaration that calls the
+reporting function of the name given by <TT
+>repFunName</TT
+> but instead of
+several arguments the generated function only has a single argument
+which is a list containing the arguments to the reporting
+function. The integer argument specifies the number of arguments the
+reporting function has. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:repFunDecl"
+><A NAME="v%3ArepFunDecl"
+></A
+></A
+><B
+>repFunDecl</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclCore"
+>DeclCore</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toHsDecl"
+><A NAME="v%3AtoHsDecl"
+></A
+></A
+><B
+>toHsDecl</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclCore"
+>DeclCore</A
+> -&gt; [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toHsDecls"
+><A NAME="v%3AtoHsDecls"
+></A
+></A
+><B
+>toHsDecls</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclCore"
+>DeclCore</A
+>] -&gt; [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsDecls.html#t%3ALHsDecl"
+>LHsDecl</A
+> <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsName"
+>HsName</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toHsExp"
+><A NAME="v%3AtoHsExp"
+></A
+></A
+><B
+>toHsExp</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-Haskell.html#t%3AToHsExpAlg"
+>ToHsExpAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A NAME="t:ToHsExpAlg"
+><A NAME="t%3AToHsExpAlg"
+></A
+></A
+><B
+>ToHsExpAlg</B
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This class defines algebras which allow to convert Parrot
+expressions into Haskell expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:toHsExpAlg"
+><A NAME="v%3AtoHsExpAlg"
+></A
+></A
+><B
+>toHsExpAlg</B
+> :: f <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-MetaInterface.html#t%3AHsExp"
+>HsExp</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Compiler.BasicValue</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Compiler-BasicValue.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Compiler.BasicValue</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides functionality to convert Parrot values into
+ basic POETS values and vice versa.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toBasicReportFunction"
+><A NAME="v%3AtoBasicReportFunction"
+></A
+></A
+><B
+>toBasicReportFunction</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AEReportFunction"
+>EReportFunction</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportFunction"
+>ReportFunction</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromBasicValue"
+><A NAME="v%3AfromBasicValue"
+></A
+></A
+><B
+>fromBasicValue</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Compiler-BasicValue.html#t%3AFromBasicValueAlg"
+>FromBasicValueAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AEValue"
+>EValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A NAME="t:FromBasicValueAlg"
+><A NAME="t%3AFromBasicValueAlg"
+></A
+></A
+><B
+>FromBasicValueAlg</B
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromBasicValueAlg"
+><A NAME="v%3AfromBasicValueAlg"
+></A
+></A
+><B
+>fromBasicValueAlg</B
+> :: f <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AEValue"
+>EValue</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Compiler-Interface.html#t%3AEValue"
+>EValue</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toBasicValue"
+><A NAME="v%3AtoBasicValue"
+></A
+></A
+><B
+>toBasicValue</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Compiler-BasicValue.html#t%3AToBasicValueAlg"
+>ToBasicValueAlg</A
+> f, ?recEnv :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+> -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; m <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toChar"
+><A NAME="v%3AtoChar"
+></A
+></A
+><B
+>toChar</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Compiler-BasicValue.html#t%3AToBasicValueAlg"
+>ToBasicValueAlg</A
+> f, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f =&gt; <A NAME="t:ToBasicValueAlg"
+><A NAME="t%3AToBasicValueAlg"
+></A
+></A
+><B
+>ToBasicValueAlg</B
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:toBasicValueAlg"
+><A NAME="v%3AtoBasicValueAlg"
+></A
+></A
+><B
+>toBasicValueAlg</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Compiler-BasicValue.html#t%3AToBasicValueAlg"
+>ToBasicValueAlg</A
+> g, ?recEnv :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+>, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m) =&gt; <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+> -&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g) -&gt; m <A HREF="Poets-Data-Value.html#t%3APOETSValue"
+>POETSValue</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toCharAlg"
+><A NAME="v%3AtoCharAlg"
+></A
+></A
+><B
+>toCharAlg</B
+> :: (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m, <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Text-Show.html#t%3AShow"
+>Show</A
+> a) =&gt; f a -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AChar"
+>Char</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

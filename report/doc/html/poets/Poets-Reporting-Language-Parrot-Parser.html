@@ -1,0 +1,1404 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Parser</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Parser.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Parser</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the parser of the Parrot reporting language.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AParser"
+>Parser</A
+> a = IndentCharParser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetPos"
+>getPos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseProgramFile"
+>parseProgramFile</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseProgram"
+>parseProgram</A
+> :: SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aprogram"
+>program</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreportName"
+>reportName</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreportDesc"
+>reportDesc</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AindentedStr"
+>indentedStr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adecl"
+>decl</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclSugar"
+>DeclSugar</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypScheme"
+>typScheme</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypConstr"
+>typConstr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Atyp"
+>typ</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtyFactor"
+>tyFactor</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aexp"
+>exp</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdateComp"
+>dateComp</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aduration"
+>duration</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADurationExp"
+>DurationExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AexpFactor"
+>expFactor</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AprimOp"
+>primOp</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APrimOp"
+>PrimOp</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AbinOpCore"
+>binOpCore</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeCase"
+>typeCase</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeCasePos"
+>TypeCasePos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdefTypeCase"
+>defTypeCase</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADefTypeCasePos"
+>DefTypeCasePos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AletBind"
+>letBind</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ALetBindPos"
+>LetBindPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Arecord"
+>record</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldAssign"
+>fieldAssign</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldAssigns"
+>fieldAssigns</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckDupAssigns"
+>checkDupAssigns</A
+> ::  [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> e] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldAssign%27"
+>fieldAssign'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldAssigns%27"
+>fieldAssigns'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AvvarIdent"
+>vvarIdent</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtvarIdent"
+>tvarIdent</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArecIdent"
+>recIdent</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfieldIdent"
+>fieldIdent</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfunIdent"
+>funIdent</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AparseInput"
+>parseInput</A
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> a -&gt; SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Parser"
+><A NAME="t%3AParser"
+></A
+></A
+><B
+>Parser</B
+> a = IndentCharParser <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The type of the parsers we are building here.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getPos"
+><A NAME="v%3AgetPos"
+></A
+></A
+><B
+>getPos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Returns the current source position in the <TT
+><A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+></TT
+> monad.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseProgramFile"
+><A NAME="v%3AparseProgramFile"
+></A
+></A
+><B
+>parseProgramFile</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AFilePath"
+>FilePath</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>Definition of the general lexer.
+</P
+><P
+>This function parses a Parrot program file returning either its
+AST if the parsing was successful or an error otherwise 
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseProgram"
+><A NAME="v%3AparseProgram"
+></A
+></A
+><B
+>parseProgram</B
+> :: SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function parses a Parrot program returning either its
+AST if the parsing was successful or an error otherwise 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:program"
+><A NAME="v%3Aprogram"
+></A
+></A
+><B
+>program</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AProgramSugar"
+>ProgramSugar</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parrot program parser.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:reportName"
+><A NAME="v%3AreportName"
+></A
+></A
+><B
+>reportName</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:reportDesc"
+><A NAME="v%3AreportDesc"
+></A
+></A
+><B
+>reportDesc</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:indentedStr"
+><A NAME="v%3AindentedStr"
+></A
+></A
+><B
+>indentedStr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:decl"
+><A NAME="v%3Adecl"
+></A
+></A
+><B
+>decl</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADeclSugar"
+>DeclSugar</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Declaration parser.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typScheme"
+><A NAME="v%3AtypScheme"
+></A
+></A
+><B
+>typScheme</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for type schemes.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typConstr"
+><A NAME="v%3AtypConstr"
+></A
+></A
+><B
+>typConstr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for type constraints.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typ"
+><A NAME="v%3Atyp"
+></A
+></A
+><B
+>typ</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for type expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tyFactor"
+><A NAME="v%3AtyFactor"
+></A
+></A
+><B
+>tyFactor</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>List of type operators
+</P
+><P
+>Supplementary parser for type expressions
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:exp"
+><A NAME="v%3Aexp"
+></A
+></A
+><B
+>exp</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Expression parser.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:dateComp"
+><A NAME="v%3AdateComp"
+></A
+></A
+><B
+>dateComp</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADateComp"
+>DateComp</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>Declaration of expression operators
+</P
+><P
+>Parser for components of date expressions, i.e. either numerals or variables.
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:duration"
+><A NAME="v%3Aduration"
+></A
+></A
+><B
+>duration</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADurationExp"
+>DurationExp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:expFactor"
+><A NAME="v%3AexpFactor"
+></A
+></A
+><B
+>expFactor</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Supplementary parser for expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:primOp"
+><A NAME="v%3AprimOp"
+></A
+></A
+><B
+>primOp</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APrimOp"
+>PrimOp</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:binOpCore"
+><A NAME="v%3AbinOpCore"
+></A
+></A
+><B
+>binOpCore</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ABinOpCore"
+>BinOpCore</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeCase"
+><A NAME="v%3AtypeCase"
+></A
+></A
+><B
+>typeCase</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeCasePos"
+>TypeCasePos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:defTypeCase"
+><A NAME="v%3AdefTypeCase"
+></A
+></A
+><B
+>defTypeCase</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ADefTypeCasePos"
+>DefTypeCasePos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:letBind"
+><A NAME="v%3AletBind"
+></A
+></A
+><B
+>letBind</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ALetBindPos"
+>LetBindPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for let bindings.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:record"
+><A NAME="v%3Arecord"
+></A
+></A
+><B
+>record</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Data-Value.html#t%3AVRecord"
+>VRecord</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for record construction expressions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldAssign"
+><A NAME="v%3AfieldAssign"
+></A
+></A
+><B
+>fieldAssign</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for a field assignment used inside of record constructions
+or record modifications.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldAssigns"
+><A NAME="v%3AfieldAssigns"
+></A
+></A
+><B
+>fieldAssigns</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for a comma separated list of field assignments enclosed in
+curly braces used for record constructions and record modifications. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkDupAssigns"
+><A NAME="v%3AcheckDupAssigns"
+></A
+></A
+><B
+>checkDupAssigns</B
+> ::  [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVFieldPos"
+>VFieldPos</A
+> e] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldAssign'"
+><A NAME="v%3AfieldAssign%27"
+></A
+></A
+><B
+>fieldAssign'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> (<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for a field assignment used inside of record constructions
+or record modifications.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldAssigns'"
+><A NAME="v%3AfieldAssigns%27"
+></A
+></A
+><B
+>fieldAssigns'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> [<A HREF="Poets-Data-Value.html#t%3AVField"
+>VField</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APExp"
+>PExp</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for a comma separated list of field assignments enclosed in
+curly braces used for record constructions and record modifications. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:vvarIdent"
+><A NAME="v%3AvvarIdent"
+></A
+></A
+><B
+>vvarIdent</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AVVarId"
+>VVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for (value) variable identifiers.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tvarIdent"
+><A NAME="v%3AtvarIdent"
+></A
+></A
+><B
+>tvarIdent</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for type variable identifiers.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:recIdent"
+><A NAME="v%3ArecIdent"
+></A
+></A
+><B
+>recIdent</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for record identifiers.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fieldIdent"
+><A NAME="v%3AfieldIdent"
+></A
+></A
+><B
+>fieldIdent</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for fields.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:funIdent"
+><A NAME="v%3AfunIdent"
+></A
+></A
+><B
+>funIdent</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Parser for function identifiers.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:parseInput"
+><A NAME="v%3AparseInput"
+></A
+></A
+><B
+>parseInput</B
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Parser.html#t%3AParser"
+>Parser</A
+> a -&gt; SourceName -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> ParseError a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

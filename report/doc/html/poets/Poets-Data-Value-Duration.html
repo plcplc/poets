@@ -1,0 +1,649 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Data.Value.Duration</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Data-Value-Duration.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Data.Value.Duration</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Patrick Bahr, and Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines duration values and operations on them.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AVDuration"
+>VDuration</A
+> a = <A HREF="#v%3AVD"
+>VD</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationSeconds"
+>durationSeconds</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationMinutes"
+>durationMinutes</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationHours"
+>durationHours</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationDays"
+>durationDays</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationWeeks"
+>durationWeeks</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationMonths"
+>durationMonths</A
+> :: a</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AdurationYears"
+>durationYears</A
+> :: a</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdurationToSeconds"
+>durationToSeconds</A
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnormaliseDuration"
+>normaliseDuration</A
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddDurationToDateTime"
+>addDurationToDateTime</A
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; DateTime -&gt; DateTime</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AnegateDuration"
+>negateDuration</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsubtractDurationFromDateTime"
+>subtractDurationFromDateTime</A
+> :: DateTime -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; DateTime</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddDuration"
+>addDuration</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsubtractDuration"
+>subtractDuration</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AscaleDuration"
+>scaleDuration</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:VDuration"
+><A NAME="t%3AVDuration"
+></A
+></A
+><B
+>VDuration</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents time durations (or time differences).
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:VD"
+><A NAME="v%3AVD"
+></A
+></A
+><B
+>VD</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationSeconds"
+><A NAME="v%3AdurationSeconds"
+></A
+></A
+><B
+>durationSeconds</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationMinutes"
+><A NAME="v%3AdurationMinutes"
+></A
+></A
+><B
+>durationMinutes</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationHours"
+><A NAME="v%3AdurationHours"
+></A
+></A
+><B
+>durationHours</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationDays"
+><A NAME="v%3AdurationDays"
+></A
+></A
+><B
+>durationDays</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationWeeks"
+><A NAME="v%3AdurationWeeks"
+></A
+></A
+><B
+>durationWeeks</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationMonths"
+><A NAME="v%3AdurationMonths"
+></A
+></A
+><B
+>durationMonths</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:durationYears"
+><A NAME="v%3AdurationYears"
+></A
+></A
+><B
+>durationYears</B
+> :: a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:durationToSeconds"
+><A NAME="v%3AdurationToSeconds"
+></A
+></A
+><B
+>durationToSeconds</B
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Convert a duration value to seconds. NB: Currently we assume one month is 30
+ days, and one year is 12 months.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:normaliseDuration"
+><A NAME="v%3AnormaliseDuration"
+></A
+></A
+><B
+>normaliseDuration</B
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Normalise a duration value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addDurationToDateTime"
+><A NAME="v%3AaddDurationToDateTime"
+></A
+></A
+><B
+>addDurationToDateTime</B
+> :: <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; DateTime -&gt; DateTime</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Add a duration value to a DateTime value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:negateDuration"
+><A NAME="v%3AnegateDuration"
+></A
+></A
+><B
+>negateDuration</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Negate a duration value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:subtractDurationFromDateTime"
+><A NAME="v%3AsubtractDurationFromDateTime"
+></A
+></A
+><B
+>subtractDurationFromDateTime</B
+> :: DateTime -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Types.html#t%3AInt"
+>Int</A
+> -&gt; DateTime</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Subtract a duration value from a DateTime value.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addDuration"
+><A NAME="v%3AaddDuration"
+></A
+></A
+><B
+>addDuration</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Add two duration values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:subtractDuration"
+><A NAME="v%3AsubtractDuration"
+></A
+></A
+><B
+>subtractDuration</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Subtract two duration values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:scaleDuration"
+><A NAME="v%3AscaleDuration"
+></A
+></A
+><B
+>scaleDuration</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3ANum"
+>Num</A
+> a =&gt; a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a -&gt; <A HREF="Poets-Data-Value-Duration.html#t%3AVDuration"
+>VDuration</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>Scale a duration value by the supplied factor.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

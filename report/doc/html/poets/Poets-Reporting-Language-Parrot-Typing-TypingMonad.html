@@ -1,0 +1,1503 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.TypingMonad</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-TypingMonad.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.TypingMonad</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the base monad for type inference and related
+ functionality (i.e. unification, matching etc.). It provides a
+ means to generate error messages which provide a indication of the
+ source code position from where the error originated.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATypingErr"
+>TypingErr</A
+>  = <A HREF="#v%3ATypingErr"
+>TypingErr</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AteMsg"
+>teMsg</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AtePos"
+>tePos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A HREF="#t%3ATypingM"
+>TypingM</A
+> a = <A HREF="#v%3ATypingM"
+>TypingM</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AunTypingM"
+>unTypingM</A
+> :: ReaderT <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+>) a</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunTypingM"
+>runTypingM</A
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A HREF="#t%3AMonadTyping"
+>MonadTyping</A
+> m  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AwithPos"
+>withPos</A
+> ::  SourcePos -&gt; m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcatchTyErr"
+>catchTyErr</A
+> ::  m a -&gt; (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> -&gt; m a) -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftTy"
+>liftTy</A
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+> a -&gt; m a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddErrMsg"
+>addErrMsg</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtypeErr"
+>typeErr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftTypeErr"
+>liftTypeErr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetPos"
+>getPos</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AwithPos%27"
+>withPos'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcHasField"
+>cHasField</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcSubType"
+>cSubType</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcOrd"
+>cOrd</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtRecord"
+>tRecord</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtNil"
+>tNil</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+>) =&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtDouble"
+>tDouble</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtString%27"
+>tString'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtChar"
+>tChar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtInt"
+>tInt</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtBool"
+>tBool</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtDate"
+>tDate</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtDuration"
+>tDuration</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtDurationDate"
+>tDurationDate</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtBin"
+>tBin</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+>) =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtFun"
+>tFun</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtProd"
+>tProd</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtSum"
+>tSum</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtUn"
+>tUn</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+>) =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AtList"
+>tList</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:TypingErr"
+><A NAME="t%3ATypingErr"
+></A
+></A
+><B
+>TypingErr</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents errors that occur during type
+inference/checking.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypingErr"
+><A NAME="v%3ATypingErr"
+></A
+></A
+><B
+>TypingErr</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:teMsg"
+><A NAME="v%3AteMsg"
+></A
+></A
+><B
+>teMsg</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:tePos"
+><A NAME="v%3AtePos"
+></A
+></A
+><B
+>tePos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>newtype</SPAN
+>  <A NAME="t:TypingM"
+><A NAME="t%3ATypingM"
+></A
+></A
+><B
+>TypingM</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>The <TT
+>TypingM</TT
+> monad provides functionality to report errors in
+context of a source position.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:TypingM"
+><A NAME="v%3ATypingM"
+></A
+></A
+><B
+>TypingM</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:unTypingM"
+><A NAME="v%3AunTypingM"
+></A
+></A
+><B
+>unTypingM</B
+> :: ReaderT <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+>) a</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runTypingM"
+><A NAME="v%3ArunTypingM"
+></A
+></A
+><B
+>runTypingM</B
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+> a -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function runs the given <TT
+>TypingM</TT
+> monad returning either an
+error value or the actual return value.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; <A NAME="t:MonadTyping"
+><A NAME="t%3AMonadTyping"
+></A
+></A
+><B
+>MonadTyping</B
+> m  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This class captures the capabilities of the typing monad. 
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:withPos"
+><A NAME="v%3AwithPos"
+></A
+></A
+><B
+>withPos</B
+> ::  SourcePos -&gt; m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function allows to run a typing monad within the context
+      of the specified position. That is, error messages within the
+      resulting monad are have the specified position as their context. 
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:catchTyErr"
+><A NAME="v%3AcatchTyErr"
+></A
+></A
+><B
+>catchTyErr</B
+> ::  m a -&gt; (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> -&gt; m a) -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function, similar to <TT
+>catchError</TT
+> allows to catch and
+      handle an erroneous typing computation.  
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftTy"
+><A NAME="v%3AliftTy"
+></A
+></A
+><B
+>liftTy</B
+> ::  <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+> a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function lifts any <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+></TT
+> monad to this monad.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addErrMsg"
+><A NAME="v%3AaddErrMsg"
+></A
+></A
+><B
+>addErrMsg</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function adds the given message to all error messages
+generated within the given monadic computation.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:typeErr"
+><A NAME="v%3AtypeErr"
+></A
+></A
+><B
+>typeErr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function generates an error with the given message. The
+generated error mentions a context position according to the innermost
+<TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AwithPos"
+>withPos</A
+></TT
+> (or possibly <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AwithPos%27"
+>withPos'</A
+></TT
+>) scope this function is used in.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftTypeErr"
+><A NAME="v%3AliftTypeErr"
+></A
+></A
+><B
+>liftTypeErr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getPos"
+><A NAME="v%3AgetPos"
+></A
+></A
+><B
+>getPos</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function returns the current source position context.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:withPos'"
+><A NAME="v%3AwithPos%27"
+></A
+></A
+><B
+>withPos'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; m a -&gt; m a</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AwithPos"
+>withPos</A
+></TT
+> but takes a position wrapped
+in a <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+></TT
+>. When given a <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#v%3AJust"
+>Just</A
+></TT
+> value, it behaves like
+<TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#v%3AwithPos"
+>withPos</A
+></TT
+>. Otherwise, this function does not alter the given monadic
+computation.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:cHasField"
+><A NAME="v%3AcHasField"
+></A
+></A
+><B
+>cHasField</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:cSubType"
+><A NAME="v%3AcSubType"
+></A
+></A
+><B
+>cSubType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:cOrd"
+><A NAME="v%3AcOrd"
+></A
+></A
+><B
+>cOrd</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tRecord"
+><A NAME="v%3AtRecord"
+></A
+></A
+><B
+>tRecord</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Data-Value.html#t%3ARecordName"
+>RecordName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tNil"
+><A NAME="v%3AtNil"
+></A
+></A
+><B
+>tNil</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+>) =&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tDouble"
+><A NAME="v%3AtDouble"
+></A
+></A
+><B
+>tDouble</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tString'"
+><A NAME="v%3AtString%27"
+></A
+></A
+><B
+>tString'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tChar"
+><A NAME="v%3AtChar"
+></A
+></A
+><B
+>tChar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tInt"
+><A NAME="v%3AtInt"
+></A
+></A
+><B
+>tInt</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tBool"
+><A NAME="v%3AtBool"
+></A
+></A
+><B
+>tBool</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tDate"
+><A NAME="v%3AtDate"
+></A
+></A
+><B
+>tDate</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tDuration"
+><A NAME="v%3AtDuration"
+></A
+></A
+><B
+>tDuration</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tDurationDate"
+><A NAME="v%3AtDurationDate"
+></A
+></A
+><B
+>tDurationDate</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tBin"
+><A NAME="v%3AtBin"
+></A
+></A
+><B
+>tBin</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+>) =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tFun"
+><A NAME="v%3AtFun"
+></A
+></A
+><B
+>tFun</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tProd"
+><A NAME="v%3AtProd"
+></A
+></A
+><B
+>tProd</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tSum"
+><A NAME="v%3AtSum"
+></A
+></A
+><B
+>tSum</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tUn"
+><A NAME="v%3AtUn"
+></A
+></A
+><B
+>tUn</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, (f <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%2A%3A"
+>:*:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+>) <A HREF="Poets-Data-ALaCarte.html#t%3A%3A%3C%3A"
+>:&lt;:</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeSigPos"
+>TypeSigPos</A
+>) =&gt; (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>) -&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:tList"
+><A NAME="v%3AtList"
+></A
+></A
+><B
+>tList</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; m (<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

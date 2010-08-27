@@ -1,0 +1,1866 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.Decomp</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-Decomp.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.Decomp</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides facilities to decompose a type term into a
+ head symbols and its arguments. Furthermore it provides a compact
+ representation of atomic types.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AConstSym"
+>ConstSym</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ASInt"
+>SInt</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASBool"
+>SBool</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASString"
+>SString</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASDate"
+>SDate</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASDuration"
+>SDuration</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASDouble"
+>SDouble</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASRecord"
+>SRecord</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASChar"
+>SChar</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASUnit"
+>SUnit</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASDurationDate"
+>SDurationDate</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AFunSym"
+>FunSym</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ASList"
+>SList</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASFun"
+>SFun</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASSum"
+>SSum</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ASProd"
+>SProd</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ADecomp"
+>Decomp</A
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ADVar"
+>DVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADConst"
+>DConst</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADFun"
+>DFun</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AFunSym"
+>FunSym</A
+> [a]</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A HREF="#t%3ATermAlg"
+>TermAlg</A
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdecompAlg"
+>decompAlg</A
+> ::  f a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ADecomp"
+>Decomp</A
+> a</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreplaceAlg"
+>replaceAlg</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Text-Show.html#t%3AShow"
+>Show</A
+> a =&gt; f a -&gt; [a] -&gt; f a</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ASym"
+>Sym</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AFunSym"
+>FunSym</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AFunSym"
+>FunSym</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AConstSym"
+>ConstSym</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ADecomp%27"
+>Decomp'</A
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ADVar%27"
+>DVar'</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADFun%27"
+>DFun'</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ASym"
+>Sym</A
+> [a]</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A HREF="#t%3ADecompType"
+>DecompType</A
+> d  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adecomp"
+>decomp</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; d (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisAtomic"
+>isAtomic</A
+> :: d <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AreplaceArgs"
+>replaceArgs</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f] -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AoccursCheck"
+>occursCheck</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AAtomicType"
+>AtomicType</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AAVar"
+>AVar</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AAConst"
+>AConst</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisConst"
+>isConst</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisVar"
+>isVar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AASubType"
+>ASubType</A
+> = (<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AASubst"
+>ASubst</A
+> = [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ApartitionTypes"
+>partitionTypes</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>] -&gt; ([<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromAtomicSubTypes"
+>fromAtomicSubTypes</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> SourcePos -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromAtomicSubType"
+>fromAtomicSubType</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromAtomicSubType%27"
+>fromAtomicSubType'</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> SourcePos -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromAtomicSubst"
+>fromAtomicSubst</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubst"
+>ASubst</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromAtomicType"
+>fromAtomicType</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AfromAtomicType%27"
+>fromAtomicType'</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AatomicType"
+>atomicType</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AatomicType%27"
+>atomicType'</A
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:ConstSym"
+><A NAME="t%3AConstSym"
+></A
+></A
+><B
+>ConstSym</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents head symbols of (Parrot's) type term,
+i.e. effectively it represents type constructors. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:SInt"
+><A NAME="v%3ASInt"
+></A
+></A
+><B
+>SInt</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SBool"
+><A NAME="v%3ASBool"
+></A
+></A
+><B
+>SBool</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SString"
+><A NAME="v%3ASString"
+></A
+></A
+><B
+>SString</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SDate"
+><A NAME="v%3ASDate"
+></A
+></A
+><B
+>SDate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SDuration"
+><A NAME="v%3ASDuration"
+></A
+></A
+><B
+>SDuration</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SDouble"
+><A NAME="v%3ASDouble"
+></A
+></A
+><B
+>SDouble</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SRecord"
+><A NAME="v%3ASRecord"
+></A
+></A
+><B
+>SRecord</B
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SChar"
+><A NAME="v%3ASChar"
+></A
+></A
+><B
+>SChar</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SUnit"
+><A NAME="v%3ASUnit"
+></A
+></A
+><B
+>SUnit</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SDurationDate"
+><A NAME="v%3ASDurationDate"
+></A
+></A
+><B
+>SDurationDate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:FunSym"
+><A NAME="t%3AFunSym"
+></A
+></A
+><B
+>FunSym</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:SList"
+><A NAME="v%3ASList"
+></A
+></A
+><B
+>SList</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SFun"
+><A NAME="v%3ASFun"
+></A
+></A
+><B
+>SFun</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SSum"
+><A NAME="v%3ASSum"
+></A
+></A
+><B
+>SSum</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:SProd"
+><A NAME="v%3ASProd"
+></A
+></A
+><B
+>SProd</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Decomp"
+><A NAME="t%3ADecomp"
+></A
+></A
+><B
+>Decomp</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents results of a decomposition of a (Parrot)
+type term. 
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:DVar"
+><A NAME="v%3ADVar"
+></A
+></A
+><B
+>DVar</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DConst"
+><A NAME="v%3ADConst"
+></A
+></A
+><B
+>DConst</B
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DFun"
+><A NAME="v%3ADFun"
+></A
+></A
+><B
+>DFun</B
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AFunSym"
+>FunSym</A
+> [a]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; <A NAME="t:TermAlg"
+><A NAME="t%3ATermAlg"
+></A
+></A
+><B
+>TermAlg</B
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This class defines the signature of the decomposition and the
+replacement (generalised) algebra. The decomposition algebra defines
+how to decompose a (type) term into head symbol and argument
+terms. The replacement algebra defines how to replace the argument
+terms of a (type) term by other (type) terms. 
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:decompAlg"
+><A NAME="v%3AdecompAlg"
+></A
+></A
+><B
+>decompAlg</B
+> ::  f a -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ADecomp"
+>Decomp</A
+> a</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:replaceAlg"
+><A NAME="v%3AreplaceAlg"
+></A
+></A
+><B
+>replaceAlg</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Text-Show.html#t%3AShow"
+>Show</A
+> a =&gt; f a -&gt; [a] -&gt; f a</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Sym"
+><A NAME="t%3ASym"
+></A
+></A
+><B
+>Sym</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:FunSym"
+><A NAME="v%3AFunSym"
+></A
+></A
+><B
+>FunSym</B
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AFunSym"
+>FunSym</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ConstSym"
+><A NAME="v%3AConstSym"
+></A
+></A
+><B
+>ConstSym</B
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Decomp'"
+><A NAME="t%3ADecomp%27"
+></A
+></A
+><B
+>Decomp'</B
+> a </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:DVar'"
+><A NAME="v%3ADVar%27"
+></A
+></A
+><B
+>DVar'</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DFun'"
+><A NAME="v%3ADFun%27"
+></A
+></A
+><B
+>DFun'</B
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ASym"
+>Sym</A
+> [a]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+>  <A NAME="t:DecompType"
+><A NAME="t%3ADecompType"
+></A
+></A
+><B
+>DecompType</B
+> d  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:decomp"
+><A NAME="v%3Adecomp"
+></A
+></A
+><B
+>decomp</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; d (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function decomposes a given (type) term into its head symbol
+      and a list of its argument terms. 
+</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isAtomic"
+><A NAME="v%3AisAtomic"
+></A
+></A
+><B
+>isAtomic</B
+> :: d <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:replaceArgs"
+><A NAME="v%3AreplaceArgs"
+></A
+></A
+><B
+>replaceArgs</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; [<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f] -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function replaces the arguments of the given (type) term with
+the given terms. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:occursCheck"
+><A NAME="v%3AoccursCheck"
+></A
+></A
+><B
+>occursCheck</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function performs the occurs check. It returns <TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#v%3ATrue"
+>True</A
+></TT
+> if the
+given variable occurs in the given (type) term. Otherwise, it returns
+<TT
+><A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#v%3AFalse"
+>False</A
+></TT
+>.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:AtomicType"
+><A NAME="t%3AAtomicType"
+></A
+></A
+><B
+>AtomicType</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents atomic data types, i.e. type constants
+and type variables.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:AVar"
+><A NAME="v%3AAVar"
+></A
+></A
+><B
+>AVar</B
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:AConst"
+><A NAME="v%3AAConst"
+></A
+></A
+><B
+>AConst</B
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isConst"
+><A NAME="v%3AisConst"
+></A
+></A
+><B
+>isConst</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isVar"
+><A NAME="v%3AisVar"
+></A
+></A
+><B
+>isVar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ASubType"
+><A NAME="t%3AASubType"
+></A
+></A
+><B
+>ASubType</B
+> = (<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents a subtype constraint between atomic types.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:ASubst"
+><A NAME="t%3AASubst"
+></A
+></A
+><B
+>ASubst</B
+> = [(<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents substitutions whose range contains only
+atomic types.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:partitionTypes"
+><A NAME="v%3ApartitionTypes"
+></A
+></A
+><B
+>partitionTypes</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>] -&gt; ([<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>], [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+>])</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function partitions the given list of atomic types into a
+list of type constants and a list of type variables. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromAtomicSubTypes"
+><A NAME="v%3AfromAtomicSubTypes"
+></A
+></A
+><B
+>fromAtomicSubTypes</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> SourcePos -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function turns atomic subtyping constraints into (general)
+subtyping constraints using the given mapping from atomic subtyping
+constraints to positions and atomic types to positions.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromAtomicSubType"
+><A NAME="v%3AfromAtomicSubType"
+></A
+></A
+><B
+>fromAtomicSubType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function turn the given atomic subtyping constraint into a
+(general) subtyping constraint using the given position and mapping
+from atomic types to positions.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromAtomicSubType'"
+><A NAME="v%3AfromAtomicSubType%27"
+></A
+></A
+><B
+>fromAtomicSubType'</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> SourcePos -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubType"
+>ASubType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#v%3AfromAtomicSubType"
+>fromAtomicSubType</A
+></TT
+> but takes a
+mapping from atomic subtyping constraints to positions instead of a
+single position.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromAtomicSubst"
+><A NAME="v%3AfromAtomicSubst"
+></A
+></A
+><B
+>fromAtomicSubst</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AASubst"
+>ASubst</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Subst.html#t%3ASubst"
+>Subst</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function turns an atomic substitution into a general
+substitution using the given mapping from atomic types to positions.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromAtomicType"
+><A NAME="v%3AfromAtomicType"
+></A
+></A
+><B
+>fromAtomicType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ASrcPos"
+>SrcPos</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function turns an atomic type into a (general) type using the
+given position.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromAtomicType'"
+><A NAME="v%3AfromAtomicType%27"
+></A
+></A
+><B
+>fromAtomicType'</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> SourcePos -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#v%3AfromAtomicType"
+>fromAtomicType</A
+></TT
+> but takes a mapping
+from atomic types to positions instead of a single position.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:atomicType"
+><A NAME="v%3AatomicType"
+></A
+></A
+><B
+>atomicType</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; m <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function turns a (general) type into a atomic type, provided
+the given type is actually not a compound type. If it is a compound
+type, a corresponding error is generated in the typing monad.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:atomicType'"
+><A NAME="v%3AatomicType%27"
+></A
+></A
+><B
+>atomicType'</B
+> :: (<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#v%3AatomicType"
+>atomicType</A
+></TT
+> but throws a (Haskell)
+error instead of generating an explicit error in a monad. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

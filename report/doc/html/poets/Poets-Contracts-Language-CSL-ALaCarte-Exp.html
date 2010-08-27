@@ -1,0 +1,1138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Contracts.Language.CSL.ALaCarte.Exp</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Contracts-Language-CSL-ALaCarte-Exp.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Contracts.Language.CSL.ALaCarte.Exp</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Tom Hvitved, Martin Dybdal, Brian Sborg Mathiasen, and
+                Philip Lykke Carlsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines the (extended) AST for expressions in the contract
+ language CSL.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AExp"
+>Exp</A
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AEVar"
+>EVar</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpVar"
+>expVar</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEProj"
+>EProj</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpProjFieldName"
+>expProjFieldName</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpProjRecord"
+>expProjRecord</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEUpdate"
+>EUpdate</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpUpdateRecord"
+>expUpdateRecord</A
+> :: e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpUpdateFieldName"
+>expUpdateFieldName</A
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpUpdateValue"
+>expUpdateValue</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEBinOp"
+>EBinOp</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpBinOp"
+>expBinOp</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3ABinOp"
+>BinOp</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpBinOpArg1"
+>expBinOpArg1</A
+> :: e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpBinOpArg2"
+>expBinOpArg2</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AENegate"
+>ENegate</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpArg"
+>expArg</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEApply"
+>EApply</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpFn"
+>expFn</A
+> :: e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpArg"
+>expArg</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AELambda"
+>ELambda</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpLArg"
+>expLArg</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpLBody"
+>expLBody</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AEIfThenElse"
+>EIfThenElse</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpCondition"
+>expCondition</A
+> :: e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpThen"
+>expThen</A
+> :: e</TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AexpElse"
+>expElse</A
+> :: e</TD
+></TR
+></TABLE
+>}</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AVar"
+>Var</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ABinOp"
+>BinOp</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AEQ"
+>EQ</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALEQ"
+>LEQ</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AGEQ"
+>GEQ</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ALT"
+>LT</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AGT"
+>GT</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3APLUS"
+>PLUS</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AMINUS"
+>MINUS</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ATIMES"
+>TIMES</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AAND"
+>AND</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AOR"
+>OR</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADPLUS"
+>DPLUS</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADMINUS"
+>DMINUS</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADTIMES"
+>DTIMES</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdummyVar"
+>dummyVar</A
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Exp"
+><A NAME="t%3AExp"
+></A
+></A
+><B
+>Exp</B
+> e </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>AST for extended expressions in CSL.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:EVar"
+><A NAME="v%3AEVar"
+></A
+></A
+><B
+>EVar</B
+></TD
+><TD CLASS="rdoc"
+>Variable.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expVar"
+><A NAME="v%3AexpVar"
+></A
+></A
+><B
+>expVar</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+><TD CLASS="rdoc"
+>Variable name.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:EProj"
+><A NAME="v%3AEProj"
+></A
+></A
+><B
+>EProj</B
+></TD
+><TD CLASS="rdoc"
+>Field projection.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expProjFieldName"
+><A NAME="v%3AexpProjFieldName"
+></A
+></A
+><B
+>expProjFieldName</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>Field to project.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expProjRecord"
+><A NAME="v%3AexpProjRecord"
+></A
+></A
+><B
+>expProjRecord</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Record expression.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:EUpdate"
+><A NAME="v%3AEUpdate"
+></A
+></A
+><B
+>EUpdate</B
+></TD
+><TD CLASS="rdoc"
+>Record updating.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expUpdateRecord"
+><A NAME="v%3AexpUpdateRecord"
+></A
+></A
+><B
+>expUpdateRecord</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Record expression.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expUpdateFieldName"
+><A NAME="v%3AexpUpdateFieldName"
+></A
+></A
+><B
+>expUpdateFieldName</B
+> :: <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+></TD
+><TD CLASS="rdoc"
+>Field to update.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expUpdateValue"
+><A NAME="v%3AexpUpdateValue"
+></A
+></A
+><B
+>expUpdateValue</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Update expression.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:EBinOp"
+><A NAME="v%3AEBinOp"
+></A
+></A
+><B
+>EBinOp</B
+></TD
+><TD CLASS="rdoc"
+>Binary operator.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expBinOp"
+><A NAME="v%3AexpBinOp"
+></A
+></A
+><B
+>expBinOp</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3ABinOp"
+>BinOp</A
+></TD
+><TD CLASS="rdoc"
+>Operator type.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expBinOpArg1"
+><A NAME="v%3AexpBinOpArg1"
+></A
+></A
+><B
+>expBinOpArg1</B
+> :: e</TD
+><TD CLASS="rdoc"
+>First argument.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expBinOpArg2"
+><A NAME="v%3AexpBinOpArg2"
+></A
+></A
+><B
+>expBinOpArg2</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Second argument.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ENegate"
+><A NAME="v%3AENegate"
+></A
+></A
+><B
+>ENegate</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expArg"
+><A NAME="v%3AexpArg"
+></A
+></A
+><B
+>expArg</B
+> :: e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:EApply"
+><A NAME="v%3AEApply"
+></A
+></A
+><B
+>EApply</B
+></TD
+><TD CLASS="rdoc"
+>Function call.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expFn"
+><A NAME="v%3AexpFn"
+></A
+></A
+><B
+>expFn</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Function expression
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expArg"
+><A NAME="v%3AexpArg"
+></A
+></A
+><B
+>expArg</B
+> :: e</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ELambda"
+><A NAME="v%3AELambda"
+></A
+></A
+><B
+>ELambda</B
+></TD
+><TD CLASS="rdoc"
+>Anonymous function, a Lambda.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expLArg"
+><A NAME="v%3AexpLArg"
+></A
+></A
+><B
+>expLArg</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+><TD CLASS="rdoc"
+>Argument
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expLBody"
+><A NAME="v%3AexpLBody"
+></A
+></A
+><B
+>expLBody</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Function body
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:EIfThenElse"
+><A NAME="v%3AEIfThenElse"
+></A
+></A
+><B
+>EIfThenElse</B
+></TD
+><TD CLASS="rdoc"
+>Conditional expression.
+</TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:expCondition"
+><A NAME="v%3AexpCondition"
+></A
+></A
+><B
+>expCondition</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Condition.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expThen"
+><A NAME="v%3AexpThen"
+></A
+></A
+><B
+>expThen</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Then branch.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:expElse"
+><A NAME="v%3AexpElse"
+></A
+></A
+><B
+>expElse</B
+> :: e</TD
+><TD CLASS="rdoc"
+>Else branch.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Var"
+><A NAME="t%3AVar"
+></A
+></A
+><B
+>Var</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:BinOp"
+><A NAME="t%3ABinOp"
+></A
+></A
+><B
+>BinOp</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>Binary operators in CSL expressions.
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:EQ"
+><A NAME="v%3AEQ"
+></A
+></A
+><B
+>EQ</B
+></TD
+><TD CLASS="rdoc"
+>Equals, <TT
+>==</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:LEQ"
+><A NAME="v%3ALEQ"
+></A
+></A
+><B
+>LEQ</B
+></TD
+><TD CLASS="rdoc"
+>Less than or equals, <TT
+>&lt;=</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:GEQ"
+><A NAME="v%3AGEQ"
+></A
+></A
+><B
+>GEQ</B
+></TD
+><TD CLASS="rdoc"
+>Greater than or equals, <TT
+>&gt;=</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:LT"
+><A NAME="v%3ALT"
+></A
+></A
+><B
+>LT</B
+></TD
+><TD CLASS="rdoc"
+>Less than, <TT
+>&lt;</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:GT"
+><A NAME="v%3AGT"
+></A
+></A
+><B
+>GT</B
+></TD
+><TD CLASS="rdoc"
+>Greater than, <TT
+>&gt;</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:PLUS"
+><A NAME="v%3APLUS"
+></A
+></A
+><B
+>PLUS</B
+></TD
+><TD CLASS="rdoc"
+>Plus, <TT
+>+</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:MINUS"
+><A NAME="v%3AMINUS"
+></A
+></A
+><B
+>MINUS</B
+></TD
+><TD CLASS="rdoc"
+>Minus, <TT
+>-</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:TIMES"
+><A NAME="v%3ATIMES"
+></A
+></A
+><B
+>TIMES</B
+></TD
+><TD CLASS="rdoc"
+>Times, <TT
+>*</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:AND"
+><A NAME="v%3AAND"
+></A
+></A
+><B
+>AND</B
+></TD
+><TD CLASS="rdoc"
+>Conjunction, <TT
+>andalso</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:OR"
+><A NAME="v%3AOR"
+></A
+></A
+><B
+>OR</B
+></TD
+><TD CLASS="rdoc"
+>Disjunction, <TT
+>orelse</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DPLUS"
+><A NAME="v%3ADPLUS"
+></A
+></A
+><B
+>DPLUS</B
+></TD
+><TD CLASS="rdoc"
+>Addition of duration values, <TT
+>&lt;+&gt;</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DMINUS"
+><A NAME="v%3ADMINUS"
+></A
+></A
+><B
+>DMINUS</B
+></TD
+><TD CLASS="rdoc"
+>Subtraction of duration values, <TT
+>&lt;-&gt;</TT
+>.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DTIMES"
+><A NAME="v%3ADTIMES"
+></A
+></A
+><B
+>DTIMES</B
+></TD
+><TD CLASS="rdoc"
+>Scaling of duration values, <TT
+>&lt;-&gt;</TT
+>.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:dummyVar"
+><A NAME="v%3AdummyVar"
+></A
+></A
+><B
+>dummyVar</B
+> :: <A HREF="Poets-Contracts-Language-CSL-ALaCarte-Exp.html#t%3AVar"
+>Var</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>A special &quot;dummy&quot; variable is used in places where the parser allows
+ binding occurrences to be optional, but the AST still requires the binding.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

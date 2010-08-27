@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.BasicType</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-BasicType.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.BasicType</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module provides functionality to convert Parrot types into
+ basic POETS types.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toReportType"
+><A NAME="v%3AtoReportType"
+></A
+></A
+><B
+>toReportType</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingErr"
+>TypingErr</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:RTM"
+><A NAME="t%3ARTM"
+></A
+></A
+><B
+>RTM</B
+> = ReaderT <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3ATypingM"
+>TypingM</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getRecEnv"
+><A NAME="v%3AgetRecEnv"
+></A
+></A
+><B
+>getRecEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3ARTM"
+>RTM</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toReportTypeM"
+><A NAME="v%3AtoReportTypeM"
+></A
+></A
+><B
+>toReportTypeM</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3ARTM"
+>RTM</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:decompFunType"
+><A NAME="v%3AdecompFunType"
+></A
+></A
+><B
+>decompFunType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3ARTM"
+>RTM</A
+> ([<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>], <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:toBasicType"
+><A NAME="v%3AtoBasicType"
+></A
+></A
+><B
+>toBasicType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3AToBasicTypeAlg"
+>ToBasicTypeAlg</A
+> f =&gt; <A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> f -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3ARTM"
+>RTM</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>class</SPAN
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Traversable.html#t%3ATraversable"
+>Traversable</A
+> f, <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3ATermAlg"
+>TermAlg</A
+> f, <A HREF="Poets-Data-ALaCarte-Algebras-Render.html#t%3ARender"
+>Render</A
+> f) =&gt; <A NAME="t:ToBasicTypeAlg"
+><A NAME="t%3AToBasicTypeAlg"
+></A
+></A
+><B
+>ToBasicTypeAlg</B
+> f  <SPAN CLASS="keyword"
+>where</SPAN
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="section4"
+>Methods</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A NAME="v:toBasicTypeAlg"
+><A NAME="v%3AtoBasicTypeAlg"
+></A
+></A
+><B
+>toBasicTypeAlg</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3AToBasicTypeAlg"
+>ToBasicTypeAlg</A
+> g =&gt; f (<A HREF="Poets-Data-ALaCarte.html#t%3ATerm"
+>Term</A
+> g) -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-BasicType.html#t%3ARTM"
+>RTM</A
+> <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromBasicType"
+><A NAME="v%3AfromBasicType"
+></A
+></A
+><B
+>fromBasicType</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:fromBasicType'"
+><A NAME="v%3AfromBasicType%27"
+></A
+></A
+><B
+>fromBasicType'</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AFunctor"
+>Functor</A
+> f =&gt; f <A HREF="Poets-Data-Type.html#t%3APOETSType"
+>POETSType</A
+> -&gt; f <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

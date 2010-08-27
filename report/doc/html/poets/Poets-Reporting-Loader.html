@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Loader</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Loader.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Loader</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module allows to compile and dynamically load reports to the running
+ reporting engine.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AhsReportModuleName"
+>hsReportModuleName</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AdisabledReportSpec"
+>disabledReportSpec</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AloadParrotReport"
+>loadParrotReport</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportSpec"
+>ReportSpec</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ApprHaskell"
+>pprHaskell</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsSyn.html#t%3AHsModule"
+>HsModule</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AloadHaskellReport"
+>loadHaskellReport</A
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsSyn.html#t%3AHsModule"
+>HsModule</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportFunction"
+>ReportFunction</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AhandleErrors"
+>handleErrors</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HscTypes.html#t%3AGhcMonad"
+>GhcMonad</A
+> m =&gt; m (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> a) -&gt; m (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AunloadReport"
+>unloadReport</A
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:hsReportModuleName"
+><A NAME="v%3AhsReportModuleName"
+></A
+></A
+><B
+>hsReportModuleName</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>this function generates the haskell module name for the given report id.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:disabledReportSpec"
+><A NAME="v%3AdisabledReportSpec"
+></A
+></A
+><B
+>disabledReportSpec</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:loadParrotReport"
+><A NAME="v%3AloadParrotReport"
+></A
+></A
+><B
+>loadParrotReport</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportId"
+>ReportId</A
+> -&gt; <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportSpec"
+>ReportSpec</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:pprHaskell"
+><A NAME="v%3ApprHaskell"
+></A
+></A
+><B
+>pprHaskell</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsSyn.html#t%3AHsModule"
+>HsModule</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:loadHaskellReport"
+><A NAME="v%3AloadHaskellReport"
+></A
+></A
+><B
+>loadHaskellReport</B
+> :: <A HREF="Poets-Data-Type.html#t%3APOETSRecordEnv"
+>POETSRecordEnv</A
+> -&gt; <A HREF="Poets-Reporting-Report.html#t%3AReportType"
+>ReportType</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HsSyn.html#t%3AHsModule"
+>HsModule</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/RdrName.html#t%3ARdrName"
+>RdrName</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> <A HREF="Poets-Reporting-Report.html#t%3AReportFunction"
+>ReportFunction</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:handleErrors"
+><A NAME="v%3AhandleErrors"
+></A
+></A
+><B
+>handleErrors</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-6.12.1/HscTypes.html#t%3AGhcMonad"
+>GhcMonad</A
+> m =&gt; m (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> a) -&gt; m (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Either.html#t%3AEither"
+>Either</A
+> <A HREF="Poets-Reporting-ReportInitException.html#t%3AReportInitException"
+>ReportInitException</A
+> a)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unloadReport"
+><A NAME="v%3AunloadReport"
+></A
+></A
+><B
+>unloadReport</B
+> :: <A HREF="Poets-Reporting-Report.html#t%3AReportModule"
+>ReportModule</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/System-IO.html#t%3AIO"
+>IO</A
+> <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function unloads the given report module from the runtime system.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

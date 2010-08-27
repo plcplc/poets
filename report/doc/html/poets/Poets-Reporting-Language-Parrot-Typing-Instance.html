@@ -1,0 +1,1847 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Reporting.Language.Parrot.Typing.Instance</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Reporting-Language-Parrot-Typing-Instance.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Reporting.Language.Parrot.Typing.Instance</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Patrick Bahr</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+><P
+>This modules provides a procedure for deciding whether a given type
+ scheme is an instance of another type scheme.
+</P
+><P
+>TODO: For now this is an ad-hoc hack. This needs a proper implementation!
+</P
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisInstance"
+>isInstance</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisInstance%27"
+>isInstance'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AHasFieldRel"
+>HasFieldRel</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AOrdPred"
+>OrdPred</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASubTypeRel"
+>SubTypeRel</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATable"
+>Table</A
+>  = <A HREF="#v%3ATable"
+>Table</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AsuperTypeRel"
+>superTypeRel</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ASubTypeRel"
+>SubTypeRel</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AsubTypeRelTgt"
+>subTypeRelTgt</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ASubTypeRel"
+>SubTypeRel</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AordPred"
+>ordPred</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3AOrdPred"
+>OrdPred</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AhasFieldRel"
+>hasFieldRel</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3AHasFieldRel"
+>HasFieldRel</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3AconstrVars"
+>constrVars</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArecordEnv"
+>recordEnv</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATableT"
+>TableT</A
+> = StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATable"
+>Table</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aentails"
+>entails</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aentails%27"
+>entails'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckSubConstr"
+>checkSubConstr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ApartitionM"
+>partitionM</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; (a -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; [a] -&gt; m ([a], [a])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcheckConstr"
+>checkConstr</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AhasField%27"
+>hasField'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AhasField"
+>hasField</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisOrd%27"
+>isOrd'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisOrd"
+>isOrd</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisSubType"
+>isSubType</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AallowsField"
+>allowsField</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AallowsOrd"
+>allowsOrd</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetGreatestSubTypeConstants"
+>getGreatestSubTypeConstants</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddField%27"
+>addField'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddField"
+>addField</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddOrd%27"
+>addOrd'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddOrd"
+>addOrd</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddSubtype%27"
+>addSubtype'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AaddSubtype"
+>addSubtype</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisUnconstrVar"
+>isUnconstrVar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisUnconstrVar%27"
+>isUnconstrVar'</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisConstrVar"
+>isConstrVar</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AorderedTypeSymsList"
+>orderedTypeSymsList</A
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AorderedTypeSyms"
+>orderedTypeSyms</A
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3ArunTableT"
+>runTableT</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m a -&gt; m (a, <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATable"
+>Table</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkTableTgt"
+>mkTableTgt</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkTable"
+>mkTable</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkConstrTable"
+>mkConstrTable</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmkBaseTable"
+>mkBaseTable</A
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isInstance"
+><A NAME="v%3AisInstance"
+></A
+></A
+><B
+>isInstance</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function decides whether the second type scheme is an
+instance of the first one. The first type scheme is supposed to be
+simplified, i.e. in particular it is assumed that subtyping
+constraints are non-circular! All type constraints (in both type
+schemes) are supposed to be atomic; if not, a corresponding error is
+signalled in the typing monad. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isInstance'"
+><A NAME="v%3AisInstance%27"
+></A
+></A
+><B
+>isInstance'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3AFunId"
+>FunId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeScheme"
+>TypeScheme</A
+> -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:HasFieldRel"
+><A NAME="t%3AHasFieldRel"
+></A
+></A
+><B
+>HasFieldRel</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents a nested table that indicates the fields of a
+record type and their types.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:OrdPred"
+><A NAME="t%3AOrdPred"
+></A
+></A
+><B
+>OrdPred</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents the <A HREF="ordered.html"
+>ordered</A
+> type predicate
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:SubTypeRel"
+><A NAME="t%3ASubTypeRel"
+></A
+></A
+><B
+>SubTypeRel</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Map.html#t%3AMap"
+>Map</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+>)</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This type represents a subtyping predicate
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Table"
+><A NAME="t%3ATable"
+></A
+></A
+><B
+>Table</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="ndoc"
+>This data type represents the lookup table used for deciding the
+entailment of type constraints.  
+</TD
+></TR
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Table"
+><A NAME="v%3ATable"
+></A
+></A
+><B
+>Table</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:superTypeRel"
+><A NAME="v%3AsuperTypeRel"
+></A
+></A
+><B
+>superTypeRel</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ASubTypeRel"
+>SubTypeRel</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:subTypeRelTgt"
+><A NAME="v%3AsubTypeRelTgt"
+></A
+></A
+><B
+>subTypeRelTgt</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ASubTypeRel"
+>SubTypeRel</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:ordPred"
+><A NAME="v%3AordPred"
+></A
+></A
+><B
+>ordPred</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3AOrdPred"
+>OrdPred</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:hasFieldRel"
+><A NAME="v%3AhasFieldRel"
+></A
+></A
+><B
+>hasFieldRel</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3AHasFieldRel"
+>HasFieldRel</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:constrVars"
+><A NAME="v%3AconstrVars"
+></A
+></A
+><B
+>constrVars</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:recordEnv"
+><A NAME="v%3ArecordEnv"
+></A
+></A
+><B
+>recordEnv</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:TableT"
+><A NAME="t%3ATableT"
+></A
+></A
+><B
+>TableT</B
+> = StateT <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATable"
+>Table</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This monad transformer constructs monads maintaining a table used
+for deciding type constraint entailment.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:entails"
+><A NAME="v%3Aentails"
+></A
+></A
+><B
+>entails</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function decides whether (an instance of) the first list of
+constraints entails the second one, given the provided record
+environment. If this is the case the result is equivalent to <TT
+>return
+()</TT
+>. Otherwise, a corresponding error is generated. 
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:entails'"
+><A NAME="v%3Aentails%27"
+></A
+></A
+><B
+>entails'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>This function is similar to <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#v%3Aentails"
+>entails</A
+></TT
+> but gets rid of the <TT
+><A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+></TT
+>
+monad transformer in the result.  
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkSubConstr"
+><A NAME="v%3AcheckSubConstr"
+></A
+></A
+><B
+>checkSubConstr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:partitionM"
+><A NAME="v%3ApartitionM"
+></A
+></A
+><B
+>partitionM</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Control-Monad.html#t%3AMonad"
+>Monad</A
+> m =&gt; (a -&gt; m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; [a] -&gt; m ([a], [a])</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:checkConstr"
+><A NAME="v%3AcheckConstr"
+></A
+></A
+><B
+>checkConstr</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:hasField'"
+><A NAME="v%3AhasField%27"
+></A
+></A
+><B
+>hasField'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:hasField"
+><A NAME="v%3AhasField"
+></A
+></A
+><B
+>hasField</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isOrd'"
+><A NAME="v%3AisOrd%27"
+></A
+></A
+><B
+>isOrd'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isOrd"
+><A NAME="v%3AisOrd"
+></A
+></A
+><B
+>isOrd</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isSubType"
+><A NAME="v%3AisSubType"
+></A
+></A
+><B
+>isSubType</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:allowsField"
+><A NAME="v%3AallowsField"
+></A
+></A
+><B
+>allowsField</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:allowsOrd"
+><A NAME="v%3AallowsOrd"
+></A
+></A
+><B
+>allowsOrd</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getGreatestSubTypeConstants"
+><A NAME="v%3AgetGreatestSubTypeConstants"
+></A
+></A
+><B
+>getGreatestSubTypeConstants</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m (<A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addField'"
+><A NAME="v%3AaddField%27"
+></A
+></A
+><B
+>addField'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addField"
+><A NAME="v%3AaddField"
+></A
+></A
+><B
+>addField</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Data-Value.html#t%3AFieldName"
+>FieldName</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addOrd'"
+><A NAME="v%3AaddOrd%27"
+></A
+></A
+><B
+>addOrd'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addOrd"
+><A NAME="v%3AaddOrd"
+></A
+></A
+><B
+>addOrd</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addSubtype'"
+><A NAME="v%3AaddSubtype%27"
+></A
+></A
+><B
+>addSubtype'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:addSubtype"
+><A NAME="v%3AaddSubtype"
+></A
+></A
+><B
+>addSubtype</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isUnconstrVar"
+><A NAME="v%3AisUnconstrVar"
+></A
+></A
+><B
+>isUnconstrVar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AAtomicType"
+>AtomicType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isUnconstrVar'"
+><A NAME="v%3AisUnconstrVar%27"
+></A
+></A
+><B
+>isUnconstrVar'</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3APType"
+>PType</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isConstrVar"
+><A NAME="v%3AisConstrVar"
+></A
+></A
+><B
+>isConstrVar</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:orderedTypeSymsList"
+><A NAME="v%3AorderedTypeSymsList"
+></A
+></A
+><B
+>orderedTypeSymsList</B
+> :: [<A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:orderedTypeSyms"
+><A NAME="v%3AorderedTypeSyms"
+></A
+></A
+><B
+>orderedTypeSyms</B
+> :: <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Typing-Decomp.html#t%3AConstSym"
+>ConstSym</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:runTableT"
+><A NAME="v%3ArunTableT"
+></A
+></A
+><B
+>runTableT</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-ExtendedRecords.html#t%3AExtRecEnv"
+>ExtRecEnv</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/containers-0.3.0.0/Data-Set.html#t%3ASet"
+>Set</A
+> <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATVarId"
+>TVarId</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m a -&gt; m (a, <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATable"
+>Table</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkTableTgt"
+><A NAME="v%3AmkTableTgt"
+></A
+></A
+><B
+>mkTableTgt</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkTable"
+><A NAME="v%3AmkTable"
+></A
+></A
+><B
+>mkTable</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; [<A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+>] -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkConstrTable"
+><A NAME="v%3AmkConstrTable"
+></A
+></A
+><B
+>mkConstrTable</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Syntax.html#t%3ATypeConstr"
+>TypeConstr</A
+> -&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:mkBaseTable"
+><A NAME="v%3AmkBaseTable"
+></A
+></A
+><B
+>mkBaseTable</B
+> :: <A HREF="Poets-Reporting-Language-Parrot-Typing-TypingMonad.html#t%3AMonadTyping"
+>MonadTyping</A
+> m =&gt; <A HREF="Poets-Reporting-Language-Parrot-Typing-Instance.html#t%3ATableT"
+>TableT</A
+> m <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Unit.html#t%3A%28%29"
+>()</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

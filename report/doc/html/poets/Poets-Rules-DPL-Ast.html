@@ -1,0 +1,1418 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Rules.DPL.Ast</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Rules-DPL-Ast.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Rules.DPL.Ast</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines an abstract syntax tree for defeasible prolog following
+ D. Nute extended with poets values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AQuery"
+>Query</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AStrictQ"
+>StrictQ</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADefeasibleQ"
+>DefeasibleQ</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ABothQ"
+>BothQ</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AGoal"
+>Goal</A
+> = <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AProgram"
+>Program</A
+>  = <A HREF="#v%3AProgram"
+>Program</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aclauses"
+>clauses</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClauses"
+>Clauses</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Asup"
+>sup</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AClauses"
+>Clauses</A
+> = [<A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASuperior"
+>Superior</A
+> = (<A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+>, <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ARuleId"
+>RuleId</A
+> = (<A HREF="Poets-Rules-DPL-Ast.html#t%3AIdent"
+>Ident</A
+>, [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3AClause"
+>Clause</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AStrict"
+>Strict</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ADefeasible"
+>Defeasible</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3AUndercut"
+>Undercut</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ARule"
+>Rule</A
+>  = <A HREF="#v%3ARule"
+>Rule</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArHead"
+>rHead</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArBody"
+>rBody</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3ArId"
+>rId</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ATerms"
+>Terms</A
+> = [<A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ATerm"
+>Term</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3AVar"
+>Var</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ACompound"
+>Compound</A
+> {<TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Afunctor"
+>functor</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AIdent"
+>Ident</A
+></TD
+></TR
+><TR
+><TD CLASS="recfield"
+><A HREF="#v%3Aargs"
+>args</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+></TR
+></TABLE
+>}</TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ANeg"
+>Neg</A
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AVariable"
+>Variable</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AIdent"
+>Ident</A
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aid2str"
+>id2str</A
+> :: [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AliftC"
+>liftC</A
+> :: (<A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+>) -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AextractRule"
+>extractRule</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcHead"
+>cHead</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcBody"
+>cBody</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsetCBody"
+>setCBody</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcId"
+>cId</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsetCId"
+>setCId</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisStrict"
+>isStrict</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisDefeasible"
+>isDefeasible</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Query"
+><A NAME="t%3AQuery"
+></A
+></A
+><B
+>Query</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:StrictQ"
+><A NAME="v%3AStrictQ"
+></A
+></A
+><B
+>StrictQ</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:DefeasibleQ"
+><A NAME="v%3ADefeasibleQ"
+></A
+></A
+><B
+>DefeasibleQ</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:BothQ"
+><A NAME="v%3ABothQ"
+></A
+></A
+><B
+>BothQ</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Goal"
+><A NAME="t%3AGoal"
+></A
+></A
+><B
+>Goal</B
+> = <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Program"
+><A NAME="t%3AProgram"
+></A
+></A
+><B
+>Program</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Program"
+><A NAME="v%3AProgram"
+></A
+></A
+><B
+>Program</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:clauses"
+><A NAME="v%3Aclauses"
+></A
+></A
+><B
+>clauses</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClauses"
+>Clauses</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:sup"
+><A NAME="v%3Asup"
+></A
+></A
+><B
+>sup</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Clauses"
+><A NAME="t%3AClauses"
+></A
+></A
+><B
+>Clauses</B
+> = [<A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Superior"
+><A NAME="t%3ASuperior"
+></A
+></A
+><B
+>Superior</B
+> = (<A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+>, <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+>)</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:RuleId"
+><A NAME="t%3ARuleId"
+></A
+></A
+><B
+>RuleId</B
+> = (<A HREF="Poets-Rules-DPL-Ast.html#t%3AIdent"
+>Ident</A
+>, [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+>])</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Clause"
+><A NAME="t%3AClause"
+></A
+></A
+><B
+>Clause</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Strict"
+><A NAME="v%3AStrict"
+></A
+></A
+><B
+>Strict</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Defeasible"
+><A NAME="v%3ADefeasible"
+></A
+></A
+><B
+>Defeasible</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Undercut"
+><A NAME="v%3AUndercut"
+></A
+></A
+><B
+>Undercut</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Rule"
+><A NAME="t%3ARule"
+></A
+></A
+><B
+>Rule</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Rule"
+><A NAME="v%3ARule"
+></A
+></A
+><B
+>Rule</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:rHead"
+><A NAME="v%3ArHead"
+></A
+></A
+><B
+>rHead</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:rBody"
+><A NAME="v%3ArBody"
+></A
+></A
+><B
+>rBody</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:rId"
+><A NAME="v%3ArId"
+></A
+></A
+><B
+>rId</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Terms"
+><A NAME="t%3ATerms"
+></A
+></A
+><B
+>Terms</B
+> = [<A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:Term"
+><A NAME="t%3ATerm"
+></A
+></A
+><B
+>Term</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="5" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Var"
+><A NAME="v%3AVar"
+></A
+></A
+><B
+>Var</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Compound"
+><A NAME="v%3ACompound"
+></A
+></A
+><B
+>Compound</B
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="body" COLSPAN="2"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:functor"
+><A NAME="v%3Afunctor"
+></A
+></A
+><B
+>functor</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AIdent"
+>Ident</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:args"
+><A NAME="v%3Aargs"
+></A
+></A
+><B
+>args</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+><TD CLASS="rdoc"
+>The number of arguments should match the arity of the atom.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Neg"
+><A NAME="v%3ANeg"
+></A
+></A
+><B
+>Neg</B
+> <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+><TD CLASS="rdoc"
+>Sound negation (i.e., not negation as failure)
+</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Variable"
+><A NAME="t%3AVariable"
+></A
+></A
+><B
+>Variable</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Must start with an uppercase letter or underscore. A single _ is special.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Ident"
+><A NAME="t%3AIdent"
+></A
+></A
+><B
+>Ident</B
+> = <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Must start with lowercase or be set in single quotes or be a sequence of special characters.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:id2str"
+><A NAME="v%3Aid2str"
+></A
+></A
+><B
+>id2str</B
+> :: [<A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Prelude.html#t%3AInteger"
+>Integer</A
+>] -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Char.html#t%3AString"
+>String</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:liftC"
+><A NAME="v%3AliftC"
+></A
+></A
+><B
+>liftC</B
+> :: (<A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+>) -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:extractRule"
+><A NAME="v%3AextractRule"
+></A
+></A
+><B
+>extractRule</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Ast.html#v%3AextractRule"
+>extractRule</A
+></TT
+> extracts a rule from a clause (i.e., looses the Strict, Defeasible or Undercut tag).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:cHead"
+><A NAME="v%3AcHead"
+></A
+></A
+><B
+>cHead</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Ast.html#v%3AcHead"
+>cHead</A
+></TT
+> extracts the head from a clause.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:cBody"
+><A NAME="v%3AcBody"
+></A
+></A
+><B
+>cBody</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Ast.html#v%3AcBody"
+>cBody</A
+></TT
+> extracts the body from a clause.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:setCBody"
+><A NAME="v%3AsetCBody"
+></A
+></A
+><B
+>setCBody</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:cId"
+><A NAME="v%3AcId"
+></A
+></A
+><B
+>cId</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Ast.html#v%3AcId"
+>cId</A
+></TT
+> extracts the rule id from a clause.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:setCId"
+><A NAME="v%3AsetCId"
+></A
+></A
+><B
+>setCId</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isStrict"
+><A NAME="v%3AisStrict"
+></A
+></A
+><B
+>isStrict</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Ast.html#v%3AisStrict"
+>isStrict</A
+></TT
+> determines whether its argument is a strict rule or not.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isDefeasible"
+><A NAME="v%3AisDefeasible"
+></A
+></A
+><B
+>isDefeasible</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Ast.html#v%3AisDefeasible"
+>isDefeasible</A
+></TT
+> determines whether its argument is a defeasible rule (strict or non-strict).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

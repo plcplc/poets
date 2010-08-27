@@ -1,0 +1,1195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--Rendered using the Haskell Html Library v0.2-->
+<HTML
+><HEAD
+><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8"
+><TITLE
+>Poets.Rules.DPL.Interpreter</TITLE
+><LINK HREF="haddock.css" REL="stylesheet" TYPE="text/css"
+><SCRIPT SRC="haddock-util.js" TYPE="text/javascript"
+></SCRIPT
+><SCRIPT TYPE="text/javascript"
+>window.onload = function () {setSynopsis("mini_Poets-Rules-DPL-Interpreter.html")};</SCRIPT
+></HEAD
+><BODY
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="topbar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><IMG SRC="haskell_icon.gif" WIDTH="16" HEIGHT="16" ALT=" "
+></TD
+><TD CLASS="title"
+>poets-0.1: The POETS project</TD
+><TD CLASS="topbut"
+><A HREF="index.html"
+>Contents</A
+></TD
+><TD CLASS="topbut"
+><A HREF="doc-index.html"
+>Index</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="modulebar"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD
+><FONT SIZE="6"
+>Poets.Rules.DPL.Interpreter</FONT
+></TD
+><TD ALIGN="right"
+><TABLE CLASS="narrow" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="infohead"
+>Portability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Stability</TD
+><TD CLASS="infoval"
+>unknown</TD
+></TR
+><TR
+><TD CLASS="infohead"
+>Maintainer</TD
+><TD CLASS="infoval"
+>Morten Ib Nielsen</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Description</TD
+></TR
+><TR
+><TD CLASS="doc"
+>This module defines an interpreter for defeasible prolog following D. Nute
+ extended with poets values.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Synopsis</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3AUnifier"
+>Unifier</A
+> = [(<A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+>, <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AoccursIn"
+>occursIn</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asubs"
+>subs</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Aunify"
+>unify</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Avariables"
+>variables</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+> -&gt; [<A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Afreshen"
+>freshen</A
+> :: [<A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+>] -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A HREF="#t%3ASearchTree"
+>SearchTree</A
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="decl"
+>= <A HREF="#v%3ASolution"
+>Solution</A
+> <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+>| <A HREF="#v%3ANode"
+>Node</A
+> [<A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+>]</TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asolve"
+>solve</A
+> :: (<A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; (<A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AmakeReportTree"
+>makeReportTree</A
+> :: (<A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+>) -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AgetSolution"
+>getSolution</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AcontainsSolution"
+>containsSolution</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsolveStrict"
+>solveStrict</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AsolveDefeasibly"
+>solveDefeasibly</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A HREF="#t%3ASearchStrategy"
+>SearchStrategy</A
+> = <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+> -&gt; [<A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adfs"
+>dfs</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Abfs"
+>bfs</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AstrictlyDeriv"
+>strictlyDeriv</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AatLeastDefeasiblyDeriv"
+>atLeastDefeasiblyDeriv</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AatMostDefeasiblyDeriv"
+>atMostDefeasiblyDeriv</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AconflictingHeads"
+>conflictingHeads</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Asuperior"
+>superior</A
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3AisDefeatable"
+>isDefeatable</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s8"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A HREF="#v%3Adefeat"
+>defeat</A
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="section1"
+>Documentation</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:Unifier"
+><A NAME="t%3AUnifier"
+></A
+></A
+><B
+>Unifier</B
+> = [(<A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+>, <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+>)]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:occursIn"
+><A NAME="v%3AoccursIn"
+></A
+></A
+><B
+>occursIn</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:subs"
+><A NAME="v%3Asubs"
+></A
+></A
+><B
+>subs</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:unify"
+><A NAME="v%3Aunify"
+></A
+></A
+><B
+>unify</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:variables"
+><A NAME="v%3Avariables"
+></A
+></A
+><B
+>variables</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerms"
+>Terms</A
+> -&gt; [<A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+>]</TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3Avariables"
+>variables</A
+></TT
+> extracts the set of variables used in a set of terms.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:freshen"
+><A NAME="v%3Afreshen"
+></A
+></A
+><B
+>freshen</B
+> :: [<A HREF="Poets-Rules-DPL-Ast.html#t%3AVariable"
+>Variable</A
+>] -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARule"
+>Rule</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Given a list of bound variables and a rule the function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3Afreshen"
+>freshen</A
+></TT
+> freshens variables in the rules that occur in the list.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>data</SPAN
+>  <A NAME="t:SearchTree"
+><A NAME="t%3ASearchTree"
+></A
+></A
+><B
+>SearchTree</B
+>  </TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="section4"
+>Constructors</TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="1" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+><A NAME="v:Solution"
+><A NAME="v%3ASolution"
+></A
+></A
+><B
+>Solution</B
+> <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+><A NAME="v:Node"
+><A NAME="v%3ANode"
+></A
+></A
+><B
+>Node</B
+> [<A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+>]</TD
+><TD CLASS="rdoc"
+></TD
+></TR
+></TABLE
+></TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:solve"
+><A NAME="v%3Asolve"
+></A
+></A
+><B
+>solve</B
+> :: (<A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; (<A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+>) -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3Asolve"
+>solve</A
+></TT
+> takes a program and a non-empty goal, whose last term is the report goal term and generates the solution space.
+ We exploit that the solution to subgoal t_i (a substitution) is applied to subgoals t_j for j&gt;i before they are solved recursively.
+ Thus once we are left with the reporting goal we can simply extract the solution from it. We use the list monad to provide backtracking.
+ The function is parameterized over two functions isApplicable and isDefeatable. The first function decides whether a clause in the program
+ can be applied (based on its type) and the other one decides whether or not a given clause can be defeated by the given program.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:makeReportTree"
+><A NAME="v%3AmakeReportTree"
+></A
+></A
+><B
+>makeReportTree</B
+> :: (<A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+>) -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:getSolution"
+><A NAME="v%3AgetSolution"
+></A
+></A
+><B
+>getSolution</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3ATerm"
+>Term</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Extracts the solution from a reporting term.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:containsSolution"
+><A NAME="v%3AcontainsSolution"
+></A
+></A
+><B
+>containsSolution</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>Determines whether a search tree contains at least one solution (unifier).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:solveStrict"
+><A NAME="v%3AsolveStrict"
+></A
+></A
+><B
+>solveStrict</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:solveDefeasibly"
+><A NAME="v%3AsolveDefeasibly"
+></A
+></A
+><B
+>solveDefeasibly</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><SPAN CLASS="keyword"
+>type</SPAN
+> <A NAME="t:SearchStrategy"
+><A NAME="t%3ASearchStrategy"
+></A
+></A
+><B
+>SearchStrategy</B
+> = <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchTree"
+>SearchTree</A
+> -&gt; [<A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+>]</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:dfs"
+><A NAME="v%3Adfs"
+></A
+></A
+><B
+>dfs</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:bfs"
+><A NAME="v%3Abfs"
+></A
+></A
+><B
+>bfs</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:strictlyDeriv"
+><A NAME="v%3AstrictlyDeriv"
+></A
+></A
+><B
+>strictlyDeriv</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3AstrictlyDeriv"
+>strictlyDeriv</A
+></TT
+> returns True iff the goal is strictly derivable.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:atLeastDefeasiblyDeriv"
+><A NAME="v%3AatLeastDefeasiblyDeriv"
+></A
+></A
+><B
+>atLeastDefeasiblyDeriv</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3AatLeastDefeasiblyDeriv"
+>atLeastDefeasiblyDeriv</A
+></TT
+> returns True iff the goal is defeasibly derivable (strict or non-strict).
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:atMostDefeasiblyDeriv"
+><A NAME="v%3AatMostDefeasiblyDeriv"
+></A
+></A
+><B
+>atMostDefeasiblyDeriv</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AGoal"
+>Goal</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3AatMostDefeasiblyDeriv"
+>atMostDefeasiblyDeriv</A
+></TT
+> returns True iff the goal is defeasibly derivable but not strictly so.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:conflictingHeads"
+><A NAME="v%3AconflictingHeads"
+></A
+></A
+><B
+>conflictingHeads</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/base-4.2.0.0/Data-Maybe.html#t%3AMaybe"
+>Maybe</A
+> <A HREF="Poets-Rules-DPL-Interpreter.html#t%3AUnifier"
+>Unifier</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3AconflictingHeads"
+>conflictingHeads</A
+></TT
+> determines whether its arguments have conflicting heads.
+ If they have the function returns a unifier that establishes the conflict.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:superior"
+><A NAME="v%3Asuperior"
+></A
+></A
+><B
+>superior</B
+> :: <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3ARuleId"
+>RuleId</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="doc"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3Asuperior"
+>superior</A
+></TT
+> returns True if c1 is superior to c2. It returns False if c2 is superior to c1 or if they are not comparable with the superior relation.
+</TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:isDefeatable"
+><A NAME="v%3AisDefeatable"
+></A
+></A
+><B
+>isDefeatable</B
+> :: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+> -&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+> -&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="decl"
+><A NAME="v:defeat"
+><A NAME="v%3Adefeat"
+></A
+></A
+><B
+>defeat</B
+></TD
+></TR
+><TR
+><TD CLASS="body"
+><TABLE CLASS="vanilla" CELLSPACING="0" CELLPADDING="0"
+><TR
+><TD CLASS="arg"
+>:: <A HREF="Poets-Rules-DPL-Interpreter.html#t%3ASearchStrategy"
+>SearchStrategy</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AProgram"
+>Program</A
+></TD
+><TD CLASS="rdoc"
+>A program containing c1 and c2.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>A clause c1.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="Poets-Rules-DPL-Ast.html#t%3AClause"
+>Clause</A
+></TD
+><TD CLASS="rdoc"
+>A clause c2.
+</TD
+></TR
+><TR
+><TD CLASS="arg"
+>-&gt; <A HREF="/usr/share/doc/ghc6-doc/html/libraries/ghc-prim-0.2.0.0/GHC-Bool.html#t%3ABool"
+>Bool</A
+></TD
+><TD CLASS="rdoc"
+></TD
+></TR
+><TR
+><TD CLASS="ndoc" COLSPAN="2"
+>The function <TT
+><A HREF="Poets-Rules-DPL-Interpreter.html#v%3Adefeat"
+>defeat</A
+></TT
+> returns True iff the clause c1 is rebutted or undercut by clause c2.
+</TD
+></TR
+></TABLE
+></TD
+></TR
+><TR
+><TD CLASS="s15"
+></TD
+></TR
+><TR
+><TD CLASS="botbar"
+>Produced by <A HREF="http://www.haskell.org/haddock/"
+>Haddock</A
+> version 2.6.0</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>
