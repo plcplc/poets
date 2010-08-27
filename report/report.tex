@@ -152,7 +152,7 @@ ensure the integrity of the core features of the language described in
 \cite{hvitved10}.  In Section \ref{extensions} we will go through the
 limitations of the current language that we want to solve. In Section
 we will determine what the syntax and semantics of these extensions
-should be. \fxnote{reformulate} Section \ref{implementation} describes how we have
+should be. Section \ref{implementation} describes how we have
 implemented the extensions. We round off our report by explaining how
 the extensions were tested (Section \ref{tests}) and some concluding
 remarks, including a set of further language features that could be
@@ -213,18 +213,18 @@ language built-in primitives to a minimum, to limit implementation
 complexity.
 
 \paragraph{Case 1: List manipulation}
-A need of list manipulations implies a need of iteration or recursion
+A need for list manipulations implies a need of iteration or recursion
 primitives. We could implement recursive functions along with head,
-tail and cons as a very minimal set of primitives, but we could can
-not allow recursion. This would break \ldots \fxwarning{hvorfor var
-  det nu lige?}.  Instead we need a way of iterating through lists
-while still guaranteeing that all expressions will terminate.  Our
-solution to this problem is simple: we provide three functions known
-from functional programming languages for iterating through and
-manipulate lists. In particular, we have implemented
-\lstinline{foldl}, \lstinline{foldr} and \lstinline{cons} as built-in
-functions, which allows the user to write the large array of functions
-expressible with these primitives.
+tail and cons as a very minimajl set of primitives, but we must not
+allow recursion, as this will make it possible to write potentially
+non-terminating functions, and all expressions must terminate. Instead
+we need a way of iterating through lists while still guaranteeing that
+all expressions will terminate. Our solution to this problem is simple:
+we provide three functions known from functional programming languages
+for iterating through and manipulate lists. In particular, we have
+implemented \lstinline{foldl}, \lstinline{foldr} and \lstinline{cons} as
+built-in functions, which allows the user to write the large array of
+functions expressible with these primitives.
 
 \paragraph{Case 2: Functions} As CSL is a declarative language, our
 functions should be inspired by declarative principles. We therefore
