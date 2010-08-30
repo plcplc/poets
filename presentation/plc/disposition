@@ -1,0 +1,8 @@
+At tale om:
+
+*Syntaktiske udvidelser
+*Kodeudvidelser
+  - Parser
+  - Evaluator
+  - AST (Exp, types)
+  - Typecheck/inference
