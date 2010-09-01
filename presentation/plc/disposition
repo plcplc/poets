@@ -1,8 +1,78 @@
 At tale om:
+===========
+
+Motivation
 
 *Syntaktiske udvidelser
 *Kodeudvidelser
   - Parser
   - Evaluator
+    env vs subst.
   - AST (Exp, types)
   - Typecheck/inference
+
+--
+
+Motivation:
+-----------
+I Tom Hvitveds oprindelige CSL var det ikke muligt selv at definere de
+funktioner der indgik i prædikaterne der afgør, om en klausul er opfyldt. På
+grund af dette var det selvsagt ret begrænset hvor komplicerede prædikater man
+kunne udtrykke.
+
+Derfor har vi udvidet CSL med muligheden for at definere funktioner, dog uden
+at tillade rekursion eller lignende, da det er vigtigt nemt at kunne afgøre, om
+en CSL-kontrakt er veldefineret eller ej, hvilket ikke ville være tilfældet,
+hvis man tillod ikke-terminerende prædikater.
+
+I midlertid er næsten enhver praktisk form for listebehandling rekursiv, så for
+ikke helt at stække sproget eksisterer foldl og foldr som primitiver i
+udvidelsen.
+
+Således har vi udvidet både abstrakt syntaks, parser, evaluator og typechecker,
+så de understøtter udvidelserne.
+
+AST:
+----
+*Vis uddrag af koden der definerer den abstrakte syntaks.
+
+Parser:
+-------
+Parseren er udvidet med regler til at parse værdidefinitioner på formen "val id
+: typ = exp", og en sukret udgave der parser funktionsdefinitioner "fun id :
+typ ( id : typ, ..) = exp"
+
+Derudover er exp-parseren udvidet med lambda-funktioner, og typeparseren er
+udvidet med funktionstyper.
+
+*Vis grammatikken på slides.
+
+Evaluator:
+----------
+*Environments vs substitution.
+
+Evaluatoren var baseret på substitution, men introduktionen af funktioner
+gjorde det mere attraktivt at bruge et environment, da vi således slap for at
+skulle lave renaming af variabler.
+
+Dette betød at Evaluatoralgebraen skulle tilpasses til typen:
+
+    evalAlg :: f (EI env (err ()) (Term v)) -> EI env (err ()) (Term v)
+
+fremfor
+
+    evalAlg :: f (Term v) -> EI env (err ()) (Term v)
+
+eftersom et expressiontræ ikke kan evalueres fra bladene og op uden et miljø at
+slå frie variabler op i.
+
+Da funktioner er repræsentet ved haskell-funktioner eksister de indbyggede
+foldl og venner som fallback løsninger på environment-opslag uden resultat,
+således at den indbyggede "foldl" returneres, medmindre brugeren har defineret
+et variabel med samme navn.
+
+*vis definition af foldl
+
+Typeinferer:
+------------
+*List constraints fra foldl og venner.
