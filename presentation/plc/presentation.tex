@@ -245,16 +245,28 @@ Added constraints for:
 
 \end{frame}
 
-\section{Conclusion}
+\section{Status}
 
-\begin{frame}{Conclusion}
+\begin{frame}{Status}
 
 \begin{itemize}
-  \item The basic most wanted features have been implemented
-  \item parserfejl?
+  \item The basic most wanted features have been implemented.
+  \item The solution of type constrains is yet to be implemented.
+  \item Some parts of the syntax still needs repetitive typing (clauses where
+  the predicate is essentially conjunctions over equalities)
 \end{itemize}
 
 \end{frame}
+
+\begin{frame}{Errata}
+\begin{itemize}
+  \item There is an undocumented flaw in the parser.
+  \item Tests of the parser and renderer could be more complete by having
+  \texttt{instance Arbitrary CExpr} and friends, thus allowing quickcheck to generate syntax
+  trees. then doing \texttt{(parser \$ render ast ) == ast} would bring free
+  randomised tests.
+  \item The constraints for cons is wrong.
+\end{itemize}
+\end{frame}
 \end{document}
-
-
+\end{document}
