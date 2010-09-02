@@ -20,8 +20,15 @@
 % template and not specifically distribute it as part of a another
 % package/program, I grant the extra permission to freely copy and
 % modify this file as you see fit and even to delete this copyright
-% notice. 
+% notice.
 
+\usepackage{verbatim}
+\usepackage{amsmath}
+\usepackage{microtype} % ++
+%\mathlig{||}{\ |\ }
+\usepackage{listings}
+%\newcommand{\kw}[1]{\text{\lstinline{#1}}}
+\newcommand{\kw}[1]{\mathbf{#1}}
 
 \mode<presentation>
 {
@@ -134,11 +141,13 @@
 
   \begin{itemize}
   \item
-    Only predifined functions (few over lists)
+    Only predifined functions (and only few over lists)
   \item
     Low expressive power.
   \end{itemize}
 \end{frame}
+
+\section{Solution}
 
 \begin{frame}{Solution}
 
@@ -147,75 +156,105 @@
     \item \alert{Restrict recursion}, as non-terminating predicates voids a contract of meaning.
   \end{itemize}
 
-  %You can create overlays\dots
-  %\begin{itemize}
-  %\item using the \texttt{pause} command:
-    %\begin{itemize}
-    %\item
-      %First item.
-      %\pause
-    %\item
-      %Second item.
-    %\end{itemize}
-  %\item
-    %using overlay specifications:
-    %\begin{itemize}
-    %\item<3->
-      %First item.
-    %\item<4->
-      %Second item.
-    %\end{itemize}
-  %\item
-    %using the general \texttt{uncover} command:
-    %\begin{itemize}
-      %\uncover<5->{\item
-        %First item.}
-      %\uncover<6->{\item
-        %Second item.}
-    %\end{itemize}
-  %\end{itemize}
-
 \end{frame}
 
 \begin{frame}{Extension points}
 CSL needed extensions in
 \begin{itemize}
-\item The Abstract Syntax
-\item The Parser
-\item The Evaluator
-\item The Typeinferer
+  \item The Abstract Syntax
+  \item The Parser
+  \item The Evaluator
+  \item The Typeinferer
 \end{itemize}
 \end{frame}
 
-\section*{Summary}
+\subsection*{Syntax}
 
-\begin{frame}{Summary}
-
-  % Keep the summary *very short*.
-  \begin{itemize}
-  \item
-    The \alert{first main message} of your talk in one or two lines.
-  \item
-    The \alert{second main message} of your talk in one or two lines.
-  \item
-    Perhaps a \alert{third message}, but not more than that.
-  \end{itemize}
-
-  % The following outlook is optional.
-  \vskip0pt plus.5fill
-  \begin{itemize}
-  \item
-    Outlook
-    \begin{itemize}
-    \item
-      Something you haven't solved.
-    \item
-      Something else you haven't solved.
-    \end{itemize}
-  \end{itemize}
+\begin{frame}{Syntax Extensions}
+  \begin{align*}%[box=\widefbox]
+    p ::= &~ \ldots || \kw{val}~ id : type = e \tag{CSL statements} \\
+       & \quad\quad || \kw{fun}~ id : t~ (id_1 : t_1, id_2 : t_2, \ldots, id_n : t_n) = e  \\
+    e ::= &~ \ldots || \lambda id_1~ id_2~ \ldots~ id_n -> e || e_1\ e_2  \tag{CSL predicates}\\
+       & \quad\quad || \kw{if}~ c~ \kw{then}~ e_1~ \kw{else}~ e_2 \\
+    t ::= &~ \ldots || type_1 -> type_2 ||
+    typevar \tag{CSL types}
+  \end{align*}
 \end{frame}
 
+\begin{frame}[fragile]{Abstract Syntax}
 
+\begin{verbatim}
+-- |Value binding.
+data ValueBinding = ValueBinding{
+      bindingType  :: CType, -- ^Type
+      bindingName  :: Var, -- ^Variable name of binding.
+      bindingValue :: CExpr -- ^Value to be bound.
+    } deriving (Typeable)
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Abstract Syntax}
+
+\begin{verbatim}
+-- |AST for extended expressions in CSL.
+data Exp e =
+  ...
+  -- |Anonymous function, a Lambda.
+  | ELambda{
+        expLArg     :: Var -- ^Argument
+      , expLBody    :: e   -- ^Function body
+      }
+  -- |Conditional expression.
+  | EIfThenElse{
+        expCondition :: e -- ^Condition.
+      , expThen :: e      -- ^Then branch.
+      , expElse :: e      -- ^Else branch.
+      }
+\end{verbatim}
+\end{frame}
+
+\subsection*{Evaluator}
+
+\begin{frame}{Evaluator Algebra}
+\begin{itemize}
+\item Based on variable environment rather than substitution.
+\item \dots Which means that the algebra produces monadic actions that yield a
+value when parametrised with an environment, rather than values directly.
+\item Extended to include hardcoded versions of \textbf{foldl},\textbf{foldr} and \textbf{ceil}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Evaluator Algebra}
+
+\begin{itemize}
+  \item Functions represented as haskell-functions
+  \item Value datatype had to be encapsulated in a newtype (CValue)
+\end{itemize}
+
+\end{frame}
+
+\subsection*{Type inference}
+
+\begin{frame}{Typeinferer Algebra}
+Added constraints for:
+\begin{itemize}
+  \item builtin functions
+  \item lambda functions
+\end{itemize}
+
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Conclusion}
+
+\begin{itemize}
+  \item The basic most wanted features have been implemented
+  \item parserfejl?
+\end{itemize}
+
+\end{frame}
 \end{document}
 
 
